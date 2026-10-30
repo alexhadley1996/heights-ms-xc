@@ -24,10 +24,14 @@ The sheet stays the primary source; the build also merges:
   (2006 Sept 15, 2011–2019, 2021 CLS, 2022 FHS). Columns: Place,Grade,Name,Time,Pace,School,Meet. Distance is the official one;
   paces are recalculated from it. Each meet page links its source. Per-race rule flags: `score_no_displacer_limit`, `score_rule_note`.
 - `sheet_overrides.json` — keyed by site race id: official date/location/distance/source for sheet races, plus fixes:
-  `replace_field_with` (use the official field, e.g. 2022 States Race 1), `fill_from_official` (keep sheet rows, add missing
+  `replace_field_with` (use the official field instead of the sheet's), `a_team_list`/`b_team_list` (2022 States: runners the
+  meet re-scored as B teams keep their places but don't score; ties follow the official order), `fill_from_official` (keep sheet rows, add missing
   finishers, e.g. 2021 States, 2007 Landon Invitational), `score_exclude_grades` (e.g. 2025 States didn't score 5th graders).
   The sheet's distance is kept; an official distance within 0.01 mi counts as agreeing (e.g. 2024 Landon 1.6 vs 1.599).
 - `official_team_scores.csv` — official team places/scores (Season,Meet,Team,Place,Score,SourceURL).
+In `MEET_INFO`: `keep_races` drops extra lists in a tab (the 2022 States B listing), `dist_from_team` marks a distance
+supplied by the team (2010 Landon, 2.2 mi). Runners with a time but no place (e.g. 2025 States, Sean Carney, no bib) are
+slotted in by time and later places renumbered. Missing Heights grades are inferred from the runner's other races (italic).
 A runner name that appears in seasons/grades that can't be one middle-schooler is split into separate runner pages;
 `identityReview` in results.json lists merges/splits worth a human check.
 

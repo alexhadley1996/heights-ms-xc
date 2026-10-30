@@ -47,7 +47,8 @@
    "score_exclude_grades": [
     5
    ],
-   "score_rule_note": "The meet did not count 5th graders in team scores; they keep their overall places but are skipped for team scoring."
+   "score_rule_note": "The meet did not count 5th graders in team scores; they keep their overall places but are skipped for team scoring.",
+   "meet_note": "The official results list the runner in 205th (14:44.5) as Sean Carney; the team's sheet has Max Bowman there and Sean Carney in 188th (14:22.0, no bib). The site follows the sheet."
   },
   "2025-flint-hill": {
    "official_date": "2025-10-29",
@@ -147,30 +148,6 @@
    "source_url": "https://racecast.co/race/xc/221988/888357",
    "original_url": "https://www.athletic.net/CrossCountry/meet/221988/results",
    "official_scores_meet": "2023 CLS Invitational \u2013 Middle School Boys"
-  },
-  "2022-state-championship-race1": {
-   "official_date": "2022-11-09",
-   "official_meet_name": "Maryland Private Middle School State Championships",
-   "official_race": "Middle School A Boys",
-   "official_distance_mi": 2.0,
-   "location": "Sandy Spring Friends School",
-   "source_name": "Racecast (results from Athletic.net)",
-   "source_url": "https://racecast.co/race/xc/216190/863194",
-   "original_url": "https://www.athletic.net/CrossCountry/meet/216190/results",
-   "official_scores_meet": "2022 Maryland Private Middle School State Championships \u2013 Middle School A Boys",
-   "replace_field_with": "races/2022_Maryland_Private_Middle_School_State_Championships_Middle_School_A_Boys_863194.csv",
-   "correction_note": "The sheet's Race 1 also contained 31 B-race runners (who are listed again in Race 2). This race now uses the official A-race results (95 finishers), so nobody is counted twice."
-  },
-  "2022-state-championship-race2": {
-   "official_date": "2022-11-09",
-   "official_meet_name": "Maryland Private Middle School State Championships",
-   "official_race": "Middle School B Boys",
-   "official_distance_mi": 2.0,
-   "location": "Sandy Spring Friends School",
-   "source_name": "Racecast (results from Athletic.net)",
-   "source_url": "https://racecast.co/race/xc/216190/863214",
-   "original_url": "https://www.athletic.net/CrossCountry/meet/216190/results",
-   "official_scores_meet": "2022 Maryland Private Middle School State Championships \u2013 Middle School B Boys"
   },
   "2022-covenant-life": {
    "official_date": "2022-10-01",
@@ -307,6 +284,20 @@
    "source_url": "https://mocorunning.com/meet.php?meet_id=479",
    "original_url": null,
    "official_scores_meet": "2007 Landon MS Meet (Heights, GDS, Landon)"
+  },
+  "2022-state-championship": {
+   "official_date": "2022-11-09",
+   "official_meet_name": "Maryland Private Middle School State Championships",
+   "official_race": "Middle School Boys (A-team scoring)",
+   "official_distance_mi": 2.0,
+   "location": "Sandy Spring Friends School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/216190/863194",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/216190/results",
+   "official_scores_meet": "2022 Maryland Private Middle School State Championships \u2013 Middle School A Boys",
+   "correction_note": "Everyone ran in one race. The sheet's full list (126 finishers, places by time) is used as the race; the meet then re-tallied extra runners from deep teams as separate 'B teams'. Those runners keep their overall places but are not counted in the team scores below (A-team scoring, as in the official results). The sheet's B-race listing is left out.",
+   "a_team_list": "races/2022_Maryland_Private_Middle_School_State_Championships_Middle_School_A_Boys_863194.csv",
+   "b_team_list": "races/2022_Maryland_Private_Middle_School_State_Championships_Middle_School_B_Boys_863214.csv"
   }
  }
 }

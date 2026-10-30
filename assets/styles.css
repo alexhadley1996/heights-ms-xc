@@ -173,3 +173,4 @@ th small{font-weight:500;text-transform:none;letter-spacing:0}
 .ok-mark{color:#2e7d32;font-weight:700}.bad-mark{color:#b3261e;font-weight:700}
 .pill.warn{background:#fff4e0;border-color:#e7c27d;color:#7a4b00}
 .caveat.fix{background:#eef6ee;border-color:#b9d8b9;color:#1f4d22}
+.inf{font-style:italic;color:var(--muted);cursor:help}

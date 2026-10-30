@@ -10,7 +10,7 @@ New meet tabs are picked up automatically if their header row uses the usual col
 (Place, Heights Place, Grade/Year, Name or First/Last Name, Pace, Time, School/Team).
 Add an entry to MEET_INFO below to give a new tab a nicer name, date or distance.
 """
-import sys, re, json, datetime, os, statistics, csv, difflib
+import sys, re, json, datetime, os, statistics, csv, difflib, collections
 
 import openpyxl
 
@@ -22,25 +22,27 @@ SKIP_TABS = {"2026 Comparison", "Comparison 2025 - 6th Grade"}
 MEET_INFO = {
     "2026 States":               dict(season=2026, name="State Championship", distance=None),
     "2026 - Bullis":             dict(season=2026, name="Bullis", distance=None),
-    "2026 - Flint Hill":         dict(season=2026, name="Flint Hill", distance=2.1),
+    "2026 - Flint Hill":         dict(season=2026, name="Flint Hill", distance=2.0),
     "2025 States":               dict(season=2025, name="State Championship", distance=None),
     "Flint Hill 2025":           dict(season=2025, name="Flint Hill", distance=None),
     "2025 Bittersweet #2":       dict(season=2025, name="Bittersweet #2", distance=None),
     "2025 Bittersweet #1":       dict(season=2025, name="Bittersweet #1", distance=None),
     "2024 State Championship":   dict(season=2024, name="State Championship", distance=None),
     "2024 - Flint Hill":         dict(season=2024, name="Flint Hill", distance=None),
-    "2024 - Landon 1.8 miles":   dict(season=2024, name="Landon", distance=1.8),
+    "2024 - Landon 1.6 miles":   dict(season=2024, name="Landon", distance=1.6),
     "2024 - Gtown Prep":         dict(season=2024, name="Georgetown Prep", distance=2.0),
     "2024 - Bullis":             dict(season=2024, name="Bullis", distance=2.0),
     "2023 State Championship":   dict(season=2023, name="State Championship", distance=2.0),
     "2023 - Bullis":             dict(season=2023, name="Bullis", distance=1.8),
     "2023 Flint Hill":           dict(season=2023, name="Flint Hill", distance=2.1),
     "2023 - Covenant Life":      dict(season=2023, name="Covenant Life", distance=2.0),
-    "2022 - States":             dict(season=2022, name="State Championship", distance=2.1),
+    # The tab's second list is a B-team re-tally of the same race; it is ignored (keep_races=1).
+    "2022 - States":             dict(season=2022, name="State Championship", distance=2.1, keep_races=1),
     "2022 - CL":                 dict(season=2022, name="Covenant Life", distance=2.0),
     "2021 - States at Landon":   dict(season=2021, name="State Championship (at Landon)", distance=2.2),
-    "2010 - Landon #2":          dict(season=2010, name="Landon #2", distance=None),
-    "2010 - Landon #1":          dict(season=2010, name="Landon #1", distance=None),
+    # 2010 tabs have no pace column/formula; course length per the coach (team) is 2.2 mi.
+    "2010 - Landon #2":          dict(season=2010, name="Landon #2", distance=2.2, dist_from_team=True),
+    "2010 - Landon #1":          dict(season=2010, name="Landon #1", distance=2.2, dist_from_team=True),
     "2009 - Landon, Nov 3":      dict(season=2009, name="Landon", date="Nov 3", distance=None),
     "2009 - Landon, Sept 28":    dict(season=2009, name="Landon", date="Sept 28", distance=None),
     "2008 - Landon, Nov 4":      dict(season=2008, name="Landon", date="Nov 4", distance=None),
@@ -55,30 +57,35 @@ MEET_INFO = {
 # Otherwise tab order (reversed) is used.
 
 # Spelling variants of the same Heights runner -> canonical name.
+# Canonical = the spelling most used in official results (racecast / Athletic.net / mocorunning), user-confirmed merges.
 NAME_ALIASES = {
     "Sean Carney (real)": "Sean Carney",
-    "John Ortman": "Johnny Ortman",      # 2023 States; "Johnny" in 5 other tabs
-    "Louie Liess": "Louie Leiss",        # 2024 Bullis
-    "P Allen": "Phillip Allen",          # 2007 Landon Oct 18
-    "Vince Kiernan": "Vince Keirnan",    # 2007; "Keirnan" in the 2008 tabs (true spelling unknown)
-    "Santi Luli": "Santiago Luli",       # 2008 tabs
-    "Andres Lulli": "Andres Luli",       # 2009 Nov 3
-    "Ed Nelson": "Edward Nelson",
+    "Johnny Ortman": "John Ortman",      # official results: "John Ortman" in 8 meets, "Johnny" in 1
+    "Louie Liess": "Louie Leiss",        # official: "Leiss" (2 meets), never "Liess"
+    "P Allen": "Philip Allen",
+    "Phillip Allen": "Philip Allen",     # official: "Philip" 10 meets (mostly HS), "Phillip" 7
+    "Vince Kiernan": "Vince Keirnan",    # official: "Keirnan" 3 meets (2008), "Kiernan" 2 (2007)
+    "Santi Luli": "Santiago Lulli",      # nickname; full first name kept; family name is Lulli (user-confirmed)
+    "Andres Luli": "Andres Lulli",       # official: "Lulli" 8 meets (2009 + HS), "Luli" 3 (2008)
+    "Justin Liess": "Justin Leiss",      # user-confirmed (same family as Louie Leiss)
+    "Colin Oneil": "Cullun O'Neill",     # user-confirmed same boy; official results: "Cullun O'Neill" 2 meets (2006), "Colin Oneil" 1 (2008)
+    "Ed Nelson": "Edward Nelson",        # nickname; full first name kept
 }
+
+CONFIRMED_SAME = {"Edward Nelson", "Cullun O'Neill"}  # user-confirmed single runner across sources
 
 # Hand-written notes about the sheet, shown on the Meets page.
 EXTRA_NOTES = [
-    "2024 Bullis: no grades recorded; several non-Heights runners listed by first name only; the sheet's Meet column auto-incremented (2024 Bullis, 2025 Bullis, ...) and is ignored.",
-    "2024 Landon: the sheet's 'Heights Place' column numbers every finisher, so the site recalculates Heights place from the School column (same for every race).",
-    "2025 States: 'Sean Carney (real)' was added by hand with no overall place (shown without a place); Heights place 43 is skipped in the sheet.",
-    "Several 2008 Landon (Oct 6) and 2023 Flint Hill times were stored as clock times (e.g. 13:36 read as 13 h 36 min); they are converted back to minutes:seconds.",
-    "2010 meets have no pace column; most 2006–2010 meets, 2022 Covenant Life, 2023 Flint Hill and 2024 Flint Hill/Bullis have no grades.",
-    "Race distances come from the divisor in each tab's pace formula (pace = time \u00f7 miles). The two 2010 Landon tabs have no pace formula, so their distance is unknown. 2026 Flint Hill's header says 2.1 mi but its formula divides by 2; the formula is used.",
-    "Where a tab has no pace for a runner (e.g. non-Heights runners at 2023 States and 2023 Bullis), the site calculates it the same way: time \u00f7 the tab's distance.",
+    "2024 Bullis: no grades recorded; several non-Heights runners are listed by first name only.",
+    "Heights place is calculated from the School column in every race (some tabs number every finisher in their Heights Place column).",
+    "Some 2008 Landon (Oct 6) and 2023 Flint Hill times were stored as clock times (e.g. 13:36 read as 13 h 36 min) and are shown as minutes:seconds.",
+    "Grades weren't recorded for most 2006\u20132010 meets, 2022 Covenant Life, 2023 Flint Hill and 2024 Flint Hill/Bullis. For Heights runners the site fills a missing grade from the same runner's other races (same season, or the grade in another season adjusted by the year difference) and shows it in italics.",
+    "Race distances come from the divisor in each tab's pace formula (pace = time \u00f7 miles). The 2010 Landon tabs have no pace formula; per the team those courses were 2.2 mi, so their paces are calculated from that.",
+    "Where a tab has no pace for a runner, the site calculates it the same way: time \u00f7 the race distance.",
     "Team scores are calculated by the site from the listed finishers (standard scoring: teams with 5+ finishers, top 5 score, 6th\u20137th displace, 8th+ ignored, ties broken by the 6th runner) and compared with official meet scores where those were found online.",
     "Races from 2011\u20132019, 2021 CLS, 2022 FHS and the 2006 Landon Home Meet (Sept 15) are not in the sheet; they come from racecast.co / Athletic.net / mocorunning.com (data/supplemental). Each of those meet pages links its source.",
-    "Corrected from official results: 2022 States Race 1 (A race) had 31 B-race runners mixed in, 2021 States and 2007 Landon Invitational were missing finishers, and 2025 States did not score 5th graders. See each meet page.",
-    "Name spellings merged for the runner pages: John/Johnny Ortman, Louie Liess/Leiss, P/Phillip Allen, Vince Kiernan/Keirnan, Santi/Santiago Luli, Andres Lulli/Luli, Ed/Edward Nelson.",
+    "2022 States: the meet re-tallied extra runners from deep teams as B teams; the B listing is left out, those runners keep their overall places but don't count in team scores. 2021 States and 2007 Landon Invitational were missing finishers, which were added from the official results. 2025 States did not score 5th graders.",
+    "Name spellings merged for the runner pages (shown with the spelling used most in official results): John Ortman (Johnny), Louie Leiss (Liess), Philip Allen (Phillip, P), Vince Keirnan (Kiernan), Santiago Lulli (Santi Luli), Andres Lulli (Luli), Daniel Lulli (Luli), Justin Leiss (Liess), Cullun O'Neill (Colin Oneil), Edward Nelson (Ed).",
     "2026 States lists 5th graders as exhibition ('Ex.') and two DNFs.",
 ]
 
@@ -212,7 +219,7 @@ def score_race(field, exclude_grades=(), max_per_team=7):
     """Standard XC scoring. Returns (standings, partial_teams). Runners in exclude_grades keep their place but don't score."""
     for e in field:
         e.pop("teamPlace", None)
-    finishers = [e for e in field if isinstance(e["place"], int) and e["secs"] is not None and e.get("grade") not in exclude_grades]
+    finishers = [e for e in field if isinstance(e["place"], int) and e["secs"] is not None and e.get("grade") not in exclude_grades and not e.get("noScore")]
     finishers.sort(key=lambda e: e["place"])
     by_team = {}
     for e in finishers:
@@ -332,9 +339,12 @@ def make_entry(place_raw, grade, name, school, time_raw, pace_raw, quirk_ctx=Non
         "paceSecs": pace,
         "heights": heights,
     }
-    if heights and name in NAME_ALIASES:
-        e["note"] = f"Listed as \u201c{name}\u201d"
-        e["name"] = NAME_ALIASES[name]
+    if heights:
+        new = NAME_ALIASES.get(name, name)
+        new = re.sub(r"\bLuli$", "Lulli", new)  # the Lulli family name is always "Lulli" (user-confirmed)
+        if new != name:
+            e["note"] = f"Listed as \u201c{name}\u201d"
+            e["name"] = new
     return e
 
 
@@ -385,6 +395,63 @@ def fill_from_official(field, official, title, quirks):
     return len(missing)
 
 
+def place_unplaced(field, info, label, quirks):
+    """Runners with a time but no place (added by hand, e.g. no bib) are slotted in by time and
+    the overall places renumbered from there."""
+    loose = [e for e in field if e["place"] is None and e["secs"] is not None]
+    if not loose or not any(isinstance(e["place"], int) for e in field):
+        return
+    for e in loose:
+        field.remove(e)
+        i = next((k for k, x in enumerate(field) if isinstance(x["place"], int) and x["secs"] is not None and x["secs"] > e["secs"]), len(field))
+        field.insert(i, e)
+        e["note"] = "Ran without a bib; added by hand in the sheet and placed by his time"
+        e["handPlaced"] = True
+    n = 0
+    for e in field:
+        if isinstance(e["place"], int) or e.get("handPlaced"):
+            n += 1
+            if e["place"] != n:
+                e.setdefault("sheetPlace", e["place"])
+            e["place"] = n
+
+
+def mark_b_team(field, a_list, b_list, quirks, label):
+    """Meets sometimes re-tally the same race for 'B teams'. Runners on the official B list (and not on the A list)
+    keep their overall place but don't count in the (A) team scores."""
+    def same(e, o):
+        return o["secs"] is not None and e["secs"] is not None and abs(o["secs"] - e["secs"]) <= 0.15 and \
+            (norm_name(o["name"]) == norm_name(e["name"]) or difflib.SequenceMatcher(None, norm_name(o["name"]), norm_name(e["name"])).ratio() >= 0.6)
+    n = 0
+    for e in field:
+        if any(same(e, o) for o in b_list) and not any(same(e, o) for o in a_list):
+            e["noScore"] = True
+            e["noScoreWhy"] = "Scored for a B team at this meet, so not counted in the team scores"
+            n += 1
+    quirks.append(f"{label}: {n} runners were scored for B teams; they keep their places but don't count in team scores.")
+    # runners with identical times: follow the official finish order
+    idx = {}
+    for e in field:
+        k = next((i for i, o in enumerate(a_list) if same(e, o)), None)
+        if k is not None:
+            idx[id(e)] = k
+    i = 0
+    while i < len(field):
+        j = i
+        while j + 1 < len(field) and field[j + 1]["secs"] is not None and field[j + 1]["secs"] == field[i]["secs"]:
+            j += 1
+        grp = field[i:j + 1]
+        if len(grp) > 1 and all(id(e) in idx for e in grp):
+            places = [e["place"] for e in grp]
+            new = sorted(grp, key=lambda e: idx[id(e)])
+            if new != grp:
+                for e, pl in zip(new, places):
+                    e["place"] = pl
+                field[i:j + 1] = new
+                quirks.append(f"{label}: tied runners at {grp[0]['time']} ({', '.join(e['name'] for e in new)}) put in the official finish order.")
+        i = j + 1
+
+
 def parse_md(season, s):
     if not s:
         return None
@@ -424,11 +491,11 @@ def finalize(field, meta, quirks):
                 if dsrc != "official":
                     e["paceCalc"] = True
     excl = tuple(meta.get("scoreExcludeGrades") or ())
+    for e in field:
+        if e.get("grade") in excl and isinstance(e["place"], int):
+            e["noScore"] = True
+            e["noScoreWhy"] = "This meet did not count this grade in team scores"
     standings, partial = score_race(field, excl, 10 ** 6 if meta.get("noDisplacerLimit") else 7)
-    if excl:
-        for e in field:
-            if e.get("grade") in excl and isinstance(e["place"], int):
-                e["noScore"] = True
     caveats = []
     ints = sorted(e["place"] for e in field if isinstance(e["place"], int))
     missing = (ints[-1] - len(set(ints))) if ints else 0
@@ -535,6 +602,8 @@ def main(path):
             cur.append(make_entry(get(r, "place"), get(r, "grade"), name, get(r, "school"), get(r, "time"), get(r, "pace")))
         if cur:
             races.append(cur)
+        if info.get("keep_races"):
+            races = races[:info["keep_races"]]
         if len(races) > 1:
             quirks.append(f"Tab '{title}' contains {len(races)} separately-numbered races (placings restart); shown as Race 1..{len(races)}.")
 
@@ -544,7 +613,7 @@ def main(path):
             if f_dist:
                 dist, dsrc = f_dist, "formula"
             elif stated:
-                dist, dsrc = stated, "stated"
+                dist, dsrc = stated, "team" if info.get("dist_from_team") else "stated"
             elif implied:
                 dist, dsrc = implied, "est"
             else:
@@ -555,6 +624,10 @@ def main(path):
             if ov:
                 used_overrides.add(mid)
             correction = None
+            place_unplaced(field, info, label, quirks)
+            if ov.get("b_team_list"):
+                mark_b_team(field, read_csv_field(ov["a_team_list"]), read_csv_field(ov["b_team_list"]), quirks, f"{info['season']} {label}")
+                correction = ov.get("correction_note")
             if ov.get("replace_field_with"):
                 before = len(field)
                 field = read_csv_field(ov["replace_field_with"])
@@ -573,7 +646,7 @@ def main(path):
                     dnote = {"official": off_d, "agrees": True}
                 else:
                     dnote = {"official": off_d, "agrees": False}
-                    quirks.append(f"{info['season']} {label}: sheet distance {dist:g} mi ({dsrc}) but the official results list {off_d:g} mi; the site uses the sheet's {dist:g} mi.")
+                    quirks.append(f"{info['season']} {label}: {'course distance (per the team)' if dsrc == 'team' else 'sheet distance'} {dist:g} mi{'' if dsrc == 'team' else f' ({dsrc})'} but the official results list {off_d:g} mi; the site uses {dist:g} mi.")
             meta = {
                 "id": mid, "season": info["season"], "name": label,
                 "dateLabel": info.get("date"),
@@ -585,6 +658,7 @@ def main(path):
                 "location": ov.get("location"),
                 "source": {"name": ov["source_name"], "url": ov["source_url"], "original": ov.get("original_url")} if ov.get("source_url") else None,
                 "correction": correction,
+                "note": ov.get("meet_note"),
                 "scoreExcludeGrades": ov.get("score_exclude_grades"),
                 "scoreRuleNote": ov.get("score_rule_note"),
                 "_scoreNotes": score_notes if ri == 0 else [],
@@ -673,12 +747,26 @@ def class_of(season, grade):
 def build_runners(meets):
     """Group Heights results by name, then split a name into separate runners when the seasons/grades
     can't belong to one middle-schooler (class year differs by 2+, or seasons more than 3 years apart)."""
-    by_name = {}
+    by_name, forms = {}, {}
     for m in meets:
         for e in m["results"]:
             if e["heights"]:
-                by_name.setdefault(e["name"], []).append((m, e))
+                k = norm_name(e["name"])  # "Nick O'neil" == "Nick O'Neil"
+                by_name.setdefault(k, []).append((m, e))
+                forms.setdefault(k, collections.Counter())[e["name"]] += 1
+    case_merges = []
+    for k, items in list(by_name.items()):
+        # display the most common form; ties go to the one with more capitals ("O'Neil" over "O'neil")
+        best = max(forms[k], key=lambda f: (forms[k][f], sum(c.isupper() for c in f), "'" in f))
+        if len(forms[k]) > 1:
+            case_merges.append(f"Merged capitalization/punctuation variants: {', '.join(sorted(forms[k]))} \u2192 {best}.")
+        for m, e in items:
+            if e["name"] != best:
+                e.setdefault("note", f"Listed as \u201c{e['name']}\u201d")
+                e["name"] = best
+        by_name[best] = by_name.pop(k)
     runners, review = [], []
+    grade_log = {"filled": 0, "conflicts": [], "unresolved": 0}
     for name, items in by_name.items():
         items.sort(key=lambda x: x[0]["order"])
         clusters = []
@@ -699,6 +787,7 @@ def build_runners(meets):
                 clusters.append(placed)
             placed["items"].append((m, e)); placed["cy"].append(cy); placed["last"] = m["season"]
         for c in clusters:
+            infer_grades(name, c["items"], grade_log)
             seasons = sorted({m["season"] for m, _ in c["items"]})
             rid = slug(name) if len(clusters) == 1 else slug(f"{name}-{seasons[0]}")
             sources = {m["origin"] for m, _ in c["items"]}
@@ -709,6 +798,7 @@ def build_runners(meets):
                 e["runnerId"] = rid
                 r["results"].append({
                     "meet": m["id"], "place": e["place"], "hplace": e.get("hplace"), "grade": e["grade"],
+                    "gradeInferred": e.get("gradeInferred", False),
                     "time": e["time"], "secs": e["secs"], "pace": e["pace"], "paceSecs": e["paceSecs"],
                     "suspect": e.get("suspect", False), "teamPlace": e.get("teamPlace"),
                     "paceCalc": e.get("paceCalc", False), "origin": m["origin"], "added": e.get("added", False),
@@ -720,7 +810,8 @@ def build_runners(meets):
             if len(sources) > 1:
                 cys = sorted({y for y in c["cy"] if y})
                 if not cys and seasons[-1] - seasons[0] >= 2:
-                    review.append(f"Merged sheet + online results for {name} ({', '.join(map(str, seasons))}) with no grades to confirm it's one runner.")
+                    if name not in CONFIRMED_SAME:
+                        review.append(f"Merged sheet + online results for {name} ({', '.join(map(str, seasons))}) with no grades to confirm it's one runner.")
         if len(clusters) > 1:
             review.append(f"Split \u201c{name}\u201d into {len(clusters)} runners: " + "; ".join(
                 f"{c['first']}\u2013{c['last']} (class of {', '.join(str(y) for y in sorted({y for y in c['cy'] if y})) or '?'})" for c in clusters))
@@ -737,7 +828,46 @@ def build_runners(meets):
             overlap = min(a["seasons"][-1], b["seasons"][-1]) - max(a["seasons"][0], b["seasons"][0]) >= -1
             if same_last and close_first and overlap and (la != lb or fa != fb):
                 review.append(f"Possible same runner, not merged: \u201c{a['name']}\u201d ({', '.join(map(str, a['seasons']))}) and \u201c{b['name']}\u201d ({', '.join(map(str, b['seasons']))}).")
+    for m in meets:
+        m["hasGrade"] = any(e["grade"] for e in m["results"])
+    review += case_merges
+    ids = collections.Counter(r["id"] for r in runners)
+    for r in runners:
+        if ids[r["id"]] > 1:
+            r["id"] = slug(f"{r['name']}-{r['seasons'][0]}")
+            review.append(f"Two runners share the id for {r['name']}; using {r['id']}.")
+    review.append(f"Grades inferred for {grade_log['filled']} Heights results; {grade_log['unresolved']} still unknown.")
+    review += grade_log["conflicts"]
     return runners, review
+
+
+def infer_grades(name, items, log):
+    """Fill a missing grade from the same runner's other races: same season exactly, otherwise
+    known grade +/- the year difference. Only when every known grade agrees and the result is 5-8."""
+    known = [(m["season"], e["grade"]) for m, e in items if e["grade"] and not e.get("gradeInferred")]
+    by_season = {}
+    for sn, g in known:
+        by_season.setdefault(sn, set()).add(g)
+    for sn, gs in by_season.items():
+        if len(gs) > 1:
+            log["conflicts"].append(f"Grade conflict: {name} is listed as grade {'/'.join(map(str, sorted(gs)))} in {sn}.")
+    classes = {sn + (8 - g) for sn, g in known}
+    if len(classes) > 1:
+        log["conflicts"].append(f"Grade conflict: {name}'s grades don't line up across seasons ({', '.join(f'{sn}: gr {g}' for sn, g in sorted(set(known)))}); not inferring other seasons.")
+    for m, e in items:
+        if e["grade"]:
+            continue
+        sn = m["season"]
+        g = None
+        if len(by_season.get(sn, ())) == 1:
+            g = next(iter(by_season[sn]))
+        elif known and len(classes) == 1:
+            g = 8 - (next(iter(classes)) - sn)
+        if g and 5 <= g <= 8:
+            e["grade"], e["gradeInferred"] = g, True
+            log["filled"] += 1
+        else:
+            log["unresolved"] += 1
 
 
 if __name__ == "__main__":
