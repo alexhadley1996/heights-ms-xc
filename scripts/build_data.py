@@ -70,7 +70,9 @@ EXTRA_NOTES = [
     "2025 States: 'Sean Carney (real)' was added by hand with no overall place (shown without a place); Heights place 43 is skipped in the sheet.",
     "Several 2008 Landon (Oct 6) and 2023 Flint Hill times were stored as clock times (e.g. 13:36 read as 13 h 36 min); they are converted back to minutes:seconds.",
     "2010 meets have no pace column; most 2006–2010 meets, 2022 Covenant Life, 2023 Flint Hill and 2024 Flint Hill/Bullis have no grades.",
-    "Distances are only stated for some meets; others show an estimate from time ÷ pace (marked 'est.'). 2026 Flint Hill says 2.1 mi but its paces work out to about 2.0 mi.",
+    "Race distances come from the divisor in each tab's pace formula (pace = time \u00f7 miles). The two 2010 Landon tabs have no pace formula, so their distance is unknown. 2026 Flint Hill's header says 2.1 mi but its formula divides by 2; the formula is used.",
+    "Where a tab has no pace for a runner (e.g. non-Heights runners at 2023 States and 2023 Bullis), the site calculates it the same way: time \u00f7 the tab's distance.",
+    "Team scores are calculated by the site from the listed finishers (standard scoring: teams with 5+ finishers, top 5 score, 6th\u20137th displace, ties broken by the 6th runner). Where the sheet has a Points/Score column, the calculated team places match it in every race except 2007 Landon Invitational.",
     "Name spellings merged for the runner pages: John/Johnny Ortman, Louie Liess/Leiss, P/Phillip Allen, Vince Kiernan/Keirnan, Santi/Santiago Luli, Andres Lulli/Luli, Ed/Edward Nelson.",
     "2026 States lists 5th graders as exhibition ('Ex.') and two DNFs.",
 ]
@@ -152,6 +154,7 @@ def find_cols(header):
         "pace": first("pace"),
         "time": first("time", "finals"),
         "school": first("school", "team"),
+        "points": first("points", "score"),
     }
     # 2007 tabs have an unlabeled pace column right before Time
     if cols["pace"] is None and cols["time"] is not None and h[cols["time"] - 1] == "":
@@ -159,9 +162,102 @@ def find_cols(header):
     return cols
 
 
+PACE_DIVISOR_RE = re.compile(r"\)\)\s*/\s*([\d.]+)\s*\)\s*/\s*86400")
+SCORE_NOTE_RE = re.compile(r"(\d)\w*\s+gr\w*\s+(expanded\s+)?score", re.I)
+NON_TEAM_RE = re.compile(r"^(unattached|unatt|independent|individual|none|)$", re.I)
+
+
+def formula_distance(ws_f):
+    """Distance in miles = the divisor in the tab's pace formula (pace = time / distance)."""
+    from collections import Counter
+    c = Counter()
+    for row in ws_f.iter_rows():
+        for cell in row:
+            v = cell.value
+            if isinstance(v, str) and v.startswith("="):
+                m = PACE_DIVISOR_RE.search(v)
+                if m:
+                    c[float(m.group(1))] += 1
+    return c
+
+
+def sheet_score_notes(ws):
+    """Team score notes typed into the side of some tabs, e.g. '8th Grade Score: 22'."""
+    notes = []
+    for row in ws.iter_rows(values_only=True):
+        for i, v in enumerate(row):
+            if isinstance(v, str) and SCORE_NOTE_RE.search(v):
+                label = v.strip().rstrip(":").strip()
+                val = None
+                m = re.search(r":\s*(\d+)\s*$", label)
+                if m:
+                    val = int(m.group(1)); label = label[:m.start()].strip()
+                else:
+                    nxt = row[i + 1] if i + 1 < len(row) else None
+                    val = int(nxt) if isinstance(nxt, (int, float)) else None
+                notes.append({"label": label, "score": val})
+    return notes
+
+
+def team_key(school):
+    return re.sub(r"[^a-z0-9]+", " ", school.lower()).strip()
+
+
+def score_race(field):
+    """Standard XC scoring. Returns (standings, scoring_places, caveats)."""
+    finishers = [e for e in field if isinstance(e["place"], int) and e["secs"] is not None]
+    finishers.sort(key=lambda e: e["place"])
+    by_team = {}
+    for e in finishers:
+        if NON_TEAM_RE.match(e["school"].strip()):
+            continue
+        by_team.setdefault(team_key(e["school"]), []).append(e)
+    full = {k: v for k, v in by_team.items() if len(v) >= 5}
+    scorers = set()
+    for k, v in full.items():
+        for e in v[:7]:
+            scorers.add(id(e))
+    tp = 0
+    for e in finishers:
+        if id(e) in scorers:
+            tp += 1
+            e["teamPlace"] = tp
+    standings = []
+    for k, v in full.items():
+        top = v[:7]
+        pts = [e["teamPlace"] for e in top]
+        five = top[:5]
+        total5 = sum(e["secs"] for e in five)
+        standings.append({
+            "team": v[0]["school"],
+            "heights": any(e["heights"] for e in v),
+            "score": sum(pts[:5]),
+            "scorers": [{"name": e["name"], "place": e["teamPlace"], "overall": e["place"], "time": e["time"]} for e in five],
+            "displacers": [{"name": e["name"], "place": e["teamPlace"], "overall": e["place"], "time": e["time"]} for e in top[5:7]],
+            "finishers": len(v),
+            "teamTime": fmt_secs(total5),
+            "avgTime": fmt_secs(total5 / 5),
+            "spread": fmt_secs(five[-1]["secs"] - five[0]["secs"]),
+            "tiebreak": pts[5] if len(pts) > 5 else 10 ** 6,
+        })
+    standings.sort(key=lambda t: (t["score"], t["tiebreak"]))
+    for i, t in enumerate(standings):
+        t["rank"] = i + 1
+        if i and t["score"] == standings[i - 1]["score"]:
+            t["tieNote"] = "tie broken by 6th runner"
+            standings[i - 1]["tieNote"] = "tie broken by 6th runner"
+    for t in standings:
+        if t["tiebreak"] == 10 ** 6:
+            t["tiebreak"] = None
+    partial = sorted({e["school"] for k, v in by_team.items() if len(v) < 5 for e in v[:1]})
+    return standings, partial
+
+
 def main(path):
     wb = openpyxl.load_workbook(path, data_only=True)
+    wb_f = openpyxl.load_workbook(path, data_only=False)
     meets, quirks = [], []
+    distance_log = []
     tabs = [ws for ws in wb if ws.title not in SKIP_TABS]
     for order, ws in enumerate(reversed(tabs)):
         title = ws.title
@@ -172,6 +268,14 @@ def main(path):
             info["name"] = re.sub(r"(19|20)\d{2}\s*-?\s*", "", title).strip() or title
             quirks.append(f"Tab '{title}' has no MEET_INFO entry; name guessed.")
         rows = list(ws.iter_rows(values_only=True))
+        divs = formula_distance(wb_f[title])
+        f_dist = divs.most_common(1)[0][0] if divs else None
+        if len(divs) > 1:
+            quirks.append(f"Tab '{title}': pace formulas use more than one distance {dict(divs)}; using {f_dist}.")
+        stated = info.get("distance")
+        if f_dist and stated and abs(f_dist - stated) > 0.001:
+            quirks.append(f"Tab '{title}': pace formula divides by {f_dist:g} mi but the sheet states {stated:g} mi; using the formula ({f_dist:g} mi).")
+        score_notes = sheet_score_notes(ws)
         header = rows[0]
         cols = find_cols(header)
         if cols["time"] is None:
@@ -220,6 +324,9 @@ def main(path):
                 "paceSecs": pace,
                 "heights": heights,
             }
+            pts = num(get(r, "points"))
+            if pts is not None:
+                entry["sheetPoints"] = int(pts)
             if heights:
                 entry["sheetHPlace"] = num(get(r, "hplace"))
             if note:
@@ -247,9 +354,53 @@ def main(path):
                     else:
                         e["hplace"] = None
             heights_n = sum(e["heights"] for e in field)
-            # implied distance from time/pace (median), only as a hint
+            # implied distance from time/pace (median), only as a fallback
             ratios = [e["secs"] / e["paceSecs"] for e in field if e["secs"] and e["paceSecs"]]
             implied = round(statistics.median(ratios), 2) if ratios else None
+            if f_dist:
+                dist, dsrc = f_dist, "formula"
+            elif stated:
+                dist, dsrc = stated, "stated"
+            elif implied:
+                dist, dsrc = implied, "est"
+            else:
+                dist, dsrc = None, None
+            # Fill in missing paces from time / distance, the same way the sheet does
+            if dist and dsrc != "est":
+                for e in field:
+                    if e["secs"] and not e["paceSecs"]:
+                        ps = int(e["secs"] / dist)
+                        e["paceSecs"], e["pace"], e["paceCalc"] = ps, f"{ps // 60}:{ps % 60:02d}", True
+            # Team scoring
+            standings, partial = score_race(field)
+            caveats = []
+            ints = sorted(e["place"] for e in field if isinstance(e["place"], int))
+            missing = (ints[-1] - len(ints)) if ints else 0
+            non_h = sum(1 for e in field if not e["heights"])
+            if missing > 0:
+                caveats.append(f"{missing} place number(s) are missing from the sheet, so some finishers aren't listed; scores may be off.")
+            if non_h < 0.1 * len(field):
+                caveats.append("Almost every runner listed is from The Heights, so the field looks incomplete.")
+            if len(standings) < 2:
+                caveats.append("Fewer than two teams have 5 finishers listed, so no team score is shown.")
+            hv = sorted({e["school"] for e in field if e["heights"]})
+            if len(hv) > 1:
+                caveats.append(f"Heights runners appear under more than one team name ({', '.join(hv)}); they are scored separately.")
+            # agreement with the sheet's own Points column, where present
+            sp = [(e.get("teamPlace"), e["sheetPoints"]) for e in field if "sheetPoints" in e]
+            agree = None
+            if sp:
+                agree = {"rows": len(sp), "match": sum(1 for a, b in sp if a == b)}
+                if agree["match"] < 0.9 * agree["rows"]:
+                    caveats.append(f"The sheet's own Points column differs from these calculated places ({agree['match']} of {agree['rows']} match); the meet seems to have scored teams with fewer than 5 listed finishers (or had runners who aren't in the sheet).")
+            score_block = {
+                "standings": standings if len(standings) >= 2 else [],
+                "partialTeams": partial,
+                "caveats": caveats,
+                "sheetNotes": score_notes if ri == 0 else [],
+                "sheetPointsCheck": agree,
+            }
+            distance_log.append((title, ri, dist, dsrc, stated))
             label = info["name"] + (f" \u2013 Race {ri + 1}" if len(races) > 1 else "")
             mid = slug(f"{info['season']}-{info['name']}-{info.get('date', '')}" + (f"-race{ri + 1}" if len(races) > 1 else ""))
             meets.append({
@@ -258,8 +409,11 @@ def main(path):
                 "name": label,
                 "date": info.get("date"),
                 "tab": title,
-                "distance": info.get("distance"),
+                "distance": dist,
+                "distanceSource": dsrc,
+                "statedDistance": stated,
                 "impliedDistance": implied,
+                "scoring": score_block,
                 "order": order * 10 + ri,
                 "fieldSize": len(field),
                 "heightsCount": heights_n,
@@ -282,6 +436,8 @@ def main(path):
                 "grade": e["grade"], "time": e["time"], "secs": e["secs"],
                 "pace": e["pace"], "paceSecs": e["paceSecs"],
                 "suspect": e.get("suspect", False),
+                "teamPlace": e.get("teamPlace"),
+                "paceCalc": e.get("paceCalc", False),
             })
     for r in runners.values():
         seasons = sorted({next(m["season"] for m in meets if m["id"] == x["meet"]) for x in r["results"]})
@@ -306,6 +462,11 @@ def main(path):
     print(f"{len(meets)} races, {len(runners)} Heights runners, {sum(m['fieldSize'] for m in meets)} result rows")
     for q in data["quirks"]:
         print("quirk:", q)
+    for t, ri, d, src, st in distance_log:
+        print(f"distance: {t!r} race{ri + 1}: {d} ({src}){' stated ' + str(st) if st else ''}")
+    for m in data["meets"]:
+        sc = m["scoring"]
+        print("score:", m["id"], [(t["team"], t["score"]) for t in sc["standings"]][:4], sc["caveats"], sc["sheetPointsCheck"], sc["sheetNotes"][:2])
 
 
 if __name__ == "__main__":

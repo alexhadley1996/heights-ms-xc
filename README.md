@@ -3,7 +3,12 @@
 Plain HTML/CSS/JS, no build step. Works on GitHub Pages as-is (`.nojekyll` included).
 
 Pages: `index.html` (home), `meets.html` (all races by season), `meet.html?id=…` (one race: Heights runners or full field),
-`runners.html` (searchable roster), `runner.html?id=…` (one runner's races + PB), `top.html` (top times/paces), `history.html` (placeholders).
+`runners.html` (searchable roster), `runner.html?id=…` (every race for one runner + PB), `top.html` (top times/paces),
+`compare.html?r=id1,id2` (compare runners, or one runner's progression), `history.html` (placeholders).
+Every results table is sortable: click a column heading (again to reverse).
+
+Race distances are read from the divisor in each tab's pace formula (the script loads the workbook twice: values and formulas).
+Team scores are calculated by the script (standard XC scoring) and checked against the sheet's Points/Score column where one exists.
 
 ## Refreshing the data
 1. In Google Sheets, File → Download → Microsoft Excel (.xlsx) for “Heights MS XC Results”.
