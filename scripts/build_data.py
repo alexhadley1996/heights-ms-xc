@@ -2,12 +2,15 @@
 """Build data/results.js (and results.json) from the "Heights MS XC Results" xlsx export.
 
 Usage:  python3 scripts/build_data.py path/to/Heights_MS_XC_Results.xlsx
+
+Also merges data/supplemental/ (races found online + per-race overrides for sheet races);
+see README "Supplemental data and corrections".
 Requires: openpyxl.  Re-run after exporting a fresh copy of the Google Sheet (File > Download > .xlsx).
 New meet tabs are picked up automatically if their header row uses the usual column names
 (Place, Heights Place, Grade/Year, Name or First/Last Name, Pace, Time, School/Team).
 Add an entry to MEET_INFO below to give a new tab a nicer name, date or distance.
 """
-import sys, re, json, datetime, os, statistics
+import sys, re, json, datetime, os, statistics, csv, difflib
 
 import openpyxl
 
@@ -72,7 +75,9 @@ EXTRA_NOTES = [
     "2010 meets have no pace column; most 2006–2010 meets, 2022 Covenant Life, 2023 Flint Hill and 2024 Flint Hill/Bullis have no grades.",
     "Race distances come from the divisor in each tab's pace formula (pace = time \u00f7 miles). The two 2010 Landon tabs have no pace formula, so their distance is unknown. 2026 Flint Hill's header says 2.1 mi but its formula divides by 2; the formula is used.",
     "Where a tab has no pace for a runner (e.g. non-Heights runners at 2023 States and 2023 Bullis), the site calculates it the same way: time \u00f7 the tab's distance.",
-    "Team scores are calculated by the site from the listed finishers (standard scoring: teams with 5+ finishers, top 5 score, 6th\u20137th displace, ties broken by the 6th runner). Where the sheet has a Points/Score column, the calculated team places match it in every race except 2007 Landon Invitational.",
+    "Team scores are calculated by the site from the listed finishers (standard scoring: teams with 5+ finishers, top 5 score, 6th\u20137th displace, 8th+ ignored, ties broken by the 6th runner) and compared with official meet scores where those were found online.",
+    "Races from 2011\u20132019, 2021 CLS, 2022 FHS and the 2006 Landon Home Meet (Sept 15) are not in the sheet; they come from racecast.co / Athletic.net / mocorunning.com (data/supplemental). Each of those meet pages links its source.",
+    "Corrected from official results: 2022 States Race 1 (A race) had 31 B-race runners mixed in, 2021 States and 2007 Landon Invitational were missing finishers, and 2025 States did not score 5th graders. See each meet page.",
     "Name spellings merged for the runner pages: John/Johnny Ortman, Louie Liess/Leiss, P/Phillip Allen, Vince Kiernan/Keirnan, Santi/Santiago Luli, Andres Lulli/Luli, Ed/Edward Nelson.",
     "2026 States lists 5th graders as exhibition ('Ex.') and two DNFs.",
 ]
@@ -203,9 +208,11 @@ def team_key(school):
     return re.sub(r"[^a-z0-9]+", " ", school.lower()).strip()
 
 
-def score_race(field):
-    """Standard XC scoring. Returns (standings, scoring_places, caveats)."""
-    finishers = [e for e in field if isinstance(e["place"], int) and e["secs"] is not None]
+def score_race(field, exclude_grades=(), max_per_team=7):
+    """Standard XC scoring. Returns (standings, partial_teams). Runners in exclude_grades keep their place but don't score."""
+    for e in field:
+        e.pop("teamPlace", None)
+    finishers = [e for e in field if isinstance(e["place"], int) and e["secs"] is not None and e.get("grade") not in exclude_grades]
     finishers.sort(key=lambda e: e["place"])
     by_team = {}
     for e in finishers:
@@ -215,7 +222,7 @@ def score_race(field):
     full = {k: v for k, v in by_team.items() if len(v) >= 5}
     scorers = set()
     for k, v in full.items():
-        for e in v[:7]:
+        for e in v[:max_per_team]:
             scorers.add(id(e))
     tp = 0
     for e in finishers:
@@ -253,12 +260,239 @@ def score_race(field):
     return standings, partial
 
 
+# ---------------------------------------------------------------------------
+# Supplemental data (races found online) and per-race overrides for sheet races
+# ---------------------------------------------------------------------------
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+SUPP = os.path.join(ROOT, "data", "supplemental")
+DIST_TOL = 0.01  # miles; official vs sheet distance closer than this counts as the same (e.g. 1.599 vs 1.6)
+
+TEAM_STOP = {"the", "school", "schools", "middle", "ms", "sc", "sch", "of", "and", "academy", "day", "episcopal", "prep",
+             "preparatory", "international", "friends", "christian", "catholic", "s", "st", "saint", "home", "homeschool", "hs"}
+TEAM_ALIAS = {"geoergetown": "georgetown", "gds": "georgetown", "sssas": "stephens agnes", "sssa": "stephens agnes",
+              "saes": "andrews", "cls": "covenant life", "stephen": "stephens", "alban": "albans", "andrew": "andrews"}
+
+
+def _toks(n):
+    n = re.sub(r"\((md|dc|va)\)", " ", n.lower()).replace("&", " and ").replace("'", "")
+    w = re.findall(r"[a-z0-9]+", n)
+    out = []
+    for x in w:
+        out += TEAM_ALIAS.get(x, x).split()
+    return [x for x in out if x not in TEAM_STOP] or w
+
+
+def match_team(name, cands):
+    k = set(_toks(name)); best, bs = None, 0
+    for c in cands:
+        ck = set(_toks(c))
+        if not k or not ck:
+            continue
+        s = len(k & ck) / min(len(k), len(ck))
+        s2 = difflib.SequenceMatcher(None, " ".join(_toks(name)), " ".join(_toks(c))).ratio()
+        sc = max(s, s2 * 0.95)
+        if sc > bs:
+            best, bs = c, sc
+    return best if bs >= 0.6 else None
+
+
+def load_json(name, default):
+    p = os.path.join(SUPP, name)
+    return json.load(open(p)) if os.path.exists(p) else default
+
+
+def load_official_scores():
+    p = os.path.join(SUPP, "official_team_scores.csv")
+    out = {}
+    if os.path.exists(p):
+        for r in csv.DictReader(open(p, encoding="utf-8")):
+            out.setdefault(r["Meet"], []).append(r)
+    return out
+
+
+def make_entry(place_raw, grade, name, school, time_raw, pace_raw, quirk_ctx=None):
+    place = num(place_raw)
+    name = re.sub(r"\s+", " ", str(name or "").strip())
+    school = clean_school(school)
+    t = parse_time(time_raw)
+    status = None
+    if isinstance(time_raw, str) and time_raw.strip().upper() in ("DNF", "DNS", "DQ"):
+        status = time_raw.strip().upper()
+    g = num(grade)
+    pace = parse_pace(pace_raw)
+    heights = bool(HEIGHTS_RE.search(school))
+    e = {
+        "place": int(place) if place is not None else (str(place_raw).strip() if place_raw not in (None, "") else None),
+        "grade": int(g) if g else None,
+        "name": name,
+        "school": school,
+        "time": fmt_secs(t) if t is not None else status,
+        "secs": round(t, 2) if t is not None else None,
+        "pace": f"{pace // 60}:{pace % 60:02d}" if pace else None,
+        "paceSecs": pace,
+        "heights": heights,
+    }
+    if heights and name in NAME_ALIASES:
+        e["note"] = f"Listed as \u201c{name}\u201d"
+        e["name"] = NAME_ALIASES[name]
+    return e
+
+
+def read_csv_field(rel):
+    rows = list(csv.DictReader(open(os.path.join(SUPP, rel), encoding="utf-8")))
+    # pace in these files is computed by the source from its own distance; recompute from ours instead
+    return [make_entry(r.get("Place"), r.get("Grade"), r.get("Name"), r.get("School"), r.get("Time"), None) for r in rows]
+
+
+def norm_name(n):
+    return re.sub(r"[^a-z]", "", n.lower())
+
+
+def fill_from_official(field, official, title, quirks):
+    """Keep the sheet rows; add official finishers the sheet doesn't have. Returns number added.
+    A sheet row and an official row are the same runner if the names match, or place and time match."""
+    names = {norm_name(e["name"]) for e in field}
+    by_place = {e["place"]: e for e in field if isinstance(e["place"], int)}
+    school_map, missing = {}, []
+    for o in official:
+        s = by_place.get(o["place"])
+        same_slot = s and s["secs"] is not None and o["secs"] is not None and abs(s["secs"] - o["secs"]) <= 1.5
+        if same_slot:
+            if s["school"]:
+                school_map.setdefault(o["school"], s["school"])
+            else:
+                s["blankSchool"] = o["school"]
+        if norm_name(o["name"]) in names or same_slot:
+            continue
+        missing.append(o)
+    for e in field:
+        if e.pop("blankSchool", None) is not None:
+            o_school = next(o["school"] for o in official if o["place"] == e["place"])
+            e["school"] = school_map.get(o_school, o_school)
+            e["heights"] = bool(HEIGHTS_RE.search(e["school"]))
+            e["note"] = "School was blank in the sheet; filled in from the official results"
+            if e["heights"] and e["name"] in NAME_ALIASES:
+                e["note"] += f" (listed as \u201c{e['name']}\u201d)"
+                e["name"] = NAME_ALIASES[e["name"]]
+            quirks.append(f"{title}: {e['name']} (place {e['place']}) had no school in the sheet; set to {e['school']} from the official results.")
+    for o in missing:
+        # use the sheet's spelling of the team name (learned from matched runners) so they score together
+        o["school"] = school_map.get(o["school"], o["school"])
+        o["heights"] = bool(HEIGHTS_RE.search(o["school"]))
+        o["added"] = True
+        field.append(o)
+    field.sort(key=lambda e: (e["place"] if isinstance(e["place"], int) else 10 ** 6, e["secs"] or 10 ** 6))
+    return len(missing)
+
+
+def parse_md(season, s):
+    if not s:
+        return None
+    for fmt in ("%b %d", "%B %d"):
+        try:
+            d = datetime.datetime.strptime(s.replace("Sept", "Sep"), fmt)
+            return datetime.date(season, d.month, d.day).isoformat()
+        except ValueError:
+            pass
+    return None
+
+
+def finalize(field, meta, quirks):
+    """Shared per-race processing: suspect flags, Heights places, paces, team scores, official comparison."""
+    title = meta["tab"] or meta["name"]
+    slowest_ahead = 0
+    for e in field:
+        if e["secs"] is None or not isinstance(e["place"], int):
+            continue
+        if e["secs"] < slowest_ahead - 1.0:
+            e["suspect"] = True
+            quirks.append(f"{meta['season']} {meta['name']}: {e['name']} ({e['school']}) place {e['place']} has time {e['time']}, faster than runners placed ahead \u2013 time/place likely mis-entered.")
+        slowest_ahead = max(slowest_ahead, e["secs"])
+    hp = 0
+    for e in field:
+        if e["heights"]:
+            if isinstance(e["place"], int) and e["secs"] is not None:
+                hp += 1; e["hplace"] = hp
+            else:
+                e["hplace"] = None
+    dist, dsrc = meta["distance"], meta["distanceSource"]
+    if dist and dsrc != "est":
+        for e in field:
+            if e["secs"] and not e["paceSecs"]:
+                ps = int(e["secs"] / dist)
+                e["paceSecs"], e["pace"] = ps, f"{ps // 60}:{ps % 60:02d}"
+                if dsrc != "official":
+                    e["paceCalc"] = True
+    excl = tuple(meta.get("scoreExcludeGrades") or ())
+    standings, partial = score_race(field, excl, 10 ** 6 if meta.get("noDisplacerLimit") else 7)
+    if excl:
+        for e in field:
+            if e.get("grade") in excl and isinstance(e["place"], int):
+                e["noScore"] = True
+    caveats = []
+    ints = sorted(e["place"] for e in field if isinstance(e["place"], int))
+    missing = (ints[-1] - len(set(ints))) if ints else 0
+    if missing > 0:
+        caveats.append(f"{missing} place number(s) are missing from the list, so some finishers aren't listed; scores may be off.")
+    if sum(1 for e in field if not e["heights"]) < 0.1 * len(field):
+        caveats.append("Almost every runner listed is from The Heights, so the field looks incomplete.")
+    if len(standings) < 2:
+        caveats.append("Fewer than two teams have 5 finishers listed, so no team score is shown.")
+    hv = sorted({e["school"] for e in field if e["heights"]})
+    if len(hv) > 1:
+        caveats.append(f"Heights runners appear under more than one team name ({', '.join(hv)}); they are scored separately.")
+    if meta.get("scoreRuleNote"):
+        caveats.append(meta["scoreRuleNote"])
+    sb = {"standings": standings if len(standings) >= 2 else [], "partialTeams": partial, "caveats": caveats,
+          "sheetNotes": meta.pop("_scoreNotes", [])}
+    off = meta.pop("_official", None)
+    if off:
+        comp = {t["team"]: t for t in sb["standings"]}
+        used, rows = set(), []
+        for o in sorted(off, key=lambda o: int(o["Place"])):
+            c = match_team(o["Team"], [x for x in comp if x not in used])
+            t = comp.get(c)
+            if c:
+                used.add(c)
+            ok = bool(t and t["rank"] == int(o["Place"]) and t["score"] == int(o["Score"]))
+            rows.append({"team": o["Team"], "place": int(o["Place"]), "score": int(o["Score"]), "computedTeam": c,
+                         "computedPlace": t["rank"] if t else None, "computedScore": t["score"] if t else None, "match": ok,
+                         "heights": bool((t and t["heights"]) or HEIGHTS_RE.search(o["Team"]))})
+            if t:
+                t["official"] = {"place": int(o["Place"]), "score": int(o["Score"]), "match": ok}
+        h = [r for r in rows if r["heights"]]
+        sb["official"] = {"source": off[0]["SourceURL"], "teams": rows, "matched": sum(r["match"] for r in rows),
+                          "heightsMatch": all(r["match"] for r in h) if h else None,
+                          "extraComputed": [x for x in comp if x not in used]}
+        bad = [r for r in rows if not r["match"]]
+        if bad:
+            ties = any(a["secs"] == b["secs"] and a["school"] != b["school"] for a, b in zip(field, field[1:]) if a["secs"])
+            if missing > 0:
+                sb["official"]["why"] = "The posted results are missing finishers, so the calculated scores can't match the official ones."
+            elif ties and all(r["computedScore"] is not None and abs(r["computedScore"] - r["score"]) <= 2 for r in bad):
+                sb["official"]["why"] = "The 1\u20132 point differences come from runners with identical times, whose order differs in the official scoring."
+        if sb["official"]["matched"] < len(rows):
+            quirks.append(f"{meta['season']} {meta['name']}: {sb['official']['matched']} of {len(rows)} official team scores reproduced.")
+    meta.update({
+        "scoring": sb,
+        "fieldSize": len(field),
+        "heightsCount": sum(e["heights"] for e in field),
+        "hasPace": any(e["paceSecs"] for e in field),
+        "hasGrade": any(e["grade"] for e in field),
+        "results": field,
+    })
+    return meta
+
+
 def main(path):
     wb = openpyxl.load_workbook(path, data_only=True)
     wb_f = openpyxl.load_workbook(path, data_only=False)
-    meets, quirks = [], []
-    distance_log = []
+    overrides = load_json("sheet_overrides.json", {}).get("races", {})
+    manifest = load_json("manifest.json", {}).get("races", [])
+    offscores = load_official_scores()
+    meets, quirks, distance_log = [], [], []
     tabs = [ws for ws in wb if ws.title not in SKIP_TABS]
+    used_overrides = set()
     for order, ws in enumerate(reversed(tabs)):
         title = ws.title
         info = dict(MEET_INFO.get(title, {}))
@@ -276,11 +510,11 @@ def main(path):
         if f_dist and stated and abs(f_dist - stated) > 0.001:
             quirks.append(f"Tab '{title}': pace formula divides by {f_dist:g} mi but the sheet states {stated:g} mi; using the formula ({f_dist:g} mi).")
         score_notes = sheet_score_notes(ws)
-        header = rows[0]
-        cols = find_cols(header)
+        cols = find_cols(rows[0])
         if cols["time"] is None:
             quirks.append(f"Tab '{title}': no Time column found, skipped.")
             continue
+
         def get(r, k):
             i = cols[k]
             return r[i] if i is not None and i < len(r) else None
@@ -289,72 +523,22 @@ def main(path):
         for r in rows[1:]:
             if not any(c not in (None, "", " ") for c in r[:12]):
                 continue
-            place_raw = get(r, "place")
-            place = num(place_raw)
+            place = num(get(r, "place"))
             if place is not None and place < prev_place and cur:
-                races.append(cur); cur = []  # place numbering restarted -> second race in same tab
+                races.append(cur); cur = []
             if place is not None:
                 prev_place = place
             if cols["name"] is not None:
-                name = str(get(r, "name") or "").strip()
+                name = get(r, "name")
             else:
-                name = f"{str(get(r, 'first') or '').strip()} {str(get(r, 'last') or '').strip()}".strip()
-            name = re.sub(r"\s+", " ", name)
-            school = clean_school(get(r, "school"))
-            time_raw = get(r, "time")
-            t = parse_time(time_raw)
-            status = None
-            if isinstance(time_raw, str) and time_raw.strip().upper() in ("DNF", "DNS", "DQ"):
-                status = time_raw.strip().upper()
-            grade = num(get(r, "grade"))
-            pace = parse_pace(get(r, "pace"))
-            heights = bool(HEIGHTS_RE.search(school))
-            note = None
-            if heights and name in NAME_ALIASES:
-                note = f"Listed in sheet as \u201c{name}\u201d"
-                name = NAME_ALIASES[name]
-            entry = {
-                "place": int(place) if place is not None else (str(place_raw).strip() if place_raw not in (None, "") else None),
-                "grade": int(grade) if grade else None,
-                "name": name,
-                "school": school,
-                "time": fmt_secs(t) if t is not None else status,
-                "secs": round(t, 2) if t is not None else None,
-                "pace": f"{pace // 60}:{pace % 60:02d}" if pace else None,
-                "paceSecs": pace,
-                "heights": heights,
-            }
-            pts = num(get(r, "points"))
-            if pts is not None:
-                entry["sheetPoints"] = int(pts)
-            if heights:
-                entry["sheetHPlace"] = num(get(r, "hplace"))
-            if note:
-                entry["note"] = note
-            cur.append(entry)
+                name = f"{str(get(r, 'first') or '').strip()} {str(get(r, 'last') or '').strip()}"
+            cur.append(make_entry(get(r, "place"), get(r, "grade"), name, get(r, "school"), get(r, "time"), get(r, "pace")))
         if cur:
             races.append(cur)
+        if len(races) > 1:
+            quirks.append(f"Tab '{title}' contains {len(races)} separately-numbered races (placings restart); shown as Race 1..{len(races)}.")
 
         for ri, field in enumerate(races):
-            # Flag times that are faster than someone placed ahead of them (out of order in the sheet).
-            slowest_ahead = 0
-            for e in field:
-                if e["secs"] is None or not isinstance(e["place"], int):
-                    continue
-                if e["secs"] < slowest_ahead - 1.0:
-                    e["suspect"] = True
-                    quirks.append(f"Tab '{title}': {e['name']} ({e['school']}) place {e['place']} has time {e['time']}, faster than runners placed ahead \u2013 time/place likely mis-entered.")
-                slowest_ahead = max(slowest_ahead, e["secs"])
-            hp = 0
-            for e in field:
-                if e["heights"]:
-                    if isinstance(e["place"], int) and e["secs"] is not None:
-                        hp += 1
-                        e["hplace"] = hp
-                    else:
-                        e["hplace"] = None
-            heights_n = sum(e["heights"] for e in field)
-            # implied distance from time/pace (median), only as a fallback
             ratios = [e["secs"] / e["paceSecs"] for e in field if e["secs"] and e["paceSecs"]]
             implied = round(statistics.median(ratios), 2) if ratios else None
             if f_dist:
@@ -365,108 +549,195 @@ def main(path):
                 dist, dsrc = implied, "est"
             else:
                 dist, dsrc = None, None
-            # Fill in missing paces from time / distance, the same way the sheet does
-            if dist and dsrc != "est":
-                for e in field:
-                    if e["secs"] and not e["paceSecs"]:
-                        ps = int(e["secs"] / dist)
-                        e["paceSecs"], e["pace"], e["paceCalc"] = ps, f"{ps // 60}:{ps % 60:02d}", True
-            # Team scoring
-            standings, partial = score_race(field)
-            caveats = []
-            ints = sorted(e["place"] for e in field if isinstance(e["place"], int))
-            missing = (ints[-1] - len(ints)) if ints else 0
-            non_h = sum(1 for e in field if not e["heights"])
-            if missing > 0:
-                caveats.append(f"{missing} place number(s) are missing from the sheet, so some finishers aren't listed; scores may be off.")
-            if non_h < 0.1 * len(field):
-                caveats.append("Almost every runner listed is from The Heights, so the field looks incomplete.")
-            if len(standings) < 2:
-                caveats.append("Fewer than two teams have 5 finishers listed, so no team score is shown.")
-            hv = sorted({e["school"] for e in field if e["heights"]})
-            if len(hv) > 1:
-                caveats.append(f"Heights runners appear under more than one team name ({', '.join(hv)}); they are scored separately.")
-            # agreement with the sheet's own Points column, where present
-            sp = [(e.get("teamPlace"), e["sheetPoints"]) for e in field if "sheetPoints" in e]
-            agree = None
-            if sp:
-                agree = {"rows": len(sp), "match": sum(1 for a, b in sp if a == b)}
-                if agree["match"] < 0.9 * agree["rows"]:
-                    caveats.append(f"The sheet's own Points column differs from these calculated places ({agree['match']} of {agree['rows']} match); the meet seems to have scored teams with fewer than 5 listed finishers (or had runners who aren't in the sheet).")
-            score_block = {
-                "standings": standings if len(standings) >= 2 else [],
-                "partialTeams": partial,
-                "caveats": caveats,
-                "sheetNotes": score_notes if ri == 0 else [],
-                "sheetPointsCheck": agree,
-            }
-            distance_log.append((title, ri, dist, dsrc, stated))
             label = info["name"] + (f" \u2013 Race {ri + 1}" if len(races) > 1 else "")
             mid = slug(f"{info['season']}-{info['name']}-{info.get('date', '')}" + (f"-race{ri + 1}" if len(races) > 1 else ""))
-            meets.append({
-                "id": mid,
-                "season": info["season"],
-                "name": label,
-                "date": info.get("date"),
-                "tab": title,
-                "distance": dist,
-                "distanceSource": dsrc,
-                "statedDistance": stated,
-                "impliedDistance": implied,
-                "scoring": score_block,
-                "order": order * 10 + ri,
-                "fieldSize": len(field),
-                "heightsCount": heights_n,
-                "hasPace": any(e["paceSecs"] for e in field),
-                "hasGrade": any(e["grade"] for e in field),
-                "results": field,
-            })
-            if len(races) > 1:
-                quirks.append(f"Tab '{title}' contains {len(races)} separately-numbered races (placings restart); shown as Race 1..{len(races)}.")
+            ov = overrides.get(mid, {})
+            if ov:
+                used_overrides.add(mid)
+            correction = None
+            if ov.get("replace_field_with"):
+                before = len(field)
+                field = read_csv_field(ov["replace_field_with"])
+                for e in field:
+                    e["fromOfficial"] = True
+                correction = ov.get("correction_note") or f"Replaced the sheet's {before} rows with the official results ({len(field)})."
+            elif ov.get("fill_from_official"):
+                n = fill_from_official(field, read_csv_field(ov["fill_from_official"]), title, quirks)
+                correction = (ov.get("correction_note") or "") + ("" if n else " (nothing to add)")
+                if n:
+                    quirks.append(f"{info['season']} {label}: added {n} finishers from the official results.")
+            off_d = ov.get("official_distance_mi")
+            dnote = None
+            if off_d and dist:
+                if abs(off_d - dist) <= DIST_TOL:
+                    dnote = {"official": off_d, "agrees": True}
+                else:
+                    dnote = {"official": off_d, "agrees": False}
+                    quirks.append(f"{info['season']} {label}: sheet distance {dist:g} mi ({dsrc}) but the official results list {off_d:g} mi; the site uses the sheet's {dist:g} mi.")
+            meta = {
+                "id": mid, "season": info["season"], "name": label,
+                "dateLabel": info.get("date"),
+                "date": ov.get("official_date") or parse_md(info["season"], info.get("date")),
+                "tab": title, "origin": "sheet",
+                "distance": dist, "distanceSource": dsrc, "statedDistance": stated, "impliedDistance": implied,
+                "officialDistance": dnote,
+                "officialName": " \u2013 ".join(x for x in (ov.get("official_meet_name"), ov.get("official_race")) if x) or None,
+                "location": ov.get("location"),
+                "source": {"name": ov["source_name"], "url": ov["source_url"], "original": ov.get("original_url")} if ov.get("source_url") else None,
+                "correction": correction,
+                "scoreExcludeGrades": ov.get("score_exclude_grades"),
+                "scoreRuleNote": ov.get("score_rule_note"),
+                "_scoreNotes": score_notes if ri == 0 else [],
+                "_official": offscores.get(ov.get("official_scores_meet")) if ov.get("official_scores_meet") else None,
+                "_tabOrder": order * 10 + ri,
+            }
+            distance_log.append((title, ri, dist, dsrc, stated, off_d))
+            meets.append(finalize(field, meta, quirks))
+    for k in set(overrides) - used_overrides:
+        quirks.append(f"sheet_overrides.json: no sheet race with id '{k}' (override unused).")
 
-    # Runner index (Heights only)
-    runners = {}
+    # Races found online that aren't in the sheet
+    for s in manifest:
+        field = read_csv_field(s["csv"])
+        race = s.get("race") or ""
+        label = s["meet"] + (f" ({race})" if race and race not in ("Middle School Boys", "Boys") else "")
+        mid = slug(f"{s['season']}-{s['meet']}-{race}-{s['date']}")
+        meta = {
+            "id": mid, "season": s["season"], "name": label, "dateLabel": None, "date": s["date"],
+            "tab": None, "origin": "online",
+            "distance": s.get("distance_mi"), "distanceSource": "official" if s.get("distance_mi") else None,
+            "statedDistance": None, "impliedDistance": None, "officialDistance": None,
+            "officialName": f"{s['meet']} \u2013 {race}" if race else s["meet"],
+            "location": s.get("location"),
+            "source": {"name": s.get("source_name"), "url": s.get("source_url"), "original": s.get("original_url")},
+            "correction": None, "note": s.get("note"),
+            "noDisplacerLimit": s.get("score_no_displacer_limit"), "scoreRuleNote": s.get("score_rule_note"),
+            "_official": offscores.get(s.get("official_scores_meet")) if s.get("official_scores_meet") else None,
+            "_tabOrder": 0,
+        }
+        meets.append(finalize(field, meta, quirks))
+
+    # Chronological order: by date; sheet races without a date sit just after the previous dated race of the
+    # same season in tab order.
+    meets.sort(key=lambda m: (m["season"], m["_tabOrder"] if m["origin"] == "sheet" else 0))
+    last = {}
+    for m in [x for x in meets if x["origin"] == "sheet"]:
+        if m["date"]:
+            last[m["season"]] = m["date"]
+        m["_sortDate"] = m["date"] or (last.get(m["season"], f"{m['season']}-09-01") + "~")
     for m in meets:
-        for e in m["results"]:
-            if not e["heights"]:
-                continue
-            r = runners.setdefault(e["name"], {"name": e["name"], "id": slug(e["name"]), "results": []})
-            r["results"].append({
-                "meet": m["id"], "place": e["place"], "hplace": e.get("hplace"),
-                "grade": e["grade"], "time": e["time"], "secs": e["secs"],
-                "pace": e["pace"], "paceSecs": e["paceSecs"],
-                "suspect": e.get("suspect", False),
-                "teamPlace": e.get("teamPlace"),
-                "paceCalc": e.get("paceCalc", False),
-            })
-    for r in runners.values():
-        seasons = sorted({next(m["season"] for m in meets if m["id"] == x["meet"]) for x in r["results"]})
-        r["seasons"] = seasons
-        paces = [x for x in r["results"] if x["paceSecs"] and not x["suspect"]]
-        r["bestPace"] = min(paces, key=lambda x: x["paceSecs"])["pace"] if paces else None
-        r["bestPaceSecs"] = min((x["paceSecs"] for x in paces), default=None)
+        m.setdefault("_sortDate", m["date"])
+    meets.sort(key=lambda m: (m["season"], m["_sortDate"], m["_tabOrder"]))
+    for i, m in enumerate(meets):
+        m["order"] = i
+        for k in ("_sortDate", "_tabOrder"):
+            m.pop(k, None)
+    seen = {}
+    for m in meets:
+        if m["id"] in seen:
+            seen[m["id"]] += 1; m["id"] += f"-{seen[m['id']]}"
+        else:
+            seen[m["id"]] = 1
 
+    runners, review = build_runners(meets)
     data = {
         "generated": datetime.date.today().isoformat(),
-        "source": "Google Sheet \u201cHeights MS XC Results\u201d",
-        "meets": sorted(meets, key=lambda m: (-m["season"], -m["order"])),
-        "runners": sorted(runners.values(), key=lambda r: r["name"].split()[-1] + r["name"]),
+        "source": "Google Sheet \u201cHeights MS XC Results\u201d plus races found on racecast.co / Athletic.net / mocorunning.com",
+        "meets": sorted(meets, key=lambda m: -m["order"]),
+        "runners": sorted(runners, key=lambda r: (r["name"].split()[-1], r["name"], r["seasons"][0])),
+        "identityReview": review,
         "quirks": EXTRA_NOTES + sorted(set(quirks)),
     }
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
+    out = os.path.join(ROOT, "data")
     with open(os.path.join(out, "results.json"), "w") as f:
         json.dump(data, f, indent=1)
     with open(os.path.join(out, "results.js"), "w") as f:
-        f.write("// Generated by scripts/build_data.py from the Heights MS XC Results sheet. Do not edit by hand.\n")
+        f.write("// Generated by scripts/build_data.py from the Heights MS XC Results sheet + data/supplemental. Do not edit by hand.\n")
         f.write("window.XC_DATA = " + json.dumps(data, separators=(",", ":")) + ";\n")
-    print(f"{len(meets)} races, {len(runners)} Heights runners, {sum(m['fieldSize'] for m in meets)} result rows")
+    print(f"{len(meets)} races ({sum(m['origin'] == 'online' for m in meets)} from online), {len(runners)} Heights runners, {sum(m['fieldSize'] for m in meets)} result rows")
     for q in data["quirks"]:
         print("quirk:", q)
-    for t, ri, d, src, st in distance_log:
-        print(f"distance: {t!r} race{ri + 1}: {d} ({src}){' stated ' + str(st) if st else ''}")
-    for m in data["meets"]:
-        sc = m["scoring"]
-        print("score:", m["id"], [(t["team"], t["score"]) for t in sc["standings"]][:4], sc["caveats"], sc["sheetPointsCheck"], sc["sheetNotes"][:2])
+    for t, ri, d, src, st, od in distance_log:
+        print(f"distance: {t!r} race{ri + 1}: {d} ({src}){' stated ' + str(st) if st else ''}{' official ' + str(od) if od else ''}")
+    for m in meets:
+        o = m["scoring"].get("official")
+        print("score:", m["id"], m["date"], m["distance"], m["distanceSource"], f"official {o['matched']}/{len(o['teams'])} heights={o['heightsMatch']}" if o else "no official")
+    for r in review:
+        print("review:", r)
+
+
+def class_of(season, grade):
+    return season + (8 - grade) if grade else None
+
+
+def build_runners(meets):
+    """Group Heights results by name, then split a name into separate runners when the seasons/grades
+    can't belong to one middle-schooler (class year differs by 2+, or seasons more than 3 years apart)."""
+    by_name = {}
+    for m in meets:
+        for e in m["results"]:
+            if e["heights"]:
+                by_name.setdefault(e["name"], []).append((m, e))
+    runners, review = [], []
+    for name, items in by_name.items():
+        items.sort(key=lambda x: x[0]["order"])
+        clusters = []
+        for m, e in items:
+            cy = class_of(m["season"], e["grade"])
+            placed = None
+            for c in clusters:
+                cys = [y for y in c["cy"] if y]
+                if cy and cys and abs(statistics.median(cys) - cy) >= 2:
+                    continue
+                if m["season"] - c["last"] > 3:
+                    continue
+                if not cy and not cys and m["season"] - c["first"] > 3:
+                    continue
+                placed = c; break
+            if not placed:
+                placed = {"first": m["season"], "last": m["season"], "cy": [], "items": []}
+                clusters.append(placed)
+            placed["items"].append((m, e)); placed["cy"].append(cy); placed["last"] = m["season"]
+        for c in clusters:
+            seasons = sorted({m["season"] for m, _ in c["items"]})
+            rid = slug(name) if len(clusters) == 1 else slug(f"{name}-{seasons[0]}")
+            sources = {m["origin"] for m, _ in c["items"]}
+            r = {"name": name, "id": rid, "seasons": seasons, "results": []}
+            if len(clusters) > 1:
+                r["disambig"] = f"{seasons[0]}" + (f"\u2013{seasons[-1]}" if seasons[-1] != seasons[0] else "")
+            for m, e in c["items"]:
+                e["runnerId"] = rid
+                r["results"].append({
+                    "meet": m["id"], "place": e["place"], "hplace": e.get("hplace"), "grade": e["grade"],
+                    "time": e["time"], "secs": e["secs"], "pace": e["pace"], "paceSecs": e["paceSecs"],
+                    "suspect": e.get("suspect", False), "teamPlace": e.get("teamPlace"),
+                    "paceCalc": e.get("paceCalc", False), "origin": m["origin"], "added": e.get("added", False),
+                })
+            paces = [x for x in r["results"] if x["paceSecs"] and not x["suspect"]]
+            r["bestPace"] = min(paces, key=lambda x: x["paceSecs"])["pace"] if paces else None
+            r["bestPaceSecs"] = min((x["paceSecs"] for x in paces), default=None)
+            runners.append(r)
+            if len(sources) > 1:
+                cys = sorted({y for y in c["cy"] if y})
+                if not cys and seasons[-1] - seasons[0] >= 2:
+                    review.append(f"Merged sheet + online results for {name} ({', '.join(map(str, seasons))}) with no grades to confirm it's one runner.")
+        if len(clusters) > 1:
+            review.append(f"Split \u201c{name}\u201d into {len(clusters)} runners: " + "; ".join(
+                f"{c['first']}\u2013{c['last']} (class of {', '.join(str(y) for y in sorted({y for y in c['cy'] if y})) or '?'})" for c in clusters))
+    # possible spelling variants that were NOT merged (same last name, similar first name, overlapping seasons)
+    rs = sorted(runners, key=lambda r: r["name"])
+    for i, a in enumerate(rs):
+        for b in rs[i + 1:]:
+            if a["name"] == b["name"]:
+                continue
+            la, lb = a["name"].split()[-1].lower(), b["name"].split()[-1].lower()
+            fa, fb = a["name"].split()[0].lower(), b["name"].split()[0].lower()
+            same_last = la == lb or difflib.SequenceMatcher(None, la, lb).ratio() >= 0.85
+            close_first = fa == fb or fa.startswith(fb[:3]) or fb.startswith(fa[:3]) or difflib.SequenceMatcher(None, fa, fb).ratio() >= 0.75
+            overlap = min(a["seasons"][-1], b["seasons"][-1]) - max(a["seasons"][0], b["seasons"][0]) >= -1
+            if same_last and close_first and overlap and (la != lb or fa != fb):
+                review.append(f"Possible same runner, not merged: \u201c{a['name']}\u201d ({', '.join(map(str, a['seasons']))}) and \u201c{b['name']}\u201d ({', '.join(map(str, b['seasons']))}).")
+    return runners, review
 
 
 if __name__ == "__main__":

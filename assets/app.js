@@ -16,14 +16,17 @@
   const ord = n => { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
   const meetLink = m => `meet.html?id=${encodeURIComponent(m.id)}`;
   const runnerHref = r => `runner.html?id=${encodeURIComponent(r.id)}`;
-  const runnerLink = name => runnersByName[name] ? runnerHref(runnersByName[name]) : null;
-  const meetTitle = m => `${m.season} ${m.name}${m.date ? " (" + m.date + ")" : ""}`;
+  const runnerLink = e => { const r = (typeof e === "object" && e.runnerId && runnersById[e.runnerId]) || runnersByName[typeof e === "object" ? e.name : e]; return r ? runnerHref(r) : null; };
+  const rName = r => r.name + (r.disambig ? ` (${r.disambig})` : "");
+  const dl = m => m.date ? new Date(m.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : (m.dateLabel || "");
+  const meetTitle = m => `${m.season} ${m.name}${dl(m) ? " (" + dl(m) + ")" : ""}`;
   const distPlain = m => m.distance ? `${m.distanceSource === "est" ? "≈" : ""}${+m.distance} mi` : "";
   const distText = m => m.distance
     ? (m.distanceSource === "est" ? `≈${+m.distance} mi <span class="muted" title="No pace formula in the sheet; estimated from time ÷ pace">(est.)</span>`
-      : `<span title="${m.distanceSource === "formula" ? "From the pace formula in the sheet (pace = time ÷ distance)" : "Stated in the sheet"}">${+m.distance} mi</span>`)
+      : `<span title="${{ formula: "From the pace formula in the sheet (pace = time ÷ distance)", official: "From the official results", stated: "Stated in the sheet" }[m.distanceSource] || ""}${m.officialDistance ? (m.officialDistance.agrees ? " · matches the official results (" + m.officialDistance.official + " mi)" : " · the official results list " + m.officialDistance.official + " mi") : ""}">${+m.distance} mi</span>${m.officialDistance && !m.officialDistance.agrees ? ` <span class="muted" title="The official results list a different distance; the site keeps the sheet's distance">(official: ${+m.officialDistance.official} mi)</span>` : ""}`)
     : '<span class="muted" title="No pace or distance in the sheet">distance unknown</span>';
   const heightsOf = m => m.results.filter(e => e.heights);
+  const missingSeasons = () => { const out = []; for (let y = seasons[seasons.length - 1]; y <= seasons[0]; y++) if (!seasons.includes(y)) out.push(y); return out; };
   const heightsTeam = m => (m.scoring?.standings || []).find(t => t.heights);
   function fmt(s) { const neg = s < 0; s = Math.abs(s); const m = Math.floor(s / 60), r = s - m * 60; return `${neg ? "-" : ""}${m}:${r.toFixed(1).padStart(4, "0")}`; }
   const parseT = t => { const m = /^(\d+):(\d+(?:\.\d+)?)$/.exec(t || ""); return m ? +m[1] * 60 + +m[2] : ""; };
@@ -76,11 +79,11 @@
       <nav class="main">${nav.map(([h, t, k]) => `<a href="${h}" class="${k === activeKey ? "active" : ""}">${t}</a>`).join("")}</nav>
     </div></header>`);
   document.body.insertAdjacentHTML("beforeend", `
-    <footer><div class="wrap"><img src="assets/heights-crest.svg" alt=""><div>Results compiled from the team's results spreadsheet (data refreshed ${esc(D.generated)}).
+    <footer><div class="wrap"><img src="assets/heights-crest.svg" alt=""><div>Results compiled from the team's results spreadsheet plus results posted online (racecast.co, Athletic.net, mocorunning.com); data refreshed ${esc(D.generated)}.
     Highlighted rows are Heights runners. Spot an error or have an old result sheet? <!-- PLACEHOLDER: contact info -->[Contact placeholder]</div></div></footer>`);
 
   // ---------- shared renderers ----------
-  const badges = r => `${r.note ? ` <span class="badge ghost" title="${esc(r.note)}">note</span>` : ""}${r.suspect ? ` <span class="badge ghost" title="Time is faster than runners placed ahead of this runner in the sheet; time or place was probably mis-entered">check</span>` : ""}`;
+  const badges = r => `${r.added ? ' <span class="badge ghost" title="Missing from the results sheet; added from the official results">added</span>' : ""}${r.noScore ? ' <span class="badge ghost" title="This meet did not count this grade in team scores">no team score</span>' : ""}${r.note ? ` <span class="badge ghost" title="${esc(r.note)}">note</span>` : ""}${r.suspect ? ` <span class="badge ghost" title="Time is faster than runners placed ahead of this runner in the sheet; time or place was probably mis-entered">check</span>` : ""}`;
   const paceCell = r => td(r.pace ? esc(r.pace) + (r.paceCalc ? '<span class="calc" title="Calculated from time ÷ distance (no pace in the sheet)">*</span>' : "") : dash, r.paceSecs, "num");
 
   function resultsTable(rows, opts = {}) {
@@ -89,7 +92,7 @@
     const head = [opts.heightsPlace ? th("Heights", "num") : "", th("Place", "num"), showTP ? th('<span title="Team-scoring place (only runners on teams with 5+ finishers, top 7 per team)">Team pts</span>', "num hide-sm") : "",
       showGrade ? th("Gr", "num hide-sm") : "", th("Name"), opts.school ? th("School", "hide-sm") : "", th("Time", "num"), showPace ? th("Pace/mi", "num") : "", opts.gap ? th("Gap", "num hide-sm") : ""].join("");
     const body = rows.map(r => {
-      const link = r.heights ? runnerLink(r.name) : null;
+      const link = r.heights ? runnerLink(r) : null;
       const name = (link ? `<a href="${link}">${esc(r.name)}</a>` : esc(r.name)) + badges(r);
       const gap = r.secs && lead ? r.secs - lead : null;
       return `<tr class="${r.heights && opts.mark ? "heights" : ""}">${opts.heightsPlace ? td(v(r.hplace), r.hplace, "num") : ""}${td(v(r.place), typeof r.place === "number" ? r.place : "", "num")}${showTP ? td(v(r.teamPlace), r.teamPlace, "num hide-sm") : ""}${showGrade ? td(v(r.grade), r.grade, "num hide-sm") : ""}${td(name, r.name)}${opts.school ? td(v(r.school), r.school, "hide-sm") : ""}${td(v(r.time), r.secs, "num t")}${showPace ? paceCell(r) : ""}${opts.gap ? td(gap === null ? "" : gap === 0 ? "—" : "+" + fmt(gap), gap, "num hide-sm muted") : ""}</tr>`;
@@ -99,7 +102,7 @@
   function meetCard(m) {
     const h = heightsOf(m).filter(e => e.secs).slice(0, 3), t = heightsTeam(m), n = m.scoring.standings.length;
     return `<a class="card meet-card" href="${meetLink(m)}">
-      <div class="season">${m.season}${m.date ? " · " + esc(m.date) : ""}</div>
+      <div class="season">${m.season}${dl(m) ? " · " + esc(dl(m)) : ""}${m.origin === "online" ? ' <span class="src-tag" title="Not in the results sheet; from results posted online">online results</span>' : ""}</div>
       <h3>${esc(m.name)}</h3>
       <div class="meta"><span>${distText(m)}</span><span>${m.heightsCount} Heights runners</span><span>${m.fieldSize} total in field</span>${t ? `<span><b>Team: ${ord(t.rank)} of ${n}</b> (${t.score} pts)</span>` : ""}</div>
       <ul class="top3">${h.map(e => `<li><span>${e.hplace}. ${esc(e.name)}</span><span>${esc(e.time)}</span></li>`).join("")}</ul></a>`;
@@ -108,14 +111,19 @@
     const sc = m.scoring, st = sc.standings;
     const cav = sc.caveats.length ? `<div class="caveat">${sc.caveats.map(c => `<div>⚠ ${esc(c)}</div>`).join("")}</div>` : "";
     const notes = sc.sheetNotes.length ? `<p class="note"><b>Scores noted in the sheet:</b> ${sc.sheetNotes.map(n => `${esc(n.label)}${n.score != null ? ": " + n.score : ""}`).join(" · ")} (likely grade-division scores; not recalculated here).</p>` : "";
-    const chk = sc.sheetPointsCheck && sc.sheetPointsCheck.match >= 0.9 * sc.sheetPointsCheck.rows ? `<span class="pill ok" title="The sheet has a Points/Score column for this race">✓ Matches the sheet's Points column (${sc.sheetPointsCheck.match}/${sc.sheetPointsCheck.rows} runners)</span>` : "";
-    if (!st.length) return `<section class="scores"><h2>Team scores</h2>${cav}${notes}<p class="note">No team score shown for this race.</p></section>`;
+    const of = sc.official;
+    const chk = of ? (of.matched === of.teams.length
+      ? `<a class="pill ok" href="${esc(of.source)}" target="_blank" rel="noopener" title="Official team scores published for this meet">✓ Matches all ${of.teams.length} official team scores</a>`
+      : `<a class="pill warn" href="${esc(of.source)}" target="_blank" rel="noopener">${of.matched} of ${of.teams.length} official team scores match${of.heightsMatch ? " (Heights matches)" : ""}</a>`) : "";
+    const why = of && of.why ? `<p class="note">${esc(of.why)}</p>` : "";
+    const offCell = t => !of ? "" : td(t.official ? `${ord(t.official.place)} · ${t.official.score}${t.official.match ? ' <span class="ok-mark" title="Matches">✓</span>' : ' <span class="bad-mark" title="Differs from the calculated score">≠</span>'}` : dash, t.official?.score, "num hide-sm");
+    if (!st.length) return `<section class="scores"><h2>Team scores</h2>${cav}${notes}${of ? `<p class="note">Official: ${of.teams.map(t => `${ord(t.place)} ${esc(t.team)} ${t.score}`).join(" · ")} (<a href="${esc(of.source)}" target="_blank" rel="noopener">source</a>)</p>` : ""}<p class="note">No team score calculated for this race.</p></section>`;
     const places = x => x.map(p => `<span class="pl" title="${esc(p.name)} · ${ord(p.overall)} overall · ${esc(p.time)}">${p.place}</span>`).join("");
-    const body = st.map((t, k) => `<tr class="${t.heights ? "heights" : ""}${k >= 10 && !t.heights ? " extra" : ""}">${td(t.rank, t.rank, "num")}${td(`<b>${esc(t.team)}</b>${t.tieNote ? ` <span class="badge ghost" title="${esc(t.tieNote)}">tie</span>` : ""}`, t.team)}${td(`<b>${t.score}</b>`, t.score, "num")}${td(places(t.scorers), t.scorers[0].place, "places")}${td(t.displacers.length ? places(t.displacers) : dash, t.displacers[0]?.place, "places hide-sm")}${td(esc(t.teamTime), parseT(t.teamTime), "num t hide-sm")}${td(esc(t.avgTime), parseT(t.avgTime), "num hide-sm")}${td(t.finishers, t.finishers, "num hide-sm")}</tr>`).join("");
+    const body = st.map((t, k) => `<tr class="${t.heights ? "heights" : ""}${k >= 10 && !t.heights ? " extra" : ""}">${td(t.rank, t.rank, "num")}${td(`<b>${esc(t.team)}</b>${t.tieNote ? ` <span class="badge ghost" title="${esc(t.tieNote)}">tie</span>` : ""}`, t.team)}${td(`<b>${t.score}</b>`, t.score, "num")}${td(places(t.scorers), t.scorers[0].place, "places")}${td(t.displacers.length ? places(t.displacers) : dash, t.displacers[0]?.place, "places hide-sm")}${td(esc(t.teamTime), parseT(t.teamTime), "num t hide-sm")}${td(esc(t.avgTime), parseT(t.avgTime), "num hide-sm")}${td(t.finishers, t.finishers, "num hide-sm")}${offCell(t)}</tr>`).join("");
     return `<section class="scores"><h2>Team scores</h2>
-      ${table(th("#", "num") + th("Team") + th("Score", "num") + th("Top 5 (team places)") + th("6th / 7th", "hide-sm") + th("Top-5 time", "num hide-sm") + th("Avg", "num hide-sm") + th("Finishers", "num hide-sm"), body, 'data-default-sort="0"')}
-      <div class="toolbar small">${st.length > 10 ? `<button class="btn ghost small" id="moreTeams">Show all ${st.length} teams</button>` : ""}${chk}</div>${cav}${notes}
-      <p class="note">Calculated by this site from the results sheet and may differ from official meet scores. Standard cross country scoring: only runners on teams with at least 5 finishers count (exhibition and unattached runners are dropped), each team's top 5 score their team place, the 6th and 7th runners push other teams' runners back but don't score, lowest total wins, and ties go to the team whose 6th runner placed better. Hover a number to see the runner.</p></section>`;
+      ${table(th("#", "num") + th("Team") + th("Score", "num") + th("Top 5 (team places)") + th("6th / 7th", "hide-sm") + th("Top-5 time", "num hide-sm") + th("Avg", "num hide-sm") + th("Finishers", "num hide-sm") + (of ? th("Official", "num hide-sm") : ""), body, 'data-default-sort="0"')}
+      <div class="toolbar small">${st.length > 10 ? `<button class="btn ghost small" id="moreTeams">Show all ${st.length} teams</button>` : ""}${chk}</div>${why}${cav}${notes}
+      <p class="note">Calculated by this site from the listed finishers${of ? " and checked against the official team scores (Official column)" : "; no official team scores were found for this race, so they may differ from the meet's"}. Standard cross country scoring: only runners on teams with at least 5 finishers count (exhibition and unattached runners are dropped), each team's top 5 score their team place, the 6th and 7th runners push other teams' runners back but don't score, lowest total wins, and ties go to the team whose 6th runner placed better. Hover a number to see the runner.</p></section>`;
   }
 
   // ---------- pages ----------
@@ -142,14 +150,14 @@
         <h2>About the team</h2>
         <div class="placeholder"><strong>Placeholder — team overview</strong>Add a short introduction to the program here (coaches, practice, how to join). Nothing has been filled in yet.</div>
         <h2>All seasons</h2>
-        <div class="grid">${seasons.map(s => { const ms = D.meets.filter(m => m.season === s).sort(chrono); return `<a class="card meet-card" href="meets.html#s${s}"><div class="season">Season</div><h3>${s}</h3><div class="meta"><span>${ms.length} race${ms.length > 1 ? "s" : ""}</span></div><ul class="top3">${ms.map(m => `<li><span>${esc(m.name)}${m.date ? " · " + esc(m.date) : ""}</span><span class="muted cnt" title="Heights runners in this race">${m.heightsCount} runners</span></li>`).join("")}</ul></a>`; }).join("")}</div>
-        <p class="note">Seasons 2011–2020 are not in the results sheet yet.</p>
+        <div class="grid">${seasons.map(s => { const ms = D.meets.filter(m => m.season === s).sort(chrono); return `<a class="card meet-card" href="meets.html#s${s}"><div class="season">Season</div><h3>${s}</h3><div class="meta"><span>${ms.length} race${ms.length > 1 ? "s" : ""}</span></div><ul class="top3">${ms.map(m => `<li><span>${esc(m.name)}${dl(m) ? " · " + esc(dl(m)) : ""}</span><span class="muted cnt" title="Heights runners in this race">${m.heightsCount} runners</span></li>`).join("")}</ul></a>`; }).join("")}</div>
+        <p class="note">${missingSeasons().length ? `No results found yet for ${missingSeasons().join(", ")}. ` : ""}Races marked “online results” aren't in the team's results sheet; they come from results posted on racecast.co / Athletic.net / mocorunning.com and link their source.</p>
       </div>`;
     },
     meets() {
       const rows = [...D.meets].sort((a, b) => -chrono(a, b)).map(m => { const t = heightsTeam(m), f = heightsOf(m).find(e => e.hplace === 1);
-        return `<tr>${td(m.season, ckey(m), "num")}${td(`<a href="${meetLink(m)}">${esc(m.name)}${m.date ? " · " + esc(m.date) : ""}</a>`, m.name)}${td(distText(m), m.distance)}${td(m.heightsCount, m.heightsCount, "num")}${td(m.fieldSize, m.fieldSize, "num hide-sm")}${td(t ? `${ord(t.rank)} of ${m.scoring.standings.length}` : dash, t?.rank, "num")}${td(t ? t.score : dash, t?.score, "num hide-sm")}${td(f ? `${esc(f.name)} <span class="muted">${esc(f.time)}</span>` : dash, f?.secs, "hide-sm")}</tr>`; }).join("");
-      $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Meets</h1><div class="sub">Every race in the results sheet. Within a season, races follow the sheet's tab order.</div></div>
+        return `<tr>${td(m.season, ckey(m), "num")}${td(`<a href="${meetLink(m)}">${esc(m.name)}${dl(m) ? " · " + esc(dl(m)) : ""}</a>${m.origin === "online" ? ' <span class="src-tag">online</span>' : ""}`, m.name)}${td(distText(m), m.distance)}${td(m.heightsCount, m.heightsCount, "num")}${td(m.fieldSize, m.fieldSize, "num hide-sm")}${td(t ? `${ord(t.rank)} of ${m.scoring.standings.length}` : dash, t?.rank, "num")}${td(t ? t.score : dash, t?.score, "num hide-sm")}${td(f ? `${esc(f.name)} <span class="muted">${esc(f.time)}</span>` : dash, f?.secs, "hide-sm")}</tr>`; }).join("");
+      $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Meets</h1><div class="sub">Every race on record, in date order: the team's results sheet plus races found in results posted online (marked “online results”).</div></div>
         <div class="toolbar"><div class="seg" id="view"><button data-v="cards" class="on">By season</button><button data-v="table">Table (sortable)</button></div></div>
         <div id="cards">${seasons.map(s => `<section class="season-block" id="s${s}"><h2>${s} <small>${D.meets.filter(m => m.season === s).length} races</small></h2><div class="grid">${D.meets.filter(m => m.season === s).sort(chrono).map(meetCard).join("")}</div></section>`).join("")}</div>
         <div id="tableview" hidden>${table(th("Season", "num") + th("Meet") + th("Distance") + th("Heights runners", "num") + th("Field", "num hide-sm") + th("Heights team", "num") + th("Score", "num hide-sm") + th("Top Heights runner", "hide-sm"), rows, 'data-default-sort="0" data-default-dir="descending"')}${sortHint}</div>
@@ -165,7 +173,9 @@
       $("#app").innerHTML = `<div class="wrap">
         <div class="page-head"><div class="crumbs"><a href="meets.html">Meets</a> / <a href="meets.html#s${m.season}">${m.season}</a></div>
         <h1>${esc(meetTitle(m))}</h1>
-        <div class="sub"><b>Distance: ${distText(m)}</b> · ${m.fieldSize} total in field · ${m.heightsCount} Heights runners${fin.length ? ` · Heights top finisher: ${ord(fin[0].place)} overall` : ""}${t ? ` · <b>Heights team: ${ord(t.rank)} of ${m.scoring.standings.length}</b>` : ""}</div></div>
+        <div class="sub">${m.date ? esc(new Date(m.date + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" })) + " · " : ""}${m.location ? esc(m.location) + " · " : ""}<b>Distance: ${distText(m)}</b> · ${m.fieldSize} total in field · ${m.heightsCount} Heights runners${fin.length ? ` · Heights top finisher: ${ord(fin[0].place)} overall` : ""}${t ? ` · <b>Heights team: ${ord(t.rank)} of ${m.scoring.standings.length}</b>` : ""}</div></div>
+        ${m.correction ? `<div class="caveat fix"><b>Corrected from the official results:</b> ${esc(m.correction)}</div>` : ""}
+        ${m.note ? `<p class="note">${esc(m.note)}</p>` : ""}
         ${scoringBlock(m)}
         <h2>Results</h2>
         <div class="toolbar">
@@ -173,7 +183,7 @@
           <input type="search" id="q" placeholder="Search name or school…">
         </div>
         <div id="tbl"></div>${sortHint}
-        <p class="note">Sheet tab: “${esc(m.tab)}”. “Heights” = place among Heights finishers. “Team pts” = team-scoring place. ${h.some(e => e.paceCalc) || m.results.some(e => e.paceCalc) ? "* Pace calculated from time ÷ distance (not in the sheet). " : ""}${!m.hasPace && !m.distance ? "No pace or distance recorded for this race. " : ""}${!m.hasGrade ? "Grades not recorded for this race. " : ""}</p>
+        <p class="note">${m.tab ? `Sheet tab: “${esc(m.tab)}”.` : "Not in the results sheet."}${m.source ? ` ${m.tab ? "Official results" : "Source"}: <a href="${esc(m.source.url)}" target="_blank" rel="noopener">${esc(m.source.name)}</a>${m.source.original ? ` (<a href="${esc(m.source.original)}" target="_blank" rel="noopener">original</a>)` : ""}${m.officialName ? ` — listed as “${esc(m.officialName)}”` : ""}.` : ""} “Heights” = place among Heights finishers. “Team pts” = team-scoring place. ${h.some(e => e.paceCalc) || m.results.some(e => e.paceCalc) ? "* Pace calculated from time ÷ distance (not in the sheet). " : ""}${!m.hasPace && !m.distance ? "No pace or distance recorded for this race. " : ""}${!m.hasGrade ? "Grades not recorded for this race. " : ""}</p>
         <div class="toolbar">${prev ? `<a class="pill" href="${meetLink(prev)}">← ${esc(meetTitle(prev))}</a>` : ""}${next ? `<a class="pill" href="${meetLink(next)}">${esc(meetTitle(next))} →</a>` : ""}</div>
       </div>`;
       let mode = "h";
@@ -202,7 +212,7 @@
           const bp = r.results.filter(x => typeof x.place === "number").sort((a, b) => a.place - b.place)[0];
           const grades = [...new Set(r.results.map(x => x.grade).filter(Boolean))].sort();
           const last = r.name.split(" ").slice(-1)[0] + " " + r.name;
-          return `<tr>${td(`<a href="${runnerHref(r)}">${esc(r.name)}</a>`, last)}${td(r.seasons.join(", "), r.seasons[r.seasons.length - 1] * 10 + r.seasons.length, "")}${td(grades.join(", ") || dash, grades[grades.length - 1], "num hide-sm")}${td(r.results.length, r.results.length, "num")}${td(best ? `<b>${esc(best.pace)}</b>` : dash, best?.paceSecs, "num t")}${td(best ? esc(meetTitle(meetsById[best.meet])) : dash, best ? ckey(meetsById[best.meet]) : "", "hide-sm muted")}${td(bp ? ord(bp.place) : dash, bp?.place, "num hide-sm")}</tr>`;
+          return `<tr>${td(`<a href="${runnerHref(r)}">${esc(rName(r))}</a>`, last)}${td(r.seasons.join(", "), r.seasons[r.seasons.length - 1] * 10 + r.seasons.length, "")}${td(grades.join(", ") || dash, grades[grades.length - 1], "num hide-sm")}${td(r.results.length, r.results.length, "num")}${td(best ? `<b>${esc(best.pace)}</b>` : dash, best?.paceSecs, "num t")}${td(best ? esc(meetTitle(meetsById[best.meet])) : dash, best ? ckey(meetsById[best.meet]) : "", "hide-sm muted")}${td(bp ? ord(bp.place) : dash, bp?.place, "num hide-sm")}</tr>`;
         }).join("");
         $("#tbl").innerHTML = table(th("Name") + th("Seasons") + th("Grades", "num hide-sm") + th("Races", "num") + th("Best pace", "num") + th("Best pace at", "hide-sm") + th("Best place", "num hide-sm"), body, 'data-default-sort="0"');
         makeSortable($("#tbl"));
@@ -213,22 +223,22 @@
     runner() {
       const r = runnersById[qs("id")];
       if (!r) { $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Runner not found</h1><a href="runners.html">Back to runners</a></div></div>`; return; }
-      document.title = `${r.name} · Heights MS XC`;
+      document.title = `${rName(r)} · Heights MS XC`;
       const res = r.results.map(x => ({ ...x, m: meetsById[x.meet] })).sort((a, b) => chrono(a.m, b.m));
       const best = res.filter(x => x.paceSecs && !x.suspect).sort((a, b) => a.paceSecs - b.paceSecs)[0];
       const seasonBest = {};
       res.forEach(x => { if (x.paceSecs && !x.suspect && (!seasonBest[x.m.season] || x.paceSecs < seasonBest[x.m.season].paceSecs)) seasonBest[x.m.season] = x; });
       const bestPlace = res.filter(x => typeof x.place === "number").sort((a, b) => a.place - b.place)[0];
       const grades = [...new Set(res.map(x => x.grade).filter(Boolean))];
-      const body = res.map(x => `<tr>${td(`${x.m.season}${x.m.date ? " · " + esc(x.m.date) : ""}`, ckey(x.m), "")}${td(`<a href="${meetLink(x.m)}">${esc(x.m.name)}</a>`, x.m.name)}${td(distText(x.m), x.m.distance, "hide-sm")}${td(v(x.grade), x.grade, "num")}${td(v(x.place), typeof x.place === "number" ? x.place : "", "num")}${td(v(x.hplace), x.hplace, "num")}${td(v(x.time) + badges(x), x.secs, "num t")}${td(`${v(x.pace)}${x.paceCalc ? '<span class="calc" title="Calculated from time ÷ distance">*</span>' : ""}${x === best ? '<span class="badge" title="Personal best pace">PB</span>' : (seasonBest[x.m.season] === x && r.seasons.length > 1 ? '<span class="badge ghost" title="Season best pace">SB</span>' : "")}`, x.paceSecs, "num")}</tr>`).join("");
+      const body = res.map(x => `<tr>${td(`${x.m.season}${dl(x.m) ? " · " + esc(dl(x.m)) : ""}`, ckey(x.m), "")}${td(`<a href="${meetLink(x.m)}">${esc(x.m.name)}</a>${x.origin === "online" ? ' <span class="src-tag" title="From results posted online">online</span>' : ""}`, x.m.name)}${td(distText(x.m), x.m.distance, "hide-sm")}${td(v(x.grade), x.grade, "num")}${td(v(x.place), typeof x.place === "number" ? x.place : "", "num")}${td(v(x.hplace), x.hplace, "num")}${td(v(x.time) + badges(x), x.secs, "num t")}${td(`${v(x.pace)}${x.paceCalc ? '<span class="calc" title="Calculated from time ÷ distance">*</span>' : ""}${x === best ? '<span class="badge" title="Personal best pace">PB</span>' : (seasonBest[x.m.season] === x && r.seasons.length > 1 ? '<span class="badge ghost" title="Season best pace">SB</span>' : "")}`, x.paceSecs, "num")}</tr>`).join("");
       $("#app").innerHTML = `<div class="wrap">
-        <div class="page-head"><div class="crumbs"><a href="runners.html">Runners</a></div><h1>${esc(r.name)}</h1>
+        <div class="page-head"><div class="crumbs"><a href="runners.html">Runners</a></div><h1>${esc(r.name)}</h1>${r.disambig ? `<p class="note">There is more than one Heights runner named ${esc(r.name)}; this page covers ${esc(r.disambig)}. ${D.runners.filter(x => x.name === r.name && x !== r).map(x => `<a href="${runnerHref(x)}">${esc(rName(x))}</a>`).join(", ")}</p>` : ""}
         <div class="sub">${r.seasons.join(", ")}${grades.length ? ` · grade${grades.length > 1 ? "s" : ""} ${grades.join(", ")}` : ""} · <a href="compare.html?r=${encodeURIComponent(r.id)}">Compare with other runners →</a></div></div>
         <div class="pbs">
           <div class="card"><span>Best pace</span><b>${best ? esc(best.pace) : "—"}</b><span>${best ? esc(meetTitle(best.m)) : "No pace recorded"}</span></div>
           <div class="card"><span>Time in PB race</span><b>${best ? esc(best.time) : esc(res.find(x => x.secs)?.time || "—")}</b><span>${best ? esc(best.m.name) + " · " + distText(best.m) : ""}</span></div>
           <div class="card"><span>Best overall place</span><b>${bestPlace ? ord(bestPlace.place) : "—"}</b><span>${bestPlace ? esc(meetTitle(bestPlace.m)) : ""}</span></div>
-          <div class="card"><span>Races</span><b>${res.length}</b><span>in the results sheet</span></div>
+          <div class="card"><span>Races</span><b>${res.length}</b><span>on record</span></div>
         </div>
         <h2>All results</h2>
         ${table(th("Season / date") + th("Meet") + th("Distance", "hide-sm") + th("Gr", "num") + th("Place", "num") + th("Heights", "num") + th("Time", "num") + th("Pace/mi", "num"), body, 'data-default-sort="0"')}
@@ -248,7 +258,7 @@
           <select id="limit"><option>25</option><option selected>50</option><option>100</option><option value="0">All</option></select>
           <label class="chk"><input type="checkbox" id="one" checked> Best per runner</label>
         </div><div id="tbl"></div>${sortHint}
-        <p class="note">Races without a time-based pace (2010 meets) only appear when chosen individually. Grade filter skips results where grade wasn't recorded. A few 2023 Flint Hill times that are out of order with the placings are left out.</p></div>`;
+        <p class="note">Races with no known distance (the two 2010 Landon meets) only appear when chosen individually. Grade filter skips results where grade wasn't recorded. A few 2023 Flint Hill times that are out of order with the placings are left out.</p></div>`;
       const draw = () => {
         const race = $("#race").value, dist = $("#dist").value, g = +$("#grade").value, s = +$("#season").value, lim = +$("#limit").value, one = $("#one").checked;
         let rows = [];
@@ -256,9 +266,9 @@
         const byTime = race || dist;
         rows = rows.filter(e => (byTime ? e.secs : e.paceSecs) && !e.suspect && (!g || e.grade === g));
         rows.sort(byTime ? (a, b) => a.secs - b.secs : (a, b) => a.paceSecs - b.paceSecs || a.secs - b.secs);
-        if (one) { const seen = new Set(); rows = rows.filter(e => !seen.has(e.name) && seen.add(e.name)); }
+        if (one) { const seen = new Set(); rows = rows.filter(e => !seen.has(e.runnerId || e.name) && seen.add(e.runnerId || e.name)); }
         if (lim) rows = rows.slice(0, lim);
-        const body = rows.map((e, i) => `<tr>${td(i + 1, i + 1, "num")}${td(`<a href="${runnerLink(e.name)}">${esc(e.name)}</a>`, e.name)}${td(v(e.grade), e.grade, "num")}${td(v(e.time), e.secs, "num t")}${paceCell(e)}${td(`<a href="${meetLink(e.m)}">${esc(meetTitle(e.m))}</a>`, ckey(e.m))}${td(distText(e.m), e.m.distance, "hide-sm")}${td(v(e.place), e.place, "num hide-sm")}</tr>`).join("");
+        const body = rows.map((e, i) => `<tr>${td(i + 1, i + 1, "num")}${td(`<a href="${runnerLink(e)}">${esc(e.name)}</a>`, e.name)}${td(v(e.grade), e.grade, "num")}${td(v(e.time), e.secs, "num t")}${paceCell(e)}${td(`<a href="${meetLink(e.m)}">${esc(meetTitle(e.m))}</a>`, ckey(e.m))}${td(distText(e.m), e.m.distance, "hide-sm")}${td(v(e.place), e.place, "num hide-sm")}</tr>`).join("");
         $("#tbl").innerHTML = table(th("#", "num") + th("Name") + th("Gr", "num") + th("Time", "num") + th("Pace/mi", "num") + th("Meet") + th("Distance", "hide-sm") + th("Place", "num hide-sm"), body, `data-default-sort="${byTime ? 3 : 4}"`);
         makeSortable($("#tbl"));
       };
@@ -270,7 +280,7 @@
         <div class="placeholder"><strong>Placeholder — program history</strong>When did the team start, who coached it, and what were the milestone seasons? To be written.</div>
         <h2>Coaches</h2><div class="placeholder"><strong>Placeholder — coaches</strong>List of head coaches by year.</div>
         <h2>Championship highlights</h2><div class="placeholder"><strong>Placeholder — highlights</strong>Team titles, standout individual finishes, notable streaks.</div>
-        <h2>Missing seasons</h2><div class="card">The results sheet currently has ${seasons.length} seasons: ${[...seasons].reverse().join(", ")}. Results for 2011–2020 (and anything before 2006) still need to be found.</div>
+        <h2>Missing seasons</h2><div class="card">Results on record cover ${seasons.length} seasons: ${[...seasons].reverse().join(", ")}. ${missingSeasons().length ? `Still missing: ${missingSeasons().join(", ")}` : "No gaps"}${seasons.length ? ` (and anything before ${seasons[seasons.length - 1]})` : ""}.</div>
         <h2>Photos</h2><div class="placeholder"><strong>Placeholder — photo gallery</strong>Team photos by season.</div></div>`;
     },
   };
@@ -281,13 +291,13 @@
     $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Compare runners</h1><div class="sub">Pick two or more Heights runners to compare side by side, or pick one to see how he progressed across races and seasons.</div></div>
       <div class="card picker">
         <div class="toolbar" style="margin:0"><input type="search" id="add" list="runner-names" placeholder="Type a runner's name and press Enter…" autocomplete="off"><button class="btn" id="addbtn">Add</button><button class="btn ghost" id="clear">Clear</button></div>
-        <datalist id="runner-names">${D.runners.map(r => `<option value="${esc(r.name)}">${esc(r.seasons.join(", "))}</option>`).join("")}</datalist>
+        <datalist id="runner-names">${D.runners.map(r => `<option value="${esc(rName(r))}">${esc(r.seasons.join(", "))}</option>`).join("")}</datalist>
         <div id="chips" class="chips"></div>
         <div class="note" id="suggest"></div>
       </div>
       <div id="out"></div></div>`;
     const sync = () => { const u = new URL(location.href); if (ids.length) u.searchParams.set("r", ids.join(",")); else u.searchParams.delete("r"); history.replaceState(null, "", u); draw(); };
-    const add = () => { const val = $("#add").value.trim().toLowerCase(); const r = D.runners.find(x => x.name.toLowerCase() === val) || D.runners.find(x => x.name.toLowerCase().includes(val)); if (val && r && !ids.includes(r.id)) { ids.push(r.id); $("#add").value = ""; sync(); } };
+    const add = () => { const val = $("#add").value.trim().toLowerCase(); const r = D.runners.find(x => rName(x).toLowerCase() === val) || D.runners.find(x => rName(x).toLowerCase().includes(val)); if (val && r && !ids.includes(r.id)) { ids.push(r.id); $("#add").value = ""; sync(); } };
     $("#add").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); add(); } });
     $("#add").addEventListener("change", add);
     $("#addbtn").onclick = add; $("#clear").onclick = () => { ids = []; sync(); };
@@ -299,7 +309,7 @@
       // suggestions: latest season's top 3 Heights by best pace
       const latest = D.meets.filter(m => m.season === seasons[0]);
       const st = D.meets.filter(m => m.season === seasons[0]).sort(chrono).slice(-1)[0];
-      const top = st ? heightsOf(st).filter(e => e.secs).slice(0, 3).map(e => runnersByName[e.name]?.id).filter(Boolean) : [];
+      const top = st ? heightsOf(st).filter(e => e.secs).slice(0, 3).map(e => e.runnerId || runnersByName[e.name]?.id).filter(Boolean) : [];
       $("#suggest").innerHTML = rs.length ? "" : `Try: <a href="#" data-add="${top.join(",")}">top 3 Heights finishers at ${esc(meetTitle(st))}</a>${top[0] ? ` · <a href="#" data-add="${top[0]}">one runner's progression</a>` : ""}`;
       if (!rs.length) { $("#out").innerHTML = ""; return; }
       const res = r => r.results.map(x => ({ ...x, m: meetsById[x.meet] })).sort((a, b) => chrono(a.m, b.m));
