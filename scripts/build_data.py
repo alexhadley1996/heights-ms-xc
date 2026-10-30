@@ -52,6 +52,15 @@ MEET_INFO = {
     "2007 - Landon Invit":       dict(season=2007, name="Landon Invitational", distance=None),
     "2006 - Landon, October 18": dict(season=2006, name="Landon", date="Oct 18", distance=None),
     "2006 - Landon Invit":       dict(season=2006, name="Landon Invitational", distance=None),
+    "2006 - Landon Home Meet Sep 15 ": dict(season=2006, name="Landon Home Meet", date="Sep 15", distance=None),
+    "2005 - Landon MS Tri-Meet Sep 1": dict(season=2005, name="Landon MS Tri-Meet", date="Sep 16", distance=None),  # tab name truncated; Date column says 2005-09-16
+    "2014 - Landon MS Invitational":   dict(season=2014, name="Landon MS Invitational", distance=None),
+    "2014 - Landon MS Invitational (": dict(season=2014, name="Landon MS Invitational (Open race)", distance=None),
+    "2015 - Landon MS Invitational -":  dict(season=2015, name="Landon MS Invitational", distance=2.19),
+    "2015 - Landon MS Open - GPT":      dict(season=2015, name="Landon MS Invitational (Open race)", distance=2.19),
+    "2019 - States at Landon":     dict(season=2019, name="State Championship (at Landon)", distance=2.2),
+    "2019 - Norwood Invitational": dict(season=2019, name="Norwood Invitational", distance=2.1),   # team tab says "Boys (2.1 mi)"
+    "2019 - Covenant Life":        dict(season=2019, name="Covenant Life", distance=2.0),
 }
 # Chronological order within a season, when known from the sheet (tab order is newest-first).
 # Otherwise tab order (reversed) is used.
@@ -69,8 +78,11 @@ NAME_ALIASES = {
     "Andres Luli": "Andres Lulli",       # official: "Lulli" 8 meets (2009 + HS), "Luli" 3 (2008)
     "Justin Liess": "Justin Leiss",      # user-confirmed (same family as Louie Leiss)
     "Colin Oneil": "Cullun O'Neill",     # user-confirmed same boy; official results: "Cullun O'Neill" 2 meets (2006), "Colin Oneil" 1 (2008)
-    "Ed Nelson": "Edward Nelson",        # nickname; full first name kept
+    "Ed Nelson": "Edward Nelson",
+    "Henny Mangold": "Henry Mangold",    # 2005 Tri-Meet typo (user-confirmed)        # nickname; full first name kept
 }
+
+SILENT_FIXES = {"Henny Mangold"}  # plain typos: corrected without a "Listed as" note
 
 CONFIRMED_SAME = {"Edward Nelson", "Cullun O'Neill"}  # user-confirmed single runner across sources
 
@@ -83,7 +95,7 @@ EXTRA_NOTES = [
     "Race distances come from the divisor in each tab's pace formula (pace = time \u00f7 miles). The 2010 Landon tabs have no pace formula; per the team those courses were 2.2 mi, so their paces are calculated from that.",
     "Where a tab has no pace for a runner, the site calculates it the same way: time \u00f7 the race distance.",
     "Team scores are calculated by the site from the listed finishers (standard scoring: teams with 5+ finishers, top 5 score, 6th\u20137th displace, 8th+ ignored, ties broken by the 6th runner) and compared with official meet scores where those were found online.",
-    "Races from 2011\u20132019, 2021 CLS, 2022 FHS and the 2006 Landon Home Meet (Sept 15) are not in the sheet; they come from racecast.co / Athletic.net / mocorunning.com (data/supplemental). Each of those meet pages links its source.",
+    "Races from 2011\u20132019 that aren't in the sheet, plus 2021 CLS and 2022 FHS, come from racecast.co / Athletic.net / mocorunning.com (data/supplemental). Each of those meet pages links its source.",
     "2022 States: the meet re-tallied extra runners from deep teams as B teams; the B listing is left out, those runners keep their overall places but don't count in team scores. 2021 States and 2007 Landon Invitational were missing finishers, which were added from the official results. 2025 States did not score 5th graders.",
     "Name spellings merged for the runner pages (shown with the spelling used most in official results): John Ortman (Johnny), Louie Leiss (Liess), Philip Allen (Phillip, P), Vince Keirnan (Kiernan), Santiago Lulli (Santi Luli), Andres Lulli (Luli), Daniel Lulli (Luli), Justin Leiss (Liess), Cullun O'Neill (Colin Oneil), Edward Nelson (Ed).",
     "2026 States lists 5th graders as exhibition ('Ex.') and two DNFs.",
@@ -175,6 +187,7 @@ def find_cols(header):
 
 
 PACE_DIVISOR_RE = re.compile(r"\)\)\s*/\s*([\d.]+)\s*\)\s*/\s*86400")
+PACE_METERS_RE = re.compile(r"/\s*\(\s*([\d.]+)\s*/\s*1609\.344\s*\)\s*\)\s*/\s*86400")
 SCORE_NOTE_RE = re.compile(r"(\d)\w*\s+gr\w*\s+(expanded\s+)?score", re.I)
 NON_TEAM_RE = re.compile(r"^(unattached|unatt|independent|individual|none|)$", re.I)
 
@@ -190,6 +203,10 @@ def formula_distance(ws_f):
                 m = PACE_DIVISOR_RE.search(v)
                 if m:
                     c[float(m.group(1))] += 1
+                    continue
+                m = PACE_METERS_RE.search(v)  # ".../(3000/1609.344))/86400" -> metres to miles
+                if m:
+                    c[round(float(m.group(1)) / 1609.344, 3)] += 1
     return c
 
 
@@ -343,7 +360,8 @@ def make_entry(place_raw, grade, name, school, time_raw, pace_raw, quirk_ctx=Non
         new = NAME_ALIASES.get(name, name)
         new = re.sub(r"\bLuli$", "Lulli", new)  # the Lulli family name is always "Lulli" (user-confirmed)
         if new != name:
-            e["note"] = f"Listed as \u201c{name}\u201d"
+            if name not in SILENT_FIXES:
+                e["note"] = f"Listed as \u201c{name}\u201d"
             e["name"] = new
     return e
 
@@ -375,6 +393,14 @@ def fill_from_official(field, official, title, quirks):
         if norm_name(o["name"]) in names or same_slot:
             continue
         missing.append(o)
+    off_by_name = {norm_name(o["name"]): o for o in official}
+    for e in field:
+        if e["place"] is None and e["secs"] is not None:
+            o = off_by_name.get(norm_name(e["name"]))
+            if o and isinstance(o["place"], int):
+                e["place"] = o["place"]
+                if o.get("grade") and not e.get("grade"):
+                    e["grade"] = o["grade"]
     for e in field:
         if e.pop("blankSchool", None) is not None:
             o_school = next(o["school"] for o in official if o["place"] == e["place"])
@@ -558,7 +584,11 @@ def main(path):
     manifest = load_json("manifest.json", {}).get("races", [])
     offscores = load_official_scores()
     meets, quirks, distance_log = [], [], []
-    tabs = [ws for ws in wb if ws.title not in SKIP_TABS]
+    def is_team_tab(ws):
+        h = [str(c or "").strip().lower() for c in next(ws.iter_rows(max_row=1, values_only=True), ())][:4]
+        return h[:4] == ["race", "rank", "team", "score"]
+    team_tabs = [ws.title for ws in wb if ws.title not in SKIP_TABS and is_team_tab(ws)]
+    tabs = [ws for ws in wb if ws.title not in SKIP_TABS and ws.title not in team_tabs]
     used_overrides = set()
     for order, ws in enumerate(reversed(tabs)):
         title = ws.title
@@ -639,6 +669,16 @@ def main(path):
                 correction = (ov.get("correction_note") or "") + ("" if n else " (nothing to add)")
                 if n:
                     quirks.append(f"{info['season']} {label}: added {n} finishers from the official results.")
+            if ov.get("replaces_supplemental"):
+                # the sheet version wins; fill grades the sheet doesn't have from the online copy of the same race
+                onl = {o["place"]: o for o in read_csv_field(ov["replaces_supplemental"]) if isinstance(o["place"], int)}
+                ng = 0
+                for e in field:
+                    o = onl.get(e["place"])
+                    if not e["grade"] and o and o["grade"] and o["secs"] and e["secs"] and abs(o["secs"] - e["secs"]) <= 0.6:
+                        e["grade"] = o["grade"]; ng += 1
+                if ng:
+                    quirks.append(f"{info['season']} {label}: the sheet has no grade for {ng} runners; filled from the official results of the same race.")
             off_d = ov.get("official_distance_mi")
             dnote = None
             if off_d and dist:
@@ -661,6 +701,7 @@ def main(path):
                 "note": ov.get("meet_note"),
                 "scoreExcludeGrades": ov.get("score_exclude_grades"),
                 "scoreRuleNote": ov.get("score_rule_note"),
+                "noDisplacerLimit": ov.get("score_no_displacer_limit"),
                 "_scoreNotes": score_notes if ri == 0 else [],
                 "_official": offscores.get(ov.get("official_scores_meet")) if ov.get("official_scores_meet") else None,
                 "_tabOrder": order * 10 + ri,
@@ -671,7 +712,10 @@ def main(path):
         quirks.append(f"sheet_overrides.json: no sheet race with id '{k}' (override unused).")
 
     # Races found online that aren't in the sheet
+    replaced = {ov["replaces_supplemental"] for ov in overrides.values() if ov.get("replaces_supplemental")}
     for s in manifest:
+        if s["csv"] in replaced:
+            continue  # the sheet now has this race; the sheet version wins
         field = read_csv_field(s["csv"])
         race = s.get("race") or ""
         label = s["meet"] + (f" ({race})" if race and race not in ("Middle School Boys", "Boys") else "")

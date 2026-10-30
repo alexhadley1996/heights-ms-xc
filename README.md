@@ -28,6 +28,9 @@ The sheet stays the primary source; the build also merges:
   meet re-scored as B teams keep their places but don't score; ties follow the official order), `fill_from_official` (keep sheet rows, add missing
   finishers, e.g. 2021 States, 2007 Landon Invitational), `score_exclude_grades` (e.g. 2025 States didn't score 5th graders).
   The sheet's distance is kept; an official distance within 0.01 mi counts as agreeing (e.g. 2024 Landon 1.6 vs 1.599).
+- `replaces_supplemental` in an override: the sheet tab now covers that online race, so the online copy is not shown; its
+  source link and official team scores are kept on the sheet race, and grades missing in the sheet are filled from it.
+  Team-score summary tabs (header Race/Rank/Team/Score) are skipped automatically.
 - `official_team_scores.csv` — official team places/scores (Season,Meet,Team,Place,Score,SourceURL).
 In `MEET_INFO`: `keep_races` drops extra lists in a tab (the 2022 States B listing), `dist_from_team` marks a distance
 supplied by the team (2010 Landon, 2.2 mi). Runners with a time but no place (e.g. 2025 States, Sean Carney, no bib) are

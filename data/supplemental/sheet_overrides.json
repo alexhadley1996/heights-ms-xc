@@ -298,6 +298,106 @@
    "correction_note": "Everyone ran in one race. The sheet's full list (126 finishers, places by time) is used as the race; the meet then re-tallied extra runners from deep teams as separate 'B teams'. Those runners keep their overall places but are not counted in the team scores below (A-team scoring, as in the official results). The sheet's B-race listing is left out.",
    "a_team_list": "races/2022_Maryland_Private_Middle_School_State_Championships_Middle_School_A_Boys_863194.csv",
    "b_team_list": "races/2022_Maryland_Private_Middle_School_State_Championships_Middle_School_B_Boys_863214.csv"
+  },
+  "2019-state-championship-at-landon": {
+   "official_date": "2019-11-05",
+   "official_meet_name": "MD/DC State Meet",
+   "official_race": "Middle School Boys",
+   "official_distance_mi": 2.2,
+   "location": "Landon School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/162893/672463",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/162893/results",
+   "official_scores_meet": "2019 MD/DC State Meet \u2013 Middle School Boys",
+   "replaces_supplemental": "races/2019_MD_DC_State_Meet_Middle_School_Boys_672463.csv"
+  },
+  "2019-norwood-invitational": {
+   "official_date": "2019-10-24",
+   "official_meet_name": "Norwood Invitational",
+   "official_race": "Middle School Boys",
+   "official_distance_mi": 2.0,
+   "location": "Norwood School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/270670/1078066",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/270670/results",
+   "official_scores_meet": "2019 Norwood Invitational \u2013 Middle School Boys",
+   "replaces_supplemental": "races/2019_Norwood_Invitational_Middle_School_Boys_1078066.csv"
+  },
+  "2019-covenant-life": {
+   "official_date": "2019-09-17",
+   "official_meet_name": "CLS Home Meet",
+   "official_race": "Middle School Boys",
+   "official_distance_mi": 2.0,
+   "location": "Covenant Life School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/160398/671140",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/160398/results",
+   "official_scores_meet": "2019 CLS Home Meet \u2013 Middle School Boys",
+   "replaces_supplemental": "races/2019_CLS_Home_Meet_Middle_School_Boys_671140.csv",
+   "score_no_displacer_limit": true,
+   "score_rule_note": "This meet counted every finisher in team places (no 7-runner limit per team); the site scores it the same way."
+  },
+  "2014-landon-ms-invitational": {
+   "official_date": "2014-10-20",
+   "official_meet_name": "Landon Middle School Invitational",
+   "official_race": "Middle School Boys",
+   "official_distance_mi": 2.19,
+   "location": "Landon School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/90671/359556",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/90671/results",
+   "official_scores_meet": "2014 Landon Middle School Invitational \u2013 Middle School Boys",
+   "replaces_supplemental": "races/2014_Landon_Middle_School_Invitational_Middle_School_Boys_359556.csv"
+  },
+  "2014-landon-ms-invitational-open-race": {
+   "official_date": "2014-10-20",
+   "official_meet_name": "Landon Middle School Invitational",
+   "official_race": "Open race",
+   "official_distance_mi": 2.19,
+   "location": "Landon School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/90671/403794",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/90671/results",
+   "official_scores_meet": "2014 Landon Middle School Invitational \u2013 Open Boys",
+   "replaces_supplemental": "races/2014_Landon_Middle_School_Invitational_Open_Boys_403794.csv"
+  },
+  "2015-landon-ms-invitational": {
+   "official_date": "2015-10-22",
+   "official_meet_name": "Landon Middle School Invitational",
+   "official_race": "Middle School Boys",
+   "official_distance_mi": 2.19,
+   "location": "Landon School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/105621/416607",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/105621/results",
+   "official_scores_meet": "2015 Landon Middle School Invitational \u2013 Middle School Boys",
+   "replaces_supplemental": "races/2015_Landon_Middle_School_Invitational_Middle_School_Boys_416607.csv"
+  },
+  "2015-landon-ms-invitational-open-race": {
+   "official_date": "2015-10-22",
+   "official_meet_name": "Landon Middle School Invitational",
+   "official_race": "Open race",
+   "official_distance_mi": 2.19,
+   "location": "Landon School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/105621/416609",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/105621/results",
+   "official_scores_meet": "2015 Landon Middle School Invitational \u2013 Open Boys",
+   "replaces_supplemental": "races/2015_Landon_Middle_School_Invitational_Open_Boys_416609.csv"
+  },
+  "2006-landon-home-meet-sep-15": {
+   "official_date": "2006-09-15",
+   "official_meet_name": "Landon Home Meet",
+   "official_race": "Middle School Boys",
+   "official_distance_mi": 1.864,
+   "location": "Landon School",
+   "source_name": "Racecast (results from Athletic.net)",
+   "source_url": "https://racecast.co/race/xc/38655/166197",
+   "original_url": "https://www.athletic.net/CrossCountry/meet/38655/results",
+   "official_scores_meet": null,
+   "replaces_supplemental": "races/2006_Landon_Home_Meet_Middle_School_Boys_166197.csv",
+   "fill_from_official": "races/2006_Landon_Home_Meet_Middle_School_Boys_166197.csv",
+   "correction_note": "The sheet lists only the 3 Heights runners (no places); places and the rest of the field come from the official results."
   }
  }
 }
