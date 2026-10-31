@@ -1,10 +1,14 @@
-# Heights MS Cross Country — results site (draft)
+# Heights Cross Country — results site (draft)
+
+Middle school (MS) and high school (HS) results for The Heights School Cavaliers, one site.
 
 Plain HTML/CSS/JS, no build step. Works on GitHub Pages as-is (`.nojekyll` included).
 
-Pages: `index.html` (home), `meets.html` (all races by season), `meet.html?id=…` (one race: Heights runners or full field),
-`runners.html` (searchable roster), `runner.html?id=…` (every race for one runner + PB), `top.html` (top times/paces),
-`compare.html?r=id1,id2` (compare runners, or one runner's progression), `history.html` (placeholders).
+Pages: `index.html` (home, both divisions), `meets.html` (all races; filter `?div=MS|HS&level=Varsity|JV|Freshman|Open|Section|Relay&season=2010`),
+`meet.html?id=…` (one race: Heights runners or full field, team scores), `runners.html` (roster; `?div=MS|HS|both`),
+`runner.html?id=…` (one page per person: middle school and high school races, Division and Level columns, MS PB pace, HS PRs by distance),
+`top.html` (top times, separate for HS — by distance, mostly 5K — and MS — by pace), `compare.html?r=id1,id2` (works across divisions),
+`history.html` (seasons table for both divisions + placeholders).
 Every results table is sortable: click a column heading (again to reverse).
 
 Race distances are read from the divisor in each tab's pace formula (the script loads the workbook twice: values and formulas).
@@ -13,7 +17,8 @@ Team scores are calculated by the script (standard XC scoring) and compared with
 ## Refreshing the data
 1. In Google Sheets, File → Download → Microsoft Excel (.xlsx) for “Heights MS XC Results”.
 2. `pip install openpyxl` then `python3 scripts/build_data.py path/to/file.xlsx`
-3. This rewrites `data/results.js` (used by the site) and `data/results.json`.
+3. This rewrites `data/results.js` (used by every page: race list, runners and their results), `data/results.json`
+   (same content) and `data/races/<race id>.js` (full field + team scores for one race, loaded only by that race's page).
 
 New meet tabs are picked up automatically; add a line to `MEET_INFO` in the script to set a nicer name/date/distance,
 and `NAME_ALIASES` to merge spelling variants of a runner's name.
@@ -35,8 +40,26 @@ The sheet stays the primary source; the build also merges:
 In `MEET_INFO`: `keep_races` drops extra lists in a tab (the 2022 States B listing), `dist_from_team` marks a distance
 supplied by the team (2010 Landon, 2.2 mi). Runners with a time but no place (e.g. 2025 States, Sean Carney, no bib) are
 slotted in by time and later places renumbered. Missing Heights grades are inferred from the runner's other races (italic).
-A runner name that appears in seasons/grades that can't be one middle-schooler is split into separate runner pages;
+A runner name that appears in seasons/grades that can't be one runner is split into separate runner pages (HS pieces that never
+raced on the same day are re-joined as a likely grade typo, except names in `KEEP_SPLIT`);
 `identityReview` in results.json lists merges/splits worth a human check.
+
+## High school data (`data/hs/`)
+Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); the sheet is not involved.
+- `races.csv` — one row per race (season, date, meet, race, level, distance, location, sources, CSV file name); `races/*.csv` — full
+  fields (Place,Grade,Name,Time,Pace,School,Meet,Level,SourceURL). Paces are recalculated from the listed distance.
+- `official_team_scores.csv` — official team scores (racecast “as scored by meet” and mocorunning.com meet printouts). On HS race
+  pages the official standings come first and the site's own calculation is shown as a crosscheck (✓ / ≠).
+- `race_notes.json` — notes shown on a race page (data issues from the research notes) and per-race grade fixes.
+- `ms_hs_matches.csv` — MS↔HS runner matches. Only `confident` rows are merged. To merge a “needs confirmation” pair, add one line to
+  `EXTRA_MS_HS_MERGES` in `scripts/hs_data.py` (`"ms-runner-id": "HS Name"`).
+- `hs_name_variants.csv` — HS spelling variants; the ones merged are listed in `HS_NAME_ALIASES` in `scripts/hs_data.py`.
+- Levels: Varsity, JV, Freshman, Open, Section (level not given — section name shown, e.g. Landon 2011 Brown/White), Relay.
+  WCAC “Varsity B” is listed at JV level; Holy Cross 2020 (V/JV together) is Open; relays show team placings with legs and
+  never count toward PRs or Top Times. Heights = school field exactly “The Heights”/“The Heights School”/“Heights School”
+  (+ relay “Boys A/B/C”), so “Dixie Heights” is not counted. ALL-CAPS names are put in normal case.
+- Sources that list every finisher twice (several 2025 racecast pages) are de-duplicated and places renumbered (noted on the page).
+- Missing grades are inferred within each runner's whole career (MS 5–8, HS 9–12), shown in italics.
 
 ## Preview locally
 `python3 -m http.server` in this folder, then open http://localhost:8000

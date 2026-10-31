@@ -1,0 +1,23 @@
+# Heights HS XC research (2006–2026): notes
+
+Files:
+- csv/: 316 per-race CSVs. Columns: Place,Grade,Name,Time,Pace,School,Meet,Level,SourceURL. Boys only, whole field.
+- ALL_FOUND_HS_RACES_summary.csv: one row per race (316).
+- official_team_scores.csv: about 4,630 team rows. Sources: racecast "as scored by meet", plus mocorunning meet printouts.
+- heights_hs_results_combined.csv: all Heights rows, about 3,050.
+- ms_hs_matches.csv: MS to HS runner matches (confident / needs confirmation).
+- hs_name_variants.csv: spelling variants of the same name within HS.
+
+Pipeline: scrape_hs.py → build_hs.py → build_moco_hs.py → assemble.py → match.py → hs_variants.py
+
+Data quality:
+- Pace = time / listed distance, given as m:ss.s like the MS CSVs. It is blank when the distance isn't listed (some WCAC races, Holy Cross 2020).
+- 2007 Episcopal Quad: the official printout (moco 435) has "Handley, Tim 15:35" (probably Timothy Hadley; the time looks wrong) and "Name, Unreadable". Racecast drops both. Official score: Heights 1st with 42. Racecast's computed score is 2nd with 70.
+- Woodward Relays (moco 792): moco files it under Sep 8, 2008. The HY-TEK header says 9/11/2006. The roster (Greg Hadley in HS) points to 2008.
+- 2019 Bullis Invitational: moco says Sep 7, 2019. The RaceTab header says 8/31/2019. The header date is used.
+- 2010 Glory Days: on moco, the boys freshman team table sits under the "Seeded Girls" title. It was matched to Freshman by Heights finisher places.
+- 2020 Holy Cross 1: the source lists Joe McClorey as grade 9. He was grade 11 in Holy Cross 2.
+- WCAC "Varsity B" is labeled JV (Varsity B). The 2021 WCAC 3rd boys race has no title in the source (probably freshman).
+- Racecast's Heights grade data sometimes doesn't match the moco printout. Check mismatches if needed.
+- Missing places in source printouts: 2018 WCAC frosh, 2023 WCAC Varsity B and frosh, 2026 VA Showcase JV.
+- RVA "Extras" races were posted in sections (e.g., M–Z), so overall places have gaps.

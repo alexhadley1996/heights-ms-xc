@@ -174,3 +174,27 @@ th small{font-weight:500;text-transform:none;letter-spacing:0}
 .pill.warn{background:#fff4e0;border-color:#e7c27d;color:#7a4b00}
 .caveat.fix{background:#eef6ee;border-color:#b9d8b9;color:#1f4d22}
 .inf{font-style:italic;color:var(--muted);cursor:help}
+/* ---- divisions & levels (MS + HS) ---- */
+.div-tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.06em;border-radius:5px;padding:1px 6px;vertical-align:1px;color:#fff;background:var(--accent)}
+.div-tag.ms{background:#5b6b7a}
+.lvl{display:inline-block;font-size:.72rem;font-weight:700;border-radius:999px;padding:1px 8px;border:1px solid #d9d3c7;background:#faf7f2;color:#5a4a3a;vertical-align:1px;white-space:nowrap}
+.lvl-varsity{background:#f6e7e7;border-color:#e2bcbc;color:#841313}
+.lvl-jv{background:#e9f0f8;border-color:#bcd0e6;color:#00498F}
+.lvl-freshman{background:#e8f3ee;border-color:#b6d6c6;color:#014838}
+.lvl-relay{background:#fbf1dc;border-color:#e8cf95;color:#7a5410}
+.lvl-section,.lvl-open{background:#f1efea;color:#4a4a4a}
+.race-line{margin:-2px 0 6px}
+.div-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
+.div-card h3{margin:6px 0}
+.race-notes{margin:12px 0;font-size:14px}
+.race-notes ul{margin:6px 0 0;padding-left:18px}
+.race-notes li+li{margin-top:4px}
+td.legs .leg{display:inline-block;margin:0 12px 2px 0;white-space:nowrap}
+details.card summary{cursor:pointer;font-weight:600}
+.toolbar.filters select:disabled{opacity:.5}
+tr.row-hs td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+td.wrapcell{white-space:normal;min-width:240px}
+td.legs{white-space:normal;min-width:320px}
+table.compact th,table.compact td{padding:8px 7px}
+table.compact td.wrapcell{min-width:200px}
+td.wrapdist{white-space:normal;min-width:70px}
