@@ -1404,12 +1404,12 @@
     "original": "https://www.athletic.net/CrossCountry/meet/257261/results"
    },
    "notes": [
-    "The source page lists almost every finisher twice (404 rows for 211 runners). The duplicates are removed here and places renumbered."
+    "The source page lists almost every finisher twice (404 rows for 202 runners). The duplicates are removed here and places renumbered."
    ],
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
    "doubled": true,
-   "fieldSize": 211,
+   "fieldSize": 202,
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
@@ -1418,9 +1418,9 @@
     "teamCount": 28,
     "calcCount": 28,
     "official": {
-     "matched": 5,
+     "matched": 26,
      "n": 28,
-     "heightsMatch": false
+     "heightsMatch": true
     },
     "heights": [
      {
@@ -1429,8 +1429,8 @@
       "score": 291,
       "official": true,
       "calcPlace": 8,
-      "calcScore": 293,
-      "match": false
+      "calcScore": 291,
+      "match": true
      }
     ]
    }
@@ -1459,12 +1459,12 @@
    },
    "notes": [
     "\u201cJohnny Ortmann\u201d is listed right after \u201cJohn Ortman\u201d with the same time; treated as the same runner.",
-    "The source page lists almost every finisher twice (1198 rows for 609 runners). The duplicates are removed here and places renumbered."
+    "The source page lists almost every finisher twice (1198 rows for 601 runners). The duplicates are removed here and places renumbered."
    ],
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
    "doubled": true,
-   "fieldSize": 609,
+   "fieldSize": 601,
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
@@ -1473,7 +1473,7 @@
     "teamCount": 88,
     "calcCount": 87,
     "official": {
-     "matched": 0,
+     "matched": 1,
      "n": 88,
      "heightsMatch": null
     },
@@ -1503,12 +1503,12 @@
     "original": "https://www.athletic.net/CrossCountry/meet/257261/results"
    },
    "notes": [
-    "The source page lists almost every finisher twice (818 rows for 418 runners). The duplicates are removed here and places renumbered."
+    "The source page lists almost every finisher twice (818 rows for 409 runners). The duplicates are removed here and places renumbered."
    ],
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
    "doubled": true,
-   "fieldSize": 418,
+   "fieldSize": 409,
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
@@ -1517,9 +1517,9 @@
     "teamCount": 45,
     "calcCount": 44,
     "official": {
-     "matched": 11,
+     "matched": 37,
      "n": 45,
-     "heightsMatch": false
+     "heightsMatch": true
     },
     "heights": [
      {
@@ -1528,8 +1528,8 @@
       "score": 552,
       "official": true,
       "calcPlace": 23,
-      "calcScore": 555,
-      "match": false
+      "calcScore": 552,
+      "match": true
      }
     ]
    }
@@ -1557,12 +1557,12 @@
     "original": "https://www.athletic.net/CrossCountry/meet/257261/results"
    },
    "notes": [
-    "The source page lists almost every finisher twice (1136 rows for 581 runners). The duplicates are removed here and places renumbered."
+    "The source page lists almost every finisher twice (1136 rows for 570 runners). The duplicates are removed here and places renumbered."
    ],
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
    "doubled": true,
-   "fieldSize": 581,
+   "fieldSize": 570,
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
@@ -1571,7 +1571,7 @@
     "teamCount": 70,
     "calcCount": 71,
     "official": {
-     "matched": 6,
+     "matched": 33,
      "n": 70,
      "heightsMatch": false
     },
@@ -1581,7 +1581,7 @@
       "place": 12,
       "score": 518,
       "official": true,
-      "calcPlace": 12,
+      "calcPlace": 13,
       "calcScore": 519,
       "match": false
      }
@@ -2357,6 +2357,7 @@
    },
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
+   "scoreRuleNote": "Only the teams in the official championship scores are scored; Field and Washington Waldorf runners ran as individuals (Field has 9 finishers but no official team score).",
    "fieldSize": 97,
    "heightsCount": 7,
    "hasPace": true,
@@ -2364,11 +2365,11 @@
    "order": 327,
    "scoring": {
     "teamCount": 10,
-    "calcCount": 11,
+    "calcCount": 10,
     "official": {
-     "matched": 3,
+     "matched": 10,
      "n": 10,
-     "heightsMatch": false
+     "heightsMatch": true
     },
     "heights": [
      {
@@ -2377,8 +2378,8 @@
       "score": 125,
       "official": true,
       "calcPlace": 5,
-      "calcScore": 131,
-      "match": false
+      "calcScore": 125,
+      "match": true
      }
     ]
    }
@@ -2507,6 +2508,7 @@
    },
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
+   "scoreRuleNote": "The official results score Albert Einstein as a team, but only some of its runners are in the posted results. Those runners are given team places here; Albert Einstein itself gets no calculated score.",
    "fieldSize": 353,
    "heightsCount": 13,
    "hasPace": true,
@@ -2516,7 +2518,7 @@
     "teamCount": 27,
     "calcCount": 26,
     "official": {
-     "matched": 13,
+     "matched": 24,
      "n": 27,
      "heightsMatch": true
     },
@@ -7232,6 +7234,8 @@
    },
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
+   "scoreExactSchool": true,
+   "scoreRuleNote": "St. Albans entered two teams, listed as \u201cSt Albans\u201d (DC) and \u201cSt. Albans\u201d (MD); the official results score them separately, and so does this calculation.",
    "fieldSize": 52,
    "heightsCount": 6,
    "hasPace": true,
@@ -7239,11 +7243,11 @@
    "order": 226,
    "scoring": {
     "teamCount": 7,
-    "calcCount": 6,
+    "calcCount": 7,
     "official": {
-     "matched": 0,
+     "matched": 7,
      "n": 7,
-     "heightsMatch": false
+     "heightsMatch": true
     },
     "heights": [
      {
@@ -7251,9 +7255,9 @@
       "place": 6,
       "score": 141,
       "official": true,
-      "calcPlace": 5,
-      "calcScore": 117,
-      "match": false
+      "calcPlace": 6,
+      "calcScore": 141,
+      "match": true
      }
     ]
    }
@@ -7282,6 +7286,8 @@
    },
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
+   "scoreExactSchool": true,
+   "scoreRuleNote": "St. Albans entered two teams, listed as \u201cSt Albans\u201d (DC) and \u201cSt. Albans\u201d (MD); the official results score them separately, and so does this calculation.",
    "fieldSize": 98,
    "heightsCount": 7,
    "hasPace": true,
@@ -7289,11 +7295,11 @@
    "order": 225,
    "scoring": {
     "teamCount": 6,
-    "calcCount": 5,
+    "calcCount": 6,
     "official": {
-     "matched": 0,
+     "matched": 5,
      "n": 6,
-     "heightsMatch": false
+     "heightsMatch": true
     },
     "heights": [
      {
@@ -7301,9 +7307,9 @@
       "place": 5,
       "score": 138,
       "official": true,
-      "calcPlace": 4,
-      "calcScore": 103,
-      "match": false
+      "calcPlace": 5,
+      "calcScore": 138,
+      "match": true
      }
     ]
    }
@@ -8185,6 +8191,7 @@
    },
    "completeness": "full field",
    "teamScoreStatus": "official (meet printout)",
+   "scoreRuleNote": "The official results score Archbishop Carroll as a team, but only 4 of its runners are in the posted results. Those 4 runners are given team places here, so the other teams' scores can be checked; Carroll itself gets no calculated score.",
    "fieldSize": 66,
    "heightsCount": 7,
    "hasPace": true,
@@ -8194,9 +8201,9 @@
     "teamCount": 10,
     "calcCount": 9,
     "official": {
-     "matched": 2,
+     "matched": 9,
      "n": 10,
-     "heightsMatch": false
+     "heightsMatch": true
     },
     "heights": [
      {
@@ -8205,8 +8212,8 @@
       "score": 139,
       "official": true,
       "calcPlace": 5,
-      "calcScore": 135,
-      "match": false
+      "calcScore": 139,
+      "match": true
      }
     ]
    }
@@ -11207,7 +11214,7 @@
     "teamCount": 17,
     "calcCount": 17,
     "official": {
-     "matched": 9,
+     "matched": 10,
      "n": 17,
      "heightsMatch": true
     },
@@ -12480,7 +12487,7 @@
     "teamCount": 55,
     "calcCount": 55,
     "official": {
-     "matched": 13,
+     "matched": 15,
      "n": 55,
      "heightsMatch": null
     },
@@ -12961,6 +12968,7 @@
    },
    "completeness": "full field",
    "teamScoreStatus": "official (meet printout)",
+   "scoreRuleNote": "The official results score Glenelg Country as a team, but only 4 of its runners are in the posted results. Those 4 runners are given team places here; Glenelg Country itself gets no calculated score.",
    "fieldSize": 123,
    "heightsCount": 3,
    "hasPace": true,
@@ -12970,7 +12978,7 @@
     "teamCount": 10,
     "calcCount": 9,
     "official": {
-     "matched": 1,
+     "matched": 8,
      "n": 10,
      "heightsMatch": null
     },
@@ -13687,7 +13695,7 @@
     "teamCount": 3,
     "calcCount": 3,
     "official": {
-     "matched": 2,
+     "matched": 3,
      "n": 3,
      "heightsMatch": true
     },
@@ -16033,7 +16041,7 @@
     "teamCount": 18,
     "calcCount": 18,
     "official": {
-     "matched": 17,
+     "matched": 18,
      "n": 18,
      "heightsMatch": true
     },
@@ -17273,7 +17281,7 @@
     "teamCount": 25,
     "calcCount": 25,
     "official": {
-     "matched": 24,
+     "matched": 25,
      "n": 25,
      "heightsMatch": true
     },
@@ -17554,6 +17562,8 @@
    ],
    "completeness": "full field",
    "teamScoreStatus": "official (meet printout)",
+   "scoreByOverall": true,
+   "scoreRuleNote": "This meet scored teams by overall place (the sum of each team's top 5 overall places), as its official scores show; calculated the same way here.",
    "fieldSize": 137,
    "heightsCount": 6,
    "hasPace": true,
@@ -17563,9 +17573,9 @@
     "teamCount": 19,
     "calcCount": 20,
     "official": {
-     "matched": 1,
+     "matched": 16,
      "n": 19,
-     "heightsMatch": false
+     "heightsMatch": true
     },
     "heights": [
      {
@@ -17574,8 +17584,8 @@
       "score": 191,
       "official": true,
       "calcPlace": 5,
-      "calcScore": 188,
-      "match": false
+      "calcScore": 191,
+      "match": true
      }
     ]
    }
@@ -17762,7 +17772,7 @@
     "teamCount": 23,
     "calcCount": 23,
     "official": {
-     "matched": 21,
+     "matched": 23,
      "n": 23,
      "heightsMatch": true
     },
@@ -18109,7 +18119,7 @@
     "teamCount": 20,
     "calcCount": 20,
     "official": {
-     "matched": 12,
+     "matched": 13,
      "n": 20,
      "heightsMatch": true
     },
@@ -20862,7 +20872,7 @@
      "secs": 1169.6,
      "pace": "6:16",
      "paceSecs": 376,
-     "teamPlace": 29,
+     "teamPlace": 35,
      "origin": "hs"
     },
     {
@@ -21397,7 +21407,7 @@
      "secs": 1370.5,
      "pace": "7:21",
      "paceSecs": 441,
-     "teamPlace": 27,
+     "teamPlace": 34,
      "origin": "hs"
     },
     {
@@ -23357,7 +23367,7 @@
      "secs": 1225.2,
      "pace": "6:34",
      "paceSecs": 394,
-     "teamPlace": 21,
+     "teamPlace": 28,
      "origin": "hs"
     },
     {
@@ -26085,14 +26095,14 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-junior-varsity-upperclassmen",
-     "place": 207,
+     "place": 206,
      "hplace": 4,
      "grade": 12,
      "time": "21:26.9",
      "secs": 1286.9,
      "pace": "6:54",
      "paceSecs": 414,
-     "teamPlace": 164,
+     "teamPlace": 163,
      "origin": "hs"
     },
     {
@@ -27062,7 +27072,7 @@
      "secs": 1115.4,
      "pace": "5:59",
      "paceSecs": 359,
-     "teamPlace": 21,
+     "teamPlace": 27,
      "origin": "hs"
     },
     {
@@ -27998,14 +28008,14 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-junior-varsity-underclassmen",
-     "place": 358,
+     "place": 352,
      "hplace": 7,
      "grade": 10,
      "time": "22:57.3",
      "secs": 1377.3,
      "pace": "7:23",
      "paceSecs": 443,
-     "teamPlace": 311,
+     "teamPlace": 310,
      "origin": "hs"
     },
     {
@@ -28271,7 +28281,7 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-varsity-a",
-     "place": 341,
+     "place": 335,
      "hplace": 4,
      "grade": 10,
      "time": "18:41.8",
@@ -31975,7 +31985,7 @@
      "secs": 1176.9,
      "pace": "6:18",
      "paceSecs": 378,
-     "teamPlace": 15,
+     "teamPlace": 22,
      "origin": "hs"
     },
     {
@@ -32570,7 +32580,7 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-varsity-a",
-     "place": 287,
+     "place": 284,
      "hplace": 3,
      "grade": 12,
      "time": "18:20.8",
@@ -33239,7 +33249,7 @@
      "secs": 1142.3,
      "pace": "6:07",
      "paceSecs": 367,
-     "teamPlace": 33,
+     "teamPlace": 31,
      "origin": "hs"
     },
     {
@@ -35060,7 +35070,7 @@
      "secs": 1132.2,
      "pace": "6:04",
      "paceSecs": 364,
-     "teamPlace": 29,
+     "teamPlace": 27,
      "origin": "hs"
     },
     {
@@ -35100,14 +35110,14 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-varsity-b",
-     "place": 122,
+     "place": 119,
      "hplace": 6,
      "grade": 12,
      "time": "20:28.4",
      "secs": 1228.4,
      "pace": "6:35",
      "paceSecs": 395,
-     "teamPlace": 114,
+     "teamPlace": 111,
      "origin": "hs"
     },
     {
@@ -36618,14 +36628,14 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-varsity-b",
-     "place": 90,
+     "place": 89,
      "hplace": 5,
      "grade": 10,
      "time": "19:54.9",
      "secs": 1194.9,
      "pace": "6:24",
      "paceSecs": 384,
-     "teamPlace": 85,
+     "teamPlace": 84,
      "origin": "hs"
     },
     {
@@ -39693,7 +39703,7 @@
      "secs": 1220.0,
      "pace": "6:32",
      "paceSecs": 392,
-     "teamPlace": 99,
+     "teamPlace": 101,
      "origin": "hs"
     },
     {
@@ -40451,7 +40461,7 @@
      "secs": 1390.4,
      "pace": "7:27",
      "paceSecs": 447,
-     "teamPlace": 29,
+     "teamPlace": 36,
      "origin": "hs"
     },
     {
@@ -42298,7 +42308,7 @@
      "secs": 1108.0,
      "pace": "5:56",
      "paceSecs": 356,
-     "teamPlace": 31,
+     "teamPlace": 32,
      "origin": "hs"
     },
     {
@@ -42382,7 +42392,7 @@
      "secs": 1149.2,
      "pace": "6:09",
      "paceSecs": 369,
-     "teamPlace": 27,
+     "teamPlace": 33,
      "origin": "hs"
     },
     {
@@ -44655,7 +44665,7 @@
      "secs": 1226.4,
      "pace": "6:34",
      "paceSecs": 394,
-     "teamPlace": 33,
+     "teamPlace": 40,
      "origin": "hs"
     },
     {
@@ -51381,14 +51391,14 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-varsity-b",
-     "place": 87,
+     "place": 86,
      "hplace": 4,
      "grade": 10,
      "time": "19:52.3",
      "secs": 1192.3,
      "pace": "6:23",
      "paceSecs": 383,
-     "teamPlace": 83,
+     "teamPlace": 82,
      "origin": "hs"
     },
     {
@@ -52475,7 +52485,7 @@
      "secs": 1121.0,
      "pace": "6:00",
      "paceSecs": 360,
-     "teamPlace": 46,
+     "teamPlace": 47,
      "origin": "hs"
     },
     {
@@ -54104,14 +54114,14 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-junior-varsity-upperclassmen",
-     "place": 286,
+     "place": 281,
      "hplace": 6,
      "grade": 12,
      "time": "22:31.8",
      "secs": 1351.8,
      "pace": "7:15",
      "paceSecs": 435,
-     "teamPlace": 221,
+     "teamPlace": 219,
      "origin": "hs"
     },
     {
@@ -54617,7 +54627,7 @@
      "secs": 1092.0,
      "pace": "5:51",
      "paceSecs": 351,
-     "teamPlace": 25,
+     "teamPlace": 26,
      "origin": "hs"
     },
     {
@@ -55034,7 +55044,7 @@
      "secs": 1139.0,
      "pace": "6:06",
      "paceSecs": 366,
-     "teamPlace": 38,
+     "teamPlace": 39,
      "origin": "hs"
     },
     {
@@ -57084,14 +57094,14 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-junior-varsity-upperclassmen",
-     "place": 270,
+     "place": 265,
      "hplace": 5,
      "grade": 11,
      "time": "22:17.5",
      "secs": 1337.5,
      "pace": "7:10",
      "paceSecs": 430,
-     "teamPlace": 209,
+     "teamPlace": 207,
      "origin": "hs"
     },
     {
@@ -57942,7 +57952,7 @@
      "secs": 1137.1,
      "pace": "6:05",
      "paceSecs": 365,
-     "teamPlace": 31,
+     "teamPlace": 29,
      "origin": "hs"
     },
     {
@@ -58694,7 +58704,7 @@
      "secs": 1149.0,
      "pace": "6:09",
      "paceSecs": 369,
-     "teamPlace": 42,
+     "teamPlace": 43,
      "origin": "hs"
     },
     {
@@ -59615,7 +59625,7 @@
      "secs": 1169.3,
      "pace": "6:16",
      "paceSecs": 376,
-     "teamPlace": 28,
+     "teamPlace": 34,
      "origin": "hs"
     },
     {
@@ -60703,7 +60713,7 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-junior-varsity-upperclassmen",
-     "place": 327,
+     "place": 320,
      "hplace": 7,
      "grade": 12,
      "time": "23:18.6",
@@ -61367,7 +61377,7 @@
      "secs": 1191.0,
      "pace": "6:23",
      "paceSecs": 383,
-     "teamPlace": 51,
+     "teamPlace": 54,
      "origin": "hs"
     }
    ],
@@ -62691,7 +62701,7 @@
      "secs": 1131.0,
      "pace": "6:04",
      "paceSecs": 364,
-     "teamPlace": 35,
+     "teamPlace": 36,
      "origin": "hs"
     },
     {
@@ -63616,14 +63626,14 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-junior-varsity-underclassmen",
-     "place": 161,
+     "place": 159,
      "hplace": 6,
      "grade": 9,
      "time": "20:59.1",
      "secs": 1259.1,
      "pace": "6:45",
      "paceSecs": 405,
-     "teamPlace": 151,
+     "teamPlace": 149,
      "origin": "hs"
     },
     {
@@ -67210,7 +67220,7 @@
      "secs": 1293.4,
      "pace": "6:56",
      "paceSecs": 416,
-     "teamPlace": 25,
+     "teamPlace": 32,
      "origin": "hs"
     },
     {
@@ -67971,7 +67981,7 @@
     },
     {
      "meet": "hs-2025-oatlands-invitational-junior-varsity-underclassmen",
-     "place": 404,
+     "place": 398,
      "hplace": 8,
      "grade": 10,
      "time": "23:26.2",
@@ -70967,7 +70977,7 @@
      "secs": 1211.5,
      "pace": "6:29",
      "paceSecs": 389,
-     "teamPlace": 18,
+     "teamPlace": 25,
      "origin": "hs"
     },
     {
@@ -73953,7 +73963,7 @@
      "secs": 1133.0,
      "pace": "6:04",
      "paceSecs": 364,
-     "teamPlace": 30,
+     "teamPlace": 28,
      "origin": "hs"
     },
     {
@@ -75676,7 +75686,7 @@
      "secs": 1263.0,
      "pace": "6:46",
      "paceSecs": 406,
-     "teamPlace": 24,
+     "teamPlace": 31,
      "origin": "hs"
     },
     {
@@ -76221,7 +76231,7 @@
      "secs": 1141.3,
      "pace": "6:07",
      "paceSecs": 367,
-     "teamPlace": 32,
+     "teamPlace": 30,
      "origin": "hs"
     },
     {
@@ -76997,7 +77007,7 @@
      "secs": 1255.0,
      "pace": "6:43",
      "paceSecs": 403,
-     "teamPlace": 107,
+     "teamPlace": 110,
      "origin": "hs"
     },
     {
@@ -77301,17 +77311,15 @@
   "2022 States: the meet re-tallied extra runners from deep teams as B teams; the B listing is left out, those runners keep their overall places but don't count in team scores. 2021 States and 2007 Landon Invitational were missing finishers, which were added from the official results. 2025 States did not score 5th graders.",
   "Name spellings merged for the runner pages (shown with the spelling used most in official results): John Ortman (Johnny), Louie Leiss (Liess), Philip Allen (Phillip, P), Vince Keirnan (Kiernan), Santiago Lulli (Santi Luli), Andres Lulli (Luli), Daniel Lulli (Luli), Justin Leiss (Liess), Cullun O'Neill (Colin Oneil), Edward Nelson (Ed).",
   "2026 States lists 5th graders as exhibition ('Ex.') and two DNFs.",
-  "2006 DC/Maryland Private Schools Cross-Country Championships \u2013 Varsity: 21 of 23 official team scores reproduced.",
   "2006 Landon Home Meet: added 16 finishers from the official results.",
   "2006 Landon: sheet distance 2 mi (formula) but the official results list 1.864 mi; the site uses 2 mi.",
-  "2006 Peter Gerhagty Invitational \u2013 Varsity: 12 of 20 official team scores reproduced.",
+  "2006 Peter Gerhagty Invitational \u2013 Varsity: 13 of 20 official team scores reproduced.",
   "2007 Episcopal Quad Meet \u2013 Varsity: 0 of 5 official team scores reproduced.",
-  "2007 Georgetown Prep Classic \u2013 Varsity: 24 of 25 official team scores reproduced.",
   "2007 Landon Invitational \u2013 Junior Varsity: 7 of 9 official team scores reproduced.",
   "2007 Landon Invitational \u2013 Varsity: 8 of 12 official team scores reproduced.",
   "2007 Landon Invitational: added 17 finishers from the official results.",
   "2007 Landon Invitational: sheet distance 2.2 mi (formula) but the official results list 2 mi; the site uses 2.2 mi.",
-  "2007 Mercersburg Invitational \u2013 Varsity: 1 of 19 official team scores reproduced.",
+  "2007 Mercersburg Invitational \u2013 Varsity: 16 of 19 official team scores reproduced.",
   "2008 Fall Classic \u2013 Varsity: 10 of 23 official team scores reproduced.",
   "2008 Landon Invitational \u2013 Junior Varsity: 6 of 7 official team scores reproduced.",
   "2008 Landon Invitational \u2013 Varsity: 6 of 10 official team scores reproduced.",
@@ -77324,7 +77332,6 @@
   "2009 37th Annual Fall Classic at Georgetown Prep \u2013 Unseeded: 7 of 31 official team scores reproduced.",
   "2009 Landon: sheet distance 2.2 mi (formula) but the official results list 2.1 mi; the site uses 2.2 mi.",
   "2009 Salesianum Invitational \u2013 Freshmen: 0 of 19 official team scores reproduced.",
-  "2009 Salesianum Invitational \u2013 Varsity C: 17 of 18 official team scores reproduced.",
   "2010 Fall Classic at Georgetown Prep \u2013 Division II JV: 12 of 20 official team scores reproduced.",
   "2010 Fall Classic at Georgetown Prep \u2013 Unseeded: 9 of 34 official team scores reproduced.",
   "2010 Glory Days Invitational \u2013 Freshman: 0 of 35 official team scores reproduced.",
@@ -77343,11 +77350,10 @@
   "2011 Oatlands Invitational \u2013 Varsity B: 4 of 66 official team scores reproduced.",
   "2011 Peter Geraghty Cross Country Invitational \u2013 Junior Varsity: 6 of 22 official team scores reproduced.",
   "2011 Peter Geraghty Cross Country Invitational \u2013 Varsity: 16 of 30 official team scores reproduced.",
-  "2012 Episcopal Home Meet #2 \u2013 Varsity: 2 of 3 official team scores reproduced.",
   "2012 Georgetown Prep Cross-Country Classic \u2013 Division II Junior Varsity: 6 of 9 official team scores reproduced.",
   "2012 Georgetown Prep Cross-Country Classic \u2013 Freshman: 7 of 12 official team scores reproduced.",
   "2012 Georgetown Prep Cross-Country Classic \u2013 Unseeded Varsity: 5 of 19 official team scores reproduced.",
-  "2013 Georgetown Prep Invitational (Fall Classic) \u2013 Freshman Overall: 1 of 10 official team scores reproduced.",
+  "2013 Georgetown Prep Invitational (Fall Classic) \u2013 Freshman Overall: 8 of 10 official team scores reproduced.",
   "2013 Georgetown Prep Invitational (Fall Classic) \u2013 Junior Varsity Div Ii Overall: 4 of 6 official team scores reproduced.",
   "2013 Georgetown Prep Invitational (Fall Classic) \u2013 Unseeded Varsity Overall: 20 of 21 official team scores reproduced.",
   "2013 Landon Invitational \u2013 Freshman: 1 of 9 official team scores reproduced.",
@@ -77359,11 +77365,11 @@
   "2014 Landon MS Invitational: the sheet has no grade for 103 runners; filled from the official results of the same race.",
   "2014 MD-DC Private Schools Cross-Country Championships (HS) \u2013 Junior Varsity Small: 4 of 6 official team scores reproduced.",
   "2014 MD-DC Private Schools Cross-Country Championships (HS) \u2013 Small: 9 of 10 official team scores reproduced.",
-  "2014 Oatlands Invitational \u2013 Freshman/Sophmore: 13 of 55 official team scores reproduced.",
+  "2014 Oatlands Invitational \u2013 Freshman/Sophmore: 15 of 55 official team scores reproduced.",
   "2014 Oatlands Invitational \u2013 Junior/Senior: 11 of 51 official team scores reproduced.",
   "2014 Oatlands Invitational \u2013 Varsity A: 14 of 63 official team scores reproduced.",
   "2015 Georgetown Prep Cross-country Classic \u2013 Freshman: 3 of 13 official team scores reproduced.",
-  "2015 Georgetown Prep Cross-country Classic \u2013 Junior Varsity I: 9 of 17 official team scores reproduced.",
+  "2015 Georgetown Prep Cross-country Classic \u2013 Junior Varsity I: 10 of 17 official team scores reproduced.",
   "2015 Georgetown Prep Cross-country Classic \u2013 Unseeded Varsity: 10 of 26 official team scores reproduced.",
   "2015 Glory Days Grill Invitational Cross Country Festival \u2013 Junior Varsity 1: 9 of 29 official team scores reproduced.",
   "2015 Glory Days Grill Invitational Cross Country Festival \u2013 Varsity B: 8 of 42 official team scores reproduced.",
@@ -77384,7 +77390,7 @@
   "2018 Glory Days Grill Invitational \u2013 JV 2: 11 of 19 official team scores reproduced.",
   "2018 Glory Days Grill Invitational \u2013 Varsity B: 5 of 29 official team scores reproduced.",
   "2018 MD/DC Middle School State Championships: 8 of 12 official team scores reproduced.",
-  "2018 WCAC Championship \u2013 Division A: 2 of 10 official team scores reproduced.",
+  "2018 WCAC Championship \u2013 Division A: 9 of 10 official team scores reproduced.",
   "2018 WCAC Championship \u2013 Freshman: 0 of 7 official team scores reproduced.",
   "2019 Glory Days Grill Invitational \u2013 Frosh: 7 of 28 official team scores reproduced.",
   "2019 Glory Days Grill Invitational \u2013 Junior Varsity II: 14 of 23 official team scores reproduced.",
@@ -77395,8 +77401,7 @@
   "2019 Oatlands Invitational \u2013 JV Underclassmen: 17 of 55 official team scores reproduced.",
   "2019 Oatlands Invitational \u2013 JV Upperclassmen: 3 of 43 official team scores reproduced.",
   "2019 Oatlands Invitational \u2013 Varsity: 14 of 65 official team scores reproduced.",
-  "2019 Skip Grant Invitational \u2013 Junior Varsity: 0 of 6 official team scores reproduced.",
-  "2019 Skip Grant Invitational \u2013 Varsity: 0 of 7 official team scores reproduced.",
+  "2019 Skip Grant Invitational \u2013 Junior Varsity: 5 of 6 official team scores reproduced.",
   "2019 WCAC Championships \u2013 Freshman: 5 of 8 official team scores reproduced.",
   "2019 WCAC Championships \u2013 Varsity A: 8 of 10 official team scores reproduced.",
   "2019 WCAC Championships \u2013 Varsity B: 2 of 7 official team scores reproduced.",
@@ -77438,12 +77443,11 @@
   "2024 Maryland Private School State Championships \u2013 Varsity Large: 10 of 12 official team scores reproduced.",
   "2024 Maryland XC Invitational (MDXC) \u2013 Black & Gold: 27 of 35 official team scores reproduced.",
   "2024 Maryland XC Invitational (MDXC) \u2013 Junior Varsity: 25 of 50 official team scores reproduced.",
-  "2024 Maryland XC Invitational (MDXC) \u2013 Open: 13 of 27 official team scores reproduced.",
+  "2024 Maryland XC Invitational (MDXC) \u2013 Open: 24 of 27 official team scores reproduced.",
   "2024 NXR Southeast Regional Championships \u2013 Rising Stars: 21 of 23 official team scores reproduced.",
   "2024 Oatlands Invitational \u2013 JV Under Class: 26 of 62 official team scores reproduced.",
   "2024 Oatlands Invitational \u2013 JV Upper Class: 18 of 55 official team scores reproduced.",
   "2024 Oatlands Invitational \u2013 Varsity B: 1 of 38 official team scores reproduced.",
-  "2024 PVAC XC #3/MoCo Private School Championship @ Sandy Spring \u2013 MoCo Champs: 3 of 10 official team scores reproduced.",
   "2024 Skip Grant Invitational \u2013 Varsity: 20 of 21 official team scores reproduced.",
   "2024 Trials of Miles Opening Night XC \u2013 Junior Varsity: 12 of 17 official team scores reproduced.",
   "2024 Trials of Miles Opening Night XC \u2013 Varsity: 9 of 18 official team scores reproduced.",
@@ -77451,10 +77455,10 @@
   "2024 VA XC Showcase \u2013 Varsity: 29 of 34 official team scores reproduced.",
   "2025 Maryland Private School State Championships \u2013 Varsity 2A (Large ): 5 of 14 official team scores reproduced.",
   "2025 Maryland XC Invitational presented by Brooks (MDXC) \u2013 Black & Gold Varsity: 21 of 39 official team scores reproduced.",
-  "2025 Oatlands Invitational \u2013 Junior Varsity Underclassmen: 6 of 70 official team scores reproduced.",
-  "2025 Oatlands Invitational \u2013 Junior Varsity Upperclassmen: 11 of 45 official team scores reproduced.",
-  "2025 Oatlands Invitational \u2013 Varsity A: 0 of 88 official team scores reproduced.",
-  "2025 Oatlands Invitational \u2013 Varsity B: 5 of 28 official team scores reproduced.",
+  "2025 Oatlands Invitational \u2013 Junior Varsity Underclassmen: 33 of 70 official team scores reproduced.",
+  "2025 Oatlands Invitational \u2013 Junior Varsity Upperclassmen: 37 of 45 official team scores reproduced.",
+  "2025 Oatlands Invitational \u2013 Varsity A: 1 of 88 official team scores reproduced.",
+  "2025 Oatlands Invitational \u2013 Varsity B: 26 of 28 official team scores reproduced.",
   "2025 The VA XC Showcase \u2013 Elite: 34 of 44 official team scores reproduced.",
   "2025 The VA XC Showcase \u2013 Junior Varsity Morning: 40 of 45 official team scores reproduced.",
   "2026 Bittersweet XC Invitational \u2013 Varsity: 23 of 24 official team scores reproduced.",
@@ -77465,10 +77469,10 @@
   "HS 2025 Maryland Private School State Championships \u2013 Varsity 2A (Large ): source lists finishers twice (268 rows); de-duplicated to 138 and renumbered.",
   "HS 2025 Maryland XC Invitational presented by Brooks (MDXC) \u2013 Black & Gold Junior Varsity (AM): source lists finishers twice (1066 rows); de-duplicated to 534 and renumbered.",
   "HS 2025 Maryland XC Invitational presented by Brooks (MDXC) \u2013 Black & Gold Varsity: source lists finishers twice (650 rows); de-duplicated to 326 and renumbered.",
-  "HS 2025 Oatlands Invitational \u2013 Junior Varsity Underclassmen: source lists finishers twice (1136 rows); de-duplicated to 581 and renumbered.",
-  "HS 2025 Oatlands Invitational \u2013 Junior Varsity Upperclassmen: source lists finishers twice (818 rows); de-duplicated to 418 and renumbered.",
-  "HS 2025 Oatlands Invitational \u2013 Varsity A: source lists finishers twice (1198 rows); de-duplicated to 609 and renumbered.",
-  "HS 2025 Oatlands Invitational \u2013 Varsity B: source lists finishers twice (404 rows); de-duplicated to 211 and renumbered.",
+  "HS 2025 Oatlands Invitational \u2013 Junior Varsity Underclassmen: source lists finishers twice (1136 rows); de-duplicated to 570 and renumbered.",
+  "HS 2025 Oatlands Invitational \u2013 Junior Varsity Upperclassmen: source lists finishers twice (818 rows); de-duplicated to 409 and renumbered.",
+  "HS 2025 Oatlands Invitational \u2013 Varsity A: source lists finishers twice (1198 rows); de-duplicated to 601 and renumbered.",
+  "HS 2025 Oatlands Invitational \u2013 Varsity B: source lists finishers twice (404 rows); de-duplicated to 202 and renumbered.",
   "HS: one official team-score list covers 2 races (Landon Invitational \u2013 Brown, Landon Invitational \u2013 White); split by place restarts and matched to each race by its scores.",
   "Tab '2019 - Norwood Invitational': pace formula divides by 2.2 mi but the sheet states 2.1 mi; using the formula (2.2 mi)."
  ]

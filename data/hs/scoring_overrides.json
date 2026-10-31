@@ -1,0 +1,40 @@
+{
+  "about": "Per-race team-scoring rules for high school races, keyed by race CSV name. Used only where the rule is how the meet scored (a stated rule, or what the official results themselves show) and it reproduces the official team scores. Options: score_by_overall_place, official_teams_only, partial_teams (official scoring teams with fewer than 5 runners in the posted results), separate_listed_teams, incomplete_teams_score. 'evidence' records what was checked.",
+  "races": {
+    "2007_Mercersburg_Invitational_Varsity_moco446.csv": {
+      "score_by_overall_place": true,
+      "note": "This meet scored teams by overall place (the sum of each team's top 5 overall places), as its official scores show; calculated the same way here.",
+      "evidence": "Overall-place scoring reproduces 16 of 19 official scores; Gonzaga and The Potomac School are not in the official scores; Bishop McNamara has only 4 runners in the posted results, which shifts the last two places by one (their scores match)."
+    },
+    "2018_WCAC_Championship_Varsity_Division_A__moco6852.csv": {
+      "partial_teams": ["Archbishop Carroll High School ("],
+      "note": "The official results score Archbishop Carroll as a team, but only 4 of its runners are in the posted results. Those 4 runners are given team places here, so the other teams' scores can be checked; Carroll itself gets no calculated score.",
+      "evidence": "Reproduces the other 9 official scores exactly (standard scoring without Carroll: 2 of 10)."
+    },
+    "2013_Georgetown_Prep_Invitational_Fall_Class_Freshman_moco2780.csv": {
+      "partial_teams": ["Glenelg Country"],
+      "note": "The official results score Glenelg Country as a team, but only 4 of its runners are in the posted results. Those 4 runners are given team places here; Glenelg Country itself gets no calculated score.",
+      "evidence": "Reproduces 8 of 10 official scores (standard: 1 of 10); Sandy Spring Friends' score matches, only its place shifts by Glenelg's missing row."
+    },
+    "2024_Maryland_XC_Invitational_MDXC_Open_962982.csv": {
+      "partial_teams": ["Albert Einstein"],
+      "note": "The official results score Albert Einstein as a team, but only some of its runners are in the posted results. Those runners are given team places here; Albert Einstein itself gets no calculated score.",
+      "evidence": "Reproduces 24 of 27 official scores (standard: 13 of 27); the 2 teams behind Einstein match in score, only their place shifts."
+    },
+    "2024_PVAC_XC_3_MoCo_Private_School_Championship_Sandy_S_MoCo_Champs_966547.csv": {
+      "official_teams_only": true,
+      "note": "Only the teams in the official championship scores are scored; Field and Washington Waldorf runners ran as individuals (Field has 9 finishers but no official team score).",
+      "evidence": "Reproduces all 10 official scores (standard: 3 of 10)."
+    },
+    "2019_Skip_Grant_Invitational_Varsity_695638.csv": {
+      "separate_listed_teams": true,
+      "note": "St. Albans entered two teams, listed as \u201cSt Albans\u201d (DC) and \u201cSt. Albans\u201d (MD); the official results score them separately, and so does this calculation.",
+      "evidence": "Reproduces all 7 official scores (standard, treating them as one team: 0 of 7)."
+    },
+    "2019_Skip_Grant_Invitational_Junior_Varsity_695643.csv": {
+      "separate_listed_teams": true,
+      "note": "St. Albans entered two teams, listed as \u201cSt Albans\u201d (DC) and \u201cSt. Albans\u201d (MD); the official results score them separately, and so does this calculation.",
+      "evidence": "Reproduces 5 of 6 official scores (standard: 0 of 6); Gilman is 1 point off."
+    }
+  }
+}

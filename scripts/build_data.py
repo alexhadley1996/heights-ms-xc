@@ -232,27 +232,38 @@ def team_key(school):
     return re.sub(r"[^a-z0-9]+", " ", school.lower()).strip()
 
 
-def score_race(field, exclude_grades=(), max_per_team=7):
-    """Standard XC scoring. Returns (standings, partial_teams). Runners in exclude_grades keep their place but don't score."""
+def score_race(field, exclude_grades=(), max_per_team=7, incomplete_score=False, by_overall=False, teams_only=None,
+               exact_school=False, partial_ok=None):
+    """Standard XC scoring. Returns (standings, partial_teams). Runners in exclude_grades keep their place but don't score.
+    Meet-specific rules (HS overrides; all off by default): incomplete_score = runners of teams without 5 finishers
+    keep their team places; by_overall = team score is the sum of overall places; teams_only = only these team keys
+    score (everyone else runs as an individual); exact_school = teams split by the exact listed name (A/B entries);
+    partial_ok = team keys the official results show as scoring teams although fewer than 5 of their runners are listed
+    (their listed runners take team places, but the team itself gets no calculated score)."""
+    key = (lambda s: s.strip()) if exact_school else team_key
     for e in field:
         e.pop("teamPlace", None)
     finishers = [e for e in field if isinstance(e["place"], int) and e["secs"] is not None and e.get("grade") not in exclude_grades and not e.get("noScore")]
     finishers.sort(key=lambda e: e["place"])
+    if teams_only is not None:
+        finishers = [e for e in finishers if team_key(e["school"]) in teams_only]
     by_team = {}
     for e in finishers:
         if NON_TEAM_RE.match(e["school"].strip()):
             continue
-        by_team.setdefault(team_key(e["school"]), []).append(e)
+        by_team.setdefault(key(e["school"]), []).append(e)
     full = {k: v for k, v in by_team.items() if len(v) >= 5}
+    placed = by_team if incomplete_score else dict(full, **{k: v for k, v in by_team.items()
+                                                             if partial_ok and team_key(v[0]["school"]) in partial_ok})
     scorers = set()
-    for k, v in full.items():
+    for k, v in placed.items():
         for e in v[:max_per_team]:
             scorers.add(id(e))
     tp = 0
     for e in finishers:
         if id(e) in scorers:
             tp += 1
-            e["teamPlace"] = tp
+            e["teamPlace"] = e["place"] if by_overall else tp
     standings = []
     for k, v in full.items():
         top = v[:7]
@@ -521,7 +532,10 @@ def finalize(field, meta, quirks):
         if e.get("grade") in excl and isinstance(e["place"], int):
             e["noScore"] = True
             e["noScoreWhy"] = "This meet did not count this grade in team scores"
-    standings, partial = score_race(field, excl, 10 ** 6 if meta.get("noDisplacerLimit") else 7)
+    standings, partial = score_race(field, excl, 10 ** 6 if meta.get("noDisplacerLimit") else 7,
+                                    incomplete_score=bool(meta.get("scoreIncomplete")), by_overall=bool(meta.get("scoreByOverall")),
+                                    teams_only=meta.pop("_scoreTeamsOnly", None), exact_school=bool(meta.get("scoreExactSchool")),
+                                    partial_ok=meta.pop("_scorePartialOk", None))
     caveats = []
     ints = sorted(e["place"] for e in field if isinstance(e["place"], int))
     missing = (ints[-1] - len(set(ints))) if ints else 0

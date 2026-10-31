@@ -50,6 +50,11 @@ Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); th
   fields (Place,Grade,Name,Time,Pace,School,Meet,Level,SourceURL). Paces are recalculated from the listed distance.
 - `official_team_scores.csv` — official team scores (racecast “as scored by meet” and mocorunning.com meet printouts). On HS race
   pages the official standings come first and the site's own calculation is shown as a crosscheck (✓ / ≠).
+- `scoring_overrides.json` — per-race HS scoring rules, used only where the rule is what the meet did and it reproduces the
+  official scores (overall-place scoring, only official teams score, an official team with under 5 posted runners still takes
+  team places, A/B teams listed under two spellings scored separately). Each entry records its evidence; the note is shown on the race page.
+  Old/short school names in official lists (J.E.B. Stuart → Justice, Wilson → Jackson-Reed, …) are paired via
+  `HS_OFFICIAL_TEAM_ALIASES` in `scripts/hs_data.py` (HS only; the official name is still shown). Unmatched races get a short reason.
 - `race_notes.json` — notes shown on a race page (data issues from the research notes) and per-race grade fixes.
 - `ms_hs_matches.csv` — MS↔HS runner matches. Only `confident` rows are merged. To merge a “needs confirmation” pair, add one line to
   `EXTRA_MS_HS_MERGES` in `scripts/hs_data.py` (`"ms-runner-id": "HS Name"`).
@@ -58,7 +63,9 @@ Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); th
   WCAC “Varsity B” is listed at JV level; Holy Cross 2020 (V/JV together) is Open; relays show team placings with legs and
   never count toward PRs or Top Times. Heights = school field exactly “The Heights”/“The Heights School”/“Heights School”
   (+ relay “Boys A/B/C”), so “Dixie Heights” is not counted. ALL-CAPS names are put in normal case.
-- Sources that list every finisher twice (several 2025 racecast pages) are de-duplicated and places renumbered (noted on the page).
+- Sources that list every finisher twice (several 2025 racecast pages) are de-duplicated (same time, grade and school, school
+  compared without punctuation) and places renumbered (noted on the page). Scoring the doubled list matches none of the
+  official scores, so the official scores were tallied on the single list.
 - Missing grades are inferred within each runner's whole career (MS 5–8, HS 9–12), shown in italics.
 
 ## Preview locally

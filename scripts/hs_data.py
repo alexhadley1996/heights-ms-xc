@@ -35,6 +35,104 @@ NOT_MERGED = ["Nicholas Monaghan", "Nick Morahan", "Nick O'Neill"]
 # Cannon, and class of 2027), so they are never re-joined despite never racing on the same day.
 KEEP_SPLIT = {"Will Cannon"}
 
+# One school listed two ways inside the same race (other team's runners only; used for scoring and de-duplication).
+HS_SCHOOL_ALIASES = {"Cornerstone Christian Academy (Middleburg)": "Cornerstone Christian Academy"}
+
+# Official team-score lists that use an old or short school name. Only used to pair an official row with the team
+# in the results; the official name is still shown. (Renamed schools: J.E.B. Stuart -> Justice 2017, Wilson ->
+# Jackson-Reed 2022, T.C. Williams -> Alexandria City 2021, Robert E. Lee -> John R. Lewis 2019,
+# George Mason -> Meridian 2021.)
+HS_OFFICIAL_TEAM_ALIASES = [
+    (r"^(j\.? ?e\.? ?b\.? ?stuart|jeb stuart|stuart, jeb)\b", "Justice"),
+    (r"^wilson$", "Jackson-Reed"),
+    (r"^t\. ?c\. williams\b", "Alexandria City"),
+    (r"^lee r e$", "John R. Lewis HS"),
+    (r"^george mason\b", "Meridian"),
+    (r"^magruder\b", "Col. Zadok Magruder"),
+    (r"^mcnamara\b", "Bishop McNamara"),
+    (r"^glenelg boys small$", "Glenelg Country"),
+    (r"^episcopal (high school|hs va)$", "Episcopal"),
+    (r"^philadelphia-montgomery\b", "Phil-Mont Christian Academy"),
+    (r"^ss$", "St Stephens and St Agnes"),
+]
+
+
+def load_scoring_overrides():
+    p = os.path.join(HS, "scoring_overrides.json")
+    return json.load(open(p, encoding="utf-8")).get("races", {}) if os.path.exists(p) else {}
+
+
+SCORING_OVERRIDES = None
+
+
+def apply_scoring_override(meta, field):
+    """Per-race scoring rules from data/hs/scoring_overrides.json (keyed by race CSV name), used only where a stated
+    or clearly evidenced meet rule reproduces the official team scores."""
+    global SCORING_OVERRIDES
+    if SCORING_OVERRIDES is None:
+        SCORING_OVERRIDES = load_scoring_overrides()
+    o = SCORING_OVERRIDES.get(meta["csv"])
+    if not o:
+        return
+    meta["scoreIncomplete"] = bool(o.get("incomplete_teams_score"))
+    meta["scoreByOverall"] = bool(o.get("score_by_overall_place"))
+    meta["scoreExactSchool"] = bool(o.get("separate_listed_teams"))
+    if o.get("partial_teams"):
+        meta["_scorePartialOk"] = {B.team_key(t) for t in o["partial_teams"]}
+    if o.get("official_teams_only") and meta.get("_official"):
+        schools = sorted({e["school"] for e in field})
+        keep = set()
+        for r in meta["_official"]:
+            c = B.match_team(r["Team"], [x for x in schools if B.team_key(x) not in keep])
+            if c:
+                keep.add(B.team_key(c))
+        meta["_scoreTeamsOnly"] = keep
+    if o.get("note"):
+        meta["scoreRuleNote"] = o["note"]
+
+
+def explain_official(m):
+    """Short reason on an HS race page when the calculated team scores don't all match the official ones."""
+    o = m["scoring"].get("official")
+    if not o or o["matched"] == len(o["teams"]):
+        return
+    bad = [r for r in o["teams"] if not r["match"]]
+    cnt = collections.Counter(B.team_key(e["school"]) for e in m["results"] if isinstance(e["place"], int) and e["secs"])
+    schools = sorted({e["school"] for e in m["results"]})
+    short = []
+    for r in o["teams"]:
+        c = r["computedTeam"] or B.match_team(r["team"], schools)
+        if not c or cnt[B.team_key(c)] < 5:
+            short.append(r["team"])
+    diffs = [abs(r["computedScore"] - r["score"]) for r in bad if r["computedScore"] is not None]
+    why = o.get("why")
+    if not why:
+        if short:
+            why = (f"{', '.join(short[:4])}{' and others' if len(short) > 4 else ''} {'is' if len(short) == 1 else 'are'} in the official "
+                   f"team scores but {'has' if len(short) == 1 else 'have'} fewer than 5 runners in the posted results, so the posted "
+                   "results are missing finishers and not every calculated score can match.")
+        elif diffs and max(diffs) == 0:
+            why = "Every calculated score matches the official one; only some places differ (tie-breaks)."
+        elif diffs and max(diffs) <= 5:
+            why = (f"The calculated scores are within {max(diffs)} point{'s' if max(diffs) > 1 else ''} of the official ones. The meet's "
+                   "scoring counted a few runners differently from the posted list (for example runners entered as individuals rather "
+                   "than for their team, or corrections made after the list was posted); which runners can't be told from the posted results.")
+        else:
+            why = (f"The official scores can't be reproduced from the posted results (differences of up to {max(diffs) if diffs else '?'} points). "
+                   "The meet scored from its own entries or rules, which the posted results don't show.")
+    if m.get("doubled"):
+        why += (" The source lists nearly every runner twice; scoring that doubled list matches none of the official scores, so the "
+                "official scores were tallied on the single list used here.")
+    o["why"] = why
+
+
+def official_team_alias(team, schools):
+    """Field school name an official team row refers to, when only an old/short name links them."""
+    for pat, to in HS_OFFICIAL_TEAM_ALIASES:
+        if re.search(pat, team.strip(), re.I) and to in schools:
+            return to
+    return None
+
 # Woodward Relays 2008 prints truncated two-man team names; map each to the runner's HS name.
 RELAY_NAME_FIX = {"Tim Hadley": "Timothy Hadley", "Tim Vaughn": "Timothy Vaughan", "Sebastian Luli": "Sebastian Lulli",
                   "Greg Had": "Gregory Hadley"}
@@ -162,6 +260,8 @@ def entry(row, grade_fix):
     e["name"] = name
     e.pop("note", None)
     e["heights"] = bool(HS_HEIGHTS_RE.match(e["school"].strip()))
+    if e["school"] in HS_SCHOOL_ALIASES:
+        e["listedSchool"], e["school"] = e["school"], HS_SCHOOL_ALIASES[e["school"]]
     if e["heights"]:
         new = HS_NAME_ALIASES.get(name, name)
         new = re.sub(r"\bLuli$", "Lulli", new)
@@ -243,10 +343,10 @@ def build_hs_meets(quirks):
         # Some racecast pages list every finisher twice in a row. Drop the second copy (same time, school and
         # grade, same or near-identical name) and renumber places.
         def _same(a, b):
-            if not a["secs"] or a["secs"] != b["secs"] or a["school"] != b["school"] or a["grade"] != b["grade"]:
+            if not a["secs"] or a["secs"] != b["secs"] or B.team_key(a["school"]) != B.team_key(b["school"]) or a["grade"] != b["grade"]:
                 return False
             return a["name"] == b["name"] or difflib.SequenceMatcher(None, a["name"].lower(), b["name"].lower()).ratio() >= 0.8
-        pairs = sum(1 for a, b in zip(field, field[1:]) if a["name"] == b["name"] and a["secs"] and a["secs"] == b["secs"] and a["school"] == b["school"])
+        pairs = sum(1 for a, b in zip(field, field[1:]) if a["name"] == b["name"] and a["secs"] and a["secs"] == b["secs"] and B.team_key(a["school"]) == B.team_key(b["school"]))
         if pairs > 0.3 * len(field):
             ded = []
             for e in field:
@@ -327,8 +427,24 @@ def build_hs_meets(quirks):
     for meta, field, off in pending:
         if meta["level"] == "Relay":
             meets.append(finalize_relay(meta, field)); continue
+        listed = {}
+        if off:
+            schools = {e["school"] for e in field}
+            off2 = []
+            for o in off:
+                a = official_team_alias(o["Team"], schools)
+                if a:
+                    listed[(int(o["Place"]), int(o["Score"]))] = o["Team"]
+                    o = dict(o, Team=a)
+                off2.append(o)
+            off = off2
         meta["_official"] = off
+        apply_scoring_override(meta, field)
         m = B.finalize(field, meta, quirks)
+        for r in (m["scoring"].get("official") or {}).get("teams", []):
+            if (r["place"], r["score"]) in listed:
+                r["team"] = listed[(r["place"], r["score"])]
+        explain_official(m)
         if m["levelLabel"] == "Individual 2.5K":
             # posted in sections (and run alongside the relays), so a team score from the listed runners means nothing
             for e in m["results"]:
@@ -336,9 +452,6 @@ def build_hs_meets(quirks):
             m["scoring"]["standings"], m["scoring"]["partialTeams"] = [], []
             m["scoring"]["caveats"] = ["No team scores: this individual race was run alongside the relays and posted in sections."]
         o = m["scoring"].get("official")
-        if o and m.get("doubled") and o["matched"] < len(o["teams"]):
-            o["why"] = ("The meet's own results list nearly every runner twice, and its official team scores were tallied with both "
-                        "copies. The calculated scores here count each runner once, so they can't match.")
         meets.append(m)
     seen = collections.Counter()
     for m in meets:
