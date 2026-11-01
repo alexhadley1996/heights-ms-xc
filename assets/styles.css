@@ -227,3 +227,31 @@ td.wrapdist{white-space:normal;min-width:70px}
 .runner-filter label{font-weight:700;font-size:14px}
 .runner-filter input{font:inherit;font-size:17px;padding:10px 14px;border:2px solid var(--line);border-radius:10px;max-width:520px;background:#fff}
 .runner-filter input:focus{outline:none;border-color:var(--accent)}
+/* All Results explorer */
+.res-filters{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-end;background:#fff;border:1px solid var(--line,#e5e0e0);border-radius:12px;padding:12px 14px;margin:8px 0}
+.res-filters label{display:flex;flex-direction:column;gap:3px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.res-filters label.chk{flex-direction:row;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;padding-bottom:6px}
+.res-filters select,.res-filters input[type=search]{font:inherit;font-size:14px;padding:6px 8px;border:1px solid #cfc7c7;border-radius:8px;background:#fff;color:inherit;text-transform:none}
+.res-filters input[type=search]{width:150px}
+.res-bar .spacer{flex:1}
+table.res-table th{cursor:pointer;user-select:none;white-space:nowrap}
+table.res-table th.sorted{color:var(--accent)}
+table.res-table th .sarr{margin-left:4px;font-size:10px}
+table.res-table th .sarr sup{font-size:9px;margin-left:1px}
+table.res-table tr.dq td{color:var(--muted)}
+.pager{justify-content:center}
+.pager span{font-size:14px;color:var(--muted)}
+.btn[disabled]{opacity:.4;cursor:default}
+/* header fits brand + 7 nav links + search on one row on desktop */
+header.site .wrap{gap:14px}
+nav.main{gap:2px}
+nav.main a{padding:8px 9px}
+.athlete-search{flex:0 0 165px}
+@media (max-width:1180px){.athlete-search{flex:1 1 100%;padding-bottom:8px}}
+.res-filters input[type=search]{flex:none}
+.res-filters .pair{display:flex;gap:6px;align-items:center;text-transform:none}
+table.res-table td{white-space:nowrap}
+table.res-table td.wrapcell{white-space:normal;min-width:180px}
+table.res-table td,table.res-table th{padding-left:7px;padding-right:7px}
+main.wide .wrap{max-width:1360px}
+table.res-table.compact td.wrapcell{min-width:170px;max-width:300px}

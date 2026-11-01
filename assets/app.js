@@ -128,11 +128,11 @@
 
   // ---------- shell ----------
   const page = document.body.dataset.page;
-  const nav = [["index.html", "Home", "home"], ["meets.html", "Meets", "meets"], ["runners.html", "Runners", "runners"], ["top.html", "Top Times", "top"], ["compare.html", "Compare", "compare"], ["history.html", "History", "history"]];
+  const nav = [["index.html", "Home", "home"], ["meets.html", "Meets", "meets"], ["runners.html", "Runners", "runners"], ["top.html", "Top Times", "top"], ["results.html", "All Results", "results"], ["compare.html", "Compare", "compare"], ["history.html", "History", "history"]];
   const activeKey = { meet: "meets", runner: "runners" }[page] || page;
   document.body.insertAdjacentHTML("afterbegin", `
     <header class="site"><div class="wrap">
-      <a class="brand" href="index.html"><img src="assets/heights-crest.svg" alt="The Heights School crest"><span class="bt"><span class="school">The Heights School</span><span class="team">Heights Cross Country</span></span></a>
+      <a class="brand" href="index.html"><img src="assets/heights-logo-white.png" alt="The Heights School logo" width="44" height="44"><span class="bt"><span class="school">The Heights School</span><span class="team">Heights Cross Country</span></span></a>
       <nav class="main">${nav.map(([h, t, k]) => `<a href="${h}" class="${k === activeKey ? "active" : ""}">${t}</a>`).join("")}</nav>
       <div class="athlete-search" role="search"><input type="search" id="athleteSearch" placeholder="Find a runner…" aria-label="Find a runner" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="athleteList"><ul id="athleteList" role="listbox" hidden></ul></div>
     </div></header>`);
@@ -179,7 +179,7 @@
     document.addEventListener("click", e => { if (!e.target.closest(".athlete-search")) close(); });
   })();
   document.body.insertAdjacentHTML("beforeend", `
-    <footer><div class="wrap"><img src="assets/heights-crest.svg" alt=""><div>Middle school results come from the team's results spreadsheet plus results posted online (racecast.co, Athletic.net, mocorunning.com); high school results come from racecast.co and mocorunning.com. Data refreshed ${esc(D.generated)}.
+    <footer><div class="wrap"><img src="assets/heights-logo.png" alt=""><div>Middle school results come from the team's results spreadsheet plus results posted online (racecast.co, Athletic.net, mocorunning.com); high school results come from racecast.co and mocorunning.com. Data refreshed ${esc(D.generated)}.
     Highlighted rows are Heights runners. Spot an error or have an old result sheet? <!-- PLACEHOLDER: contact info -->[Contact placeholder]</div></div></footer>`);
 
   // Heights team result for list pages. Middle school shows the site's calculated placing (as before);
@@ -282,7 +282,7 @@
       const lHS = seasonsOf(HS)[0], lMS = seasonsOf(MS)[0];
       $("#app").innerHTML = `
       <section class="hero"><div class="wrap">
-        <img class="crest" src="assets/heights-crest.svg" alt="The Heights School crest"><div class="hero-text">
+        <img class="crest" src="assets/heights-logo-white.png" alt="The Heights School logo"><div class="hero-text">
         <div class="eyebrow">The Heights School Cavaliers · Middle &amp; High School</div>
         <h1>Heights Cross Country<br>Results &amp; Records</h1>
         <p>Race-by-race results for Heights runners: middle school from ${seasonsOf(MS).slice(-1)[0]} and high school from ${seasonsOf(HS).slice(-1)[0]}, through ${seasons[0]}.</p>
@@ -561,6 +561,190 @@
       const go = () => (div === "MS" ? msDraw : hsDraw)();
       bindSeg("div", x => { div = x; setParam("div", x); go(); });
       go();
+    },
+    // All Results explorer: every Heights individual result (MS + HS) in one sortable, filterable, paginated table.
+    // The row index is built from the runner index after the page shell paints (lazily), and only one page of rows is
+    // rendered at a time. Sort, filters and page live in the URL so a view can be shared.
+    results() {
+      const P = new URLSearchParams(location.search);
+      const st = {
+        div: P.get("div") || "", level: P.get("level") || "", from: P.get("from") || "", to: P.get("to") || "",
+        grade: P.get("grade") || "", meet: P.get("meet") || "", dist: P.get("dist") || "", q: P.get("q") || "",
+        pr: P.get("pr") === "1", best: P.get("best") === "1", all: P.get("all") === "1",
+        sort: (P.get("sort") || "date:desc").split(",").map(s => s.split(":")).filter(s => s[0]).map(([c, d]) => [c, d === "asc" ? "asc" : "desc"]),
+        page: Math.max(1, +P.get("page") || 1),
+      };
+      const PER = 100;
+      const COLS = [
+        ["runner", "Runner"], ["div", "Div"], ["level", "Level"], ["season", "Season", "num"], ["date", "Date"], ["meet", "Meet"],
+        ["dist", "Distance", "num"], ["place", "Place", "num"], ["hplace", "Heights pl.", "num"], ["grade", "Grade", "num"],
+        ["time", "Time", "num"], ["pace", "Pace", "num"], ["flag", "PR"]];
+      const ss = seasons.slice().sort((a, b) => a - b);
+      const opt = (val, label, cur) => `<option value="${esc(val)}"${String(val) === String(cur) ? " selected" : ""}>${esc(label)}</option>`;
+      const levelOpts = [["", "All levels"], ["MS", "Middle school"], ...LEVELS.map(l => [l, l])];
+      $("#app").innerHTML = `<div class="wrap">
+        <div class="page-head"><h1>All Results</h1><p class="sub">Every individual Heights result on record, middle school and high school, in one table. Click a column heading to sort (again to reverse); shift-click another heading to add it as a secondary sort.</p></div>
+        <form class="filters res-filters" id="rf" onsubmit="return false">
+          <label>Division <select id="f-div">${[["", "Both"], ["MS", "Middle school"], ["HS", "High school"]].map(([a, b]) => opt(a, b, st.div)).join("")}</select></label>
+          <label>Level <select id="f-level">${levelOpts.map(([a, b]) => opt(a, b, st.level)).join("")}</select></label>
+          <label>Seasons <span class="pair"><select id="f-from" aria-label="From season">${opt("", "from", st.from)}${ss.map(s => opt(s, s, st.from)).join("")}</select> – <select id="f-to" aria-label="To season">${opt("", "to", st.to)}${ss.map(s => opt(s, s, st.to)).join("")}</select></span></label>
+          <label>Grade <select id="f-grade">${opt("", "Any", st.grade)}${[5, 6, 7, 8, 9, 10, 11, 12].map(g => opt(g, g, st.grade)).join("")}</select></label>
+          <label>Distance <select id="f-dist"><option value="">Any</option></select></label>
+          <label>Meet <input type="search" id="f-meet" placeholder="e.g. Landon" value="${esc(st.meet)}" list="meetNames"></label>
+          <label>Runner <input type="search" id="f-q" placeholder="Name" value="${esc(st.q)}"></label>
+          <label class="chk"><input type="checkbox" id="f-pr"${st.pr ? " checked" : ""}> PRs only</label>
+          <label class="chk"><input type="checkbox" id="f-best"${st.best ? " checked" : ""}> Best result per runner</label>
+          <label class="chk"><input type="checkbox" id="f-all"${st.all ? " checked" : ""}> Include DQs &amp; relay legs</label>
+          <button type="button" class="btn ghost small" id="f-reset">Reset</button>
+        </form>
+        <div class="toolbar res-bar"><b id="rcount">Loading results…</b><span class="spacer"></span><button type="button" class="btn small" id="csv">Download CSV</button></div>
+        <div id="rtable"><p class="muted">Loading…</p></div>
+        <div class="toolbar pager" id="pager"></div>
+        <p class="note">PR = high school personal record at that distance (fastest time; relay legs don't count). PB = middle school personal best pace (MS courses vary in length, so the fastest pace per mile counts). “Best result per runner” keeps each runner's fastest pace per mile among the rows that match the other filters (best place if no pace). Grades in italics are inferred from the runner's other races. DQs and relay legs are hidden unless “Include DQs &amp; relay legs” is ticked.</p>
+        <datalist id="meetNames"></datalist></div>`;
+      let ROWS = null;
+      const build = () => {
+        const rows = [];
+        D.runners.forEach(r => {
+          const res = r.results.map(x => ({ x, m: meetsById[x.meet] })).filter(o => o.m);
+          const msBest = res.filter(o => o.m.division === "MS" && okPace(o.x)).sort((a, b) => a.x.paceSecs - b.x.paceSecs)[0];
+          const hsPR = {};
+          res.forEach(o => { if (isHS(o.m) && o.x.secs && !o.x.suspect && !o.x.relay && !o.x.dq && o.m.distKey && (!hsPR[o.m.distKey] || o.x.secs < hsPR[o.m.distKey].x.secs)) hsPR[o.m.distKey] = o; });
+          res.forEach(o => {
+            const { x, m } = o;
+            const dist = isHS(m) ? (m.distKey || (m.distance ? `${(+m.distance).toFixed(2)} mi` : "")) : (m.distance ? `${(+m.distance).toFixed(2).replace(/0$/, "")} mi` : "");
+            const flag = !isHS(m) ? (o === msBest ? "PB" : "") : (!x.relay && m.distKey && hsPR[m.distKey] === o ? "PR" : "");
+            rows.push({
+              r, x, m, flag, dist, distM: m.distance ? +m.distance : null,
+              name: x.as || r.name, display: rName(r), nk: (r.name + " " + (r.aka || []).join(" ") + " " + (x.as || "")).toLowerCase(),
+              mk: `${m.season} ${isHS(m) ? m.meetName : m.name} ${m.name}`.toLowerCase(), meetName: isHS(m) ? m.meetName : m.name,
+              lvl: isHS(m) ? m.level : "MS", lvlLabel: isHS(m) ? m.levelLabel : "Middle school",
+              placeN: typeof x.place === "number" ? x.place : null, dq: !!x.dq || x.place === "DQ" || x.time === "DQ", relay: !!x.relay,
+            });
+          });
+        });
+        return rows;
+      };
+      const SORTV = {
+        runner: o => o.r.name.split(" ").slice(-1)[0] + " " + o.r.name, div: o => o.m.division, level: o => o.lvlLabel, season: o => o.m.season,
+        date: o => ckey(o.m), meet: o => o.meetName, dist: o => o.distM, place: o => o.placeN, hplace: o => o.x.hplace ?? null,
+        grade: o => o.x.grade ?? null, time: o => o.x.secs ?? null, pace: o => o.x.paceSecs ?? null, flag: o => o.flag || null,
+      };
+      const filtered = () => {
+        const q = st.q.trim().toLowerCase(), mq = st.meet.trim().toLowerCase();
+        let out = ROWS.filter(o => (st.all || (!o.dq && !o.relay)) && (!st.div || o.m.division === st.div) &&
+          (!st.level || o.lvl === st.level) && (!st.from || o.m.season >= +st.from) && (!st.to || o.m.season <= +st.to) &&
+          (!st.grade || o.x.grade === +st.grade) && (!st.dist || o.dist === st.dist) && (!q || q.split(/\s+/).every(w => o.nk.includes(w))) &&
+          (!mq || mq.split(/\s+/).every(w => o.mk.includes(w))) && (!st.pr || o.flag));
+        if (st.best) {
+          const b = {};
+          out.forEach(o => {
+            const k = o.r.id, c = b[k];
+            const key = o => [o.x.paceSecs && !o.x.suspect && !o.relay ? o.x.paceSecs : 1e9, o.placeN ?? 1e9];
+            if (!c) { b[k] = o; return; }
+            const [p1, q1] = key(o), [p2, q2] = key(c);
+            if (p1 < p2 || (p1 === p2 && q1 < q2)) b[k] = o;
+          });
+          out = Object.values(b);
+        }
+        const keys = st.sort.length ? st.sort : [["date", "desc"]];
+        out.sort((a, b) => {
+          for (const [c, d] of keys) {
+            const f = SORTV[c]; if (!f) continue;
+            const x = f(a), y = f(b);
+            if (x === y) continue;
+            if (x === null || x === "" || x === undefined) return 1; if (y === null || y === "" || y === undefined) return -1;
+            const cmp = typeof x === "number" && typeof y === "number" ? x - y : String(x).localeCompare(String(y), undefined, { sensitivity: "base" });
+            if (cmp) return d === "asc" ? cmp : -cmp;
+          }
+          return ckey(b.m) - ckey(a.m) || (a.placeN ?? 1e9) - (b.placeN ?? 1e9);
+        });
+        return out;
+      };
+      const syncURL = () => {
+        const u = new URL(location.href), sp = u.searchParams;
+        [...sp.keys()].forEach(k => sp.delete(k));
+        ["div", "level", "from", "to", "grade", "meet", "dist", "q"].forEach(k => { if (st[k]) sp.set(k, st[k]); });
+        ["pr", "best", "all"].forEach(k => { if (st[k]) sp.set(k, "1"); });
+        const s = st.sort.map(([c, d]) => `${c}:${d}`).join(",");
+        if (s && s !== "date:desc") sp.set("sort", s);
+        if (st.page > 1) sp.set("page", st.page);
+        history.replaceState(null, "", u);
+      };
+      const cell = (o, c) => {
+        const { x, m } = o;
+        switch (c) {
+          case "runner": return `<a href="${runnerHref(o.r)}">${esc(o.display)}</a>${x.as && x.as !== o.r.name ? ` <span class="muted" title="Listed in this race as">(${esc(x.as)})</span>` : ""}`;
+          case "div": return divTag(m);
+          case "level": return isHS(m) ? lvlTag(m) : '<span class="muted">MS</span>';
+          case "season": return m.season;
+          case "date": return esc(dl(m) || "");
+          case "meet": return `<a href="${meetLink(m)}">${esc(o.meetName)}</a>${raceShort(m) && isHS(m) ? ` <span class="muted">${esc(raceShort(m))}</span>` : ""}${x.relay ? ' <span class="muted">(relay leg)</span>' : ""}`;
+          case "dist": return o.dist ? esc(o.dist) : dash;
+          case "place": return v(x.place);
+          case "hplace": return v(x.hplace);
+          case "grade": return gv(x);
+          case "time": return v(x.time);
+          case "pace": return v(x.pace);
+          case "flag": return o.flag ? `<span class="badge" title="${o.flag === "PR" ? "High school PR at " + esc(m.distKey) : "Middle school personal best pace"}">${o.flag}</span>` : "";
+        }
+      };
+      const numCols = new Set(["season", "dist", "place", "hplace", "grade", "time", "pace"]);
+      const render = () => {
+        const out = filtered();
+        const pages = Math.max(1, Math.ceil(out.length / PER));
+        if (st.page > pages) st.page = pages;
+        const slice = out.slice((st.page - 1) * PER, st.page * PER);
+        const pri = Object.fromEntries(st.sort.map(([c, d], i) => [c, [d, i]]));
+        const head = COLS.map(([c, label]) => { const s = pri[c]; return `<th class="${numCols.has(c) ? "num" : ""}${s ? " sorted" : ""}" data-col="${c}" tabindex="0" role="columnheader"${s ? ` aria-sort="${s[0] === "asc" ? "ascending" : "descending"}"` : ""} title="Click to sort; shift-click to add a secondary sort">${label}${s ? `<span class="sarr">${s[0] === "asc" ? "▲" : "▼"}${st.sort.length > 1 ? `<sup>${s[1] + 1}</sup>` : ""}</span>` : ""}</th>`; }).join("");
+        const body = slice.map(o => `<tr class="${o.m.division === "HS" ? "row-hs" : ""}${o.dq ? " dq" : ""}">${COLS.map(([c]) => `<td class="${numCols.has(c) ? "num" : ""}${c === "time" ? " t" : ""}${c === "meet" ? " wrapcell" : ""}">${cell(o, c)}</td>`).join("")}</tr>`).join("");
+        $("#rtable").innerHTML = `<div class="table-wrap"><table class="res-table compact" id="resTable"><thead><tr>${head}</tr></thead><tbody>${body || `<tr><td colspan="${COLS.length}" class="muted">No results match these filters.</td></tr>`}</tbody></table></div>`;
+        const runnersN = new Set(out.map(o => o.r.id)).size;
+        $("#rcount").textContent = `${out.length.toLocaleString()} result${out.length === 1 ? "" : "s"} · ${runnersN.toLocaleString()} runner${runnersN === 1 ? "" : "s"}${out.length > PER ? ` · showing ${((st.page - 1) * PER + 1).toLocaleString()}–${Math.min(st.page * PER, out.length).toLocaleString()}` : ""}`;
+        const pb = (p, label, dis) => `<button type="button" class="btn ghost small" data-p="${p}"${dis ? " disabled" : ""}>${label}</button>`;
+        $("#pager").innerHTML = pages > 1 ? `${pb(1, "« First", st.page === 1)}${pb(st.page - 1, "‹ Prev", st.page === 1)}<span>Page ${st.page} of ${pages}</span>${pb(st.page + 1, "Next ›", st.page === pages)}${pb(pages, "Last »", st.page === pages)}` : "";
+        syncURL();
+        document.body.dataset.loaded = "1";
+        return out;
+      };
+      const sortBy = (c, shift) => {
+        const i = st.sort.findIndex(s => s[0] === c);
+        const defDir = ["season", "date"].includes(c) ? "desc" : "asc";
+        if (shift) {
+          if (i >= 0) st.sort[i][1] = st.sort[i][1] === "asc" ? "desc" : "asc"; else st.sort.push([c, defDir]);
+        } else {
+          st.sort = [[c, i === 0 ? (st.sort[0][1] === "asc" ? "desc" : "asc") : defDir]];
+        }
+        st.page = 1; render();
+      };
+      const csvCell = s => { s = String(s ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+      const exportCSV = () => {
+        const out = filtered();
+        const head = ["Runner", "Listed as", "Division", "Level", "Season", "Date", "Meet", "Race", "Distance", "Place", "Heights place", "Grade", "Grade inferred", "Time", "Pace", "PR", "Runner page", "Meet page"];
+        const base = location.href.replace(/[^/]*$/, "");
+        const lines = [head.join(",")].concat(out.map(o => [o.r.name + (o.r.disambig ? ` (${o.r.disambig})` : ""), o.x.as || "", o.m.division, o.lvlLabel, o.m.season, o.m.date || "", o.meetName, o.m.name, o.dist,
+          o.x.place ?? "", o.x.hplace ?? "", o.x.grade ?? "", o.x.gradeInferred ? "yes" : "", o.x.time ?? "", o.x.pace ?? "", o.flag, base + runnerHref(o.r), base + meetLink(o.m)].map(csvCell).join(",")));
+        const blob = new Blob(["\ufeff" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+        const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "heights-xc-results.csv";
+        document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+      };
+      const bind = () => {
+        const dists = [...new Set(ROWS.map(o => o.dist).filter(Boolean))].sort((a, b) => (ROWS.find(o => o.dist === a).distM || 0) - (ROWS.find(o => o.dist === b).distM || 0));
+        $("#f-dist").innerHTML = `<option value="">Any</option>` + dists.map(d => opt(d, d, st.dist)).join("");
+        $("#meetNames").innerHTML = [...new Set(ROWS.map(o => o.meetName))].sort().map(n => `<option value="${esc(n)}">`).join("");
+        const upd = (k, val) => { st[k] = val; st.page = 1; render(); };
+        [["div", "f-div"], ["level", "f-level"], ["from", "f-from"], ["to", "f-to"], ["grade", "f-grade"], ["dist", "f-dist"]].forEach(([k, id]) => { $("#" + id).onchange = e => upd(k, e.target.value); });
+        let t;
+        [["meet", "f-meet"], ["q", "f-q"]].forEach(([k, id]) => { $("#" + id).oninput = e => { clearTimeout(t); t = setTimeout(() => upd(k, e.target.value), 150); }; });
+        [["pr", "f-pr"], ["best", "f-best"], ["all", "f-all"]].forEach(([k, id]) => { $("#" + id).onchange = e => upd(k, e.target.checked); });
+        $("#f-reset").onclick = () => { location.href = "results.html"; };
+        $("#csv").onclick = exportCSV;
+        $("#rtable").addEventListener("click", e => { const h = e.target.closest("th[data-col]"); if (h) sortBy(h.dataset.col, e.shiftKey); });
+        $("#rtable").addEventListener("keydown", e => { const h = e.target.closest("th[data-col]"); if (h && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); sortBy(h.dataset.col, e.shiftKey); } });
+        $("#pager").onclick = e => { const b = e.target.closest("button[data-p]"); if (b && !b.disabled) { st.page = +b.dataset.p; render(); $("#rcount").scrollIntoView({ block: "nearest" }); } };
+      };
+      // build the index after the page shell has painted
+      (window.requestIdleCallback || (f => setTimeout(f, 0)))(() => { ROWS = build(); bind(); render(); });
     },
     compare() { renderCompare(); },
     history() {

@@ -36,6 +36,9 @@
   ],
   "2026_VA_XC_Showcase_JV_Morning_JV__moco11116.csv": [
    "The posted printout is missing 3 places, so some finishers aren't listed."
+  ],
+  "2013_Landon_Invitational_Freshman_282634.csv": [
+   "The source lists Edy McCormack twice (45th, 15:10.2 and 47th, 15:10.6) and Griffin Woofter twice (65th, 16:24.6 and 68th, 16:27.8). Only the first listing of each is kept, and the places after each removed row are moved up by one. The Heights has fewer than 5 runners here, so the team scores are unchanged."
   ]
  },
  "grade_fixes": {
@@ -68,7 +71,20 @@
    "level": "JV",
    "label": "JV",
    "short": "Small Schools JV",
-   "note": "The source labels this race “Large School Varsity”, but the race labelled “Small School JV” was really the small-schools varsity race, and the Heights runners here are the JV group (the same runners ran the JV race in 2009), so the two labels look swapped. Listed here as the JV race; please confirm."
+   "note": "The source labels this race “Large School Varsity”, but it was the small-schools JV race (confirmed by the team); the race labelled “Small School JV” was the small-schools varsity race."
   }
+ },
+ "_about_drop_rows": "drop_rows: duplicate rows for the same runner in one race (keyed by race CSV name); the first listing is kept, the later one is removed and places after it are renumbered.",
+ "drop_rows": {
+  "2013_Landon_Invitational_Freshman_282634.csv": [
+   {
+    "Place": "47",
+    "Name": "Edy McCormack"
+   },
+   {
+    "Place": "68",
+    "Name": "Griffin Woofter"
+   }
+  ]
  }
 }

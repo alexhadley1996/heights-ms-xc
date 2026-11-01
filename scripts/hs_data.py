@@ -352,6 +352,16 @@ def build_hs_meets(quirks):
             if e["time"] == "DQ":
                 e["dq"] = True
             field.append(e)
+        drops = notes.get("drop_rows", {}).get(base, [])
+        if drops:
+            gone = [e for e in field if any(str(e["place"]) == str(x["Place"]) and e["name"] == x["Name"] for x in drops)]
+            if len(gone) != len(drops):
+                quirks.append(f"HS {base}: drop_rows matched {len(gone)} of {len(drops)} rows.")
+            field = [e for e in field if e not in gone]
+            dp = [g["place"] for g in gone if isinstance(g["place"], int)]
+            for e in field:
+                if isinstance(e["place"], int):
+                    e["place"] -= sum(1 for x in dp if x < e["place"])
         level, label, lnote = level_of(s)
         lov = notes.get("level_overrides", {}).get(base)
         old_short = race_short(s, level, label) if lov else None

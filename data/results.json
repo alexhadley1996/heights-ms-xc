@@ -13376,10 +13376,13 @@
     "url": "https://racecast.co/race/xc/65440/282634",
     "original": "https://www.athletic.net/CrossCountry/meet/65440/results"
    },
+   "notes": [
+    "The source lists Edy McCormack twice (45th, 15:10.2 and 47th, 15:10.6) and Griffin Woofter twice (65th, 16:24.6 and 68th, 16:27.8). Only the first listing of each is kept, and the places after each removed row are moved up by one. The Heights has fewer than 5 runners here, so the team scores are unchanged."
+   ],
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
-   "fieldSize": 79,
-   "heightsCount": 4,
+   "fieldSize": 77,
+   "heightsCount": 2,
    "hasPace": true,
    "hasGrade": true,
    "order": 105,
@@ -15271,7 +15274,7 @@
     "original": "https://www.athletic.net/CrossCountry/meet/32421/results"
    },
    "notes": [
-    "The source labels this race \u201cLarge School Varsity\u201d, but the race labelled \u201cSmall School JV\u201d was really the small-schools varsity race, and the Heights runners here are the JV group (the same runners ran the JV race in 2009), so the two labels look swapped. Listed here as the JV race; please confirm."
+    "The source labels this race \u201cLarge School Varsity\u201d, but it was the small-schools JV race (confirmed by the team); the race labelled \u201cSmall School JV\u201d was the small-schools varsity race."
    ],
    "completeness": "full field",
    "teamScoreStatus": "official (as scored by meet)",
@@ -59098,17 +59101,6 @@
      "origin": "hs"
     },
     {
-     "meet": "hs-2013-landon-invitational-freshman",
-     "place": 47,
-     "hplace": 2,
-     "grade": 9,
-     "time": "15:10.6",
-     "secs": 910.6,
-     "pace": "7:35",
-     "paceSecs": 455,
-     "origin": "hs"
-    },
-    {
      "meet": "hs-2013-montgomery-county-private-school-championships-junior-varsity",
      "place": 52,
      "hplace": 8,
@@ -71231,7 +71223,23 @@
      "pace": "9:21",
      "paceSecs": 561,
      "origin": "online"
-    },
+    }
+   ],
+   "ms": [
+    2016
+   ],
+   "hs": [],
+   "disambig": "2016",
+   "bestPace": "8:32",
+   "bestPaceSecs": 512
+  },
+  {
+   "name": "Noah Schneider",
+   "id": "noah-schneider-2016-norwood",
+   "seasons": [
+    2016
+   ],
+   "results": [
     {
      "meet": "2016-norwood-halloween-run-2016-10-27",
      "place": 101,
@@ -71248,8 +71256,9 @@
     2016
    ],
    "hs": [],
-   "bestPace": "8:32",
-   "bestPaceSecs": 512
+   "disambig": "the second Noah Schneider at the 2016 Norwood Halloween Run",
+   "bestPace": "13:14",
+   "bestPaceSecs": 794
   },
   {
    "name": "Nick Searby",
@@ -73971,17 +73980,6 @@
      "origin": "hs"
     },
     {
-     "meet": "hs-2019-landon-invitational-varsity-b-division",
-     "place": 66,
-     "hplace": 8,
-     "grade": 11,
-     "time": "23:06.0",
-     "secs": 1386.0,
-     "pace": "7:26",
-     "paceSecs": 446,
-     "origin": "hs"
-    },
-    {
      "meet": "hs-2019-glory-days-grill-invitational-junior-varsity-ii",
      "place": 131,
      "hplace": 3,
@@ -74047,6 +74045,37 @@
     "meet": "hs-2019-glory-days-grill-invitational-junior-varsity-ii"
    },
    "hsBestPaceSecs": 376
+  },
+  {
+   "name": "Robert Spence",
+   "id": "robert-spence-2019-landon",
+   "seasons": [
+    2019
+   ],
+   "results": [
+    {
+     "meet": "hs-2019-landon-invitational-varsity-b-division",
+     "place": 66,
+     "hplace": 8,
+     "grade": 11,
+     "time": "23:06.0",
+     "secs": 1386.0,
+     "pace": "7:26",
+     "paceSecs": 446,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2019
+   ],
+   "disambig": "the second Robert Spence at the 2019 Landon Invitational",
+   "hs5k": {
+    "time": "23:06.0",
+    "secs": 1386.0,
+    "meet": "hs-2019-landon-invitational-varsity-b-division"
+   },
+   "hsBestPaceSecs": 446
   },
   {
    "name": "Chase Stabolepszy",
@@ -79854,24 +79883,13 @@
    "results": [
     {
      "meet": "hs-2013-landon-invitational-freshman",
-     "place": 65,
-     "hplace": 3,
+     "place": 64,
+     "hplace": 2,
      "grade": 9,
      "time": "16:24.6",
      "secs": 984.6,
      "pace": "8:12",
      "paceSecs": 492,
-     "origin": "hs"
-    },
-    {
-     "meet": "hs-2013-landon-invitational-freshman",
-     "place": 68,
-     "hplace": 4,
-     "grade": 9,
-     "time": "16:27.8",
-     "secs": 987.8,
-     "pace": "8:13",
-     "paceSecs": 493,
      "origin": "hs"
     },
     {
@@ -81218,16 +81236,14 @@
   }
  ],
  "identityReview": [
+  "Split \u201cNoah Schneider\u201d (MS): 1 result(s) belong to a different runner with the same name (2016-norwood).",
   "Kept \u201cBrandon Kolb\u201d (HS) as one runner although the listed grades disagree (class of 2010, 2012); never ran on the same day, so likely a grade typo.",
   "Kept \u201cJames Herrick\u201d (HS) as one runner although the listed grades disagree (class of 2008, 2011); never ran on the same day, so likely a grade typo.",
+  "Split \u201cRobert Spence\u201d (HS): 1 result(s) belong to a different runner with the same name (2019-landon).",
   "Kept \u201cCregan Cahill\u201d (HS) as one runner although the listed grades disagree (class of 2021, 2023); never ran on the same day, so likely a grade typo.",
   "Split \u201cWill Cannon\u201d (HS) into 2 runners: 2022\u20132025 (class of 2025); 2024\u20132025 (class of 2027)",
   "Kept \u201cRigby Anderson\u201d (HS) as one runner although the listed grades disagree (class of 2023, 2026); never ran on the same day, so likely a grade typo.",
   "MS\u2013HS match: no HS runner named Jude Mcniff (for Jude McNiff); not merged.",
-  "After merging, Bobby Spence has 2 results in the same race (hs-2019-landon-invitational-varsity-b-division): Robert Spence 21:30.7 (place 37); Robert Spence 23:06.0 (place 66). All kept.",
-  "After merging, Noah Schneider has 2 results in the same race (2016-norwood-halloween-run-2016-10-27): Noah Schneider 18:43.0 (place 62); Noah Schneider 26:28.0 (place 101). All kept.",
-  "After merging, Edy McCormack has 2 results in the same race (hs-2013-landon-invitational-freshman): Edy McCormack 15:10.2 (place 45); Edy McCormack 15:10.6 (place 47). All kept.",
-  "After merging, Griffin Woofter has 2 results in the same race (hs-2013-landon-invitational-freshman): Griffin Woofter 16:24.6 (place 65); Griffin Woofter 16:27.8 (place 68). All kept.",
   "Merged capitalization/punctuation variants (HS): Matthew McDonald, Matthew Mcdonald \u2192 Matthew McDonald.",
   "Merged capitalization/punctuation variants (HS): John McDonald, John Mcdonald \u2192 John McDonald.",
   "Merged capitalization/punctuation variants (MS): Nick O'Neil, Nick O'neil \u2192 Nick O'Neil.",

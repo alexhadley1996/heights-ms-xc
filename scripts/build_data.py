@@ -776,7 +776,9 @@ def main(path):
         else:
             seen[m["id"]] = 1
 
+    apply_row_splits(meets, quirks)
     runners, review = build_runners(meets)
+    check_one_row_per_runner(meets, runners)
     write_outputs(meets, runners, review, quirks)
     ms = [m for m in meets if m["division"] == "MS"]
     gs = collections.Counter(m["division"] for m in meets if m["group"] == m["id"] or True)
@@ -933,6 +935,45 @@ def _cluster(name, items):
     return clusters
 
 
+# A result row that belongs to a different Heights runner with the same name as a teammate (the team says these are
+# brothers). Keyed by (race id, place, listed name) -> (tag for the runner id, label shown after his name).
+ROW_SPLITS = {
+    ("hs-2019-landon-invitational-varsity-b-division", 66, "Robert Spence"):
+        ("2019-landon", "the second Robert Spence at the 2019 Landon Invitational"),
+    ("2016-norwood-halloween-run-2016-10-27", 101, "Noah Schneider"):
+        ("2016-norwood", "the second Noah Schneider at the 2016 Norwood Halloween Run"),
+}
+
+
+def apply_row_splits(meets, quirks):
+    found = set()
+    for m in meets:
+        for e in m["results"]:
+            k = (m["id"], e["place"], e["name"])
+            if k in ROW_SPLITS:
+                e["person"], e["personLabel"] = ROW_SPLITS[k]
+                e["note"] = ((e.get("note") + "; ") if e.get("note") else "") + (
+                    "Another Heights runner listed under the same name in this race (a brother, per the team); "
+                    "kept as a separate runner.")
+                found.add(k)
+    for k in set(ROW_SPLITS) - found:
+        quirks.append(f"ROW_SPLITS entry not found: {k}")
+
+
+def check_one_row_per_runner(meets, runners):
+    """Build-time check: no runner may have two results in the same race."""
+    bad = []
+    for r in runners:
+        c = collections.Counter(x["meet"] for x in r["results"])
+        bad += [f"{r['id']} \u00d7{n} in {mid}" for mid, n in c.items() if n > 1]
+    for m in meets:
+        c = collections.Counter(e.get("runnerId") for e in m["results"] if e.get("runnerId"))
+        bad += [f"{rid} \u00d7{n} in {m['id']} (field)" for rid, n in c.items() if n > 1]
+    if bad:
+        sys.exit("ERROR: a runner appears more than once in a race:\n  " + "\n  ".join(sorted(set(bad))))
+    print(f"Check passed: every runner appears at most once in each of {len(meets)} races.")
+
+
 def build_runners(meets):
     """One runner per person. Middle and high school results are grouped by name separately (same rules as before),
     then joined into one person using the MS-HS matches in data/hs (hs_data.load_matches)."""
@@ -977,16 +1018,30 @@ def build_runners(meets):
                             review.append(f"Kept \u201c{name}\u201d (HS) as one runner although the listed grades disagree "
                                           f"(class of {', '.join(str(y) for y in sorted(set(y for y in a['cy'] if y)))}); never ran on the same day, so likely a grade typo.")
                             break
+            # rows marked as a different runner with the same name (ROW_SPLITS) become their own person
+            tagged = collections.defaultdict(list)
+            for c in clusters:
+                keep = []
+                for it in c["items"]:
+                    (tagged[it[1]["person"]] if it[1].get("person") else keep).append(it)
+                c["items"] = keep
+            clusters = [c for c in clusters if c["items"]]
             for c in clusters:
                 seasons = sorted({m["season"] for m, _ in c["items"]})
                 pid = slug(name) if len(clusters) == 1 else slug(f"{name}-{seasons[0]}")
                 p = {"name": name, "div": div, "items": c["items"], "cy": [y for y in c["cy"] if y], "id": pid, "seasons": seasons,
-                     "split": len(clusters) > 1}
+                     "split": len(clusters) > 1 or bool(tagged)}
                 people.append(p)
                 if div == "MS":
                     srcs = {m["origin"] for m, _ in c["items"]}
                     if len(srcs) > 1 and not p["cy"] and seasons[-1] - seasons[0] >= 2 and name not in CONFIRMED_SAME:
                         review.append(f"Merged sheet + online results for {name} ({', '.join(map(str, seasons))}) with no grades to confirm it's one runner.")
+            for tag, its in tagged.items():
+                seasons = sorted({m["season"] for m, _ in its})
+                cy = [m["season"] + 12 - e["grade"] for m, e in its if isinstance(e.get("grade"), int)]
+                people.append({"name": name, "div": div, "items": its, "cy": cy, "id": slug(f"{name}-{tag}"), "seasons": seasons,
+                               "split": True, "tagged": True, "disambig": its[0][1].get("personLabel")})
+                review.append(f"Split \u201c{name}\u201d ({div}): {len(its)} result(s) belong to a different runner with the same name ({tag}).")
             if len(clusters) > 1:
                 review.append(f"Split \u201c{name}\u201d ({div}) into {len(clusters)} runners: " + "; ".join(
                     f"{c['first']}\u2013{c['last']} (class of {', '.join(str(y) for y in sorted(set(y for y in c['cy'] if y))) or '?'})" for c in clusters))
@@ -1007,7 +1062,7 @@ def build_runners(meets):
             review.append(f"MS\u2013HS match: no MS runner with id {ms_id}; not merged.")
             continue
         for hn in sorted(hs_names):
-            cands = [p for p in hs_people if p["name"] == hn and id(p) not in merged_hs]
+            cands = [p for p in hs_people if p["name"] == hn and id(p) not in merged_hs and not p.get("tagged")]
             if not cands:
                 if hn not in hs_data.HS_NAME_ALIASES:
                     review.append(f"MS\u2013HS match: no HS runner named {hn} (for {msp['name']}); not merged.")
@@ -1069,7 +1124,9 @@ def build_runners(meets):
         listed = [e["listed"] for _, e in items if e.get("listed")]
         if len(names) > 1 or listed:
             r["aka"] = list(dict.fromkeys([n for n in names if n != name] + [n for n in listed if n != name]))
-        if p["split"]:
+        if p.get("disambig"):
+            r["disambig"] = p["disambig"]
+        elif p["split"]:
             r["disambig"] = f"{seasons[0]}" + (f"\u2013{seasons[-1]}" if seasons[-1] != seasons[0] else "")
         for m, e in items:
             e["runnerId"] = rid

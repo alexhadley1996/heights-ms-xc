@@ -7,6 +7,7 @@ Plain HTML/CSS/JS, no build step. Works on GitHub Pages as-is (`.nojekyll` inclu
 Pages: `index.html` (home, both divisions), `meets.html` (all races; filter `?div=MS|HS&level=Varsity|JV|Freshman|Open|Section|Relay&season=2010`),
 `meet.html?id=…` (one race: Heights runners or full field, team scores), `runners.html` (roster; `?div=MS|HS|both`),
 `runner.html?id=…` (one page per person: middle school and high school races, Division and Level columns, MS PB pace, HS PRs by distance),
+`results.html` (All Results: every Heights individual result, MS + HS; sort by any column, shift-click for a secondary sort; filters for division, level, seasons, grade, meet, distance, runner, PRs only, best per runner, DQs/relay legs; CSV export; the view is kept in the URL),
 `top.html` (top times, separate for HS — by distance, mostly 5K — and MS — by pace), `compare.html?r=id1,id2` (works across divisions),
 `history.html` (seasons table for both divisions + placeholders).
 Every results table is sortable: click a column heading (again to reverse).
@@ -61,6 +62,10 @@ Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); th
 - One meet page per meet: all races of a meet (varsity, JV, freshman, …) are sections of the same `meet.html?id=<meet>`
   page (`groups` in results.json). An old race id (`meet.html?id=<race id>`) redirects to its meet page, scrolled to that race
   (`#<race id>`); `raceAliases` maps renamed race ids. `SEASON_NOTES` in build_data.py adds a note to a season (2020: COVID).
+- One row per runner per race: `drop_rows` in race_notes.json removes a duplicate listing (2013 Landon Freshman: Edy McCormack,
+  Griffin Woofter); `ROW_SPLITS` in build_data.py marks a row that belongs to a different runner with the same name (brothers:
+  Robert Spence at 2019 Landon, Noah Schneider at 2016 Norwood). The build stops with an error if any runner still appears
+  twice in one race.
 - Runner merges confirmed by the team: `HS_NAME_ALIASES` (spellings), `EXTRA_MS_HS_MERGES` (MS→HS), `CONFIRMED_SAME_PERSON`
   (pages joined regardless of listed grades, e.g. all Will/William Cannon pages). Old runner ids redirect (`runnerAliases`).
 - Athlete search: the box in the header of every page (type part of a name, any spelling the runner is listed under;
@@ -86,7 +91,6 @@ Text marked “Placeholder” (home page About, History page, footer contact) st
 - Colors: school colors red and white — https://heights.edu/about/quick-facts/ ("School Color: Red"), https://en.wikipedia.org/wiki/The_Heights_School_(Maryland) and https://www.wcacsports.com/members/theheights/index ("Red / White").
 - Exact red `#841313` (and darker `#6e1010`): heights.edu theme stylesheet https://heights.edu/app/themes/heights-school/dist/styles/main_feb5b753.css (primary link/button/nav color).
 - Mascot / team name: Cavalier / Cavaliers — heights.edu Quick Facts, Wikipedia, WCAC.
-- `assets/heights-crest.svg` — https://heights.edu/app/themes/heights-school/resources/assets/images/crest.svg (unaltered)
+- Logo (provided by the team, Nov 2026): `assets/heights-logo-original.png` (red H over crossed sabers, white background). Made from it: `heights-logo.png` (transparent, red; footer), `heights-logo-white.png` (transparent, white; red header and home banner), favicons `favicon.ico` (16/32/48), `favicon-16/32/48.png`, `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` (`site.webmanifest`). The school crest is no longer used.
 - `assets/heights-men-fully-alive.svg` — https://heights.edu/app/themes/heights-school/resources/assets/images/mfa.svg (unaltered, not currently used)
-- `assets/favicon-32.png`, `icon-192.png`, `apple-touch-icon.png` — heights.edu site icons https://heights.edu/app/uploads/2019/10/cropped-Admiss6-{32x32,192x192,180x180}.png (unaltered)
 - Fonts on heights.edu: Adobe Garamond SC (self-hosted) and Typekit `tablet-gothic` / `adobe-garamond-pro` (licensed). This site uses free EB Garamond (Google Fonts) in small caps as a stand-in, plus system sans-serif.
