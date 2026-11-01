@@ -779,6 +779,10 @@ def main(path):
     runners, review = build_runners(meets)
     write_outputs(meets, runners, review, quirks)
     ms = [m for m in meets if m["division"] == "MS"]
+    gs = collections.Counter(m["division"] for m in meets if m["group"] == m["id"] or True)
+    ng = collections.Counter((m["division"], m["group"]) for m in meets)
+    print(f"Meet pages: {len(ng)} ({sum(1 for d, _ in ng if d == 'HS')} HS, {sum(1 for d, _ in ng if d == 'MS')} MS) for {len(meets)} races; "
+          f"{len(build_runners.aliases)} old runner ids redirect")
     print(f"MS: {len(ms)} races ({sum(m['origin'] == 'online' for m in ms)} from online), "
           f"{sum(1 for r in runners if r['ms'])} Heights runners, {sum(m['heightsCount'] for m in ms)} Heights finishes")
     hs = [m for m in meets if m["division"] == "HS"]
@@ -815,6 +819,51 @@ def slim_scoring(m):
     return out
 
 
+LEVEL_ORDER = {"Varsity": 0, "JV": 1, "Freshman": 2, "Open": 3, "Section": 4, "Relay": 5}
+# The same meet listed under two names (one race from racecast, one from mocorunning)
+MEET_GROUP_ALIASES = {(2011, "MD-DC Private School Championships"): "Maryland & DC Private School Championships"}
+SEASON_NOTES = {2020: "2020 was the COVID-19 season: most invitationals and championships were cancelled, and teams ran "
+                      "small dual or tri meets with few or no published results, so very few races are on record."}
+
+
+def assign_groups(meets):
+    """One meet page per meet: races of the same meet, date (or weekend) and division share a group.
+    Returns the group list; each race gets m["group"] (a one-race meet keeps its race id as the group id)."""
+    buckets = collections.defaultdict(list)
+    for m in meets:
+        if m["division"] == "HS":
+            name = MEET_GROUP_ALIASES.get((m["season"], m["meetName"]), m["meetName"])
+            key = ("HS", m["season"], name)
+        else:
+            name = re.sub(r"\s*\((open|b) race\)\s*$", "", m["name"], flags=re.I).strip()
+            key = ("MS", m["season"], name, m.get("date") or m["id"])
+        buckets[key].append(m)
+    race_ids = {m["id"] for m in meets}
+    groups, used = [], set()
+    for key, ms in buckets.items():
+        div, season, name = key[0], key[1], key[2]
+        ms.sort(key=lambda m: (LEVEL_ORDER.get(m.get("level"), 9) if div == "HS" else (m["name"] != name), m["order"]))
+        if len(ms) == 1:
+            gid = ms[0]["id"]
+        elif div == "MS":
+            gid = ms[0]["id"]  # the main race's id: its old links already land on this page
+        else:
+            gid = slug(f"hs-{season}-{name}")
+            while gid in race_ids or gid in used:
+                gid += "-meet"
+        used.add(gid)
+        dates = sorted({m["date"] for m in ms if m.get("date")})
+        g = {"id": gid, "season": season, "division": div, "name": name, "date": dates[0] if dates else None,
+             "endDate": dates[-1] if len(dates) > 1 else None, "dateLabel": ms[0].get("dateLabel"),
+             "location": next((m["location"] for m in ms if m.get("location")), None),
+             "order": min(m["order"] for m in ms), "races": [m["id"] for m in ms],
+             "levels": list(dict.fromkeys(m.get("level") for m in ms))}
+        for m in ms:
+            m["group"] = gid
+        groups.append({k: v for k, v in g.items() if v is not None})
+    return sorted(groups, key=lambda g: -g["order"])
+
+
 def write_outputs(meets, runners, review, quirks):
     out = os.path.join(ROOT, "data")
     fdir = os.path.join(out, "races")
@@ -822,6 +871,7 @@ def write_outputs(meets, runners, review, quirks):
     for f in os.listdir(fdir):
         if f.endswith(".js"):
             os.remove(os.path.join(fdir, f))
+    groups = assign_groups(meets)
     core = []
     for m in sorted(meets, key=lambda m: -m["order"]):
         field = {"results": [{k: v for k, v in e.items() if v not in (None, False) or k in ("place", "time")} for e in m["results"]],
@@ -830,7 +880,7 @@ def write_outputs(meets, runners, review, quirks):
             field["relay"] = m["relay"]
         with open(os.path.join(fdir, f"{m['id']}.js"), "w") as f:
             f.write(f"(window.XC_FIELD = window.XC_FIELD || {{}})[{json.dumps(m['id'])}] = " + json.dumps(field, separators=(",", ":")) + ";\n")
-        c = {k: v for k, v in m.items() if k not in ("results", "scoring", "relay", "csv") and v not in (None, False, [], "")}
+        c = {k: v for k, v in m.items() if k not in ("results", "scoring", "relay", "csv", "aliasIds") and v not in (None, False, [], "")}
         if c.get("notes"):
             c.pop("note", None)  # HS races: the list of notes replaces the joined text
         c["scoring"] = slim_scoring(m)
@@ -839,6 +889,10 @@ def write_outputs(meets, runners, review, quirks):
         "generated": datetime.date.today().isoformat(),
         "source": "Google Sheet \u201cHeights MS XC Results\u201d (middle school), races found on racecast.co / Athletic.net / mocorunning.com (middle school), and high school results from racecast.co and mocorunning.com (data/hs)",
         "meets": core,
+        "groups": groups,
+        "seasonNotes": SEASON_NOTES,
+        "runnerAliases": getattr(build_runners, "aliases", {}),
+        "raceAliases": {a: m["id"] for m in meets for a in (m.get("aliasIds") or []) if a != m["id"]},
         "runners": sorted(runners, key=lambda r: (r["name"].split()[-1], r["name"], r["seasons"][0])),
         "identityReview": review,
         "quirks": EXTRA_NOTES + sorted(set(quirks)),
@@ -969,6 +1023,23 @@ def build_runners(meets):
     runners = []
     grade_log = {"filled": 0, "conflicts": [], "unresolved": 0}
     persons = [p for p in people if p["div"] == "MS"] + [p for p in hs_people if id(p) not in merged_hs]
+    by_pid = {}
+    for p in persons:
+        by_pid.setdefault(p["id"], p)
+    for grp in hs_data.CONFIRMED_SAME_PERSON:
+        prim = by_pid.get(grp[0])
+        if not prim:
+            review.append(f"Confirmed merge: no runner with id {grp[0]}; not merged.")
+            continue
+        for oid in grp[1:]:
+            o = by_pid.get(oid)
+            if not o or o is prim:
+                review.append(f"Confirmed merge: no runner with id {oid} (for {grp[0]}); skipped.")
+                continue
+            prim.setdefault("hsParts", []).extend([{**o, "hsParts": []}] + o.get("hsParts", []))
+            persons.remove(o)
+        prim["split"] = False
+    aliases = {}
     for p in persons:
         items = list(p["items"])
         names = collections.Counter({p["name"]: len(p["items"])})
@@ -979,6 +1050,15 @@ def build_runners(meets):
         if p["div"] == "HS" and rid in taken:
             rid = slug(f"{p['name']}-hs")
         taken.add(rid)
+        for hp in p.get("hsParts", []):  # old page ids of the joined parts redirect here
+            for old_id in (hp["id"], slug(f"{hp['name']}-hs")):
+                if old_id != rid:
+                    aliases.setdefault(old_id, rid)
+        dup = collections.Counter(m["id"] for m, _ in items)
+        for mid, n in dup.items():
+            if n > 1:
+                review.append(f"After merging, {p['name']} has {n} results in the same race ({mid}): "
+                              + "; ".join(f"{e['name']} {e['time']} (place {e['place']})" for m, e in items if m["id"] == mid) + ". All kept.")
         # the name he's listed under most (an HS full name usually wins over an MS short form)
         name = max(names, key=lambda n: (names[n], len(n)))
         infer_grades(name, items, grade_log)
@@ -986,8 +1066,9 @@ def build_runners(meets):
         r = {"name": name, "id": rid, "seasons": seasons, "results": [],
              "ms": sorted({m["season"] for m, _ in items if m["division"] == "MS"}),
              "hs": sorted({m["season"] for m, _ in items if m["division"] == "HS"})}
-        if len(names) > 1:
-            r["aka"] = [n for n in names if n != name]
+        listed = [e["listed"] for _, e in items if e.get("listed")]
+        if len(names) > 1 or listed:
+            r["aka"] = list(dict.fromkeys([n for n in names if n != name] + [n for n in listed if n != name]))
         if p["split"]:
             r["disambig"] = f"{seasons[0]}" + (f"\u2013{seasons[-1]}" if seasons[-1] != seasons[0] else "")
         for m, e in items:
@@ -997,8 +1078,13 @@ def build_runners(meets):
                  "time": e["time"], "secs": e["secs"], "pace": e["pace"], "paceSecs": e["paceSecs"],
                  "suspect": e.get("suspect", False), "teamPlace": e.get("teamPlace"),
                  "paceCalc": e.get("paceCalc", False), "origin": m["origin"], "added": e.get("added", False)}
-            if e["name"] != name:
+            if e.get("listed") and e["listed"] != name:
+                x["as"] = e["listed"]
+            elif e["name"] != name:
                 x["as"] = e["name"]
+            if e.get("dq"):
+                x["dq"] = True
+                x["note"] = e.get("note")
             if e.get("relay"):
                 x["relay"] = e["relay"]
             r["results"].append({k: v for k, v in x.items() if v not in (None, False) or k in ("place", "time")})
@@ -1031,6 +1117,8 @@ def build_runners(meets):
     review += case_merges
     review.append(f"Grades inferred for {grade_log['filled']} Heights results; {grade_log['unresolved']} still unknown.")
     review += grade_log["conflicts"]
+    ids = {r["id"] for r in runners}
+    build_runners.aliases = {k: v for k, v in aliases.items() if k not in ids}
     return runners, review
 
 

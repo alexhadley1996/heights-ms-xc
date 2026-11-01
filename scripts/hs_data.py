@@ -27,9 +27,13 @@ HS_NAME_ALIASES = {
     "Creegan Cahill": "Cregan Cahill",
     "Gregan Cahill": "Cregan Cahill",
     "Gregory Lipovsky": "Greg Lipovsky",
+    # confirmed by the team (Oct 2026)
+    "Nick O'Neill": "Nicholas O'Neil",
+    "Nicholas Monaghan": "Nicholas Monahan",
+    "Nick Morahan": "Nicholas Monahan",
 }
 # Listed in hs_name_variants.csv but kept separate: each is also a "needs confirmation" MS-HS pair.
-NOT_MERGED = ["Nicholas Monaghan", "Nick Morahan", "Nick O'Neill"]
+NOT_MERGED = []  # all earlier "possible same runner" pairs were confirmed by the team (Oct 2026) and merged
 
 # Same-name HS runners that really are two people (both "Will Cannon": class of 2025, also listed as William
 # Cannon, and class of 2027), so they are never re-joined despite never racing on the same day.
@@ -141,7 +145,20 @@ RELAY_NAME_FIX = {"Tim Hadley": "Timothy Hadley", "Tim Vaughn": "Timothy Vaughan
 # To merge a "needs confirmation" pair once it's confirmed, add ONE line here, e.g.
 #   "nick-monahan": "Nicholas Monaghan",
 EXTRA_MS_HS_MERGES = {
+    # confirmed by the team (Oct 2026)
+    "anthony-giantino": "Anthony Giuntini",
+    "tomoyo-kanno": "Tamoya Kano",
+    "luca-tocci": "Lucca Tocci",
+    "steven-mccreary": "Stephen McCreary",
+    "david-krohn": "David Krohn",
 }
+
+# Runner pages to join into one person regardless of the listed grades (ids as the build would otherwise make them;
+# the first id is kept, the others redirect to it). Confirmed by the team (Oct 2026): every Will / William Cannon
+# result is the same runner, even though the listed grades point to two different class years.
+CONFIRMED_SAME_PERSON = [
+    ["william-cannon", "will-cannon-2022", "will-cannon-2024", "will-cannon"],
+]
 
 ROMAN = {"II", "III", "IV", "V", "VI"}
 
@@ -268,6 +285,7 @@ def entry(row, grade_fix):
         if new != name:
             e["note"] = f"Listed as \u201c{raw}\u201d"
             e["name"] = new
+            e["listed"] = name
         elif name != raw:
             e["note"] = f"Listed as \u201c{raw}\u201d"
         if raw in grade_fix:
@@ -328,11 +346,21 @@ def build_hs_meets(quirks):
     for s in rows:
         base = os.path.basename(s["CSV"])
         field = [entry(r, gfix.get(base, {})) for r in csv.DictReader(open(os.path.join(HS, "races", base), encoding="utf-8"))]
+        for x in notes.get("extra_rows", {}).get(base, []):  # e.g. a DQ the source lists apart from the finishers
+            e = entry(x, {})
+            e["note"] = x.get("note") or e.get("note")
+            if e["time"] == "DQ":
+                e["dq"] = True
+            field.append(e)
         level, label, lnote = level_of(s)
+        lov = notes.get("level_overrides", {}).get(base)
+        old_short = race_short(s, level, label) if lov else None
+        if lov:
+            level, label, lnote = lov["level"], lov["label"], lov["note"]
         metres, miles, dkey = parse_distance(s["Distance"])
         season = int(s["Season"])
         meet = re.sub(r"^\d{4}\s+", "", s["Meet"]).strip()
-        short = race_short(s, level, label)
+        short = lov["short"] if lov else race_short(s, level, label)
         rn = list(rnotes.get(base, []))
         if lnote:
             rn.insert(0, lnote)
@@ -399,6 +427,7 @@ def build_hs_meets(quirks):
             "source": {"name": src_name, "url": src_url, "original": s["OriginalSource"] or None},
             "correction": None, "note": " ".join(rn) or None, "notes": rn, "completeness": s["Completeness"],
             "teamScoreStatus": status, "csv": base, "_tabOrder": 0, "doubled": meta_doubled,
+            "aliasIds": [B.slug(f"hs-{season}-{meet}-{old_short}")] if lov else None,
         }
         if level == "Relay":
             pending.append((meta, field, None)); continue

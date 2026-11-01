@@ -19,12 +19,21 @@
   const dash = '<span class="muted">—</span>';
   const v = x => (x === null || x === undefined || x === "") ? dash : esc(x);
   const ord = n => { if (typeof n !== "number") return esc(n); const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
-  const meetLink = m => `meet.html?id=${encodeURIComponent(m.id)}`;
+  // one meet page per meet (group of races); a race link points at its section on that page
+  const groups = D.groups || [];
+  const groupsById = Object.fromEntries(groups.map(g => [g.id, g]));
+  const groupOf = m => groupsById[m.group] || { id: m.id, races: [m.id], name: m.name, season: m.season, division: m.division, date: m.date, levels: [m.level], order: m.order };
+  const gRaces = g => g.races.map(id => meetsById[id]).filter(Boolean);
+  const groupLink = g => `meet.html?id=${encodeURIComponent(g.id)}`;
+  const meetLink = m => { const g = groupOf(m); return groupLink(g) + (g.races.length > 1 ? "#" + encodeURIComponent(m.id) : ""); };
   const runnerHref = r => `runner.html?id=${encodeURIComponent(r.id)}`;
   const runnerLink = e => { const r = (typeof e === "object" && e.runnerId && runnersById[e.runnerId]) || runnersByName[typeof e === "object" ? e.name : e]; return r ? runnerHref(r) : null; };
   const rName = r => r.name + (r.disambig ? ` (${r.disambig})` : "");
   const dl = m => m.date ? new Date(m.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : (m.dateLabel || "");
   const meetTitle = m => `${m.season} ${m.name}${dl(m) ? " (" + dl(m) + ")" : ""}`;
+  const gDate = g => g.date ? (dl(g) + (g.endDate && g.endDate !== g.date ? "–" + new Date(g.endDate + "T12:00:00").toLocaleDateString("en-US", g.endDate.slice(5, 7) === g.date.slice(5, 7) ? { day: "numeric" } : { month: "short", day: "numeric" }) : "")) : (g.dateLabel || "");
+  const gTitle = g => `${g.season} ${g.name}${gDate(g) ? " (" + gDate(g) + ")" : ""}`;
+  const raceLabel = m => isHS(m) ? (m.level === "Relay" || m.levelLabel === m.name.split(" – ").slice(-1)[0] ? m.levelLabel : `${m.levelLabel} · ${m.name.split(" – ").slice(-1)[0]}`) : m.name;
   const isHS = m => m.division === "HS";
   const divTag = m => `<span class="div-tag ${m.division === "HS" ? "hs" : "ms"}" title="${DIVS[m.division]}">${m.division}</span>`;
   const lvlTag = m => isHS(m) ? `<span class="lvl lvl-${esc(m.level.toLowerCase())}" title="Level: ${esc(m.level)}">${esc(m.levelLabel)}</span>` : "";
@@ -49,6 +58,12 @@
   }));
   Object.values(hByMeet).forEach(a => a.sort((p, q) => (typeof p.place === "number" ? p.place : 1e9) - (typeof q.place === "number" ? q.place : 1e9) || (p.relay?.leg || 0) - (q.relay?.leg || 0)));
   const heightsOf = m => hByMeet[m.id] || [];
+  const gRunners = g => new Set(gRaces(g).flatMap(m => heightsOf(m).map(e => e.runnerId))).size;
+  const gMain = g => gRaces(g).find(m => heightsTeam(m)) || gRaces(g)[0];  // first race (varsity first) with a Heights team score
+  const gChrono = (a, b) => a.season - b.season || a.order - b.order;
+  const gLevelTags = g => { const rs = gRaces(g); return rs.length === 1 && !isHS(rs[0]) ? "" : rs.map(m => isHS(m) ? `<span class="lvl lvl-${esc(m.level.toLowerCase())}" title="${esc(raceLabel(m))}">${esc(m.levelLabel)}</span>` : `<span class="lvl lvl-open" title="${esc(m.name)}">${esc((m.name.match(/\((.+?)\)\s*$/) || [, "Main race"])[1])}</span>`).join(" "); };
+  const raceShort = m => isHS(m) ? (m.level === "Relay" || m.levelLabel === m.name.split(" – ").slice(-1)[0] ? "" : m.name.split(" – ").slice(-1)[0]) : m.name;
+  const seasonNote = s => (D.seasonNotes || {})[s];
   const heightsTeam = m => (m.scoring?.heights || [])[0];
   const teamCount = m => m.scoring?.teamCount || 0;
   const teamText = (m, t) => `${ord(t.place)} of ${teamCount(m)}`;
@@ -119,7 +134,50 @@
     <header class="site"><div class="wrap">
       <a class="brand" href="index.html"><img src="assets/heights-crest.svg" alt="The Heights School crest"><span class="bt"><span class="school">The Heights School</span><span class="team">Heights Cross Country</span></span></a>
       <nav class="main">${nav.map(([h, t, k]) => `<a href="${h}" class="${k === activeKey ? "active" : ""}">${t}</a>`).join("")}</nav>
+      <div class="athlete-search" role="search"><input type="search" id="athleteSearch" placeholder="Find a runner…" aria-label="Find a runner" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="athleteList"><ul id="athleteList" role="listbox" hidden></ul></div>
     </div></header>`);
+  // header athlete search: type-ahead over runner names and their "listed as" spellings, all client-side
+  (function () {
+    const norm = t => String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]+/g, "");
+    const yrs = r => r.seasons.length ? (r.seasons[0] === r.seasons[r.seasons.length - 1] ? `${r.seasons[0]}` : `${r.seasons[0]}–${r.seasons[r.seasons.length - 1]}`) : "";
+    const divs = r => [r.ms?.length ? "MS" : "", r.hs?.length ? "HS" : ""].filter(Boolean).join("/");
+    const idx = D.runners.map(r => ({ r, keys: [r.name, ...(r.aka || [])].map(n => ({ n, k: norm(n) })) }));
+    const inp = document.getElementById("athleteSearch"), list = document.getElementById("athleteList");
+    let items = [], sel = -1;
+    const close = () => { list.hidden = true; inp.setAttribute("aria-expanded", "false"); sel = -1; };
+    const go = r => { location.href = runnerHref(r); };
+    const render = () => {
+      const q = norm(inp.value.trim());
+      if (!q) { items = []; close(); return; }
+      const words = q.split(" ").filter(Boolean);
+      const scored = [];
+      idx.forEach(({ r, keys }) => {
+        let best = null;
+        keys.forEach(({ n, k }, i) => {
+          if (!words.every(w => k.split(" ").some(p => p.startsWith(w)) || k.includes(w))) return;
+          const sc = (k.startsWith(q) ? 0 : k.split(" ").some(p => p.startsWith(words[0])) ? 1 : 2) + (i ? 0.5 : 0);
+          if (!best || sc < best.sc) best = { sc, via: i ? n : null };
+        });
+        if (best) scored.push({ r, ...best });
+      });
+      scored.sort((a, b) => a.sc - b.sc || a.r.name.localeCompare(b.r.name));
+      items = scored.slice(0, 10); sel = items.length ? 0 : -1;
+      list.innerHTML = items.length ? items.map((x, i) => `<li role="option" data-i="${i}" class="${i === sel ? "on" : ""}" aria-selected="${i === sel}"><b>${esc(rName(x.r))}</b> <span class="muted">· ${divs(x.r)} · ${yrs(x.r)}</span>${x.via ? `<span class="via">listed as ${esc(x.via)}</span>` : ""}</li>`).join("") + (scored.length > 10 ? `<li class="more muted">${scored.length - 10} more — <a href="runners.html?q=${encodeURIComponent(inp.value.trim())}">see all</a></li>` : "")
+        : '<li class="more muted">No runner matches</li>';
+      list.hidden = false; inp.setAttribute("aria-expanded", "true");
+    };
+    const hl = () => [...list.querySelectorAll("li[data-i]")].forEach((li, i) => { li.classList.toggle("on", i === sel); li.setAttribute("aria-selected", i === sel); });
+    inp.addEventListener("input", render);
+    inp.addEventListener("focus", () => { if (inp.value.trim()) render(); });
+    inp.addEventListener("keydown", e => {
+      if (e.key === "ArrowDown" && items.length) { e.preventDefault(); sel = (sel + 1) % items.length; hl(); }
+      else if (e.key === "ArrowUp" && items.length) { e.preventDefault(); sel = (sel - 1 + items.length) % items.length; hl(); }
+      else if (e.key === "Enter" && sel >= 0 && items[sel]) { e.preventDefault(); go(items[sel].r); }
+      else if (e.key === "Escape") close();
+    });
+    list.addEventListener("mousedown", e => { const li = e.target.closest("li[data-i]"); if (li) { e.preventDefault(); go(items[+li.dataset.i].r); } });
+    document.addEventListener("click", e => { if (!e.target.closest(".athlete-search")) close(); });
+  })();
   document.body.insertAdjacentHTML("beforeend", `
     <footer><div class="wrap"><img src="assets/heights-crest.svg" alt=""><div>Middle school results come from the team's results spreadsheet plus results posted online (racecast.co, Athletic.net, mocorunning.com); high school results come from racecast.co and mocorunning.com. Data refreshed ${esc(D.generated)}.
     Highlighted rows are Heights runners. Spot an error or have an old result sheet? <!-- PLACEHOLDER: contact info -->[Contact placeholder]</div></div></footer>`);
@@ -162,6 +220,16 @@
       <div class="meta"><span>${distText(m)}</span><span>${m.heightsCount} Heights runners</span><span>${m.fieldSize} ${m.level === "Relay" ? "teams" : "total"} in field</span>${t ? `<span><b>Team: ${ord(t.place)} of ${t.of}</b> (${t.score} pts)</span>` : ""}</div>
       <ul class="top3">${h.map(e => `<li><span>${e.relay ? `${esc(e.name)} <span class="muted">(leg${e.relay.leg ? " " + e.relay.leg : ""})</span>` : `${e.hplace}. ${esc(e.name)}`}</span><span>${esc(e.time)}</span></li>`).join("")}</ul></a>`;
   }
+  function groupCard(g) {
+    const rs = gRaces(g), m0 = gMain(g), t = m0 ? teamOf(m0) : null;
+    if (rs.length === 1) return meetCard(rs[0]);
+    const h = heightsOf(m0).filter(e => e.secs).slice(0, 3);
+    return `<a class="card meet-card ${g.division === "HS" ? "hs" : "ms"}" href="${groupLink(g)}">
+      <div class="season">${divTag(g)} ${g.season}${gDate(g) ? " · " + esc(gDate(g)) : ""}</div>
+      <h3>${esc(g.name)}</h3><div class="race-line">${gLevelTags(g)}</div>
+      <div class="meta"><span>${rs.length} races</span><span>${gRunners(g)} Heights runners</span>${t ? `<span><b>${esc(isHS(m0) ? m0.levelLabel : "Team")}: ${ord(t.place)} of ${t.of}</b> (${t.score} pts)</span>` : ""}</div>
+      <ul class="top3">${h.map(e => `<li><span>${e.hplace}. ${esc(e.name)}${isHS(m0) ? ` <span class="muted">${esc(m0.levelLabel)}</span>` : ""}</span><span>${esc(e.time)}</span></li>`).join("")}</ul></a>`;
+  }
   const places = x => x.map(p => `<span class="pl" title="${esc(p.name)} · ${ord(p.overall)} overall · ${esc(p.time)}">${p.place}</span>`).join("");
 
   function scoringBlock(m, F) {
@@ -180,7 +248,7 @@
     const body = st.map((t, k) => `<tr class="${t.heights ? "heights" : ""}${k >= 10 && !t.heights ? " extra" : ""}">${td(t.rank, t.rank, "num")}${td(`<b>${esc(t.team)}</b>${t.tieNote ? ` <span class="badge ghost" title="${esc(t.tieNote)}">tie</span>` : ""}`, t.team)}${td(`<b>${t.score}</b>`, t.score, "num")}${td(places(t.scorers), t.scorers[0].place, "places")}${td(t.displacers.length ? places(t.displacers) : dash, t.displacers[0]?.place, "places hide-sm")}${td(esc(t.teamTime), parseT(t.teamTime), "num t hide-sm")}${td(esc(t.avgTime), parseT(t.avgTime), "num hide-sm")}${td(t.finishers, t.finishers, "num hide-sm")}${offCell(t)}</tr>`).join("");
     return `<section class="scores"><h2>Team scores</h2>
       ${table(th("#", "num") + th("Team") + th("Score", "num") + th("Top 5 (team places)") + th("6th / 7th", "hide-sm") + th("Top-5 time", "num hide-sm") + th("Avg", "num hide-sm") + th("Finishers", "num hide-sm") + (of ? th("Official", "num hide-sm") : ""), body, 'data-default-sort="0"')}
-      <div class="toolbar small">${st.length > 10 ? `<button class="btn ghost small" id="moreTeams" data-n="${st.length}">Show all ${st.length} teams</button>` : ""}${chk}</div>${why}${cav}${notes}
+      <div class="toolbar small">${st.length > 10 ? `<button class="btn ghost small moreTeams" data-n="${st.length}">Show all ${st.length} teams</button>` : ""}${chk}</div>${why}${cav}${notes}
       <p class="note">Calculated by this site from the listed finishers${of ? " and checked against the official team scores (Official column)" : "; no official team scores were found for this race, so they may differ from the meet's"}. ${rule}</p></section>`;
   }
   // High school races with official scores: the official standings come first; the site's own calculation is the crosscheck.
@@ -191,7 +259,7 @@
     const body = rows.map(({ o, t }, k) => `<tr class="${(o?.heights || t?.heights) ? "heights" : ""}${k >= 10 && !(o?.heights || t?.heights) ? " extra" : ""}">${td(o ? o.place : dash, o ? o.place : "", "num")}${td(`<b>${esc(o ? o.team : t.team)}</b>${!o ? ' <span class="badge ghost" title="Has 5+ finishers in the listed results but isn\'t in the official team scores">not in official</span>' : ""}`, o ? o.team : t.team)}${td(o ? `<b>${o.score}</b>` : dash, o ? o.score : "", "num")}${td(t ? `${ord(t.rank)} · ${t.score}${o ? (o.match ? ' <span class="ok-mark" title="Calculated place and score match the official">✓</span>' : ' <span class="bad-mark" title="Calculated score differs from the official">≠</span>') : ""}` : dash, t ? t.score : "", "num")}${td(t ? places(t.scorers) : dash, t ? t.scorers[0].place : "", "places hide-sm")}${td(t && t.displacers.length ? places(t.displacers) : dash, t?.displacers[0]?.place, "places hide-sm")}${td(t ? esc(t.teamTime) : dash, t ? parseT(t.teamTime) : "", "num t hide-sm")}${td(t ? t.finishers : dash, t?.finishers, "num hide-sm")}</tr>`).join("");
     return `<section class="scores"><h2>Team scores</h2>
       ${table(th("Place", "num") + th("Team") + th("Official score", "num") + th('<span title="Calculated by this site from the listed finishers">Calculated</span>', "num") + th("Top 5 (team places)", "hide-sm") + th("6th / 7th", "hide-sm") + th("Top-5 time", "num hide-sm") + th("Finishers", "num hide-sm"), body, 'data-default-sort="0"')}
-      <div class="toolbar small">${rows.length > 10 ? `<button class="btn ghost small" id="moreTeams" data-n="${rows.length}">Show all ${rows.length} teams</button>` : ""}${chk}</div>${why}${cav}
+      <div class="toolbar small">${rows.length > 10 ? `<button class="btn ghost small moreTeams" data-n="${rows.length}">Show all ${rows.length} teams</button>` : ""}${chk}</div>${why}${cav}
       <p class="note">Place and score are the official team results published by the meet (<a href="${esc(of.source)}" target="_blank" rel="noopener">source</a>). “Calculated” is this site's own tally from the listed finishers, as a crosscheck: ✓ = same place and score, ≠ = different. Meets often have their own rules (team size limits, non-scoring runners, finishers missing from the posted results), so differences are common. ${rule}</p></section>`;
   }
   function relayBlock(m, F) {
@@ -200,7 +268,7 @@
     const body = teams.map((t, k) => `<tr class="${t.heights ? "heights" : ""}${k >= 15 && !t.heights ? " extra" : ""}">${td(v(t.place), t.place, "num")}${td(`<b>${esc(t.team)}</b>`, t.team)}${td(v(t.time), t.secs, "num t")}${td(legs(t), "", "legs")}</tr>`).join("");
     return `<section class="scores"><h2>Relay results</h2>
       ${table(th("Place", "num") + th("Team") + th("Time", "num") + th(R.twoMan ? "Runners" : "Legs (leg · runner · split)"), body, 'data-default-sort="0"')}
-      <div class="toolbar small">${teams.length > 15 ? `<button class="btn ghost small" id="moreTeams" data-n="${teams.length}">Show all ${teams.length} teams</button>` : ""}</div>
+      <div class="toolbar small">${teams.length > 15 ? `<button class="btn ghost small moreTeams" data-n="${teams.length}">Show all ${teams.length} teams</button>` : ""}</div>
       <p class="note">Relay legs don't count toward personal records or the Top Times lists.</p></section>`;
   }
 
@@ -208,6 +276,7 @@
   const finishes = ms => ms.reduce((a, m) => a + m.heightsCount, 0);
   const nRunners = div => D.runners.filter(r => (div === "MS" ? r.ms : r.hs)?.length).length;
   const nBoth = D.runners.filter(r => r.ms?.length && r.hs?.length).length;
+  const GMS = groups.filter(g => g.division === "MS"), GHS = groups.filter(g => g.division === "HS");
   const pages = {
     home() {
       const lHS = seasonsOf(HS)[0], lMS = seasonsOf(MS)[0];
@@ -219,30 +288,30 @@
         <p>Race-by-race results for Heights runners: middle school from ${seasonsOf(MS).slice(-1)[0]} and high school from ${seasonsOf(HS).slice(-1)[0]}, through ${seasons[0]}.</p>
         <div class="stats">
           <div class="stat"><b>${seasons.length}</b><span>seasons on record</span></div>
-          <div class="stat"><b>${D.meets.length}</b><span>races · ${MS.length} MS · ${HS.length} HS</span></div>
+          <div class="stat"><b>${groups.length}</b><span>meets · ${D.meets.length} races</span></div>
           <div class="stat"><b>${D.runners.length}</b><span>Heights runners · ${nBoth} ran both</span></div>
           <div class="stat"><b>${finishes(D.meets)}</b><span>Heights finishes</span></div>
         </div>
       </div></div></section>
       <div class="wrap">
         <div class="div-cols">
-          <a class="card meet-card div-card" href="meets.html?div=HS"><div class="season">${divTag({ division: "HS" })} High school</div><h3>${HS.length} races · ${seasonsOf(HS).length} seasons</h3><div class="meta"><span>${nRunners("HS")} runners</span><span>${finishes(HS)} finishes</span><span>Varsity, JV, freshman, open and relay races</span></div></a>
-          <a class="card meet-card div-card" href="meets.html?div=MS"><div class="season">${divTag({ division: "MS" })} Middle school</div><h3>${MS.length} races · ${seasonsOf(MS).length} seasons</h3><div class="meta"><span>${nRunners("MS")} runners</span><span>${finishes(MS)} finishes</span><span>From the team's results sheet plus results posted online</span></div></a>
+          <a class="card meet-card div-card" href="meets.html?div=HS"><div class="season">${divTag({ division: "HS" })} High school</div><h3>${GHS.length} meets · ${HS.length} races · ${seasonsOf(HS).length} seasons</h3><div class="meta"><span>${nRunners("HS")} runners</span><span>${finishes(HS)} finishes</span><span>Varsity, JV, freshman, open and relay races</span></div></a>
+          <a class="card meet-card div-card" href="meets.html?div=MS"><div class="season">${divTag({ division: "MS" })} Middle school</div><h3>${GMS.length} meets · ${MS.length} races · ${seasonsOf(MS).length} seasons</h3><div class="meta"><span>${nRunners("MS")} runners</span><span>${finishes(MS)} finishes</span><span>From the team's results sheet plus results posted online</span></div></a>
         </div>
         <h2>${lHS} high school season</h2>
-        <div class="grid">${HS.filter(m => m.season === lHS).sort(chrono).map(meetCard).join("")}</div>
+        <div class="grid">${GHS.filter(g => g.season === lHS).sort(gChrono).map(groupCard).join("")}</div>
         <h2>${lMS} middle school season</h2>
-        <div class="grid">${MS.filter(m => m.season === lMS).sort(chrono).map(meetCard).join("")}</div>
+        <div class="grid">${GMS.filter(g => g.season === lMS).sort(gChrono).map(groupCard).join("")}</div>
         <h2>About the team</h2>
         <div class="placeholder"><strong>Placeholder — team overview</strong>Add a short introduction to the program here (coaches, practice, how to join). Nothing has been filled in yet.</div>
         <h2>All seasons</h2>
-        <div class="grid">${seasons.map(s => { const hs = HS.filter(m => m.season === s), ms = MS.filter(m => m.season === s).sort(chrono); return `<a class="card meet-card" href="meets.html?season=${s}"><div class="season">Season</div><h3>${s}</h3><div class="meta">${hs.length ? `<span>${divTag({ division: "HS" })} ${hs.length} race${hs.length > 1 ? "s" : ""} · ${finishes(hs)} finishes</span>` : ""}${ms.length ? `<span>${divTag({ division: "MS" })} ${ms.length} race${ms.length > 1 ? "s" : ""}</span>` : ""}</div><ul class="top3">${ms.map(m => `<li><span>${esc(m.name)}${dl(m) ? " · " + esc(dl(m)) : ""}</span><span class="muted cnt" title="Heights runners in this race">${m.heightsCount} runners</span></li>`).join("")}${hs.length ? `<li><span class="muted">High school: ${esc([...new Set(hs.sort(chrono).map(m => m.meetName))].slice(0, 6).join(", "))}${new Set(hs.map(m => m.meetName)).size > 6 ? "…" : ""}</span></li>` : ""}</ul></a>`; }).join("")}</div>
+        <div class="grid">${seasons.map(s => { const hs = HS.filter(m => m.season === s), ms = MS.filter(m => m.season === s).sort(chrono); return `<a class="card meet-card" href="meets.html?season=${s}"><div class="season">Season</div><h3>${s}</h3><div class="meta">${hs.length ? `<span>${divTag({ division: "HS" })} ${GHS.filter(g => g.season === s).length} meet${GHS.filter(g => g.season === s).length > 1 ? "s" : ""} · ${hs.length} race${hs.length > 1 ? "s" : ""}</span>` : ""}${ms.length ? `<span>${divTag({ division: "MS" })} ${ms.length} race${ms.length > 1 ? "s" : ""}</span>` : ""}</div>${seasonNote(s) ? `<p class="note season-note">${esc(seasonNote(s))}</p>` : ""}<ul class="top3">${GMS.filter(g => g.season === s).sort(gChrono).map(g => `<li><span>${esc(g.name)}${gDate(g) ? " · " + esc(gDate(g)) : ""}</span><span class="muted cnt" title="Heights runners at this meet">${gRunners(g)} runners</span></li>`).join("")}${hs.length ? `<li><span class="muted">High school: ${esc([...new Set(hs.sort(chrono).map(m => m.meetName))].slice(0, 6).join(", "))}${new Set(hs.map(m => m.meetName)).size > 6 ? "…" : ""}</span></li>` : ""}</ul></a>`; }).join("")}</div>
         <p class="note">${missingSeasons(MS).length ? `No middle school results found yet for ${missingSeasons(MS).join(", ")}. ` : ""}${missingSeasons(HS).length ? `No high school results found yet for ${missingSeasons(HS).join(", ")}. ` : ""}Middle school races marked “online results” aren't in the team's results sheet; they come from results posted on racecast.co / Athletic.net / mocorunning.com and link their source. All high school results come from racecast.co and mocorunning.com.</p>
       </div>`;
     },
     meets() {
       const st = { div: qs("div") || "", level: qs("level") || "", season: qs("season") || (location.hash.match(/^#s(\d{4})$/) || [])[1] || "", q: "", view: qs("view") || "cards" };
-      $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Meets</h1><div class="sub">Every race on record, in date order. Middle school: the team's results sheet plus races found in results posted online (marked “online results”). High school: varsity, JV, freshman, open and relay races from racecast.co and mocorunning.com.</div></div>
+      $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Meets</h1><div class="sub">Every meet on record, in date order; each meet page holds all of its races. Middle school: the team's results sheet plus races found in results posted online (marked “online results”). High school: varsity, JV, freshman, open and relay races from racecast.co and mocorunning.com.</div></div>
         <div class="toolbar filters">
           ${seg("div", [["", "All"], ["HS", "High school"], ["MS", "Middle school"]], st.div)}
           <select id="level" title="Level (high school)"><option value="">All levels</option>${LEVELS.map(l => `<option value="${l}" ${st.level === l ? "selected" : ""}>${l === "Section" ? "Section (level not given)" : l}</option>`).join("")}</select>
@@ -255,16 +324,18 @@
         <h2>Data notes</h2><details class="card"><summary>${D.quirks.length} notes about the data (sheet quirks, corrections, duplicates removed)</summary><ul class="note" style="margin:8px 0 0;padding-left:18px">${D.quirks.map(q => `<li>${esc(q)}</li>`).join("")}</ul></details></div>`;
       const draw = () => {
         const q = st.q.toLowerCase();
-        const ms = D.meets.filter(m => (!st.div || m.division === st.div) && (!st.level || (m.division === "HS" && m.level === st.level)) && (!st.season || m.season === +st.season) && (!q || (m.name + " " + (m.officialName || "") + " " + (m.location || "")).toLowerCase().includes(q)));
+        const txt = g => (g.name + " " + gRaces(g).map(m => m.name + " " + (m.officialName || "")).join(" ") + " " + (g.location || "")).toLowerCase();
+        const gs = groups.filter(g => (!st.div || g.division === st.div) && (!st.level || (g.division === "HS" && g.levels.includes(st.level))) && (!st.season || g.season === +st.season) && (!q || txt(g).includes(q)));
+        const nr = gs.reduce((a, g) => a + g.races.length, 0);
         $("#level").disabled = st.div === "MS";
-        $("#count").textContent = `${ms.length} race${ms.length === 1 ? "" : "s"} shown${st.level ? ` (level filter applies to high school races)` : ""}.`;
+        $("#count").textContent = `${gs.length} meet${gs.length === 1 ? "" : "s"} (${nr} race${nr === 1 ? "" : "s"}) shown${st.level ? ` · meets with a ${st.level} race (level filter applies to high school)` : ""}.`;
         if (st.view === "cards") {
-          const ss = seasonsOf(ms);
-          $("#out").innerHTML = ss.map(s => { const x = ms.filter(m => m.season === s).sort((a, b) => (a.division === b.division ? 0 : a.division === "HS" ? -1 : 1) || chrono(a, b)); return `<section class="season-block" id="s${s}"><h2>${s} <small>${x.length} races</small></h2><div class="grid">${x.map(meetCard).join("")}</div></section>`; }).join("") || '<p class="muted">No races match.</p>';
+          const ss = [...new Set(gs.map(g => g.season))].sort((a, b) => b - a);
+          $("#out").innerHTML = ss.map(s => { const x = gs.filter(g => g.season === s).sort((a, b) => (a.division === b.division ? 0 : a.division === "HS" ? -1 : 1) || gChrono(a, b)); return `<section class="season-block" id="s${s}"><h2>${s} <small>${x.length} meet${x.length === 1 ? "" : "s"}</small></h2>${seasonNote(s) ? `<p class="note season-note">${esc(seasonNote(s))}</p>` : ""}<div class="grid">${x.map(groupCard).join("")}</div></section>`; }).join("") || '<p class="muted">No meets match.</p>';
         } else {
-          const rows = [...ms].sort((a, b) => -chrono(a, b)).map(m => { const t = teamOf(m), f = heightsOf(m).find(e => e.hplace === 1) || heightsOf(m)[0];
-            return `<tr>${td(m.season, ckey(m), "num")}${td(divTag(m), m.division)}${td(isHS(m) ? lvlTag(m) : dash, isHS(m) ? m.level + " " + m.levelLabel : "")}${td(`<a href="${meetLink(m)}">${esc(m.name)}${dl(m) ? " · " + esc(dl(m)) : ""}</a>${m.origin === "online" ? ' <span class="src-tag">online</span>' : ""}`, m.name, "wrapcell")}${td(distText(m), distSort(m))}${td(m.heightsCount, m.heightsCount, "num")}${td(m.fieldSize, m.fieldSize, "num hide-sm")}${td(t ? `${ord(t.place)} of ${t.of}` : dash, t?.place, "num")}${td(t ? t.score : dash, t?.score, "num hide-sm")}${td(f ? `${esc(f.name)} <span class="muted">${esc(f.time)}</span>` : dash, f?.secs, "hide-sm")}</tr>`; }).join("");
-          $("#out").innerHTML = table(th("Season", "num") + th("Div") + th("Level") + th("Meet") + th("Distance") + th("Heights runners", "num") + th("Field", "num hide-sm") + th("Heights team", "num") + th("Score", "num hide-sm") + th("Top Heights runner", "hide-sm"), rows, 'data-default-sort="0" data-default-dir="descending"') + sortHint;
+          const rows = [...gs].sort((a, b) => -gChrono(a, b)).map(g => { const rs = gRaces(g), m0 = gMain(g), t = m0 ? teamOf(m0) : null, f = m0 ? (heightsOf(m0).find(e => e.hplace === 1) || heightsOf(m0)[0]) : null, one = rs.length === 1 ? rs[0] : null;
+            return `<tr>${td(g.season, g.season * 1000 + g.order, "num")}${td(divTag(g), g.division)}${td(`<a href="${groupLink(g)}">${esc(g.name)}${gDate(g) ? " · " + esc(gDate(g)) : ""}</a>${one && one.origin === "online" ? ' <span class="src-tag">online</span>' : ""}`, g.name, "wrapcell")}${td(gLevelTags(g) || dash, g.levels.join(" "), "wrapcell")}${td(rs.length, rs.length, "num hide-sm")}${td(one ? distText(one) : [...new Set(rs.map(m => m.distKey || (m.distance ? +m.distance + " mi" : "")).filter(Boolean))].map(esc).join(", ") || dash, one ? distSort(one) : "", "hide-sm")}${td(gRunners(g), gRunners(g), "num")}${td(t ? `${ord(t.place)} of ${t.of}${rs.length > 1 && isHS(m0) ? ` <span class="muted">${esc(m0.levelLabel)}</span>` : ""}` : dash, t?.place, "num")}${td(f ? `${esc(f.name)} <span class="muted">${esc(f.time)}</span>` : dash, f?.secs, "hide-sm")}</tr>`; }).join("");
+          $("#out").innerHTML = table(th("Season", "num") + th("Div") + th("Meet") + th("Races / levels") + th("Races", "num hide-sm") + th("Distance", "hide-sm") + th("Heights runners", "num") + th('<span title="Heights team place in the first race listed (varsity first)">Heights team</span>', "num") + th("Top Heights runner", "hide-sm"), rows, 'data-default-sort="0" data-default-dir="descending"') + sortHint;
           makeSortable($("#out"));
         }
       };
@@ -276,61 +347,88 @@
       draw();
     },
     meet() {
-      const m = meetsById[qs("id")] || D.meets[0];
-      document.title = `${meetTitle(m)} · Heights Cross Country`;
-      const all = D.meets.filter(x => x.division === m.division).sort(chrono), i = all.indexOf(m), prev = all[i - 1], next = all[i + 1];
-      const sameMeet = isHS(m) ? D.meets.filter(x => x !== m && x.division === "HS" && x.season === m.season && x.meetName === m.meetName && x.date === m.date).sort(chrono) : [];
-      const h = heightsOf(m), fin = h.filter(e => e.secs && typeof e.place === "number"), t = teamOf(m);
-      const noteList = m.notes || (m.note ? [m.note] : []);
+      const id = qs("id");
+      // old per-race links (meet.html?id=<race>) land on the race's section of its meet page
+      const ra = (D.raceAliases || {})[id];
+      if (!groupsById[id] && !meetsById[id] && ra && meetsById[ra]) { location.replace(meetLink(meetsById[ra])); return; }
+      if (!groupsById[id] && meetsById[id] && groupOf(meetsById[id]).id !== id) { location.replace(meetLink(meetsById[id])); return; }
+      const g = groupsById[id] || (meetsById[id] ? groupOf(meetsById[id]) : null);
+      if (!g) { $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Meet not found</h1><a href="meets.html">Back to meets</a></div></div>`; return; }
+      const rs = gRaces(g), multi = rs.length > 1;
+      document.title = `${gTitle(g)} · Heights Cross Country`;
+      const all = groups.filter(x => x.division === g.division).sort(gChrono), i = all.indexOf(g), prev = all[i - 1], next = all[i + 1];
+      const day = d => new Date(d + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" });
+      const dates = g.date ? (g.endDate ? `${day(g.date)} – ${day(g.endDate)}` : day(g.date)) : (g.dateLabel || "");
+      const head = m => {
+        const h = heightsOf(m), fin = h.filter(e => e.secs && typeof e.place === "number"), t = teamOf(m);
+        return `${multi ? "" : `${lvlTag(m)} `}<b>Distance: ${distText(m)}</b> · ${m.fieldSize} ${m.level === "Relay" ? "teams" : "total"} in field · ${m.heightsCount} Heights runner${m.heightsCount === 1 ? "" : "s"}${fin.length && m.level !== "Relay" ? ` · Heights top finisher: ${ord(fin[0].place)} overall` : ""}${t ? ` · <b>Heights team: ${ord(t.place)} of ${t.of}${isHS(m) && t.official ? " (official)" : ""}</b>` : ""}${m.date && g.endDate ? ` · ${esc(dl(m))}` : ""}`;
+      };
+      const srcNote = m => `${m.tab ? `Sheet tab: “${esc(m.tab)}”.` : isHS(m) ? "High school results." : "Not in the results sheet."}${m.source ? ` ${m.tab ? "Official results" : "Source"}: <a href="${esc(m.source.url)}" target="_blank" rel="noopener">${esc(m.source.name)}</a>${m.source.original ? (/^https?:/.test(m.source.original) ? ` (<a href="${esc(m.source.original)}" target="_blank" rel="noopener">original</a>)` : ` (original: ${esc(m.source.original)})`) : ""}${m.officialName ? ` — listed as “${esc(m.officialName)}”` : ""}.` : ""} “Heights” = place among Heights finishers. “Team pts” = team-scoring place. <span class="pnote"></span>${!m.hasPace && !m.distance ? "No pace or distance recorded for this race. " : ""}${!m.hasGrade ? "Grades not recorded for this race. " : ""}`;
+      const section = m => {
+        const notes = m.notes || (m.note ? [m.note] : []);
+        return `<section class="race-sec" id="${esc(m.id)}" data-race="${esc(m.id)}">
+          ${multi ? `<h2 class="race-h">${isHS(m) ? lvlTag(m) : ""} ${esc(raceShort(m))}${m.origin === "online" ? ' <span class="src-tag" title="Not in the results sheet; from results posted online">online results</span>' : ""}</h2>` : ""}
+          <div class="sub race-sub">${head(m)}</div>
+          ${m.correction ? `<div class="caveat fix"><b>Corrected from the official results:</b> ${esc(m.correction)}</div>` : ""}
+          ${notes.length ? `<div class="card race-notes"><b>Notes about this race</b><ul>${notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>` : ""}
+          <div class="scoring"><p class="muted">Loading results…</p></div>
+          <h3>Results${multi ? ` · ${esc(isHS(m) ? m.levelLabel : m.name)}` : ""}</h3>
+          <div class="toolbar">
+            <div class="seg view"><button data-v="h" class="on">Heights runners</button><button data-v="all">Full field</button></div>
+            <input type="search" class="q" placeholder="Search name or school…">
+          </div>
+          <div class="tbl"></div>
+          <p class="note">${srcNote(m)}</p>
+        </section>`;
+      };
       $("#app").innerHTML = `<div class="wrap">
-        <div class="page-head"><div class="crumbs"><a href="meets.html">Meets</a> / <a href="meets.html?div=${m.division}">${DIVS[m.division]}</a> / <a href="meets.html?season=${m.season}&div=${m.division}">${m.season}</a></div>
-        <h1>${esc(meetTitle(m))}</h1>
-        <div class="sub">${divTag(m)} ${lvlTag(m)} ${m.date ? esc(new Date(m.date + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" })) + " · " : ""}${m.location ? esc(m.location) + " · " : ""}<b>Distance: ${distText(m)}</b> · ${m.fieldSize} ${m.level === "Relay" ? "teams" : "total"} in field · ${m.heightsCount} Heights runners${fin.length && m.level !== "Relay" ? ` · Heights top finisher: ${ord(fin[0].place)} overall` : ""}${t ? ` · <b>Heights team: ${ord(t.place)} of ${t.of}${isHS(m) && t.official ? " (official)" : ""}</b>` : ""}</div>
-        ${sameMeet.length ? `<div class="toolbar small">Other races at this meet: ${sameMeet.map(x => `<a class="pill" href="${meetLink(x)}">${esc(x.levelLabel)}${x.levelLabel !== x.name.split(" – ").slice(-1)[0] ? " · " + esc(x.name.split(" – ").slice(-1)[0]) : ""}</a>`).join("")}</div>` : ""}</div>
-        ${m.correction ? `<div class="caveat fix"><b>Corrected from the official results:</b> ${esc(m.correction)}</div>` : ""}
-        ${noteList.length ? `<div class="card race-notes"><b>Notes about this race</b><ul>${noteList.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>` : ""}
-        <div id="scoring"><p class="muted">Loading results…</p></div>
-        <h2>Results</h2>
-        <div class="toolbar">
-          <div class="seg" id="view"><button data-v="h" class="on">Heights runners</button><button data-v="all">Full field</button></div>
-          <input type="search" id="q" placeholder="Search name or school…">
-        </div>
-        <div id="tbl"></div>${sortHint}
-        <p class="note">${m.tab ? `Sheet tab: “${esc(m.tab)}”.` : isHS(m) ? "High school results." : "Not in the results sheet."}${m.source ? ` ${m.tab ? "Official results" : "Source"}: <a href="${esc(m.source.url)}" target="_blank" rel="noopener">${esc(m.source.name)}</a>${m.source.original ? (/^https?:/.test(m.source.original) ? ` (<a href="${esc(m.source.original)}" target="_blank" rel="noopener">original</a>)` : ` (original: ${esc(m.source.original)})`) : ""}${m.officialName ? ` — listed as “${esc(m.officialName)}”` : ""}.` : ""} “Heights” = place among Heights finishers. “Team pts” = team-scoring place. <span id="pnote"></span>${!m.hasPace && !m.distance ? "No pace or distance recorded for this race. " : ""}${!m.hasGrade ? "Grades not recorded for this race. " : ""}</p>
-        <div class="toolbar">${prev ? `<a class="pill" href="${meetLink(prev)}">← ${esc(meetTitle(prev))}</a>` : ""}${next ? `<a class="pill" href="${meetLink(next)}">${esc(meetTitle(next))} →</a>` : ""}</div>
+        <div class="page-head"><div class="crumbs"><a href="meets.html">Meets</a> / <a href="meets.html?div=${g.division}">${DIVS[g.division]}</a> / <a href="meets.html?season=${g.season}&div=${g.division}">${g.season}</a></div>
+        <h1>${esc(gTitle(g))}</h1>
+        <div class="sub">${divTag(g)} ${dates ? esc(dates) + " · " : ""}${g.location ? esc(g.location) + " · " : ""}${multi ? `${rs.length} races · ${gRunners(g)} Heights runners` : ""}${!multi ? head(rs[0]) : ""}</div>
+        ${multi ? `<nav class="race-tabs" aria-label="Races at this meet"><span class="muted">Races:</span>${rs.map(m => `<a class="pill" href="#${esc(m.id)}">${isHS(m) ? lvlTag(m) : ""}${raceShort(m) ? " " + esc(raceShort(m)) : ""} <span class="muted" title="Heights runners">${m.heightsCount}</span></a>`).join("")}</nav>` : ""}
+        ${seasonNote(g.season) && g.division === "HS" ? `<p class="note season-note">${esc(seasonNote(g.season))}</p>` : ""}</div>
+        ${rs.map(section).join("")}
+        <div class="toolbar">${prev ? `<a class="pill" href="${groupLink(prev)}">← ${esc(gTitle(prev))}</a>` : ""}${next ? `<a class="pill" href="${groupLink(next)}">${esc(gTitle(next))} →</a>` : ""}</div>
+        ${sortHint}
       </div>`;
-      let mode = "h", F = null;
       const relayRows = rows => {
         const head = th("Team place", "num") + th("Team") + th("Leg", "num") + th("Runner") + th("Gr", "num hide-sm") + th("Split", "num") + th("Pace/mi", "num hide-sm") + th("Team time", "num hide-sm");
         const body = rows.map(e => `<tr>${td(v(e.relay.teamPlace), e.relay.teamPlace, "num")}${td(esc(e.relay.team), e.relay.team)}${td(v(e.relay.leg), e.relay.leg, "num")}${td(`<a href="${runnerLink(e)}">${esc(e.name)}</a>${badges(e)}`, e.name)}${td(gv(e), e.grade, "num hide-sm")}${td(v(e.time), e.secs, "num t")}${td(v(e.pace), e.paceSecs, "num hide-sm")}${td(v(e.relay.teamTime), parseT(e.relay.teamTime), "num hide-sm")}</tr>`).join("");
         return table(head, body, 'data-default-sort="0"');
       };
-      const draw = () => {
-        const q = $("#q").value.trim().toLowerCase();
-        if (m.level === "Relay") {
-          let rows = F ? F.results : h; if (q) rows = rows.filter(r => (r.name + " " + r.school).toLowerCase().includes(q));
-          $("#tbl").innerHTML = mode === "h" ? relayRows(rows) : `<p class="note">The full relay field is in the relay results table above.</p>`;
-        } else {
-          let rows = mode === "h" ? (F ? F.results.filter(e => e.heights) : h) : (F ? F.results : []);
-          if (q) rows = rows.filter(r => (r.name + " " + (r.school || "")).toLowerCase().includes(q));
-          $("#tbl").innerHTML = mode === "h" ? resultsTable(rows, { heightsPlace: true, gap: true }) : (F ? resultsTable(rows, { heightsPlace: true, school: true, mark: true }) : '<p class="muted">Loading…</p>');
-        }
-        makeSortable($("#tbl"));
-      };
-      $("#view").onclick = e => { const b = e.target.closest("button"); if (!b) return; mode = b.dataset.v; [...$("#view").children].forEach(x => x.classList.toggle("on", x === b)); draw(); };
-      $("#q").oninput = draw; draw();
-      loadField(m).then(f => {
-        F = f;
-        $("#scoring").innerHTML = m.level === "Relay" ? relayBlock(m, F) : scoringBlock(m, F);
-        $("#pnote").textContent = F.results.some(e => e.paceCalc) ? "* Pace calculated from time ÷ distance (not in the sheet). " : "";
-        makeSortable($("#scoring")); draw();
-        const mt = $("#moreTeams"); if (mt) mt.onclick = () => { const sec = mt.closest(".scores"); sec.classList.toggle("expanded"); mt.textContent = sec.classList.contains("expanded") ? `Show top ${m.level === "Relay" ? 15 : 10} teams` : `Show all ${mt.dataset.n} teams`; };
-      }).catch(err => { $("#scoring").innerHTML = `<div class="caveat">⚠ Couldn't load the full results for this race (${esc(err.message)}). Heights results are shown below.</div>`; });
+      const loads = rs.map(m => {
+        const sec = document.getElementById(m.id), q$ = c => sec.querySelector(c), h = heightsOf(m);
+        let mode = "h", F = null;
+        const draw = () => {
+          const q = q$(".q").value.trim().toLowerCase(), tbl = q$(".tbl");
+          if (m.level === "Relay") {
+            let rows = h; if (q) rows = rows.filter(r => (r.name + " " + (r.relay?.team || "")).toLowerCase().includes(q));
+            tbl.innerHTML = mode === "h" ? relayRows(rows) : `<p class="note">The full relay field is in the relay results table above.</p>`;
+          } else {
+            let rows = mode === "h" ? (F ? F.results.filter(e => e.heights) : h) : (F ? F.results : []);
+            if (q) rows = rows.filter(r => (r.name + " " + (r.school || "")).toLowerCase().includes(q));
+            tbl.innerHTML = mode === "h" ? resultsTable(rows, { heightsPlace: true, gap: true }) : (F ? resultsTable(rows, { heightsPlace: true, school: true, mark: true }) : '<p class="muted">Loading…</p>');
+          }
+          makeSortable(tbl);
+        };
+        q$(".view").onclick = e => { const b = e.target.closest("button"); if (!b) return; mode = b.dataset.v; [...q$(".view").children].forEach(x => x.classList.toggle("on", x === b)); draw(); };
+        q$(".q").oninput = draw; draw();
+        return loadField(m).then(f => {
+          F = f;
+          q$(".scoring").innerHTML = m.level === "Relay" ? relayBlock(m, F) : scoringBlock(m, F);
+          q$(".pnote").textContent = F.results.some(e => e.paceCalc) ? "* Pace calculated from time ÷ distance (not in the sheet). " : "";
+          makeSortable(q$(".scoring")); draw();
+          const mt = q$(".moreTeams"); if (mt) mt.onclick = () => { const sc = mt.closest(".scores"); sc.classList.toggle("expanded"); mt.textContent = sc.classList.contains("expanded") ? `Show top ${m.level === "Relay" ? 15 : 10} teams` : `Show all ${mt.dataset.n} teams`; };
+        }).catch(err => { q$(".scoring").innerHTML = `<div class="caveat">⚠ Couldn't load the full results for this race (${esc(err.message)}). Heights results are shown below.</div>`; });
+      });
+      const jump = () => { const t = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t) t.scrollIntoView(); };
+      jump(); Promise.all(loads).then(() => { document.body.dataset.loaded = "1"; jump(); });
     },
     runners() {
       const st = { div: qs("div") || "" };
       $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Runners</h1><div class="sub">${D.runners.length} Heights runners appear in the results (${nRunners("MS")} in middle school, ${nRunners("HS")} in high school; ${nBoth} ran in both). Every runner has one page with all of his races.</div></div>
-        <div class="toolbar"><input type="search" id="q" placeholder="Search runners…">
+        <div class="runner-filter"><label for="q">Filter runners</label><input type="search" id="q" placeholder="Type a name — matches “listed as” spellings too" value="${esc(qs("q") || "")}" autofocus></div>
+        <div class="toolbar">
           ${seg("div", [["", "All"], ["HS", "High school"], ["MS", "Middle school"], ["both", "Both"]], st.div)}
           <select id="season"><option value="">All seasons</option>${seasons.map(s => `<option>${s}</option>`).join("")}</select>
           <a class="pill" href="compare.html">Compare runners →</a></div>
@@ -356,6 +454,8 @@
     },
     runner() {
       const r = runnersById[qs("id")];
+      const alias = (D.runnerAliases || {})[qs("id")];
+      if (!r && alias && runnersById[alias]) { location.replace(runnerHref(runnersById[alias]) + location.hash); return; }
       if (!r) { $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Runner not found</h1><a href="runners.html">Back to runners</a></div></div>`; return; }
       document.title = `${rName(r)} · Heights Cross Country`;
       const res = r.results.map(x => ({ ...x, m: meetsById[x.meet] })).sort((a, b) => chrono(a.m, b.m));
@@ -467,13 +567,14 @@
       const rows = [...seasons].map(s => { const ms = MS.filter(m => m.season === s), hs = HS.filter(m => m.season === s);
         const rs = D.runners.filter(r => r.seasons.includes(s)), rm = rs.filter(r => r.results.some(x => x.m.season === s && !isHS(x.m))).length, rh = rs.filter(r => r.results.some(x => x.m.season === s && isHS(x.m))).length;
         const lv = l => hs.filter(m => m.level === l).length;
-        return `<tr>${td(s, s, "num")}${td(ms.length ? `<a href="meets.html?season=${s}&div=MS">${ms.length}</a>` : dash, ms.length, "num")}${td(rm || dash, rm, "num")}${td(hs.length ? `<a href="meets.html?season=${s}&div=HS">${hs.length}</a>` : dash, hs.length, "num")}${td(hs.length ? `${lv("Varsity")} / ${lv("JV")} / ${lv("Freshman")} / ${lv("Open") + lv("Section") + lv("Relay")}` : dash, lv("Varsity"), "num hide-sm")}${td(rh || dash, rh, "num")}</tr>`; }).join("");
+        return `<tr>${td(`${s}${seasonNote(s) ? ` <span class="badge ghost" title="${esc(seasonNote(s))}">COVID season</span>` : ""}`, s, "num")}${td(ms.length ? `<a href="meets.html?season=${s}&div=MS">${ms.length}</a>` : dash, ms.length, "num")}${td(rm || dash, rm, "num")}${td(hs.length ? `<a href="meets.html?season=${s}&div=HS">${hs.length}</a>` : dash, hs.length, "num")}${td(hs.length ? `${lv("Varsity")} / ${lv("JV")} / ${lv("Freshman")} / ${lv("Open") + lv("Section") + lv("Relay")}` : dash, lv("Varsity"), "num hide-sm")}${td(rh || dash, rh, "num")}</tr>`; }).join("");
       $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>History</h1><div class="sub">The story of Heights cross country, middle school and high school.</div></div>
         <div class="placeholder"><strong>Placeholder — program history</strong>When did the team start, who coached it, and what were the milestone seasons? To be written.</div>
         <h2>Coaches</h2><div class="placeholder"><strong>Placeholder — coaches</strong>List of head coaches by year, for the middle school and high school teams.</div>
         <h2>Championship highlights</h2><div class="placeholder"><strong>Placeholder — highlights</strong>Team titles, standout individual finishes, notable streaks.</div>
         <h2>Seasons on record</h2>
         ${table(th("Season", "num") + th("MS races", "num") + th("MS runners", "num") + th("HS races", "num") + th('<span title="Varsity / JV / Freshman / other (open, section, relay)">HS V / JV / Fr / other</span>', "num hide-sm") + th("HS runners", "num"), rows, 'data-default-sort="0" data-default-dir="descending"')}
+        ${Object.keys(D.seasonNotes || {}).length ? `<h2>Season notes</h2>${Object.entries(D.seasonNotes).map(([s, n]) => `<div class="card season-note"><b>${esc(s)}</b> — ${esc(n)}</div>`).join("")}` : ""}
         <h2>Missing seasons</h2><div class="card">Middle school results cover ${seasonsOf(MS).length} seasons (${seasonsOf(MS).slice(-1)[0]}–${seasonsOf(MS)[0]}); ${missingSeasons(MS).length ? `still missing: ${missingSeasons(MS).join(", ")}` : "no gaps"}. High school results cover ${seasonsOf(HS).length} seasons (${seasonsOf(HS).slice(-1)[0]}–${seasonsOf(HS)[0]}); ${missingSeasons(HS).length ? `still missing: ${missingSeasons(HS).join(", ")}` : "no gaps"}. ${nBoth} runners have results in both.</div>
         <h2>Photos</h2><div class="placeholder"><strong>Placeholder — photo gallery</strong>Team photos by season.</div></div>`;
       makeSortable();

@@ -55,7 +55,16 @@ Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); th
   team places, A/B teams listed under two spellings scored separately). Each entry records its evidence; the note is shown on the race page.
   Old/short school names in official lists (J.E.B. Stuart → Justice, Wilson → Jackson-Reed, …) are paired via
   `HS_OFFICIAL_TEAM_ALIASES` in `scripts/hs_data.py` (HS only; the official name is still shown). Unmatched races get a short reason.
-- `race_notes.json` — notes shown on a race page (data issues from the research notes) and per-race grade fixes.
+- `race_notes.json` — notes shown on a race page (data issues from the research notes), per-race grade fixes,
+  `extra_rows` (e.g. Tim Hadley's 2007 Episcopal DQ: shown as DQ, no place/time, not counted in records) and
+  `level_overrides` (a mislabelled race's level/label; the old race id redirects — 2010 MD/DC Small Schools is Varsity).
+- One meet page per meet: all races of a meet (varsity, JV, freshman, …) are sections of the same `meet.html?id=<meet>`
+  page (`groups` in results.json). An old race id (`meet.html?id=<race id>`) redirects to its meet page, scrolled to that race
+  (`#<race id>`); `raceAliases` maps renamed race ids. `SEASON_NOTES` in build_data.py adds a note to a season (2020: COVID).
+- Runner merges confirmed by the team: `HS_NAME_ALIASES` (spellings), `EXTRA_MS_HS_MERGES` (MS→HS), `CONFIRMED_SAME_PERSON`
+  (pages joined regardless of listed grades, e.g. all Will/William Cannon pages). Old runner ids redirect (`runnerAliases`).
+- Athlete search: the box in the header of every page (type part of a name, any spelling the runner is listed under;
+  Enter opens the first match). The Runners page also has a name filter (`runners.html?q=…`).
 - `ms_hs_matches.csv` — MS↔HS runner matches. Only `confident` rows are merged. To merge a “needs confirmation” pair, add one line to
   `EXTRA_MS_HS_MERGES` in `scripts/hs_data.py` (`"ms-runner-id": "HS Name"`).
 - `hs_name_variants.csv` — HS spelling variants; the ones merged are listed in `HS_NAME_ALIASES` in `scripts/hs_data.py`.

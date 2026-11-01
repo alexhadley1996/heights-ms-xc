@@ -1,25 +1,74 @@
 {
-  "_about": "Per-race notes for the high school results, keyed by the CSV file name in races/. Shown on the race page. Edit freely; rebuild with scripts/build_data.py.",
-  "races": {
-    "2007_Episcopal_Quad_Meet_Varsity_49846.csv": [
-      "The official printout (mocorunning.com) also lists \u201cHandley, Tim 15:35\u201d (probably Timothy Hadley, but the time looks wrong) and \u201cName, Unreadable\u201d. Neither is included in the results here.",
-      "Official team score: The Heights 1st with 42 points. Racecast's own calculation from the listed finishers puts The Heights 2nd with 70, so the calculated scores below don't match the official ones."
-    ],
-    "2008_Woodward_Relays_2man_moco792.csv": [
-      "Date: mocorunning.com files this meet under Sep 8, 2008, but the printout header says 9/11/2006. The Heights roster (Greg Hadley was in high school in 2008, not 2006) points to 2008, so 2008 is used.",
-      "Two-man relay over 6 miles; only team times are posted. Runner names are cut off in the printout (\u201cGreg Had\u201d), and two Heights teams are listed only as \u201cRelay #3\u201d and \u201cRelay #4\u201d with no names."
-    ],
-    "2019_Bullis_Invitational_JV_moco7159.csv": ["Date: mocorunning.com says Sep 7, 2019, but the results header says 8/31/2019; the header date is used."],
-    "2019_Bullis_Invitational_Varsity_moco7159.csv": ["Date: mocorunning.com says Sep 7, 2019, but the results header says 8/31/2019; the header date is used."],
-    "2010_Glory_Days_Invitational_Freshman_169066.csv": ["On mocorunning.com the boys freshman team-score table sits under a \u201cSeeded Girls\u201d heading. It was matched to this race by the Heights runners' places."],
-    "2020_Holy_Cross_Invitational_1_Open_Boys_overall__moco6880.csv": ["The source lists Joe McClorey as grade 9; he was grade 11 in Holy Cross Invitational 2 two weeks later, so grade 11 is used."],
-    "2021_WCAC_Championship_Unlabeled_3rd_boys_r_moco9235.csv": ["This third boys race has no title in the source. It is probably the freshman race."],
-    "2018_WCAC_Championship_Freshman_moco6852.csv": ["The posted printout is missing 25 places, so some finishers aren't listed."],
-    "2023_WCAC_Championship_Freshman_moco10175.csv": ["The posted printout is missing 19 places, so some finishers aren't listed."],
-    "2023_WCAC_Championship_JV_Varsity_B__moco10175.csv": ["The posted printout is missing 15 places, so some finishers aren't listed."],
-    "2026_VA_XC_Showcase_JV_Morning_JV__moco11116.csv": ["The posted printout is missing 3 places, so some finishers aren't listed."]
-  },
-  "grade_fixes": {
-    "2020_Holy_Cross_Invitational_1_Open_Boys_overall__moco6880.csv": {"Joe McClorey": 11}
+ "_about": "Per-race notes for the high school results, keyed by the CSV file name in races/. Shown on the race page. Edit freely; rebuild with scripts/build_data.py.",
+ "races": {
+  "2007_Episcopal_Quad_Meet_Varsity_49846.csv": [
+   "Tim Hadley was disqualified for cutting the course (confirmed by the team). The official printout (mocorunning.com) lists him as “Handley, Tim 15:35”; he is shown here as DQ with no place or time, and the result doesn't count toward his records.",
+   "The printout also lists “Name, Unreadable”, which is left out.",
+   "Official team score: The Heights 1st with 42 points (kept as the meet scored it). Racecast's own calculation from the listed finishers puts The Heights 2nd with 70, so the calculated scores below don't match the official ones."
+  ],
+  "2008_Woodward_Relays_2man_moco792.csv": [
+   "Date: mocorunning.com files this meet under Sep 8, 2008, but the printout header says 9/11/2006. The Heights roster (Greg Hadley was in high school in 2008, not 2006) points to 2008, so 2008 is used.",
+   "Two-man relay over 6 miles; only team times are posted. Runner names are cut off in the printout (“Greg Had”), and two Heights teams are listed only as “Relay #3” and “Relay #4” with no names."
+  ],
+  "2019_Bullis_Invitational_JV_moco7159.csv": [
+   "Date: mocorunning.com says Sep 7, 2019, but the results header says 8/31/2019; the header date is used."
+  ],
+  "2019_Bullis_Invitational_Varsity_moco7159.csv": [
+   "Date: mocorunning.com says Sep 7, 2019, but the results header says 8/31/2019; the header date is used."
+  ],
+  "2010_Glory_Days_Invitational_Freshman_169066.csv": [
+   "On mocorunning.com the boys freshman team-score table sits under a “Seeded Girls” heading. It was matched to this race by the Heights runners' places."
+  ],
+  "2020_Holy_Cross_Invitational_1_Open_Boys_overall__moco6880.csv": [
+   "The source lists Joe McClorey as grade 9; he was grade 11 in Holy Cross Invitational 2 two weeks later, so grade 11 is used."
+  ],
+  "2021_WCAC_Championship_Unlabeled_3rd_boys_r_moco9235.csv": [
+   "This third boys race has no title in the source. It is probably the freshman race."
+  ],
+  "2018_WCAC_Championship_Freshman_moco6852.csv": [
+   "The posted printout is missing 25 places, so some finishers aren't listed."
+  ],
+  "2023_WCAC_Championship_Freshman_moco10175.csv": [
+   "The posted printout is missing 19 places, so some finishers aren't listed."
+  ],
+  "2023_WCAC_Championship_JV_Varsity_B__moco10175.csv": [
+   "The posted printout is missing 15 places, so some finishers aren't listed."
+  ],
+  "2026_VA_XC_Showcase_JV_Morning_JV__moco11116.csv": [
+   "The posted printout is missing 3 places, so some finishers aren't listed."
+  ]
+ },
+ "grade_fixes": {
+  "2020_Holy_Cross_Invitational_1_Open_Boys_overall__moco6880.csv": {
+   "Joe McClorey": 11
   }
+ },
+ "extra_rows": {
+  "2007_Episcopal_Quad_Meet_Varsity_49846.csv": [
+   {
+    "Place": "DQ",
+    "Grade": "",
+    "Name": "Timothy Hadley",
+    "Time": "DQ",
+    "School": "The Heights",
+    "note": "Disqualified for cutting the course (confirmed by the team). Listed on the official printout as “Handley, Tim”, 15:35."
+   }
+  ]
+ },
+ "_about_extra_rows": "extra_rows: rows added to a race's results (e.g. a disqualified runner the source lists separately), keyed by race CSV name.",
+ "_about_level_overrides": "level_overrides: corrected level/label for a race the source mislabels (keyed by race CSV name); the old race id redirects.",
+ "level_overrides": {
+  "2010_Maryland_Washington_DC_Private_School_Championship_Small_School_JV_140662.csv": {
+   "level": "Varsity",
+   "label": "Varsity",
+   "short": "Small Schools",
+   "note": "The source labels this race “Small School JV”, but it was the small-schools varsity race (confirmed by the team): The Heights' top runners ran here (Gregory Hadley won in 16:25)."
+  },
+  "2010_Maryland_Washington_DC_Private_School_Championship_Large_School_Varsity_140679.csv": {
+   "level": "JV",
+   "label": "JV",
+   "short": "Small Schools JV",
+   "note": "The source labels this race “Large School Varsity”, but the race labelled “Small School JV” was really the small-schools varsity race, and the Heights runners here are the JV group (the same runners ran the JV race in 2009), so the two labels look swapped. Listed here as the JV race; please confirm."
+  }
+ }
 }
