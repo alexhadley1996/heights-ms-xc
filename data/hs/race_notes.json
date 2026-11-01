@@ -39,6 +39,24 @@
   ],
   "2013_Landon_Invitational_Freshman_282634.csv": [
    "The source lists Edy McCormack twice (45th, 15:10.2 and 47th, 15:10.6) and Griffin Woofter twice (65th, 16:24.6 and 68th, 16:27.8). Only the first listing of each is kept, and the places after each removed row are moved up by one. The Heights has fewer than 5 runners here, so the team scores are unchanged."
+  ],
+  "2013_Calverton_Haunted_Halloween_5K_Open.csv": [
+   "Open community race (the Calverton School's Haunted Halloween 5K): men, women and children from the community ran together and there was no team scoring. The full field is listed as the timer (mdtiming.com) posted it; it gives ages, not grades or schools, so only Heights runners have a school here.",
+   "Heights grades are not in the results; they come from each runner's other races that season (or his class year).",
+   "All 14 Heights finishers were high school runners (grades 9–12), so this meet is listed under high school only.",
+   "Source: mdtiming.com results file; a copy was also posted on calvertonschool.org (Wayback Machine copy linked below)."
+  ],
+  "2014_Calverton_Haunted_Halloween_5K_Open.csv": [
+   "Open community race (the Calverton School's Haunted Halloween 5K): men, women and children from the community ran together and there was no team scoring. The full field is listed as the timer (mdtiming.com) posted it; it gives ages, not grades or schools, so only Heights runners have a school here.",
+   "Heights grades are not in the results; they come from each runner's other races that season (or his class year).",
+   "15 Heights high school runners and one middle schooler ran. Reese Smith (8th grade, 8th overall in 20:40) is listed here as “The Heights (middle school)”; his result counts as a middle school result and is on the middle school page for this race.",
+   "Source: mdtiming.com results file."
+  ],
+  "2010_Calverton_Homecoming_Race_Team_Scores.csv": [
+   "Tri-meet at Calverton's Homecoming. Only the team scores were published (somdnews.com sports roundup: The Heights 24, St. Mary's Ryken 31, Calverton 85); no individual results for Heights runners have been found.",
+   "Conflicting source: Calverton's own schedule page for this date has the note “Chen (4) Heights (19) Gonzaga (25)”. That may be a separate or JV race (“CHEN” is likely a homeschool team), but it doesn't match the roundup and is unresolved. The scores shown are the roundup's. Calverton schedule (Wayback copy): https://web.archive.org/web/20101219040436/http://www.calvertonschool.org/page.cfm?p=303&teamID=25&event=2233&show=detail",
+   "The distance isn't stated (Calverton's other home races were 5K), and the level isn't stated either, so this is listed as an open race.",
+   "The somdnews page shows an Aug 22, 2011 date; that is when the site moved the article to a new system, not when the meet was held."
   ]
  },
  "grade_fixes": {
@@ -86,5 +104,12 @@
     "Name": "Griffin Woofter"
    }
   ]
+ },
+ "no_team_scores": {
+  "2013_Calverton_Haunted_Halloween_5K_Open.csv": "No team scores: open community race with no team scoring.",
+  "2014_Calverton_Haunted_Halloween_5K_Open.csv": "No team scores: open community race with no team scoring."
+ },
+ "score_only": {
+  "2010_Calverton_Homecoming_Race_Team_Scores.csv": "Team scores only: no individual results were published for this meet."
  }
 }

@@ -217,7 +217,7 @@
     return `<a class="card meet-card ${isHS(m) ? "hs" : "ms"}" href="${meetLink(m)}">
       <div class="season">${divTag(m)} ${m.season}${dl(m) ? " · " + esc(dl(m)) : ""}${m.origin === "online" ? ' <span class="src-tag" title="Not in the results sheet; from results posted online">online results</span>' : ""}</div>
       <h3>${esc(isHS(m) ? m.meetName : m.name)}</h3>${isHS(m) ? `<div class="race-line">${lvlTag(m)}${m.level !== "Relay" && m.levelLabel !== m.name.split(" – ").slice(-1)[0] ? ` <span class="muted">${esc(m.name.split(" – ").slice(-1)[0])}</span>` : ""}</div>` : ""}
-      <div class="meta"><span>${distText(m)}</span><span>${m.heightsCount} Heights runners</span><span>${m.fieldSize} ${m.level === "Relay" ? "teams" : "total"} in field</span>${t ? `<span><b>Team: ${ord(t.place)} of ${t.of}</b> (${t.score} pts)</span>` : ""}</div>
+      <div class="meta"><span>${distText(m)}</span>${m.scoreOnly ? `<span>Team scores only</span>` : `<span>${m.heightsCount} Heights runners</span><span>${m.fieldSize} ${m.level === "Relay" ? "teams" : "total"} in field</span>`}${t ? `<span><b>Team: ${ord(t.place)} of ${t.of}</b> (${t.score} pts)</span>` : ""}</div>
       <ul class="top3">${h.map(e => `<li><span>${e.relay ? `${esc(e.name)} <span class="muted">(leg${e.relay.leg ? " " + e.relay.leg : ""})</span>` : `${e.hplace}. ${esc(e.name)}`}</span><span>${esc(e.time)}</span></li>`).join("")}</ul></a>`;
   }
   function groupCard(g) {
@@ -242,6 +242,9 @@
       : `<a class="pill warn" href="${esc(of.source)}" target="_blank" rel="noopener">${of.matched} of ${of.teams.length} official team scores match${of.heightsMatch ? " (Heights matches)" : ""}</a>`) : "";
     const why = of && of.why ? `<p class="note">${esc(of.why)}</p>` : "";
     const rule = "Standard cross country scoring: only runners on teams with at least 5 finishers count (exhibition and unattached runners are dropped), each team's top 5 score their team place, the 6th and 7th runners push other teams' runners back but don't score, lowest total wins, and ties go to the team whose 6th runner placed better. Hover a number to see the runner.";
+    if (of && of.scoreOnly) return `<section class="scores"><h2>Team scores</h2>
+      ${table(th("Place", "num") + th("Team") + th("Score", "num"), of.teams.map(o => `<tr class="${o.heights ? "heights" : ""}">${td(o.place, o.place, "num")}${td(`<b>${esc(o.team)}</b>`, o.team)}${td(`<b>${o.score}</b>`, o.score, "num")}</tr>`).join(""), 'data-default-sort="0"')}
+      ${cav}<p class="note">Official team scores as published (<a href="${esc(of.source)}" target="_blank" rel="noopener">source</a>). No individual results were published, so the scores can't be recalculated here.</p></section>`;
     if (isHS(m) && of) return hsOfficialBlock(m, sc, of, chk, why, cav, rule);
     const offCell = t => !of ? "" : td(t.official ? `${ord(t.official.place)} · ${t.official.score}${t.official.match ? ' <span class="ok-mark" title="Matches">✓</span>' : ' <span class="bad-mark" title="Differs from the calculated score">≠</span>'}` : dash, t.official?.score, "num hide-sm");
     if (!st.length) return `<section class="scores"><h2>Team scores</h2>${cav}${notes}${of ? `<p class="note">Official: ${of.teams.map(t => `${ord(t.place)} ${esc(t.team)} ${t.score}`).join(" · ")} (<a href="${esc(of.source)}" target="_blank" rel="noopener">source</a>)</p>` : ""}<p class="note">No team score calculated for this race.</p></section>`;
@@ -361,23 +364,25 @@
       const dates = g.date ? (g.endDate ? `${day(g.date)} – ${day(g.endDate)}` : day(g.date)) : (g.dateLabel || "");
       const head = m => {
         const h = heightsOf(m), fin = h.filter(e => e.secs && typeof e.place === "number"), t = teamOf(m);
+        if (m.scoreOnly) return `${multi ? "" : `${lvlTag(m)} `}<b>Team scores only</b> · no individual results were published${t ? ` · <b>Heights: ${ord(t.place)} of ${t.of}</b> (${t.score} pts)` : ""}`;
         return `${multi ? "" : `${lvlTag(m)} `}<b>Distance: ${distText(m)}</b> · ${m.fieldSize} ${m.level === "Relay" ? "teams" : "total"} in field · ${m.heightsCount} Heights runner${m.heightsCount === 1 ? "" : "s"}${fin.length && m.level !== "Relay" ? ` · Heights top finisher: ${ord(fin[0].place)} overall` : ""}${t ? ` · <b>Heights team: ${ord(t.place)} of ${t.of}${isHS(m) && t.official ? " (official)" : ""}</b>` : ""}${m.date && g.endDate ? ` · ${esc(dl(m))}` : ""}`;
       };
-      const srcNote = m => `${m.tab ? `Sheet tab: “${esc(m.tab)}”.` : isHS(m) ? "High school results." : "Not in the results sheet."}${m.source ? ` ${m.tab ? "Official results" : "Source"}: <a href="${esc(m.source.url)}" target="_blank" rel="noopener">${esc(m.source.name)}</a>${m.source.original ? (/^https?:/.test(m.source.original) ? ` (<a href="${esc(m.source.original)}" target="_blank" rel="noopener">original</a>)` : ` (original: ${esc(m.source.original)})`) : ""}${m.officialName ? ` — listed as “${esc(m.officialName)}”` : ""}.` : ""} “Heights” = place among Heights finishers. “Team pts” = team-scoring place. <span class="pnote"></span>${!m.hasPace && !m.distance ? "No pace or distance recorded for this race. " : ""}${!m.hasGrade ? "Grades not recorded for this race. " : ""}`;
+      const srcNote = m => `${m.tab ? `Sheet tab: “${esc(m.tab)}”.` : isHS(m) ? "High school results." : "Not in the results sheet."}${m.source ? ` ${m.tab ? "Official results" : "Source"}: <a href="${esc(m.source.url)}" target="_blank" rel="noopener">${esc(m.source.name)}</a>${m.source.original ? (/^https?:/.test(m.source.original) ? ` (<a href="${esc(m.source.original)}" target="_blank" rel="noopener">${/web\.archive\.org/.test(m.source.original) ? "Wayback Machine copy" : "original"}</a>)` : ` (original: ${esc(m.source.original)})`) : ""}${m.officialName ? ` — listed as “${esc(m.officialName)}”` : ""}.` : ""} “Heights” = place among Heights finishers. “Team pts” = team-scoring place. <span class="pnote"></span>${!m.hasPace && !m.distance ? "No pace or distance recorded for this race. " : ""}${!m.hasGrade ? "Grades not recorded for this race. " : ""}`;
       const section = m => {
         const notes = m.notes || (m.note ? [m.note] : []);
         return `<section class="race-sec" id="${esc(m.id)}" data-race="${esc(m.id)}">
           ${multi ? `<h2 class="race-h">${isHS(m) ? lvlTag(m) : ""} ${esc(raceShort(m))}${m.origin === "online" ? ' <span class="src-tag" title="Not in the results sheet; from results posted online">online results</span>' : ""}</h2>` : ""}
           <div class="sub race-sub">${head(m)}</div>
           ${m.correction ? `<div class="caveat fix"><b>Corrected from the official results:</b> ${esc(m.correction)}</div>` : ""}
-          ${notes.length ? `<div class="card race-notes"><b>Notes about this race</b><ul>${notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>` : ""}
+          ${notes.length ? `<div class="card race-notes"><b>Notes about this race</b><ul>${notes.map(n => `<li>${esc(n).replace(/https?:\/\/[^\s<]+[^\s<.,)]/g, u => `<a href="${u}" target="_blank" rel="noopener">${u.length > 60 ? u.replace(/^https?:\/\//, "").slice(0, 57) + "…" : u}</a>`)}</li>`).join("")}</ul></div>` : ""}
           <div class="scoring"><p class="muted">Loading results…</p></div>
+          ${m.scoreOnly ? `<p class="note">No individual results were published for this meet.</p>` : ""}<div class="res-block"${m.scoreOnly ? " hidden" : ""}>
           <h3>Results${multi ? ` · ${esc(isHS(m) ? m.levelLabel : m.name)}` : ""}</h3>
           <div class="toolbar">
             <div class="seg view"><button data-v="h" class="on">Heights runners</button><button data-v="all">Full field</button></div>
             <input type="search" class="q" placeholder="Search name or school…">
           </div>
-          <div class="tbl"></div>
+          <div class="tbl"></div></div>
           <p class="note">${srcNote(m)}</p>
         </section>`;
       };

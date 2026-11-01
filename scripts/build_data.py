@@ -550,6 +550,12 @@ def finalize(field, meta, quirks):
         caveats.append(f"Heights runners appear under more than one team name ({', '.join(hv)}); they are scored separately.")
     if meta.get("scoreRuleNote"):
         caveats.append(meta["scoreRuleNote"])
+    if meta.get("noTeamScores"):  # open community races: nobody kept team scores
+        standings, partial, caveats = [], [], [meta["noTeamScores"]]
+        for e in field:
+            e.pop("teamPlace", None)
+    if meta.get("scoreOnly"):  # only the team scores were published
+        caveats = [meta["scoreOnly"]]
     sb = {"standings": standings if len(standings) >= 2 else [], "partialTeams": partial, "caveats": caveats,
           "sheetNotes": meta.pop("_scoreNotes", [])}
     off = meta.pop("_official", None)
@@ -578,7 +584,13 @@ def finalize(field, meta, quirks):
                 sb["official"]["why"] = "The posted results are missing finishers, so the calculated scores can't match the official ones."
             elif ties and all(r["computedScore"] is not None and abs(r["computedScore"] - r["score"]) <= 2 for r in bad):
                 sb["official"]["why"] = "The 1\u20132 point differences come from runners with identical times, whose order differs in the official scoring."
-        if sb["official"]["matched"] < len(rows):
+        if meta.get("scoreOnly"):
+            sb["official"]["scoreOnly"] = True
+            sb["official"]["heightsMatch"] = None
+            for r in rows:
+                r["match"] = None
+            sb["official"]["why"] = "No individual results were published for this meet, so the team scores can't be recalculated here."
+        elif sb["official"]["matched"] < len(rows):
             quirks.append(f"{meta['season']} {meta['name']}: {sb['official']['matched']} of {len(rows)} official team scores reproduced.")
     meta.update({
         "scoring": sb,
@@ -731,6 +743,9 @@ def main(path):
         if s["csv"] in replaced:
             continue  # the sheet now has this race; the sheet version wins
         field = read_csv_field(s["csv"])
+        for e in field:  # e.g. Heights high school runners in an open race: listed, but not middle school results
+            if s.get("not_heights_school") and e["school"] == s["not_heights_school"]:
+                e["heights"] = False
         race = s.get("race") or ""
         label = s["meet"] + (f" ({race})" if race and race not in ("Middle School Boys", "Boys") else "")
         mid = slug(f"{s['season']}-{s['meet']}-{race}-{s['date']}")
@@ -746,6 +761,7 @@ def main(path):
             "correction": None, "note": s.get("note"),
             "noDisplacerLimit": s.get("score_no_displacer_limit"), "scoreRuleNote": s.get("score_rule_note"),
             "_official": offscores.get(s.get("official_scores_meet")) if s.get("official_scores_meet") else None,
+            "noTeamScores": s.get("no_team_scores"),
             "_tabOrder": 0,
         }
         meets.append(finalize(field, meta, quirks))
@@ -809,6 +825,8 @@ def slim_scoring(m):
     teams = []
     if off:
         out["official"] = {"matched": off["matched"], "n": len(off["teams"]), "heightsMatch": off["heightsMatch"]}
+        if off.get("scoreOnly"):
+            out["official"]["scoreOnly"] = True
         for o in off["teams"]:
             if o["heights"]:
                 teams.append({"team": o["team"], "place": o["place"], "score": o["score"], "official": True,
@@ -882,7 +900,8 @@ def write_outputs(meets, runners, review, quirks):
             field["relay"] = m["relay"]
         with open(os.path.join(fdir, f"{m['id']}.js"), "w") as f:
             f.write(f"(window.XC_FIELD = window.XC_FIELD || {{}})[{json.dumps(m['id'])}] = " + json.dumps(field, separators=(",", ":")) + ";\n")
-        c = {k: v for k, v in m.items() if k not in ("results", "scoring", "relay", "csv", "aliasIds") and v not in (None, False, [], "")}
+        c = {k: v for k, v in m.items() if k not in ("results", "scoring", "relay", "csv", "aliasIds")
+             and (v not in (None, False, [], "") or k in ("fieldSize", "heightsCount"))}
         if c.get("notes"):
             c.pop("note", None)  # HS races: the list of notes replaces the joined text
         c["scoring"] = slim_scoring(m)

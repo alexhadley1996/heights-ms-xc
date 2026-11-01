@@ -98,7 +98,7 @@ def apply_scoring_override(meta, field):
 def explain_official(m):
     """Short reason on an HS race page when the calculated team scores don't all match the official ones."""
     o = m["scoring"].get("official")
-    if not o or o["matched"] == len(o["teams"]):
+    if not o or o["matched"] == len(o["teams"]) or o.get("scoreOnly"):
         return
     bad = [r for r in o["teams"] if not r["match"]]
     cnt = collections.Counter(B.team_key(e["school"]) for e in m["results"] if isinstance(e["place"], int) and e["secs"])
@@ -376,7 +376,7 @@ def build_hs_meets(quirks):
             rn.insert(0, lnote)
         if "per pace" in s["Distance"]:
             rn.append("The results don't state the distance; 5K is inferred from the posted paces.")
-        if metres is None and level != "Relay":
+        if metres is None and level != "Relay" and base not in notes.get("score_only", {}):
             rn.append("The results don't list the race distance, so no paces are shown.")
         # Some racecast pages list every finisher twice in a row. Drop the second copy (same time, school and
         # grade, same or near-identical name) and renumber places.
@@ -438,6 +438,7 @@ def build_hs_meets(quirks):
             "correction": None, "note": " ".join(rn) or None, "notes": rn, "completeness": s["Completeness"],
             "teamScoreStatus": status, "csv": base, "_tabOrder": 0, "doubled": meta_doubled,
             "aliasIds": [B.slug(f"hs-{season}-{meet}-{old_short}")] if lov else None,
+            "noTeamScores": notes.get("no_team_scores", {}).get(base), "scoreOnly": notes.get("score_only", {}).get(base),
         }
         if level == "Relay":
             pending.append((meta, field, None)); continue
