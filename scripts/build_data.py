@@ -538,7 +538,9 @@ def finalize(field, meta, quirks):
                                     partial_ok=meta.pop("_scorePartialOk", None))
     caveats = []
     ints = sorted(e["place"] for e in field if isinstance(e["place"], int))
-    missing = (ints[-1] - len(set(ints))) if ints else 0
+    # place numbers absent from the list; a tie (two runners given place 8, next is 10) explains the skipped number
+    tied = {q for p, c in collections.Counter(ints).items() if c > 1 for q in range(p + 1, p + c)}
+    missing = len(set(range(1, ints[-1] + 1)) - set(ints) - tied) if ints else 0
     if missing > 0:
         caveats.append(f"{missing} place number(s) are missing from the list, so some finishers aren't listed; scores may be off.")
     if sum(1 for e in field if not e["heights"]) < 0.1 * len(field):

@@ -439,6 +439,36 @@
    "not_heights_school": "The Heights (high school)",
    "no_team_scores": "No team scores: open community race with no team scoring.",
    "note": "Open community 5K (the Calverton School's Haunted Halloween 5K): men, women and children ran together and there was no team scoring; the timer's results give ages, not grades or schools. The Heights' high school team ran it, and 8th grader Reese Smith ran with them (8th overall in 20:40). Only his result counts as a middle school result here; the 15 Heights high school runners are listed as “The Heights (high school)” and their results are on the high school page for this race. This is a 5K, longer than middle school races, so the pace is the fair comparison."
+  },
+  {
+   "csv": "races/2012_MD_DC_Private_School_MS_Championship_Boys_2mi.csv",
+   "season": 2012,
+   "date": "2012-11-10",
+   "meet": "Maryland & DC Middle School Championships",
+   "race": "",
+   "location": "Agricultural History Farm Park, Derwood, MD",
+   "distance_mi": 2.0,
+   "distance_m": 3218.7,
+   "source_name": "Athletic.net",
+   "source_url": "https://www.athletic.net/CrossCountry/meet/67289/results",
+   "original_url": null,
+   "official_scores_meet": "2012 Maryland & DC Middle School Championships – Boys 2 Mile",
+   "note": "MD/DC Private School Championships, middle school boys 2-mile race (posted on athletic.net as a separate meet, “Maryland and DC Private School State Championship”). Full field of 53: athletic.net lists St Albans' Christopher Emerson twice (also as “Chris Emerson”, same place 13 and time 14:00.4), so the duplicate row is left out; with it removed, the calculated team scores match all four official scores. Official team scores are from the meet as posted on athletic.net; only four teams scored."
+  },
+  {
+   "csv": "races/2017_MD_DC_Private_School_MS_Championship_Boys_2mi.csv",
+   "season": 2017,
+   "date": "2017-11-02",
+   "meet": "Maryland & DC Middle School Championships",
+   "race": "",
+   "location": "Belvoir Scott's Plantation, Crownsville, MD",
+   "distance_mi": 2.0,
+   "distance_m": 3218.7,
+   "source_name": "Athletic.net",
+   "source_url": "https://www.athletic.net/CrossCountry/meet/134669/results",
+   "original_url": null,
+   "official_scores_meet": "2017 Maryland & DC Middle School Championships – Boys 2 Mile",
+   "note": "MD/DC Private School Championships, middle school boys 2-mile race, at Belvoir Scott's Plantation (not Agricultural History Farm Park). Full field of 133. Official team scores are from the meet as posted on athletic.net. The winner, Dawson Grogan (Holy Family), is listed as grade 9 by athletic.net; that's left as posted (it is probably the grade on his athletic.net profile later, not in 2017). Two pairs of runners tied (places 8 and 33 are shared, so 9 and 34 are skipped)."
   }
  ]
 }

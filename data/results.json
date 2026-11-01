@@ -30,7 +30,7 @@
    "heightsCount": 35,
    "hasPace": true,
    "hasGrade": true,
-   "order": 378,
+   "order": 380,
    "venue": "Bittersweet Field",
    "group": "2026-state-championship",
    "scoring": {
@@ -85,7 +85,7 @@
    "heightsCount": 20,
    "hasPace": true,
    "hasGrade": true,
-   "order": 377,
+   "order": 379,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -137,7 +137,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 376,
+   "order": 378,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -189,7 +189,7 @@
    "heightsCount": 13,
    "hasPace": true,
    "hasGrade": true,
-   "order": 375,
+   "order": 377,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -241,7 +241,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 374,
+   "order": 376,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2026-va-xc-showcase",
    "scoring": {
@@ -288,7 +288,7 @@
    "heightsCount": 11,
    "hasPace": true,
    "hasGrade": true,
-   "order": 373,
+   "order": 375,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2026-va-xc-showcase",
    "scoring": {
@@ -332,7 +332,7 @@
    "heightsCount": 38,
    "hasPace": true,
    "hasGrade": true,
-   "order": 372,
+   "order": 374,
    "venue": "Bullis School, Potomac, MD",
    "group": "2026-bullis",
    "scoring": {
@@ -384,7 +384,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 371,
+   "order": 373,
    "venue": "Bittersweet Field",
    "group": "hs-2026-bittersweet-xc-invitational",
    "scoring": {
@@ -436,7 +436,7 @@
    "heightsCount": 32,
    "hasPace": true,
    "hasGrade": true,
-   "order": 370,
+   "order": 372,
    "venue": "Bittersweet Field",
    "group": "hs-2026-bittersweet-xc-invitational",
    "scoring": {
@@ -489,7 +489,7 @@
    "heightsCount": 36,
    "hasPace": true,
    "hasGrade": true,
-   "order": 369,
+   "order": 371,
    "venue": "Flint Hill School, Oakton, VA",
    "group": "2026-flint-hill",
    "scoring": {
@@ -544,7 +544,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 368,
+   "order": 370,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2026-rva-relays",
    "scoring": {
@@ -584,7 +584,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 367,
+   "order": 369,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2026-rva-relays",
    "scoring": {
@@ -624,7 +624,7 @@
    "heightsCount": 16,
    "hasPace": true,
    "hasGrade": true,
-   "order": 366,
+   "order": 368,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2026-rva-relays",
    "scoring": {
@@ -661,7 +661,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 365,
+   "order": 367,
    "venue": "Morven Park, Leesburg, VA",
    "group": "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance",
    "scoring": {
@@ -713,7 +713,7 @@
    "heightsCount": 32,
    "hasPace": true,
    "hasGrade": true,
-   "order": 364,
+   "order": 366,
    "venue": "Morven Park, Leesburg, VA",
    "group": "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance",
    "scoring": {
@@ -769,7 +769,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 363,
+   "order": 365,
    "venue": "Bittersweet Field",
    "group": "hs-2025-maryland-private-school-state-championships",
    "scoring": {
@@ -825,7 +825,7 @@
    "heightsCount": 29,
    "hasPace": true,
    "hasGrade": true,
-   "order": 362,
+   "order": 364,
    "venue": "Bittersweet Field",
    "group": "hs-2025-maryland-private-school-state-championships",
    "scoring": {
@@ -882,7 +882,7 @@
    "heightsCount": 44,
    "hasPace": true,
    "hasGrade": true,
-   "order": 361,
+   "order": 363,
    "venue": "Bittersweet Field",
    "group": "2025-state-championship",
    "scoring": {
@@ -934,7 +934,7 @@
    "heightsCount": 46,
    "hasPace": true,
    "hasGrade": true,
-   "order": 360,
+   "order": 362,
    "venue": "Flint Hill School, Oakton, VA",
    "group": "2025-flint-hill",
    "scoring": {
@@ -986,7 +986,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 359,
+   "order": 361,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2025-wcac-championships",
    "scoring": {
@@ -1041,7 +1041,7 @@
    "heightsCount": 21,
    "hasPace": true,
    "hasGrade": true,
-   "order": 358,
+   "order": 360,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2025-wcac-championships",
    "scoring": {
@@ -1093,7 +1093,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 357,
+   "order": 359,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2025-wcac-championships",
    "scoring": {
@@ -1145,7 +1145,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 356,
+   "order": 358,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2025-the-va-xc-showcase",
    "scoring": {
@@ -1197,7 +1197,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 355,
+   "order": 357,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2025-the-va-xc-showcase",
    "scoring": {
@@ -1249,7 +1249,7 @@
    "heightsCount": 51,
    "hasPace": true,
    "hasGrade": true,
-   "order": 354,
+   "order": 356,
    "venue": "Bittersweet Field",
    "group": "2025-bittersweet-2",
    "scoring": {
@@ -1305,7 +1305,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 353,
+   "order": 355,
    "venue": "Shawan Downs, Cockeysville, MD",
    "group": "hs-2025-maryland-xc-invitational-presented-by-brooks-mdxc",
    "scoring": {
@@ -1361,7 +1361,7 @@
    "heightsCount": 23,
    "hasPace": true,
    "hasGrade": true,
-   "order": 352,
+   "order": 354,
    "venue": "Shawan Downs, Cockeysville, MD",
    "group": "hs-2025-maryland-xc-invitational-presented-by-brooks-mdxc",
    "scoring": {
@@ -1413,7 +1413,7 @@
    "heightsCount": 43,
    "hasPace": true,
    "hasGrade": true,
-   "order": 351,
+   "order": 353,
    "venue": "Bittersweet Field",
    "group": "2025-bittersweet-1",
    "scoring": {
@@ -1469,7 +1469,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 350,
+   "order": 352,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2025-oatlands-invitational",
    "scoring": {
@@ -1526,7 +1526,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 349,
+   "order": 351,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2025-oatlands-invitational",
    "scoring": {
@@ -1572,7 +1572,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 348,
+   "order": 350,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2025-oatlands-invitational",
    "scoring": {
@@ -1628,7 +1628,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 347,
+   "order": 349,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2025-oatlands-invitational",
    "scoring": {
@@ -1680,7 +1680,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 346,
+   "order": 348,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2025-skip-grant-invitational",
    "scoring": {
@@ -1732,7 +1732,7 @@
    "heightsCount": 19,
    "hasPace": true,
    "hasGrade": true,
-   "order": 345,
+   "order": 347,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2025-skip-grant-invitational",
    "scoring": {
@@ -1784,7 +1784,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 344,
+   "order": 346,
    "venue": "Bittersweet Field",
    "group": "hs-2025-bittersweet-xc-invitational",
    "scoring": {
@@ -1836,7 +1836,7 @@
    "heightsCount": 32,
    "hasPace": true,
    "hasGrade": true,
-   "order": 343,
+   "order": 345,
    "venue": "Bittersweet Field",
    "group": "hs-2025-bittersweet-xc-invitational",
    "scoring": {
@@ -1888,7 +1888,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 342,
+   "order": 344,
    "venue": "WakeMed Soccer Park, Cary, NC",
    "group": "hs-2024-nxr-southeast-regional-championships-rising-stars",
    "scoring": {
@@ -1940,7 +1940,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 341,
+   "order": 343,
    "venue": "Bittersweet Field",
    "group": "2024-state-championship",
    "scoring": {
@@ -1992,7 +1992,7 @@
    "heightsCount": 11,
    "hasPace": true,
    "hasGrade": true,
-   "order": 340,
+   "order": 342,
    "venue": "Bittersweet Field",
    "group": "hs-2024-maryland-private-school-state-championships",
    "scoring": {
@@ -2044,7 +2044,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 339,
+   "order": 341,
    "venue": "Bittersweet Field",
    "group": "hs-2024-maryland-private-school-state-championships",
    "scoring": {
@@ -2096,7 +2096,7 @@
    "heightsCount": 24,
    "hasPace": true,
    "hasGrade": true,
-   "order": 338,
+   "order": 340,
    "venue": "Flint Hill School, Oakton, VA",
    "group": "2024-flint-hill",
    "scoring": {
@@ -2151,7 +2151,7 @@
    "heightsCount": 22,
    "hasPace": true,
    "hasGrade": true,
-   "order": 337,
+   "order": 339,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2024-wcac",
    "scoring": {
@@ -2203,7 +2203,7 @@
    "heightsCount": 16,
    "hasPace": true,
    "hasGrade": true,
-   "order": 336,
+   "order": 338,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2024-wcac",
    "scoring": {
@@ -2256,7 +2256,7 @@
    "heightsCount": 29,
    "hasPace": true,
    "hasGrade": true,
-   "order": 335,
+   "order": 337,
    "venue": "Landon School, Bethesda, MD",
    "group": "2024-landon",
    "scoring": {
@@ -2308,7 +2308,7 @@
    "heightsCount": 1,
    "hasPace": true,
    "hasGrade": true,
-   "order": 334,
+   "order": 336,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2024-va-xc-showcase",
    "scoring": {
@@ -2350,7 +2350,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 333,
+   "order": 335,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2024-va-xc-showcase",
    "scoring": {
@@ -2403,7 +2403,7 @@
    "heightsCount": 15,
    "hasPace": true,
    "hasGrade": true,
-   "order": 332,
+   "order": 334,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "2024-georgetown-prep",
    "scoring": {
@@ -2456,7 +2456,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 331,
+   "order": 333,
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
    "group": "hs-2024-pvac-xc-3-moco-private-school-championship-sandy-spring",
    "scoring": {
@@ -2508,7 +2508,7 @@
    "heightsCount": 25,
    "hasPace": true,
    "hasGrade": true,
-   "order": 330,
+   "order": 332,
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
    "group": "hs-2024-pvac-xc-3-moco-private-school-championship-sandy-spring",
    "scoring": {
@@ -2560,7 +2560,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 329,
+   "order": 331,
    "venue": "Shawan Downs, Cockeysville, MD",
    "group": "hs-2024-maryland-xc-invitational-mdxc",
    "scoring": {
@@ -2613,7 +2613,7 @@
    "heightsCount": 13,
    "hasPace": true,
    "hasGrade": true,
-   "order": 328,
+   "order": 330,
    "venue": "Shawan Downs, Cockeysville, MD",
    "group": "hs-2024-maryland-xc-invitational-mdxc",
    "scoring": {
@@ -2665,7 +2665,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 327,
+   "order": 329,
    "venue": "Shawan Downs, Cockeysville, MD",
    "group": "hs-2024-maryland-xc-invitational-mdxc",
    "scoring": {
@@ -2717,7 +2717,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 326,
+   "order": 328,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2024-skip-grant-invitational",
    "scoring": {
@@ -2769,7 +2769,7 @@
    "heightsCount": 29,
    "hasPace": true,
    "hasGrade": true,
-   "order": 325,
+   "order": 327,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2024-skip-grant-invitational",
    "scoring": {
@@ -2824,7 +2824,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 324,
+   "order": 326,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2024-oatlands-invitational",
    "scoring": {
@@ -2876,7 +2876,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 323,
+   "order": 325,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2024-oatlands-invitational",
    "scoring": {
@@ -2920,7 +2920,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 322,
+   "order": 324,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2024-oatlands-invitational",
    "scoring": {
@@ -2972,7 +2972,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 321,
+   "order": 323,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2024-oatlands-invitational",
    "scoring": {
@@ -3027,7 +3027,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 320,
+   "order": 322,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2024-rva-relays",
    "scoring": {
@@ -3067,7 +3067,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 319,
+   "order": 321,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2024-rva-relays",
    "scoring": {
@@ -3107,7 +3107,7 @@
    "heightsCount": 16,
    "hasPace": true,
    "hasGrade": true,
-   "order": 318,
+   "order": 320,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2024-rva-relays",
    "scoring": {
@@ -3144,7 +3144,7 @@
    "heightsCount": 24,
    "hasPace": true,
    "hasGrade": true,
-   "order": 317,
+   "order": 319,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2024-woodward-cross-country-relays-junior-varsity",
    "scoring": {
@@ -3185,7 +3185,7 @@
    "heightsCount": 40,
    "hasPace": true,
    "hasGrade": true,
-   "order": 316,
+   "order": 318,
    "venueInferred": true,
    "venue": "Bullis School, Potomac, MD",
    "group": "2024-bullis",
@@ -3230,7 +3230,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 315,
+   "order": 317,
    "venue": "Morven Park, Leesburg, VA",
    "group": "hs-2024-trials-of-miles-opening-night-xc",
    "scoring": {
@@ -3282,7 +3282,7 @@
    "heightsCount": 23,
    "hasPace": true,
    "hasGrade": true,
-   "order": 314,
+   "order": 316,
    "venue": "Morven Park, Leesburg, VA",
    "group": "hs-2024-trials-of-miles-opening-night-xc",
    "scoring": {
@@ -3334,7 +3334,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 313,
+   "order": 315,
    "venue": "Morven Park, Leesburg, VA",
    "group": "hs-2024-trials-of-miles-opening-night-xc",
    "scoring": {
@@ -3376,7 +3376,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 312,
+   "order": 314,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2023-md-state-private-schools-cross-country-championships",
    "scoring": {
@@ -3428,7 +3428,7 @@
    "heightsCount": 30,
    "hasPace": true,
    "hasGrade": true,
-   "order": 311,
+   "order": 313,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2023-md-state-private-schools-cross-country-championships",
    "scoring": {
@@ -3481,7 +3481,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 310,
+   "order": 312,
    "venue": "Maryland School for the Deaf",
    "group": "2023-state-championship",
    "scoring": {
@@ -3533,7 +3533,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 309,
+   "order": 311,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2023-moco-private-school-championships",
    "scoring": {
@@ -3585,7 +3585,7 @@
    "heightsCount": 18,
    "hasPace": true,
    "hasGrade": true,
-   "order": 308,
+   "order": 310,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2023-moco-private-school-championships",
    "scoring": {
@@ -3637,7 +3637,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 307,
+   "order": 309,
    "venue": "Unknown",
    "group": "hs-2023-wcac-championship",
    "scoring": {
@@ -3689,7 +3689,7 @@
    "fieldSize": 102,
    "heightsCount": 15,
    "hasGrade": true,
-   "order": 306,
+   "order": 308,
    "venue": "Unknown",
    "group": "hs-2023-wcac-championship",
    "scoring": {
@@ -3740,7 +3740,7 @@
    "fieldSize": 35,
    "heightsCount": 8,
    "hasGrade": true,
-   "order": 305,
+   "order": 307,
    "venue": "Unknown",
    "group": "hs-2023-wcac-championship",
    "scoring": {
@@ -3792,7 +3792,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 304,
+   "order": 306,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2023-skip-grant-invitational",
    "scoring": {
@@ -3844,7 +3844,7 @@
    "heightsCount": 28,
    "hasPace": true,
    "hasGrade": true,
-   "order": 303,
+   "order": 305,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2023-skip-grant-invitational",
    "scoring": {
@@ -3896,7 +3896,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 302,
+   "order": 304,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2023-milestat-com-xc-invitational-2023-elite",
    "scoring": {
@@ -3948,7 +3948,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 301,
+   "order": 303,
    "venue": "Shawan Downs, Cockeysville, MD",
    "group": "hs-2023-maryland-xc-invitational-presented-by-saucony-mdxc",
    "scoring": {
@@ -4000,7 +4000,7 @@
    "heightsCount": 27,
    "hasPace": true,
    "hasGrade": true,
-   "order": 300,
+   "order": 302,
    "venue": "Shawan Downs, Cockeysville, MD",
    "group": "hs-2023-maryland-xc-invitational-presented-by-saucony-mdxc",
    "scoring": {
@@ -4041,7 +4041,7 @@
    "heightsCount": 36,
    "hasPace": true,
    "hasGrade": true,
-   "order": 299,
+   "order": 301,
    "venueInferred": true,
    "venue": "Bullis School, Potomac, MD",
    "group": "2023-bullis",
@@ -4075,7 +4075,7 @@
    "heightsCount": 36,
    "hasPace": true,
    "hasGrade": true,
-   "order": 298,
+   "order": 300,
    "venueInferred": true,
    "venue": "Flint Hill School, Oakton, VA",
    "group": "2023-flint-hill",
@@ -4121,7 +4121,7 @@
    "heightsCount": 34,
    "hasPace": true,
    "hasGrade": true,
-   "order": 297,
+   "order": 299,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "2023-covenant-life",
    "scoring": {
@@ -4173,7 +4173,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 296,
+   "order": 298,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2023-oatlands-invitational",
    "scoring": {
@@ -4225,7 +4225,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 295,
+   "order": 297,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2023-oatlands-invitational",
    "scoring": {
@@ -4280,7 +4280,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 294,
+   "order": 296,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2023-rva-relays",
    "scoring": {
@@ -4320,7 +4320,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 293,
+   "order": 295,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2023-rva-relays",
    "scoring": {
@@ -4360,7 +4360,7 @@
    "heightsCount": 15,
    "hasPace": true,
    "hasGrade": true,
-   "order": 292,
+   "order": 294,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2023-rva-relays",
    "scoring": {
@@ -4397,7 +4397,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 291,
+   "order": 293,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2023-eagle-invitational",
    "scoring": {
@@ -4449,7 +4449,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 290,
+   "order": 292,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2023-eagle-invitational",
    "scoring": {
@@ -4501,7 +4501,7 @@
    "heightsCount": 17,
    "hasPace": true,
    "hasGrade": true,
-   "order": 289,
+   "order": 291,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2023-eagle-invitational",
    "scoring": {
@@ -4553,7 +4553,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 288,
+   "order": 290,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2022-md-state-private-schools-championships",
    "scoring": {
@@ -4605,7 +4605,7 @@
    "heightsCount": 18,
    "hasPace": true,
    "hasGrade": true,
-   "order": 287,
+   "order": 289,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2022-md-state-private-schools-championships",
    "scoring": {
@@ -4659,7 +4659,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 286,
+   "order": 288,
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
    "group": "2022-state-championship",
    "scoring": {
@@ -4711,7 +4711,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 285,
+   "order": 287,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2022-moco-private-school-championships",
    "scoring": {
@@ -4763,7 +4763,7 @@
    "heightsCount": 20,
    "hasPace": true,
    "hasGrade": true,
-   "order": 284,
+   "order": 286,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2022-moco-private-school-championships",
    "scoring": {
@@ -4813,7 +4813,7 @@
    "fieldSize": 65,
    "heightsCount": 7,
    "hasGrade": true,
-   "order": 283,
+   "order": 285,
    "venue": "Unknown",
    "group": "hs-2022-wcac-championship",
    "scoring": {
@@ -4864,7 +4864,7 @@
    "fieldSize": 105,
    "heightsCount": 17,
    "hasGrade": true,
-   "order": 282,
+   "order": 284,
    "venue": "Unknown",
    "group": "hs-2022-wcac-championship",
    "scoring": {
@@ -4914,7 +4914,7 @@
    "fieldSize": 49,
    "heightsCount": 9,
    "hasGrade": true,
-   "order": 281,
+   "order": 283,
    "venue": "Unknown",
    "group": "hs-2022-wcac-championship",
    "scoring": {
@@ -4958,7 +4958,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 280,
+   "order": 282,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2022-skip-grant-invitational",
    "scoring": {
@@ -5010,7 +5010,7 @@
    "heightsCount": 23,
    "hasPace": true,
    "hasGrade": true,
-   "order": 279,
+   "order": 281,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2022-skip-grant-invitational",
    "scoring": {
@@ -5056,7 +5056,7 @@
    "heightsCount": 38,
    "hasPace": true,
    "hasGrade": true,
-   "order": 278,
+   "order": 280,
    "venue": "Burke Lake Park, Fairfax Station, VA",
    "group": "2022-fhs-invitational-2022-10-14",
    "scoring": {
@@ -5108,7 +5108,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 277,
+   "order": 279,
    "venue": "Gov. Thomas Johnson HS, Frederick, MD",
    "group": "hs-2022-patriot-xc-invitational",
    "scoring": {
@@ -5160,7 +5160,7 @@
    "heightsCount": 15,
    "hasPace": true,
    "hasGrade": true,
-   "order": 276,
+   "order": 278,
    "venue": "Gov. Thomas Johnson HS, Frederick, MD",
    "group": "hs-2022-patriot-xc-invitational",
    "scoring": {
@@ -5213,7 +5213,7 @@
    "heightsCount": 34,
    "hasPace": true,
    "hasGrade": true,
-   "order": 275,
+   "order": 277,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "2022-covenant-life",
    "scoring": {
@@ -5265,7 +5265,7 @@
    "heightsCount": 27,
    "hasPace": true,
    "hasGrade": true,
-   "order": 274,
+   "order": 276,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2022-cls-invitational-varsity",
    "scoring": {
@@ -5317,7 +5317,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 273,
+   "order": 275,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2022-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -5369,7 +5369,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 272,
+   "order": 274,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2022-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -5421,7 +5421,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 271,
+   "order": 273,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2022-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -5473,7 +5473,7 @@
    "heightsCount": 26,
    "hasPace": true,
    "hasGrade": true,
-   "order": 270,
+   "order": 272,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2022-bullis-bulldog-invitational",
    "scoring": {
@@ -5525,7 +5525,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 269,
+   "order": 271,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2022-bullis-bulldog-invitational",
    "scoring": {
@@ -5577,7 +5577,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 268,
+   "order": 270,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2022-eagle-invitational",
    "scoring": {
@@ -5629,7 +5629,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 267,
+   "order": 269,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2022-eagle-invitational",
    "scoring": {
@@ -5681,7 +5681,7 @@
    "heightsCount": 16,
    "hasPace": true,
    "hasGrade": true,
-   "order": 266,
+   "order": 268,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2022-eagle-invitational",
    "scoring": {
@@ -5733,7 +5733,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 265,
+   "order": 267,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2021-md-private-schools-championships",
    "scoring": {
@@ -5785,7 +5785,7 @@
    "heightsCount": 23,
    "hasPace": true,
    "hasGrade": true,
-   "order": 264,
+   "order": 266,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2021-md-private-schools-championships",
    "scoring": {
@@ -5839,7 +5839,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 263,
+   "order": 265,
    "venue": "Landon School, Bethesda, MD",
    "group": "2021-state-championship-at-landon",
    "scoring": {
@@ -5891,7 +5891,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 262,
+   "order": 264,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2021-moco-private-school-championships",
    "scoring": {
@@ -5943,7 +5943,7 @@
    "heightsCount": 20,
    "hasPace": true,
    "hasGrade": true,
-   "order": 261,
+   "order": 263,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2021-moco-private-school-championships",
    "scoring": {
@@ -5995,7 +5995,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 260,
+   "order": 262,
    "venue": "Unknown",
    "group": "hs-2021-wcac-championship",
    "scoring": {
@@ -6046,7 +6046,7 @@
    "fieldSize": 45,
    "heightsCount": 8,
    "hasGrade": true,
-   "order": 259,
+   "order": 261,
    "venue": "Unknown",
    "group": "hs-2021-wcac-championship",
    "scoring": {
@@ -6097,7 +6097,7 @@
    "fieldSize": 99,
    "heightsCount": 17,
    "hasGrade": true,
-   "order": 258,
+   "order": 260,
    "venue": "Unknown",
    "group": "hs-2021-wcac-championship",
    "scoring": {
@@ -6149,7 +6149,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 257,
+   "order": 259,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2021-skip-grant-invitational",
    "scoring": {
@@ -6201,7 +6201,7 @@
    "heightsCount": 20,
    "hasPace": true,
    "hasGrade": true,
-   "order": 256,
+   "order": 258,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2021-skip-grant-invitational",
    "scoring": {
@@ -6253,7 +6253,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 255,
+   "order": 257,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2021-glory-days-grill-invitational",
    "scoring": {
@@ -6305,7 +6305,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 254,
+   "order": 256,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2021-glory-days-grill-invitational",
    "scoring": {
@@ -6357,7 +6357,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 253,
+   "order": 255,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2021-glory-days-grill-invitational",
    "scoring": {
@@ -6403,7 +6403,7 @@
    "heightsCount": 26,
    "hasPace": true,
    "hasGrade": true,
-   "order": 252,
+   "order": 254,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "2021-cls-invitational-2021-10-02",
    "scoring": {
@@ -6455,7 +6455,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 251,
+   "order": 253,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2021-georgetown-prep-classic",
    "scoring": {
@@ -6507,7 +6507,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 250,
+   "order": 252,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2021-georgetown-prep-classic",
    "scoring": {
@@ -6559,7 +6559,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 249,
+   "order": 251,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2021-georgetown-prep-classic",
    "scoring": {
@@ -6611,7 +6611,7 @@
    "heightsCount": 17,
    "hasPace": true,
    "hasGrade": true,
-   "order": 248,
+   "order": 250,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2021-the-mark-ferris-landon-invitational",
    "scoring": {
@@ -6663,7 +6663,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 247,
+   "order": 249,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2021-the-mark-ferris-landon-invitational",
    "scoring": {
@@ -6715,7 +6715,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 246,
+   "order": 248,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2021-oatlands-invitational",
    "scoring": {
@@ -6767,7 +6767,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 245,
+   "order": 247,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2021-oatlands-invitational",
    "scoring": {
@@ -6822,7 +6822,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 244,
+   "order": 246,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2021-oatlands-invitational",
    "scoring": {
@@ -6877,7 +6877,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 243,
+   "order": 245,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2021-oatlands-invitational",
    "scoring": {
@@ -6928,7 +6928,7 @@
    "fieldSize": 57,
    "heightsCount": 10,
    "hasGrade": true,
-   "order": 242,
+   "order": 244,
    "venue": "Montgomery County, MD (course not listed)",
    "group": "hs-2020-holy-cross-invitational-2-individual-results-overall",
    "scoring": {
@@ -6972,7 +6972,7 @@
    "fieldSize": 34,
    "heightsCount": 6,
    "hasGrade": true,
-   "order": 241,
+   "order": 243,
    "venue": "Montgomery County, MD (course not listed)",
    "group": "hs-2020-holy-cross-invitational-1-individual-results-overall",
    "scoring": {
@@ -7016,7 +7016,7 @@
    "heightsCount": 24,
    "hasPace": true,
    "hasGrade": true,
-   "order": 240,
+   "order": 242,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2020-covenant-life-vs-the-heights-varsity",
    "scoring": {
@@ -7071,7 +7071,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 239,
+   "order": 241,
    "venue": "North Bethesda, MD (course not listed)",
    "group": "hs-2019-maryland-state-private-school-championship",
    "scoring": {
@@ -7126,7 +7126,7 @@
    "heightsCount": 12,
    "hasPace": true,
    "hasGrade": true,
-   "order": 238,
+   "order": 240,
    "venue": "North Bethesda, MD (course not listed)",
    "group": "hs-2019-maryland-state-private-school-championship",
    "scoring": {
@@ -7179,7 +7179,7 @@
    "heightsCount": 12,
    "hasPace": true,
    "hasGrade": true,
-   "order": 237,
+   "order": 239,
    "venue": "Landon School, Bethesda, MD",
    "group": "2019-state-championship-at-landon",
    "scoring": {
@@ -7231,7 +7231,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 236,
+   "order": 238,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2019-moco-private-school-championships",
    "scoring": {
@@ -7283,7 +7283,7 @@
    "heightsCount": 11,
    "hasPace": true,
    "hasGrade": true,
-   "order": 235,
+   "order": 237,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2019-moco-private-school-championships",
    "scoring": {
@@ -7338,7 +7338,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 234,
+   "order": 236,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2019-wcac-championships",
    "scoring": {
@@ -7380,7 +7380,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 233,
+   "order": 235,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2019-wcac-championships",
    "scoring": {
@@ -7432,7 +7432,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 232,
+   "order": 234,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2019-wcac-championships",
    "scoring": {
@@ -7485,7 +7485,7 @@
    "heightsCount": 40,
    "hasPace": true,
    "hasGrade": true,
-   "order": 231,
+   "order": 233,
    "venue": "Norwood School, Bethesda, MD",
    "group": "2019-norwood-invitational",
    "scoring": {
@@ -7539,7 +7539,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 230,
+   "order": 232,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2019-skip-grant-invitational",
    "scoring": {
@@ -7593,7 +7593,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 229,
+   "order": 231,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2019-skip-grant-invitational",
    "scoring": {
@@ -7645,7 +7645,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 228,
+   "order": 230,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2019-glory-days-grill-invitational",
    "scoring": {
@@ -7697,7 +7697,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 227,
+   "order": 229,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2019-glory-days-grill-invitational",
    "scoring": {
@@ -7749,7 +7749,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 226,
+   "order": 228,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2019-glory-days-grill-invitational",
    "scoring": {
@@ -7801,7 +7801,7 @@
    "heightsCount": 17,
    "hasPace": true,
    "hasGrade": true,
-   "order": 225,
+   "order": 227,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2019-cls-home-meet-varsity",
    "scoring": {
@@ -7853,7 +7853,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 224,
+   "order": 226,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2019-landon-invitational",
    "scoring": {
@@ -7905,7 +7905,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 223,
+   "order": 225,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2019-landon-invitational",
    "scoring": {
@@ -7957,7 +7957,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 222,
+   "order": 224,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2019-landon-invitational",
    "scoring": {
@@ -8012,7 +8012,7 @@
    "heightsCount": 32,
    "hasPace": true,
    "hasGrade": true,
-   "order": 221,
+   "order": 223,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "2019-covenant-life",
    "scoring": {
@@ -8064,7 +8064,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 220,
+   "order": 222,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2019-oatlands-invitational",
    "scoring": {
@@ -8116,7 +8116,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 219,
+   "order": 221,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2019-oatlands-invitational",
    "scoring": {
@@ -8168,7 +8168,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 218,
+   "order": 220,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2019-oatlands-invitational",
    "scoring": {
@@ -8223,7 +8223,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 217,
+   "order": 219,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2019-bullis-invitational",
    "scoring": {
@@ -8278,7 +8278,7 @@
    "heightsCount": 17,
    "hasPace": true,
    "hasGrade": true,
-   "order": 216,
+   "order": 218,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2019-bullis-invitational",
    "scoring": {
@@ -8330,7 +8330,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 215,
+   "order": 217,
    "venue": "McDaniel College, Westminster, MD",
    "group": "hs-2018-maryland-private-school-championships",
    "scoring": {
@@ -8382,7 +8382,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 214,
+   "order": 216,
    "venue": "McDaniel College, Westminster, MD",
    "group": "hs-2018-maryland-private-school-championships",
    "scoring": {
@@ -8428,7 +8428,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 213,
+   "order": 215,
    "venue": "Belvoir Scott's Plantation, Crownsville, MD",
    "group": "2018-md-dc-middle-school-state-championships-2018-11-08",
    "scoring": {
@@ -8480,7 +8480,7 @@
    "heightsCount": 18,
    "hasPace": true,
    "hasGrade": true,
-   "order": 212,
+   "order": 214,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2018-montgomery-county-private-school-championships-varsity",
    "scoring": {
@@ -8533,7 +8533,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 211,
+   "order": 213,
    "venue": "Unknown",
    "group": "hs-2018-wcac-championship",
    "scoring": {
@@ -8588,7 +8588,7 @@
    "heightsCount": 2,
    "hasPace": true,
    "hasGrade": true,
-   "order": 210,
+   "order": 212,
    "venue": "Unknown",
    "group": "hs-2018-wcac-championship",
    "scoring": {
@@ -8640,7 +8640,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 209,
+   "order": 211,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2018-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -8692,7 +8692,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 208,
+   "order": 210,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2018-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -8734,7 +8734,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 207,
+   "order": 209,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2018-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -8780,7 +8780,7 @@
    "heightsCount": 24,
    "hasPace": true,
    "hasGrade": true,
-   "order": 206,
+   "order": 208,
    "venue": "Landon School, Bethesda, MD",
    "group": "2018-landon-middle-school-invitational-2018-10-17",
    "scoring": {
@@ -8826,7 +8826,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 205,
+   "order": 207,
    "venue": "Landon School, Bethesda, MD",
    "group": "2018-landon-middle-school-invitational-2018-10-17",
    "scoring": {
@@ -8878,7 +8878,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 204,
+   "order": 206,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2018-glory-days-grill-invitational",
    "scoring": {
@@ -8930,7 +8930,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 203,
+   "order": 205,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2018-glory-days-grill-invitational",
    "scoring": {
@@ -8982,7 +8982,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 202,
+   "order": 204,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2018-covenant-life-xc-invitational",
    "scoring": {
@@ -9034,7 +9034,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 201,
+   "order": 203,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2018-covenant-life-xc-invitational",
    "scoring": {
@@ -9086,7 +9086,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 200,
+   "order": 202,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2018-landon-invitational",
    "scoring": {
@@ -9128,7 +9128,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 199,
+   "order": 201,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2018-landon-invitational",
    "scoring": {
@@ -9180,7 +9180,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 198,
+   "order": 200,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2018-landon-invitational",
    "scoring": {
@@ -9232,7 +9232,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 197,
+   "order": 199,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2018-bullis-invitational",
    "scoring": {
@@ -9284,7 +9284,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 196,
+   "order": 198,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2018-bullis-invitational",
    "scoring": {
@@ -9336,7 +9336,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 195,
+   "order": 197,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2017-maryland-private-school-championships",
    "scoring": {
@@ -9388,7 +9388,7 @@
    "heightsCount": 11,
    "hasPace": true,
    "hasGrade": true,
-   "order": 194,
+   "order": 196,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2017-maryland-private-school-championships",
    "scoring": {
@@ -9440,7 +9440,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 193,
+   "order": 195,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2017-montgomery-county-private-school-championships",
    "scoring": {
@@ -9492,7 +9492,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 192,
+   "order": 194,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2017-montgomery-county-private-school-championships",
    "scoring": {
@@ -9511,6 +9511,53 @@
       "official": true,
       "calcPlace": 3,
       "calcScore": 69,
+      "match": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "2017-maryland-dc-middle-school-championships-2017-11-02",
+   "season": 2017,
+   "name": "Maryland & DC Middle School Championships",
+   "division": "MS",
+   "level": "Open",
+   "levelLabel": "Middle school",
+   "date": "2017-11-02",
+   "origin": "online",
+   "distance": 2.0,
+   "distanceSource": "official",
+   "officialName": "Maryland & DC Middle School Championships",
+   "location": "Belvoir Scott's Plantation, Crownsville, MD",
+   "source": {
+    "name": "Athletic.net",
+    "url": "https://www.athletic.net/CrossCountry/meet/134669/results",
+    "original": null
+   },
+   "note": "MD/DC Private School Championships, middle school boys 2-mile race, at Belvoir Scott's Plantation (not Agricultural History Farm Park). Full field of 133. Official team scores are from the meet as posted on athletic.net. The winner, Dawson Grogan (Holy Family), is listed as grade 9 by athletic.net; that's left as posted (it is probably the grade on his athletic.net profile later, not in 2017). Two pairs of runners tied (places 8 and 33 are shared, so 9 and 34 are skipped).",
+   "fieldSize": 133,
+   "heightsCount": 14,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 193,
+   "venue": "Belvoir Scott's Plantation, Crownsville, MD",
+   "group": "2017-maryland-dc-middle-school-championships-2017-11-02",
+   "scoring": {
+    "teamCount": 13,
+    "calcCount": 13,
+    "official": {
+     "matched": 12,
+     "n": 13,
+     "heightsMatch": true
+    },
+    "heights": [
+     {
+      "team": "The Heights",
+      "place": 3,
+      "score": 70,
+      "official": true,
+      "calcPlace": 3,
+      "calcScore": 70,
       "match": true
      }
     ]
@@ -9544,7 +9591,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 191,
+   "order": 192,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2017-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -9596,7 +9643,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 190,
+   "order": 191,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2017-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -9638,7 +9685,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 189,
+   "order": 190,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2017-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -9690,7 +9737,7 @@
    "heightsCount": 19,
    "hasPace": true,
    "hasGrade": true,
-   "order": 188,
+   "order": 189,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2017-bullis-home-meet-varsity",
    "scoring": {
@@ -9742,7 +9789,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 187,
+   "order": 188,
    "venue": "Watkins Mill HS, Gaithersburg, MD",
    "group": "hs-2017-wolverine-run",
    "scoring": {
@@ -9794,7 +9841,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 186,
+   "order": 187,
    "venue": "Watkins Mill HS, Gaithersburg, MD",
    "group": "hs-2017-wolverine-run",
    "scoring": {
@@ -9846,7 +9893,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 185,
+   "order": 186,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2017-covenant-life-invitational",
    "scoring": {
@@ -9898,7 +9945,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 184,
+   "order": 185,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2017-covenant-life-invitational",
    "scoring": {
@@ -9950,7 +9997,7 @@
    "heightsCount": 12,
    "hasPace": true,
    "hasGrade": true,
-   "order": 183,
+   "order": 184,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2017-landon-invitational",
    "scoring": {
@@ -10002,7 +10049,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 182,
+   "order": 183,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2017-landon-invitational",
    "scoring": {
@@ -10054,7 +10101,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 181,
+   "order": 182,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2017-bullis-invitational",
    "scoring": {
@@ -10106,7 +10153,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 180,
+   "order": 181,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2017-bullis-invitational",
    "scoring": {
@@ -10158,7 +10205,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 179,
+   "order": 180,
    "venue": "WakeMed Soccer Park, Cary, NC",
    "group": "hs-2016-nxr-southeast-regional-championships-open",
    "scoring": {
@@ -10210,7 +10257,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 178,
+   "order": 179,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2016-maryland-dc-private-school-championships",
    "scoring": {
@@ -10262,7 +10309,7 @@
    "heightsCount": 12,
    "hasPace": true,
    "hasGrade": true,
-   "order": 177,
+   "order": 178,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2016-maryland-dc-private-school-championships",
    "scoring": {
@@ -10314,7 +10361,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 176,
+   "order": 177,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2016-montgomery-county-private-school-championships",
    "scoring": {
@@ -10366,7 +10413,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 175,
+   "order": 176,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2016-montgomery-county-private-school-championships",
    "scoring": {
@@ -10412,7 +10459,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 174,
+   "order": 175,
    "venue": "Belvoir Scott's Plantation, Crownsville, MD",
    "group": "2016-maryland-dc-middle-school-championships-2016-11-03",
    "scoring": {
@@ -10458,7 +10505,7 @@
    "heightsCount": 28,
    "hasPace": true,
    "hasGrade": true,
-   "order": 173,
+   "order": 174,
    "venue": "Norwood School, Bethesda, MD",
    "group": "2016-norwood-halloween-run-2016-10-27",
    "scoring": {
@@ -10510,7 +10557,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 172,
+   "order": 173,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2016-43rd-annual-georgetown-prep-classic",
    "scoring": {
@@ -10562,7 +10609,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 171,
+   "order": 172,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2016-43rd-annual-georgetown-prep-classic",
    "scoring": {
@@ -10614,7 +10661,7 @@
    "heightsCount": 2,
    "hasPace": true,
    "hasGrade": true,
-   "order": 170,
+   "order": 171,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2016-43rd-annual-georgetown-prep-classic",
    "scoring": {
@@ -10656,7 +10703,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 169,
+   "order": 170,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2016-bullis-homecoming-meet",
    "scoring": {
@@ -10708,7 +10755,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 168,
+   "order": 169,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2016-bullis-homecoming-meet",
    "scoring": {
@@ -10754,7 +10801,7 @@
    "heightsCount": 15,
    "hasPace": true,
    "hasGrade": true,
-   "order": 167,
+   "order": 168,
    "venue": "Landon School, Bethesda, MD",
    "group": "2016-landon-middle-school-invitational-2016-10-13",
    "scoring": {
@@ -10800,7 +10847,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 166,
+   "order": 167,
    "venue": "Landon School, Bethesda, MD",
    "group": "2016-landon-middle-school-invitational-2016-10-13",
    "scoring": {
@@ -10852,7 +10899,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 165,
+   "order": 166,
    "venue": "Watkins Mill HS, Gaithersburg, MD",
    "group": "hs-2016-wolverine-run",
    "scoring": {
@@ -10904,7 +10951,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 164,
+   "order": 165,
    "venue": "Watkins Mill HS, Gaithersburg, MD",
    "group": "hs-2016-wolverine-run",
    "scoring": {
@@ -10956,7 +11003,7 @@
    "heightsCount": 3,
    "hasPace": true,
    "hasGrade": true,
-   "order": 163,
+   "order": 164,
    "venue": "Watkins Mill HS, Gaithersburg, MD",
    "group": "hs-2016-wolverine-run",
    "scoring": {
@@ -10998,7 +11045,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 162,
+   "order": 163,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2016-landon-invitational",
    "scoring": {
@@ -11050,7 +11097,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 161,
+   "order": 162,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2016-landon-invitational",
    "scoring": {
@@ -11102,7 +11149,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 160,
+   "order": 161,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2016-covenant-life-xc-invitational",
    "scoring": {
@@ -11154,7 +11201,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 159,
+   "order": 160,
    "venue": "Covenant Life School, Gaithersburg, MD",
    "group": "hs-2016-covenant-life-xc-invitational",
    "scoring": {
@@ -11206,7 +11253,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 158,
+   "order": 159,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2016-bullis-invitational",
    "scoring": {
@@ -11258,7 +11305,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 157,
+   "order": 158,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2016-bullis-invitational",
    "scoring": {
@@ -11310,7 +11357,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 156,
+   "order": 157,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2015-maryland-dc-private-school-championships-small-schools-varsity",
    "scoring": {
@@ -11362,7 +11409,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 155,
+   "order": 156,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2015-montgomery-county-private-school-championships",
    "scoring": {
@@ -11414,7 +11461,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 154,
+   "order": 155,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2015-montgomery-county-private-school-championships",
    "scoring": {
@@ -11460,7 +11507,7 @@
    "heightsCount": 16,
    "hasPace": true,
    "hasGrade": true,
-   "order": 153,
+   "order": 154,
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
    "group": "2015-maryland-dc-middle-school-championships-2015-11-05",
    "scoring": {
@@ -11513,7 +11560,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 152,
+   "order": 153,
    "venue": "Landon School, Bethesda, MD",
    "group": "2015-landon-ms-invitational",
    "scoring": {
@@ -11566,7 +11613,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 151,
+   "order": 152,
    "venue": "Landon School, Bethesda, MD",
    "group": "2015-landon-ms-invitational",
    "scoring": {
@@ -11618,7 +11665,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 150,
+   "order": 151,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2015-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -11670,7 +11717,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 149,
+   "order": 150,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2015-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -11722,7 +11769,7 @@
    "heightsCount": 2,
    "hasPace": true,
    "hasGrade": true,
-   "order": 148,
+   "order": 149,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2015-georgetown-prep-cross-country-classic",
    "scoring": {
@@ -11764,7 +11811,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 147,
+   "order": 148,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2015-glory-days-grill-invitational-cross-country-festival",
    "scoring": {
@@ -11816,7 +11863,7 @@
    "heightsCount": 11,
    "hasPace": true,
    "hasGrade": true,
-   "order": 146,
+   "order": 147,
    "venue": "Bull Run Regional Park, VA",
    "group": "hs-2015-glory-days-grill-invitational-cross-country-festival",
    "scoring": {
@@ -11862,7 +11909,7 @@
    "heightsCount": 17,
    "hasPace": true,
    "hasGrade": true,
-   "order": 145,
+   "order": 146,
    "venue": "Landon School, Bethesda, MD",
    "group": "2015-landon-ms-home-meet-2-2015-10-08",
    "scoring": {
@@ -11914,7 +11961,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 144,
+   "order": 145,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2015-landon-invitational",
    "scoring": {
@@ -11966,7 +12013,7 @@
    "heightsCount": 11,
    "hasPace": true,
    "hasGrade": true,
-   "order": 143,
+   "order": 144,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2015-landon-invitational",
    "scoring": {
@@ -12018,7 +12065,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 142,
+   "order": 143,
    "venue": "Williamsburg, VA (course not listed)",
    "group": "hs-2015-william-mary-invitational",
    "scoring": {
@@ -12062,7 +12109,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 141,
+   "order": 142,
    "venue": "Williamsburg, VA (course not listed)",
    "group": "hs-2015-william-mary-invitational",
    "scoring": {
@@ -12106,7 +12153,7 @@
    "heightsCount": 20,
    "hasPace": true,
    "hasGrade": true,
-   "order": 140,
+   "order": 141,
    "venue": "Bullis School, Potomac, MD",
    "group": "hs-2015-bullis-invitational-varsity",
    "scoring": {
@@ -12158,7 +12205,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 139,
+   "order": 140,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2014-md-dc-private-schools-cross-country-championships-hs",
    "scoring": {
@@ -12210,7 +12257,7 @@
    "heightsCount": 13,
    "hasPace": true,
    "hasGrade": true,
-   "order": 138,
+   "order": 139,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2014-md-dc-private-schools-cross-country-championships-hs",
    "scoring": {
@@ -12256,7 +12303,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 137,
+   "order": 138,
    "venue": "Flint Hill School, Oakton, VA",
    "group": "2014-flint-hill-home-meet-2014-11-05",
    "scoring": {
@@ -12302,7 +12349,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 136,
+   "order": 137,
    "venue": "Landon School, Bethesda, MD",
    "group": "2014-maryland-and-dc-private-school-championships-2014-11-03",
    "scoring": {
@@ -12354,7 +12401,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 135,
+   "order": 136,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2014-montgomery-county-private-school-championships",
    "scoring": {
@@ -12406,7 +12453,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 134,
+   "order": 135,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2014-montgomery-county-private-school-championships",
    "scoring": {
@@ -12465,7 +12512,7 @@
    "heightsCount": 15,
    "hasPace": true,
    "hasGrade": true,
-   "order": 133,
+   "order": 134,
    "venue": "The Calverton School, Huntingtown, MD",
    "group": "hs-2014-calverton-haunted-halloween-5k-open",
    "scoring": {
@@ -12498,7 +12545,7 @@
    "heightsCount": 1,
    "hasPace": true,
    "hasGrade": true,
-   "order": 132,
+   "order": 133,
    "venue": "The Calverton School, Huntingtown, MD",
    "group": "2014-calverton-haunted-halloween-5k-2014-10-25",
    "scoring": {
@@ -12535,7 +12582,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 131,
+   "order": 132,
    "venue": "Landon School, Bethesda, MD",
    "group": "2014-landon-ms-invitational",
    "scoring": {
@@ -12587,7 +12634,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 130,
+   "order": 131,
    "venue": "Landon School, Bethesda, MD",
    "group": "2014-landon-ms-invitational",
    "scoring": {
@@ -12639,7 +12686,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 129,
+   "order": 130,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2014-georgetown-prep-invitational-fall-classic",
    "scoring": {
@@ -12691,7 +12738,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 128,
+   "order": 129,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2014-georgetown-prep-invitational-fall-classic",
    "scoring": {
@@ -12743,7 +12790,7 @@
    "heightsCount": 3,
    "hasPace": true,
    "hasGrade": true,
-   "order": 127,
+   "order": 128,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2014-georgetown-prep-invitational-fall-classic",
    "scoring": {
@@ -12785,7 +12832,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 126,
+   "order": 127,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2014-landon-invitational",
    "scoring": {
@@ -12837,7 +12884,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 125,
+   "order": 126,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2014-landon-invitational",
    "scoring": {
@@ -12879,7 +12926,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 124,
+   "order": 125,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2014-landon-invitational",
    "scoring": {
@@ -12925,7 +12972,7 @@
    "heightsCount": 15,
    "hasPace": true,
    "hasGrade": true,
-   "order": 123,
+   "order": 124,
    "venue": "Landon School, Bethesda, MD",
    "group": "2014-landon-middle-school-meet-7-teams-2014-09-24",
    "scoring": {
@@ -12977,7 +13024,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 122,
+   "order": 123,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2014-oatlands-invitational",
    "scoring": {
@@ -13032,7 +13079,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 121,
+   "order": 122,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2014-oatlands-invitational",
    "scoring": {
@@ -13074,7 +13121,7 @@
    "heightsCount": 4,
    "hasPace": true,
    "hasGrade": true,
-   "order": 120,
+   "order": 121,
    "venue": "Oatlands, Leesburg, VA",
    "group": "hs-2014-oatlands-invitational",
    "scoring": {
@@ -13119,7 +13166,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 119,
+   "order": 120,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2014-howard-county-invitational",
    "scoring": {
@@ -13174,7 +13221,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 118,
+   "order": 119,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2014-howard-county-invitational",
    "scoring": {
@@ -13229,7 +13276,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 117,
+   "order": 118,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2014-howard-county-invitational",
    "scoring": {
@@ -13281,7 +13328,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 116,
+   "order": 117,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2013-maryland-and-dc-private-school-championships-varsity-small",
    "scoring": {
@@ -13327,7 +13374,7 @@
    "heightsCount": 15,
    "hasPace": true,
    "hasGrade": true,
-   "order": 115,
+   "order": 116,
    "venue": "Landon School, Bethesda, MD",
    "group": "2013-maryland-and-dc-private-school-championships-2013-11-04",
    "scoring": {
@@ -13379,7 +13426,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 114,
+   "order": 115,
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
    "group": "hs-2013-montgomery-county-private-school-championships",
    "scoring": {
@@ -13431,7 +13478,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 113,
+   "order": 114,
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
    "group": "hs-2013-montgomery-county-private-school-championships",
    "scoring": {
@@ -13490,7 +13537,7 @@
    "heightsCount": 14,
    "hasPace": true,
    "hasGrade": true,
-   "order": 112,
+   "order": 113,
    "venue": "The Calverton School, Huntingtown, MD",
    "group": "hs-2013-calverton-haunted-halloween-5k-open",
    "scoring": {
@@ -13527,7 +13574,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 111,
+   "order": 112,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2013-georgetown-prep-invitational-fall-classic",
    "scoring": {
@@ -13579,7 +13626,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 110,
+   "order": 111,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2013-georgetown-prep-invitational-fall-classic",
    "scoring": {
@@ -13629,7 +13676,7 @@
    "heightsCount": 3,
    "hasPace": true,
    "hasGrade": true,
-   "order": 109,
+   "order": 110,
    "venue": "Georgetown Prep, North Bethesda, MD",
    "group": "hs-2013-georgetown-prep-invitational-fall-classic",
    "scoring": {
@@ -13671,7 +13718,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 108,
+   "order": 109,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2013-landon-invitational",
    "scoring": {
@@ -13723,7 +13770,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 107,
+   "order": 108,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2013-landon-invitational",
    "scoring": {
@@ -13778,7 +13825,7 @@
    "heightsCount": 2,
    "hasPace": true,
    "hasGrade": true,
-   "order": 106,
+   "order": 107,
    "venue": "Landon School, Bethesda, MD",
    "group": "hs-2013-landon-invitational",
    "scoring": {
@@ -13820,7 +13867,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 105,
+   "order": 106,
    "venue": "Eastern State Hospital, Williamsburg, VA",
    "group": "hs-2013-william-and-mary-varsity",
    "scoring": {
@@ -13872,7 +13919,7 @@
    "heightsCount": 12,
    "hasPace": true,
    "hasGrade": true,
-   "order": 104,
+   "order": 105,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2013-howard-county-invitational",
    "scoring": {
@@ -13924,7 +13971,7 @@
    "heightsCount": 6,
    "hasPace": true,
    "hasGrade": true,
-   "order": 103,
+   "order": 104,
    "venue": "Centennial HS, Ellicott City, MD",
    "group": "hs-2013-howard-county-invitational",
    "scoring": {
@@ -13976,7 +14023,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 102,
+   "order": 103,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2012-md-dc-private-school-championships",
    "scoring": {
@@ -14028,7 +14075,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 101,
+   "order": 102,
    "venue": "Agricultural History Farm Park, Derwood, MD",
    "group": "hs-2012-md-dc-private-school-championships",
    "scoring": {
@@ -14047,6 +14094,53 @@
       "official": true,
       "calcPlace": 4,
       "calcScore": 103,
+      "match": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "2012-maryland-dc-middle-school-championships-2012-11-10",
+   "season": 2012,
+   "name": "Maryland & DC Middle School Championships",
+   "division": "MS",
+   "level": "Open",
+   "levelLabel": "Middle school",
+   "date": "2012-11-10",
+   "origin": "online",
+   "distance": 2.0,
+   "distanceSource": "official",
+   "officialName": "Maryland & DC Middle School Championships",
+   "location": "Agricultural History Farm Park, Derwood, MD",
+   "source": {
+    "name": "Athletic.net",
+    "url": "https://www.athletic.net/CrossCountry/meet/67289/results",
+    "original": null
+   },
+   "note": "MD/DC Private School Championships, middle school boys 2-mile race (posted on athletic.net as a separate meet, \u201cMaryland and DC Private School State Championship\u201d). Full field of 53: athletic.net lists St Albans' Christopher Emerson twice (also as \u201cChris Emerson\u201d, same place 13 and time 14:00.4), so the duplicate row is left out; with it removed, the calculated team scores match all four official scores. Official team scores are from the meet as posted on athletic.net; only four teams scored.",
+   "fieldSize": 53,
+   "heightsCount": 21,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 101,
+   "venue": "Agricultural History Farm Park, Derwood, MD",
+   "group": "2012-maryland-dc-middle-school-championships-2012-11-10",
+   "scoring": {
+    "teamCount": 4,
+    "calcCount": 4,
+    "official": {
+     "matched": 4,
+     "n": 4,
+     "heightsMatch": true
+    },
+    "heights": [
+     {
+      "team": "The Heights",
+      "place": 2,
+      "score": 50,
+      "official": true,
+      "calcPlace": 2,
+      "calcScore": 50,
       "match": true
      }
     ]
@@ -19119,7 +19213,7 @@
    "date": "2026-10-29",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 378,
+   "order": 380,
    "races": [
     "2026-state-championship"
    ],
@@ -19135,7 +19229,7 @@
    "date": "2026-10-24",
    "location": "Kenilworth Park",
    "venue": "Kenilworth Park, Washington, DC",
-   "order": 375,
+   "order": 377,
    "races": [
     "hs-2026-wcac-cross-country-championships-varsity-a",
     "hs-2026-wcac-cross-country-championships-varsity-b",
@@ -19155,7 +19249,7 @@
    "date": "2026-10-17",
    "location": "Pole Green Park (Upper Course), Mechanicsville, VA",
    "venue": "Pole Green Park, Mechanicsville, VA",
-   "order": 373,
+   "order": 375,
    "races": [
     "hs-2026-va-xc-showcase-varsity-showcase",
     "hs-2026-va-xc-showcase-morning-jv"
@@ -19173,7 +19267,7 @@
    "date": "2026-10-05",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 372,
+   "order": 374,
    "races": [
     "2026-bullis"
    ],
@@ -19189,7 +19283,7 @@
    "date": "2026-10-03",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 370,
+   "order": 372,
    "races": [
     "hs-2026-bittersweet-xc-invitational-varsity",
     "hs-2026-bittersweet-xc-invitational-open"
@@ -19207,7 +19301,7 @@
    "date": "2026-09-24",
    "location": "Flint Hill",
    "venue": "Flint Hill School, Oakton, VA",
-   "order": 369,
+   "order": 371,
    "races": [
     "2026-flint-hill"
    ],
@@ -19223,7 +19317,7 @@
    "date": "2026-09-19",
    "location": "Richmond, VA area (course not listed in printout)",
    "venue": "Richmond, VA area (course not listed)",
-   "order": 366,
+   "order": 368,
    "races": [
     "hs-2026-rva-relays-extra-2",
     "hs-2026-rva-relays-bc-relay",
@@ -19242,7 +19336,7 @@
    "date": "2026-09-04",
    "location": "Morven Park Grounds",
    "venue": "Morven Park, Leesburg, VA",
-   "order": 364,
+   "order": 366,
    "races": [
     "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-varsity",
     "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-junior-varsity"
@@ -19260,7 +19354,7 @@
    "date": "2025-11-06",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 362,
+   "order": 364,
    "races": [
     "hs-2025-maryland-private-school-state-championships-varsity-2a-large",
     "hs-2025-maryland-private-school-state-championships-junior-varsity"
@@ -19278,7 +19372,7 @@
    "date": "2025-11-05",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 361,
+   "order": 363,
    "races": [
     "2025-state-championship"
    ],
@@ -19294,7 +19388,7 @@
    "date": "2025-10-29",
    "location": "Flint Hill",
    "venue": "Flint Hill School, Oakton, VA",
-   "order": 360,
+   "order": 362,
    "races": [
     "2025-flint-hill"
    ],
@@ -19310,7 +19404,7 @@
    "date": "2025-10-25",
    "location": "Kenilworth Park, Washington, DC",
    "venue": "Kenilworth Park, Washington, DC",
-   "order": 357,
+   "order": 359,
    "races": [
     "hs-2025-wcac-championships-varsity-a",
     "hs-2025-wcac-championships-varsity-b",
@@ -19330,7 +19424,7 @@
    "date": "2025-10-18",
    "location": "Pole Green Palk (Upper Course)",
    "venue": "Pole Green Park, Mechanicsville, VA",
-   "order": 355,
+   "order": 357,
    "races": [
     "hs-2025-the-va-xc-showcase-elite",
     "hs-2025-the-va-xc-showcase-junior-varsity-morning"
@@ -19348,7 +19442,7 @@
    "date": "2025-10-17",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 354,
+   "order": 356,
    "races": [
     "2025-bittersweet-2"
    ],
@@ -19364,7 +19458,7 @@
    "date": "2025-10-11",
    "location": "Shawan Downs - Shawan Road",
    "venue": "Shawan Downs, Cockeysville, MD",
-   "order": 352,
+   "order": 354,
    "races": [
     "hs-2025-maryland-xc-invitational-presented-by-brooks-mdxc-black-gold-varsity",
     "hs-2025-maryland-xc-invitational-presented-by-brooks-mdxc-black-gold-junior-varsity-am"
@@ -19382,7 +19476,7 @@
    "date": "2025-10-03",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 351,
+   "order": 353,
    "races": [
     "2025-bittersweet-1"
    ],
@@ -19398,7 +19492,7 @@
    "date": "2025-09-27",
    "location": "Oatlands Plantation",
    "venue": "Oatlands, Leesburg, VA",
-   "order": 347,
+   "order": 349,
    "races": [
     "hs-2025-oatlands-invitational-varsity-a",
     "hs-2025-oatlands-invitational-varsity-b",
@@ -19418,7 +19512,7 @@
    "date": "2025-09-19",
    "location": "Agricultural History Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 345,
+   "order": 347,
    "races": [
     "hs-2025-skip-grant-invitational-varsity",
     "hs-2025-skip-grant-invitational-jv"
@@ -19436,7 +19530,7 @@
    "date": "2025-09-06",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 343,
+   "order": 345,
    "races": [
     "hs-2025-bittersweet-xc-invitational-varsity",
     "hs-2025-bittersweet-xc-invitational-junior-varsity"
@@ -19454,7 +19548,7 @@
    "date": "2024-11-23",
    "location": "WakeMed Soccer Park",
    "venue": "WakeMed Soccer Park, Cary, NC",
-   "order": 342,
+   "order": 344,
    "races": [
     "hs-2024-nxr-southeast-regional-championships-rising-stars"
    ],
@@ -19470,7 +19564,7 @@
    "date": "2024-11-07",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 341,
+   "order": 343,
    "races": [
     "2024-state-championship"
    ],
@@ -19486,7 +19580,7 @@
    "date": "2024-11-07",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 339,
+   "order": 341,
    "races": [
     "hs-2024-maryland-private-school-state-championships-varsity-large",
     "hs-2024-maryland-private-school-state-championships-junior-varsity"
@@ -19504,7 +19598,7 @@
    "date": "2024-11-04",
    "location": "Flint Hill",
    "venue": "Flint Hill School, Oakton, VA",
-   "order": 338,
+   "order": 340,
    "races": [
     "2024-flint-hill"
    ],
@@ -19520,7 +19614,7 @@
    "date": "2024-10-26",
    "location": "Kenilworth Park",
    "venue": "Kenilworth Park, Washington, DC",
-   "order": 336,
+   "order": 338,
    "races": [
     "hs-2024-wcac-varsity-a",
     "hs-2024-wcac-varsity-b"
@@ -19538,7 +19632,7 @@
    "date": "2024-10-24",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 335,
+   "order": 337,
    "races": [
     "2024-landon"
    ],
@@ -19554,7 +19648,7 @@
    "date": "2024-10-19",
    "location": "Pole Green Park",
    "venue": "Pole Green Park, Mechanicsville, VA",
-   "order": 333,
+   "order": 335,
    "races": [
     "hs-2024-va-xc-showcase-elite",
     "hs-2024-va-xc-showcase-varsity"
@@ -19571,7 +19665,7 @@
    "date": "2024-10-17",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 332,
+   "order": 334,
    "races": [
     "2024-georgetown-prep"
    ],
@@ -19587,7 +19681,7 @@
    "date": "2024-10-16",
    "location": "Sandy Spring Friends School",
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
-   "order": 330,
+   "order": 332,
    "races": [
     "hs-2024-pvac-xc-3-moco-private-school-championship-sandy-spring-moco-champs",
     "hs-2024-pvac-xc-3-moco-private-school-championship-sandy-spring-moco-co-ed-junior-varsity"
@@ -19605,7 +19699,7 @@
    "date": "2024-10-05",
    "location": "Shawan Downs - Shawan Road",
    "venue": "Shawan Downs, Cockeysville, MD",
-   "order": 327,
+   "order": 329,
    "races": [
     "hs-2024-maryland-xc-invitational-mdxc-black-gold",
     "hs-2024-maryland-xc-invitational-mdxc-junior-varsity",
@@ -19625,7 +19719,7 @@
    "date": "2024-09-28",
    "location": "Agricultural History Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 325,
+   "order": 327,
    "races": [
     "hs-2024-skip-grant-invitational-varsity",
     "hs-2024-skip-grant-invitational-jv"
@@ -19643,7 +19737,7 @@
    "date": "2024-09-21",
    "location": "Oatlands Plantation",
    "venue": "Oatlands, Leesburg, VA",
-   "order": 321,
+   "order": 323,
    "races": [
     "hs-2024-oatlands-invitational-varsity-a",
     "hs-2024-oatlands-invitational-varsity-b",
@@ -19663,7 +19757,7 @@
    "date": "2024-09-14",
    "location": "Richmond, VA area (course not listed in printout)",
    "venue": "Richmond, VA area (course not listed)",
-   "order": 318,
+   "order": 320,
    "races": [
     "hs-2024-rva-relays-extras-m-z",
     "hs-2024-rva-relays-bc-relay",
@@ -19682,7 +19776,7 @@
    "date": "2024-09-07",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 317,
+   "order": 319,
    "races": [
     "hs-2024-woodward-cross-country-relays-junior-varsity"
    ],
@@ -19697,7 +19791,7 @@
    "name": "Bullis",
    "venue": "Bullis School, Potomac, MD",
    "venueInferred": true,
-   "order": 316,
+   "order": 318,
    "races": [
     "2024-bullis"
    ],
@@ -19713,7 +19807,7 @@
    "date": "2024-08-30",
    "location": "Morven Park",
    "venue": "Morven Park, Leesburg, VA",
-   "order": 313,
+   "order": 315,
    "races": [
     "hs-2024-trials-of-miles-opening-night-xc-varsity",
     "hs-2024-trials-of-miles-opening-night-xc-junior-varsity",
@@ -19733,7 +19827,7 @@
    "date": "2023-11-09",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 311,
+   "order": 313,
    "races": [
     "hs-2023-md-state-private-schools-cross-country-championships-varsity-large-school",
     "hs-2023-md-state-private-schools-cross-country-championships-junior-varsity"
@@ -19751,7 +19845,7 @@
    "date": "2023-11-04",
    "location": "Maryland School for the Deaf",
    "venue": "Maryland School for the Deaf",
-   "order": 310,
+   "order": 312,
    "races": [
     "2023-state-championship"
    ],
@@ -19767,7 +19861,7 @@
    "date": "2023-11-02",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 308,
+   "order": 310,
    "races": [
     "hs-2023-moco-private-school-championships-varsity",
     "hs-2023-moco-private-school-championships-junior-varsity"
@@ -19785,7 +19879,7 @@
    "date": "2023-10-28",
    "location": "(not listed in printout)",
    "venue": "Unknown",
-   "order": 305,
+   "order": 307,
    "races": [
     "hs-2023-wcac-championship-varsity-a",
     "hs-2023-wcac-championship-varsity-b",
@@ -19805,7 +19899,7 @@
    "date": "2023-10-21",
    "location": "Agricultural Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 303,
+   "order": 305,
    "races": [
     "hs-2023-skip-grant-invitational-varsity",
     "hs-2023-skip-grant-invitational-junior-varsity"
@@ -19823,7 +19917,7 @@
    "date": "2023-10-14",
    "location": "Pole Green Park",
    "venue": "Pole Green Park, Mechanicsville, VA",
-   "order": 302,
+   "order": 304,
    "races": [
     "hs-2023-milestat-com-xc-invitational-2023-elite"
    ],
@@ -19839,7 +19933,7 @@
    "date": "2023-10-07",
    "location": "Shawan Downs - Shawan Road",
    "venue": "Shawan Downs, Cockeysville, MD",
-   "order": 300,
+   "order": 302,
    "races": [
     "hs-2023-maryland-xc-invitational-presented-by-saucony-mdxc-black-gold",
     "hs-2023-maryland-xc-invitational-presented-by-saucony-mdxc-junior-varsity"
@@ -19856,7 +19950,7 @@
    "name": "Bullis",
    "venue": "Bullis School, Potomac, MD",
    "venueInferred": true,
-   "order": 299,
+   "order": 301,
    "races": [
     "2023-bullis"
    ],
@@ -19871,7 +19965,7 @@
    "name": "Flint Hill",
    "venue": "Flint Hill School, Oakton, VA",
    "venueInferred": true,
-   "order": 298,
+   "order": 300,
    "races": [
     "2023-flint-hill"
    ],
@@ -19887,7 +19981,7 @@
    "date": "2023-09-30",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 297,
+   "order": 299,
    "races": [
     "2023-covenant-life"
    ],
@@ -19903,7 +19997,7 @@
    "date": "2023-09-23",
    "location": "Oatlands Plantation",
    "venue": "Oatlands, Leesburg, VA",
-   "order": 295,
+   "order": 297,
    "races": [
     "hs-2023-oatlands-invitational-varsity",
     "hs-2023-oatlands-invitational-junior-varsity"
@@ -19921,7 +20015,7 @@
    "date": "2023-09-16",
    "location": "Richmond, VA area (course not listed in printout)",
    "venue": "Richmond, VA area (course not listed)",
-   "order": 292,
+   "order": 294,
    "races": [
     "hs-2023-rva-relays-individual-2",
     "hs-2023-rva-relays-bc-relay",
@@ -19940,7 +20034,7 @@
    "date": "2023-09-09",
    "location": "Centennial HS",
    "venue": "Centennial HS, Ellicott City, MD",
-   "order": 289,
+   "order": 291,
    "races": [
     "hs-2023-eagle-invitational-varsity",
     "hs-2023-eagle-invitational-frosh-soph",
@@ -19960,7 +20054,7 @@
    "date": "2022-11-13",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 287,
+   "order": 289,
    "races": [
     "hs-2022-md-state-private-schools-championships-varsity-large-school",
     "hs-2022-md-state-private-schools-championships-junior-varsity"
@@ -19978,7 +20072,7 @@
    "date": "2022-11-09",
    "location": "Sandy Spring Friends School",
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
-   "order": 286,
+   "order": 288,
    "races": [
     "2022-state-championship"
    ],
@@ -19994,7 +20088,7 @@
    "date": "2022-11-03",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 284,
+   "order": 286,
    "races": [
     "hs-2022-moco-private-school-championships-varsity",
     "hs-2022-moco-private-school-championships-junior-varsity"
@@ -20012,7 +20106,7 @@
    "date": "2022-10-29",
    "location": "(not listed in printout)",
    "venue": "Unknown",
-   "order": 281,
+   "order": 283,
    "races": [
     "hs-2022-wcac-championship-varsity-a",
     "hs-2022-wcac-championship-varsity-b",
@@ -20032,7 +20126,7 @@
    "date": "2022-10-22",
    "location": "Agricultural Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 279,
+   "order": 281,
    "races": [
     "hs-2022-skip-grant-invitational-varsity",
     "hs-2022-skip-grant-invitational-junior-varsity"
@@ -20050,7 +20144,7 @@
    "date": "2022-10-14",
    "location": "Burke Lake Park",
    "venue": "Burke Lake Park, Fairfax Station, VA",
-   "order": 278,
+   "order": 280,
    "races": [
     "2022-fhs-invitational-2022-10-14"
    ],
@@ -20066,7 +20160,7 @@
    "date": "2022-10-08",
    "location": "Governor Thomas Johnson High School",
    "venue": "Gov. Thomas Johnson HS, Frederick, MD",
-   "order": 276,
+   "order": 278,
    "races": [
     "hs-2022-patriot-xc-invitational-varsity",
     "hs-2022-patriot-xc-invitational-junior-varsity"
@@ -20084,7 +20178,7 @@
    "date": "2022-10-01",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 275,
+   "order": 277,
    "races": [
     "2022-covenant-life"
    ],
@@ -20100,7 +20194,7 @@
    "date": "2022-10-01",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 274,
+   "order": 276,
    "races": [
     "hs-2022-cls-invitational-varsity"
    ],
@@ -20116,7 +20210,7 @@
    "date": "2022-09-24",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 271,
+   "order": 273,
    "races": [
     "hs-2022-georgetown-prep-cross-country-classic-seeded-varsity",
     "hs-2022-georgetown-prep-cross-country-classic-junior-varsity",
@@ -20136,7 +20230,7 @@
    "date": "2022-09-17",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 269,
+   "order": 271,
    "races": [
     "hs-2022-bullis-bulldog-invitational-varsity-a",
     "hs-2022-bullis-bulldog-invitational-varsity-b"
@@ -20153,7 +20247,7 @@
    "date": "2022-09-10",
    "location": "Centennial HS",
    "venue": "Centennial HS, Ellicott City, MD",
-   "order": 266,
+   "order": 268,
    "races": [
     "hs-2022-eagle-invitational-varsity",
     "hs-2022-eagle-invitational-frosh-soph",
@@ -20173,7 +20267,7 @@
    "date": "2021-11-13",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 264,
+   "order": 266,
    "races": [
     "hs-2021-md-private-schools-championships-varsity-large-school",
     "hs-2021-md-private-schools-championships-junior-varsity"
@@ -20191,7 +20285,7 @@
    "date": "2021-11-05",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 263,
+   "order": 265,
    "races": [
     "2021-state-championship-at-landon"
    ],
@@ -20207,7 +20301,7 @@
    "date": "2021-11-04",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 261,
+   "order": 263,
    "races": [
     "hs-2021-moco-private-school-championships-varsity",
     "hs-2021-moco-private-school-championships-junior-varsity"
@@ -20225,7 +20319,7 @@
    "date": "2021-10-30",
    "location": "(not listed in printout)",
    "venue": "Unknown",
-   "order": 258,
+   "order": 260,
    "races": [
     "hs-2021-wcac-championship-varsity-a",
     "hs-2021-wcac-championship-varsity-b",
@@ -20245,7 +20339,7 @@
    "date": "2021-10-23",
    "location": "Agricultural Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 256,
+   "order": 258,
    "races": [
     "hs-2021-skip-grant-invitational-varsity",
     "hs-2021-skip-grant-invitational-junior-varsity"
@@ -20263,7 +20357,7 @@
    "date": "2021-10-09",
    "location": "Bull Run Regional Park",
    "venue": "Bull Run Regional Park, VA",
-   "order": 253,
+   "order": 255,
    "races": [
     "hs-2021-glory-days-grill-invitational-varsity-b",
     "hs-2021-glory-days-grill-invitational-junior-varsity-div-2",
@@ -20283,7 +20377,7 @@
    "date": "2021-10-02",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 252,
+   "order": 254,
    "races": [
     "2021-cls-invitational-2021-10-02"
    ],
@@ -20299,7 +20393,7 @@
    "date": "2021-09-25",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 249,
+   "order": 251,
    "races": [
     "hs-2021-georgetown-prep-classic-seeded-varsity",
     "hs-2021-georgetown-prep-classic-junior-varsity",
@@ -20319,7 +20413,7 @@
    "date": "2021-09-18",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 247,
+   "order": 249,
    "races": [
     "hs-2021-the-mark-ferris-landon-invitational-varsity-a",
     "hs-2021-the-mark-ferris-landon-invitational-varsity-b"
@@ -20336,7 +20430,7 @@
    "date": "2021-09-11",
    "location": "Oatlands Plantation",
    "venue": "Oatlands, Leesburg, VA",
-   "order": 243,
+   "order": 245,
    "races": [
     "hs-2021-oatlands-invitational-varsity-a",
     "hs-2021-oatlands-invitational-varsity-b",
@@ -20356,7 +20450,7 @@
    "date": "2020-10-31",
    "location": "Montgomery County, MD",
    "venue": "Montgomery County, MD (course not listed)",
-   "order": 242,
+   "order": 244,
    "races": [
     "hs-2020-holy-cross-invitational-2-individual-results-overall"
    ],
@@ -20372,7 +20466,7 @@
    "date": "2020-10-17",
    "location": "Montgomery County, MD",
    "venue": "Montgomery County, MD (course not listed)",
-   "order": 241,
+   "order": 243,
    "races": [
     "hs-2020-holy-cross-invitational-1-individual-results-overall"
    ],
@@ -20388,7 +20482,7 @@
    "date": "2020-09-24",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 240,
+   "order": 242,
    "races": [
     "hs-2020-covenant-life-vs-the-heights-varsity"
    ],
@@ -20404,7 +20498,7 @@
    "date": "2019-11-09",
    "location": "N Bethesda, MD",
    "venue": "North Bethesda, MD (course not listed)",
-   "order": 238,
+   "order": 240,
    "races": [
     "hs-2019-maryland-state-private-school-championship-varsity-large",
     "hs-2019-maryland-state-private-school-championship-jv"
@@ -20422,7 +20516,7 @@
    "date": "2019-11-05",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 237,
+   "order": 239,
    "races": [
     "2019-state-championship-at-landon"
    ],
@@ -20438,7 +20532,7 @@
    "date": "2019-11-02",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 235,
+   "order": 237,
    "races": [
     "hs-2019-moco-private-school-championships-varsity",
     "hs-2019-moco-private-school-championships-junior-varsity"
@@ -20456,7 +20550,7 @@
    "date": "2019-10-26",
    "location": "Bull Run Regional Park",
    "venue": "Bull Run Regional Park, VA",
-   "order": 232,
+   "order": 234,
    "races": [
     "hs-2019-wcac-championships-varsity-a",
     "hs-2019-wcac-championships-varsity-b",
@@ -20476,7 +20570,7 @@
    "date": "2019-10-24",
    "location": "Norwood School",
    "venue": "Norwood School, Bethesda, MD",
-   "order": 231,
+   "order": 233,
    "races": [
     "2019-norwood-invitational"
    ],
@@ -20492,7 +20586,7 @@
    "date": "2019-10-19",
    "location": "Agricultural Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 229,
+   "order": 231,
    "races": [
     "hs-2019-skip-grant-invitational-varsity",
     "hs-2019-skip-grant-invitational-junior-varsity"
@@ -20510,7 +20604,7 @@
    "date": "2019-10-12",
    "location": "Bull Run Regional Park",
    "venue": "Bull Run Regional Park, VA",
-   "order": 226,
+   "order": 228,
    "races": [
     "hs-2019-glory-days-grill-invitational-varsity-b",
     "hs-2019-glory-days-grill-invitational-junior-varsity-ii",
@@ -20530,7 +20624,7 @@
    "date": "2019-09-28",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 225,
+   "order": 227,
    "races": [
     "hs-2019-cls-home-meet-varsity"
    ],
@@ -20546,7 +20640,7 @@
    "date": "2019-09-21",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 222,
+   "order": 224,
    "races": [
     "hs-2019-landon-invitational-varsity-a-division",
     "hs-2019-landon-invitational-varsity-b-division",
@@ -20564,7 +20658,7 @@
    "date": "2019-09-17",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 221,
+   "order": 223,
    "races": [
     "2019-covenant-life"
    ],
@@ -20580,7 +20674,7 @@
    "date": "2019-09-14",
    "location": "Oatlands Plantation",
    "venue": "Oatlands, Leesburg, VA",
-   "order": 218,
+   "order": 220,
    "races": [
     "hs-2019-oatlands-invitational-varsity",
     "hs-2019-oatlands-invitational-jv-underclassmen",
@@ -20599,7 +20693,7 @@
    "date": "2019-08-31",
    "location": "Bullis School, Potomac, MD",
    "venue": "Bullis School, Potomac, MD",
-   "order": 216,
+   "order": 218,
    "races": [
     "hs-2019-bullis-invitational-varsity",
     "hs-2019-bullis-invitational-jv-mixed"
@@ -20617,7 +20711,7 @@
    "date": "2018-11-12",
    "location": "McDaniel College",
    "venue": "McDaniel College, Westminster, MD",
-   "order": 214,
+   "order": 216,
    "races": [
     "hs-2018-maryland-private-school-championships-varsity-large",
     "hs-2018-maryland-private-school-championships-junior-varsity"
@@ -20635,7 +20729,7 @@
    "date": "2018-11-08",
    "location": "Belvoir Scott's Plantation",
    "venue": "Belvoir Scott's Plantation, Crownsville, MD",
-   "order": 213,
+   "order": 215,
    "races": [
     "2018-md-dc-middle-school-state-championships-2018-11-08"
    ],
@@ -20651,7 +20745,7 @@
    "date": "2018-11-07",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 212,
+   "order": 214,
    "races": [
     "hs-2018-montgomery-county-private-school-championships-varsity"
    ],
@@ -20667,7 +20761,7 @@
    "date": "2018-10-27",
    "location": "(not listed in printout)",
    "venue": "Unknown",
-   "order": 210,
+   "order": 212,
    "races": [
     "hs-2018-wcac-championship-division-a",
     "hs-2018-wcac-championship-freshman"
@@ -20685,7 +20779,7 @@
    "date": "2018-10-20",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 207,
+   "order": 209,
    "races": [
     "hs-2018-georgetown-prep-cross-country-classic-unseeded-varsity",
     "hs-2018-georgetown-prep-cross-country-classic-junior-varsity",
@@ -20705,7 +20799,7 @@
    "date": "2018-10-17",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 205,
+   "order": 207,
    "races": [
     "2018-landon-middle-school-invitational-2018-10-17",
     "2018-landon-middle-school-invitational-b-race-2018-10-17"
@@ -20722,7 +20816,7 @@
    "date": "2018-10-06",
    "location": "Bull Run Regional Park",
    "venue": "Bull Run Regional Park, VA",
-   "order": 203,
+   "order": 205,
    "races": [
     "hs-2018-glory-days-grill-invitational-varsity-b",
     "hs-2018-glory-days-grill-invitational-jv-2"
@@ -20740,7 +20834,7 @@
    "date": "2018-09-29",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 201,
+   "order": 203,
    "races": [
     "hs-2018-covenant-life-xc-invitational-varsity",
     "hs-2018-covenant-life-xc-invitational-junior-varsity"
@@ -20758,7 +20852,7 @@
    "date": "2018-09-22",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 198,
+   "order": 200,
    "races": [
     "hs-2018-landon-invitational-varsity-a-division",
     "hs-2018-landon-invitational-varsity-b-division",
@@ -20776,7 +20870,7 @@
    "date": "2018-09-08",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 196,
+   "order": 198,
    "races": [
     "hs-2018-bullis-invitational-varsity-blue",
     "hs-2018-bullis-invitational-junior-varsity"
@@ -20794,7 +20888,7 @@
    "date": "2017-11-11",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 194,
+   "order": 196,
    "races": [
     "hs-2017-maryland-private-school-championships-varsity-large",
     "hs-2017-maryland-private-school-championships-junior-varsity-large"
@@ -20812,7 +20906,7 @@
    "date": "2017-11-04",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 192,
+   "order": 194,
    "races": [
     "hs-2017-montgomery-county-private-school-championships-varsity",
     "hs-2017-montgomery-county-private-school-championships-junior-varsity"
@@ -20823,6 +20917,22 @@
    ]
   },
   {
+   "id": "2017-maryland-dc-middle-school-championships-2017-11-02",
+   "season": 2017,
+   "division": "MS",
+   "name": "Maryland & DC Middle School Championships",
+   "date": "2017-11-02",
+   "location": "Belvoir Scott's Plantation, Crownsville, MD",
+   "venue": "Belvoir Scott's Plantation, Crownsville, MD",
+   "order": 193,
+   "races": [
+    "2017-maryland-dc-middle-school-championships-2017-11-02"
+   ],
+   "levels": [
+    "Open"
+   ]
+  },
+  {
    "id": "hs-2017-georgetown-prep-cross-country-classic",
    "season": 2017,
    "division": "HS",
@@ -20830,7 +20940,7 @@
    "date": "2017-10-21",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 189,
+   "order": 190,
    "races": [
     "hs-2017-georgetown-prep-cross-country-classic-unseeded-varsity",
     "hs-2017-georgetown-prep-cross-country-classic-junior-varsity-ii",
@@ -20850,7 +20960,7 @@
    "date": "2017-10-14",
    "location": "Bullis School, Potomac, MD",
    "venue": "Bullis School, Potomac, MD",
-   "order": 188,
+   "order": 189,
    "races": [
     "hs-2017-bullis-home-meet-varsity"
    ],
@@ -20866,7 +20976,7 @@
    "date": "2017-10-07",
    "location": "Watkins Mill HS",
    "venue": "Watkins Mill HS, Gaithersburg, MD",
-   "order": 186,
+   "order": 187,
    "races": [
     "hs-2017-wolverine-run-varsity",
     "hs-2017-wolverine-run-jv"
@@ -20884,7 +20994,7 @@
    "date": "2017-09-30",
    "location": "Covenant Life School, Gaithersburg, MD",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 184,
+   "order": 185,
    "races": [
     "hs-2017-covenant-life-invitational-5-000-meters-varsity",
     "hs-2017-covenant-life-invitational-5-000-meters-junior-varsity"
@@ -20902,7 +21012,7 @@
    "date": "2017-09-16",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 182,
+   "order": 183,
    "races": [
     "hs-2017-landon-invitational-varsity-brown-division",
     "hs-2017-landon-invitational-varsity-gold-division"
@@ -20919,7 +21029,7 @@
    "date": "2017-09-09",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 180,
+   "order": 181,
    "races": [
     "hs-2017-bullis-invitational-varsity",
     "hs-2017-bullis-invitational-junior-varsity"
@@ -20937,7 +21047,7 @@
    "date": "2016-11-26",
    "location": "WakeMed Soccer Park",
    "venue": "WakeMed Soccer Park, Cary, NC",
-   "order": 179,
+   "order": 180,
    "races": [
     "hs-2016-nxr-southeast-regional-championships-open"
    ],
@@ -20953,7 +21063,7 @@
    "date": "2016-11-12",
    "location": "Agricultural Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 177,
+   "order": 178,
    "races": [
     "hs-2016-maryland-dc-private-school-championships-varsity-small-schools",
     "hs-2016-maryland-dc-private-school-championships-junior-varsity-small"
@@ -20971,7 +21081,7 @@
    "date": "2016-11-05",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 175,
+   "order": 176,
    "races": [
     "hs-2016-montgomery-county-private-school-championships-varsity",
     "hs-2016-montgomery-county-private-school-championships-junior-varsity"
@@ -20989,7 +21099,7 @@
    "date": "2016-11-03",
    "location": "Belvoir Scott's Plantation, Crownsville, MD",
    "venue": "Belvoir Scott's Plantation, Crownsville, MD",
-   "order": 174,
+   "order": 175,
    "races": [
     "2016-maryland-dc-middle-school-championships-2016-11-03"
    ],
@@ -21005,7 +21115,7 @@
    "date": "2016-10-27",
    "location": "Norwood School",
    "venue": "Norwood School, Bethesda, MD",
-   "order": 173,
+   "order": 174,
    "races": [
     "2016-norwood-halloween-run-2016-10-27"
    ],
@@ -21021,7 +21131,7 @@
    "date": "2016-10-22",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 170,
+   "order": 171,
    "races": [
     "hs-2016-43rd-annual-georgetown-prep-classic-seeded-varsity",
     "hs-2016-43rd-annual-georgetown-prep-classic-junior-varsity-i",
@@ -21041,7 +21151,7 @@
    "date": "2016-10-13",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 168,
+   "order": 169,
    "races": [
     "hs-2016-bullis-homecoming-meet-varsity",
     "hs-2016-bullis-homecoming-meet-junior-varsity"
@@ -21059,7 +21169,7 @@
    "date": "2016-10-13",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 166,
+   "order": 167,
    "races": [
     "2016-landon-middle-school-invitational-2016-10-13",
     "2016-landon-middle-school-invitational-open-race-2016-10-13"
@@ -21076,7 +21186,7 @@
    "date": "2016-10-08",
    "location": "Watkins Mill HS",
    "venue": "Watkins Mill HS, Gaithersburg, MD",
-   "order": 163,
+   "order": 164,
    "races": [
     "hs-2016-wolverine-run-varsity",
     "hs-2016-wolverine-run-junior-varsity",
@@ -21096,7 +21206,7 @@
    "date": "2016-09-24",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 161,
+   "order": 162,
    "races": [
     "hs-2016-landon-invitational-varsity-brown-division",
     "hs-2016-landon-invitational-varsity-white-division"
@@ -21113,7 +21223,7 @@
    "date": "2016-09-17",
    "location": "Covenant Life School",
    "venue": "Covenant Life School, Gaithersburg, MD",
-   "order": 159,
+   "order": 160,
    "races": [
     "hs-2016-covenant-life-xc-invitational-varsity",
     "hs-2016-covenant-life-xc-invitational-junior-varsity"
@@ -21131,7 +21241,7 @@
    "date": "2016-09-10",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 157,
+   "order": 158,
    "races": [
     "hs-2016-bullis-invitational-varsity",
     "hs-2016-bullis-invitational-junior-varsity"
@@ -21149,7 +21259,7 @@
    "date": "2015-11-14",
    "location": "Agricultural Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 156,
+   "order": 157,
    "races": [
     "hs-2015-maryland-dc-private-school-championships-small-schools-varsity"
    ],
@@ -21165,7 +21275,7 @@
    "date": "2015-11-07",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 154,
+   "order": 155,
    "races": [
     "hs-2015-montgomery-county-private-school-championships-varsity",
     "hs-2015-montgomery-county-private-school-championships-junior-varsity"
@@ -21183,7 +21293,7 @@
    "date": "2015-11-05",
    "location": "Sandy Spring Friends School",
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
-   "order": 153,
+   "order": 154,
    "races": [
     "2015-maryland-dc-middle-school-championships-2015-11-05"
    ],
@@ -21199,7 +21309,7 @@
    "date": "2015-10-22",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 151,
+   "order": 152,
    "races": [
     "2015-landon-ms-invitational",
     "2015-landon-ms-invitational-open-race"
@@ -21216,7 +21326,7 @@
    "date": "2015-10-17",
    "location": "Georgetown Prep",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 148,
+   "order": 149,
    "races": [
     "hs-2015-georgetown-prep-cross-country-classic-unseeded-varsity",
     "hs-2015-georgetown-prep-cross-country-classic-junior-varsity-i",
@@ -21236,7 +21346,7 @@
    "date": "2015-10-10",
    "location": "Bull Run Regional Park",
    "venue": "Bull Run Regional Park, VA",
-   "order": 146,
+   "order": 147,
    "races": [
     "hs-2015-glory-days-grill-invitational-cross-country-festival-varsity-b",
     "hs-2015-glory-days-grill-invitational-cross-country-festival-junior-varsity-1"
@@ -21254,7 +21364,7 @@
    "date": "2015-10-08",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 145,
+   "order": 146,
    "races": [
     "2015-landon-ms-home-meet-2-2015-10-08"
    ],
@@ -21270,7 +21380,7 @@
    "date": "2015-09-26",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 143,
+   "order": 144,
    "races": [
     "hs-2015-landon-invitational-varsity-9-12",
     "hs-2015-landon-invitational-junior-varsity-9-12"
@@ -21288,7 +21398,7 @@
    "date": "2015-09-19",
    "location": "Williamsburg, VA",
    "venue": "Williamsburg, VA (course not listed)",
-   "order": 141,
+   "order": 142,
    "races": [
     "hs-2015-william-mary-invitational-varsity-a",
     "hs-2015-william-mary-invitational-junior-varsity"
@@ -21306,7 +21416,7 @@
    "date": "2015-09-12",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 140,
+   "order": 141,
    "races": [
     "hs-2015-bullis-invitational-varsity"
    ],
@@ -21322,7 +21432,7 @@
    "date": "2014-11-08",
    "location": "Agricultural Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 138,
+   "order": 139,
    "races": [
     "hs-2014-md-dc-private-schools-cross-country-championships-hs-small",
     "hs-2014-md-dc-private-schools-cross-country-championships-hs-junior-varsity-small"
@@ -21340,7 +21450,7 @@
    "date": "2014-11-05",
    "location": "Flint Hill",
    "venue": "Flint Hill School, Oakton, VA",
-   "order": 137,
+   "order": 138,
    "races": [
     "2014-flint-hill-home-meet-2014-11-05"
    ],
@@ -21356,7 +21466,7 @@
    "date": "2014-11-03",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 136,
+   "order": 137,
    "races": [
     "2014-maryland-and-dc-private-school-championships-2014-11-03"
    ],
@@ -21372,7 +21482,7 @@
    "date": "2014-11-01",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 134,
+   "order": 135,
    "races": [
     "hs-2014-montgomery-county-private-school-championships-varsity",
     "hs-2014-montgomery-county-private-school-championships-junior-varsity"
@@ -21390,7 +21500,7 @@
    "date": "2014-10-25",
    "location": "The Calverton School, Huntingtown, MD",
    "venue": "The Calverton School, Huntingtown, MD",
-   "order": 133,
+   "order": 134,
    "races": [
     "hs-2014-calverton-haunted-halloween-5k-open"
    ],
@@ -21406,7 +21516,7 @@
    "date": "2014-10-25",
    "location": "The Calverton School, Huntingtown, MD",
    "venue": "The Calverton School, Huntingtown, MD",
-   "order": 132,
+   "order": 133,
    "races": [
     "2014-calverton-haunted-halloween-5k-2014-10-25"
    ],
@@ -21422,7 +21532,7 @@
    "date": "2014-10-20",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 130,
+   "order": 131,
    "races": [
     "2014-landon-ms-invitational",
     "2014-landon-ms-invitational-open-race"
@@ -21439,7 +21549,7 @@
    "date": "2014-10-18",
    "location": "Georgetown Prep, Rockville, MD",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 127,
+   "order": 128,
    "races": [
     "hs-2014-georgetown-prep-invitational-fall-classic-unseeded-varsity-overall",
     "hs-2014-georgetown-prep-invitational-fall-classic-junior-varsity-div-i-overall",
@@ -21459,7 +21569,7 @@
    "date": "2014-09-27",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 124,
+   "order": 125,
    "races": [
     "hs-2014-landon-invitational-varsity",
     "hs-2014-landon-invitational-junior-varsity-11-12",
@@ -21479,7 +21589,7 @@
    "date": "2014-09-24",
    "location": "Landon School, Bethesda, MD",
    "venue": "Landon School, Bethesda, MD",
-   "order": 123,
+   "order": 124,
    "races": [
     "2014-landon-middle-school-meet-7-teams-2014-09-24"
    ],
@@ -21495,7 +21605,7 @@
    "date": "2014-09-20",
    "location": "Oatlands Plantation",
    "venue": "Oatlands, Leesburg, VA",
-   "order": 120,
+   "order": 121,
    "races": [
     "hs-2014-oatlands-invitational-varsity-a",
     "hs-2014-oatlands-invitational-freshman-sophmore",
@@ -21515,7 +21625,7 @@
    "date": "2014-09-13",
    "location": "Centennial HS",
    "venue": "Centennial HS, Ellicott City, MD",
-   "order": 117,
+   "order": 118,
    "races": [
     "hs-2014-howard-county-invitational-a",
     "hs-2014-howard-county-invitational-b",
@@ -21533,7 +21643,7 @@
    "date": "2013-11-09",
    "location": "Agricultural Farm Park",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 116,
+   "order": 117,
    "races": [
     "hs-2013-maryland-and-dc-private-school-championships-varsity-small"
    ],
@@ -21549,7 +21659,7 @@
    "date": "2013-11-04",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 115,
+   "order": 116,
    "races": [
     "2013-maryland-and-dc-private-school-championships-2013-11-04"
    ],
@@ -21565,7 +21675,7 @@
    "date": "2013-11-02",
    "location": "Sandy Spring Friends School",
    "venue": "Sandy Spring Friends School, Sandy Spring, MD",
-   "order": 113,
+   "order": 114,
    "races": [
     "hs-2013-montgomery-county-private-school-championships-varsity",
     "hs-2013-montgomery-county-private-school-championships-junior-varsity"
@@ -21583,7 +21693,7 @@
    "date": "2013-10-26",
    "location": "The Calverton School, Huntingtown, MD",
    "venue": "The Calverton School, Huntingtown, MD",
-   "order": 112,
+   "order": 113,
    "races": [
     "hs-2013-calverton-haunted-halloween-5k-open"
    ],
@@ -21599,7 +21709,7 @@
    "date": "2013-10-12",
    "location": "Georgetown Prep, Rockville, MD",
    "venue": "Georgetown Prep, North Bethesda, MD",
-   "order": 109,
+   "order": 110,
    "races": [
     "hs-2013-georgetown-prep-invitational-fall-classic-unseeded-varsity-overall",
     "hs-2013-georgetown-prep-invitational-fall-classic-junior-varsity-div-ii-overall",
@@ -21619,7 +21729,7 @@
    "date": "2013-09-28",
    "location": "Landon School",
    "venue": "Landon School, Bethesda, MD",
-   "order": 106,
+   "order": 107,
    "races": [
     "hs-2013-landon-invitational-varsity",
     "hs-2013-landon-invitational-junior-varsity",
@@ -21639,7 +21749,7 @@
    "date": "2013-09-21",
    "location": "Eastern State Hospital",
    "venue": "Eastern State Hospital, Williamsburg, VA",
-   "order": 105,
+   "order": 106,
    "races": [
     "hs-2013-william-and-mary-varsity"
    ],
@@ -21655,7 +21765,7 @@
    "date": "2013-09-07",
    "location": "Centennial HS",
    "venue": "Centennial HS, Ellicott City, MD",
-   "order": 103,
+   "order": 104,
    "races": [
     "hs-2013-howard-county-invitational-varsity",
     "hs-2013-howard-county-invitational-varsity-b"
@@ -21672,7 +21782,7 @@
    "date": "2012-11-10",
    "location": "Agricultural History Farm Park, Derwood, MD",
    "venue": "Agricultural History Farm Park, Derwood, MD",
-   "order": 101,
+   "order": 102,
    "races": [
     "hs-2012-md-dc-private-school-championships-individual-results-varsity-small-schools",
     "hs-2012-md-dc-private-school-championships-individual-results-jv-small-schools"
@@ -21680,6 +21790,22 @@
    "levels": [
     "Varsity",
     "JV"
+   ]
+  },
+  {
+   "id": "2012-maryland-dc-middle-school-championships-2012-11-10",
+   "season": 2012,
+   "division": "MS",
+   "name": "Maryland & DC Middle School Championships",
+   "date": "2012-11-10",
+   "location": "Agricultural History Farm Park, Derwood, MD",
+   "venue": "Agricultural History Farm Park, Derwood, MD",
+   "order": 101,
+   "races": [
+    "2012-maryland-dc-middle-school-championships-2012-11-10"
+   ],
+   "levels": [
+    "Open"
    ]
   },
   {
@@ -22883,9 +23009,11 @@
   "matthew-kilmer-hs": "matt-kilmer",
   "david-diller-hs": "david-diller",
   "george-kelly-hs": "george-kelly",
+  "joseph-mcclorey": "joe-mcclorey",
+  "joseph-mcclorey-hs": "joe-mcclorey",
   "patrick-connolly-hs": "patrick-connolly",
-  "jack-garvey-hs": "jack-garvey",
   "leo-zelaya-hs": "leo-zelaya",
+  "jack-garvey-hs": "jack-garvey",
   "nate-dettleff-hs": "nate-dettleff",
   "nate-gartland-hs": "nate-gartland",
   "joseph-mcniff-hs": "joseph-mcniff",
@@ -23236,6 +23364,17 @@
      "secs": 1034.5,
      "pace": "8:12",
      "paceSecs": 492,
+     "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 43,
+     "hplace": 15,
+     "grade": 8,
+     "time": "16:52.0",
+     "secs": 1012.0,
+     "pace": "8:26",
+     "paceSecs": 506,
      "origin": "online"
     }
    ],
@@ -24570,6 +24709,17 @@
      "origin": "online"
     },
     {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 53,
+     "hplace": 21,
+     "grade": 6,
+     "time": "20:23.0",
+     "secs": 1223.0,
+     "pace": "10:11",
+     "paceSecs": 611,
+     "origin": "online"
+    },
+    {
      "meet": "2014-landon-middle-school-meet-7-teams-2014-09-24",
      "place": 68,
      "hplace": 12,
@@ -24617,7 +24767,8 @@
    "id": "logan-austin",
    "seasons": [
     2015,
-    2016
+    2016,
+    2017
    ],
    "results": [
     {
@@ -24664,15 +24815,28 @@
      "pace": "9:01",
      "paceSecs": 541,
      "origin": "online"
+    },
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 33,
+     "hplace": 6,
+     "grade": 8,
+     "time": "15:23.4",
+     "secs": 923.4,
+     "pace": "7:41",
+     "paceSecs": 461,
+     "teamPlace": 31,
+     "origin": "online"
     }
    ],
    "ms": [
     2015,
-    2016
+    2016,
+    2017
    ],
    "hs": [],
-   "bestPace": "9:01",
-   "bestPaceSecs": 541
+   "bestPace": "7:41",
+   "bestPaceSecs": 461
   },
   {
    "name": "Andrew Bailey",
@@ -27136,6 +27300,17 @@
      "origin": "online"
     },
     {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 30,
+     "hplace": 13,
+     "grade": 6,
+     "time": "15:36.0",
+     "secs": 936.0,
+     "pace": "7:48",
+     "paceSecs": 468,
+     "origin": "online"
+    },
+    {
      "meet": "2013-maryland-and-dc-private-school-championships-2013-11-04",
      "place": 50,
      "hplace": 7,
@@ -28049,6 +28224,7 @@
    "id": "jonathan-berry",
    "seasons": [
     2016,
+    2017,
     2018,
     2019,
     2020,
@@ -28091,6 +28267,17 @@
      "pace": "7:42",
      "paceSecs": 462,
      "teamPlace": 9,
+     "origin": "online"
+    },
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 36,
+     "hplace": 8,
+     "grade": 7,
+     "time": "15:24.7",
+     "secs": 924.7,
+     "pace": "7:42",
+     "paceSecs": 462,
      "origin": "online"
     },
     {
@@ -28380,6 +28567,7 @@
    ],
    "ms": [
     2016,
+    2017,
     2018
    ],
    "hs": [
@@ -28577,6 +28765,17 @@
      "secs": 1235.3,
      "pace": "9:48",
      "paceSecs": 588,
+     "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 46,
+     "hplace": 18,
+     "grade": 7,
+     "time": "17:14.0",
+     "secs": 1034.0,
+     "pace": "8:37",
+     "paceSecs": 517,
      "origin": "online"
     },
     {
@@ -29455,6 +29654,18 @@
      "pace": "7:03",
      "paceSecs": 423,
      "teamPlace": 11,
+     "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 18,
+     "hplace": 7,
+     "grade": 7,
+     "time": "14:26.0",
+     "secs": 866.0,
+     "pace": "7:13",
+     "paceSecs": 433,
+     "teamPlace": 15,
      "origin": "online"
     },
     {
@@ -30505,6 +30716,18 @@
      "origin": "online"
     },
     {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 14,
+     "hplace": 4,
+     "grade": 7,
+     "time": "14:00.9",
+     "secs": 840.9,
+     "pace": "7:00",
+     "paceSecs": 420,
+     "teamPlace": 12,
+     "origin": "online"
+    },
+    {
      "meet": "2013-maryland-and-dc-private-school-championships-2013-11-04",
      "place": 34,
      "hplace": 2,
@@ -30522,8 +30745,8 @@
     2013
    ],
    "hs": [],
-   "bestPace": "7:05",
-   "bestPaceSecs": 425
+   "bestPace": "7:00",
+   "bestPaceSecs": 420
   },
   {
    "name": "Bobby Bunch",
@@ -36377,6 +36600,7 @@
    "name": "Patrick Connolly",
    "id": "patrick-connolly",
    "seasons": [
+    2017,
     2018,
     2019,
     2020,
@@ -36385,6 +36609,18 @@
     2023
    ],
    "results": [
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 32,
+     "hplace": 5,
+     "grade": 6,
+     "time": "15:22.9",
+     "secs": 922.9,
+     "pace": "7:41",
+     "paceSecs": 461,
+     "teamPlace": 29,
+     "origin": "online"
+    },
     {
      "meet": "2018-landon-middle-school-invitational-2018-10-17",
      "place": 7,
@@ -36737,6 +36973,7 @@
     }
    ],
    "ms": [
+    2017,
     2018,
     2019
    ],
@@ -38757,6 +38994,17 @@
      "origin": "online"
     },
     {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 26,
+     "hplace": 10,
+     "grade": 8,
+     "time": "15:07.0",
+     "secs": 907.0,
+     "pace": "7:33",
+     "paceSecs": 453,
+     "origin": "online"
+    },
+    {
      "meet": "hs-2013-howard-county-invitational-varsity",
      "place": 109,
      "hplace": 3,
@@ -39721,6 +39969,17 @@
      "origin": "online"
     },
     {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 48,
+     "hplace": 19,
+     "grade": 6,
+     "time": "17:24.0",
+     "secs": 1044.0,
+     "pace": "8:42",
+     "paceSecs": 522,
+     "origin": "online"
+    },
+    {
      "meet": "2013-maryland-and-dc-private-school-championships-2013-11-04",
      "place": 86,
      "hplace": 11,
@@ -40450,6 +40709,7 @@
    "id": "david-diller",
    "seasons": [
     2016,
+    2017,
     2018,
     2019,
     2020,
@@ -40490,6 +40750,18 @@
      "secs": 989.0,
      "pace": "8:14",
      "paceSecs": 494,
+     "origin": "online"
+    },
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 35,
+     "hplace": 7,
+     "grade": 7,
+     "time": "15:23.6",
+     "secs": 923.6,
+     "pace": "7:41",
+     "paceSecs": 461,
+     "teamPlace": 32,
      "origin": "online"
     },
     {
@@ -40766,6 +41038,7 @@
    ],
    "ms": [
     2016,
+    2017,
     2018
    ],
    "hs": [
@@ -40978,14 +41251,26 @@
      "paceSecs": 431,
      "teamPlace": 18,
      "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 17,
+     "hplace": 6,
+     "grade": 8,
+     "time": "14:19.0",
+     "secs": 859.0,
+     "pace": "7:09",
+     "paceSecs": 429,
+     "teamPlace": 14,
+     "origin": "online"
     }
    ],
    "ms": [
     2012
    ],
    "hs": [],
-   "bestPace": "7:11",
-   "bestPaceSecs": 431
+   "bestPace": "7:09",
+   "bestPaceSecs": 429
   },
   {
    "name": "Robert Doughty",
@@ -41083,6 +41368,17 @@
      "origin": "online"
     },
     {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 36,
+     "hplace": 14,
+     "grade": 6,
+     "time": "16:07.0",
+     "secs": 967.0,
+     "pace": "8:03",
+     "paceSecs": 483,
+     "origin": "online"
+    },
+    {
      "meet": "2013-maryland-and-dc-private-school-championships-2013-11-04",
      "place": 91,
      "hplace": 14,
@@ -41123,14 +41419,15 @@
     2014
    ],
    "hs": [],
-   "bestPace": "8:26",
-   "bestPaceSecs": 506
+   "bestPace": "8:03",
+   "bestPaceSecs": 483
   },
   {
    "name": "Joseph Duncan",
    "id": "joseph-duncan",
    "seasons": [
-    2016
+    2016,
+    2017
    ],
    "results": [
     {
@@ -41166,10 +41463,22 @@
      "pace": "8:34",
      "paceSecs": 514,
      "origin": "online"
+    },
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 45,
+     "hplace": 9,
+     "grade": 8,
+     "time": "15:45.8",
+     "secs": 945.8,
+     "pace": "7:52",
+     "paceSecs": 472,
+     "origin": "online"
     }
    ],
    "ms": [
-    2016
+    2016,
+    2017
    ],
    "hs": [],
    "bestPace": "7:28",
@@ -46889,14 +47198,26 @@
      "paceSecs": 431,
      "teamPlace": 17,
      "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 12,
+     "hplace": 3,
+     "grade": 8,
+     "time": "13:59.0",
+     "secs": 839.0,
+     "pace": "6:59",
+     "paceSecs": 419,
+     "teamPlace": 10,
+     "origin": "online"
     }
    ],
    "ms": [
     2012
    ],
    "hs": [],
-   "bestPace": "7:11",
-   "bestPaceSecs": 431
+   "bestPace": "6:59",
+   "bestPaceSecs": 419
   },
   {
    "name": "Leo Gress",
@@ -48997,6 +49318,7 @@
    "id": "gage-hamilton",
    "seasons": [
     2016,
+    2017,
     2018
    ],
    "results": [
@@ -49038,6 +49360,18 @@
      "origin": "online"
     },
     {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 2,
+     "hplace": 1,
+     "grade": 7,
+     "time": "12:55.0",
+     "secs": 775.0,
+     "pace": "6:27",
+     "paceSecs": 387,
+     "teamPlace": 2,
+     "origin": "online"
+    },
+    {
      "meet": "2018-landon-middle-school-invitational-2018-10-17",
      "place": 3,
      "hplace": 1,
@@ -49064,6 +49398,7 @@
    ],
    "ms": [
     2016,
+    2017,
     2018
    ],
    "hs": [],
@@ -50294,6 +50629,17 @@
      "origin": "online"
     },
     {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 45,
+     "hplace": 17,
+     "grade": 7,
+     "time": "17:07.0",
+     "secs": 1027.0,
+     "pace": "8:33",
+     "paceSecs": 513,
+     "origin": "online"
+    },
+    {
      "meet": "hs-2014-howard-county-invitational-c",
      "place": 68,
      "hplace": 2,
@@ -50797,14 +51143,25 @@
      "pace": "7:29",
      "paceSecs": 449,
      "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 21,
+     "hplace": 8,
+     "grade": 8,
+     "time": "14:51.0",
+     "secs": 891.0,
+     "pace": "7:25",
+     "paceSecs": 445,
+     "origin": "online"
     }
    ],
    "ms": [
     2012
    ],
    "hs": [],
-   "bestPace": "7:29",
-   "bestPaceSecs": 449
+   "bestPace": "7:25",
+   "bestPaceSecs": 445
   },
   {
    "name": "Lincoln Huff",
@@ -51613,6 +51970,32 @@
    "bestPaceSecs": 658
   },
   {
+   "name": "Nicholas Jorgensen",
+   "id": "nicholas-jorgensen",
+   "seasons": [
+    2017
+   ],
+   "results": [
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 77,
+     "hplace": 13,
+     "grade": 8,
+     "time": "16:40.1",
+     "secs": 1000.1,
+     "pace": "8:20",
+     "paceSecs": 500,
+     "origin": "online"
+    }
+   ],
+   "ms": [
+    2017
+   ],
+   "hs": [],
+   "bestPace": "8:20",
+   "bestPaceSecs": 500
+  },
+  {
    "name": "Paul Junghans",
    "id": "paul-junghans",
    "seasons": [
@@ -52326,6 +52709,7 @@
    "id": "george-kelly",
    "seasons": [
     2016,
+    2017,
     2018,
     2019
    ],
@@ -52350,6 +52734,17 @@
      "secs": 1033.0,
      "pace": "8:36",
      "paceSecs": 516,
+     "origin": "online"
+    },
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 84,
+     "hplace": 14,
+     "grade": 7,
+     "time": "16:57.5",
+     "secs": 1017.5,
+     "pace": "8:28",
+     "paceSecs": 508,
      "origin": "online"
     },
     {
@@ -52458,6 +52853,7 @@
    ],
    "ms": [
     2016,
+    2017,
     2018
    ],
    "hs": [
@@ -55431,6 +55827,17 @@
      "secs": 935.0,
      "pace": "7:25",
      "paceSecs": 445,
+     "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 29,
+     "hplace": 12,
+     "grade": 6,
+     "time": "15:25.0",
+     "secs": 925.0,
+     "pace": "7:42",
+     "paceSecs": 462,
      "origin": "online"
     },
     {
@@ -59565,14 +59972,28 @@
   },
   {
    "name": "Joseph McClorey",
-   "id": "joseph-mcclorey",
+   "id": "joe-mcclorey",
    "seasons": [
+    2017,
     2018,
     2019,
     2020,
     2021
    ],
    "results": [
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 6,
+     "hplace": 2,
+     "grade": 8,
+     "time": "13:32.1",
+     "secs": 812.1,
+     "pace": "6:46",
+     "paceSecs": 406,
+     "teamPlace": 6,
+     "origin": "online",
+     "as": "Joe McClorey"
+    },
     {
      "meet": "hs-2018-bullis-invitational-varsity-blue",
      "place": 16,
@@ -59898,7 +60319,9 @@
      "origin": "hs"
     }
    ],
-   "ms": [],
+   "ms": [
+    2017
+   ],
    "hs": [
     2018,
     2019,
@@ -59906,9 +60329,11 @@
     2021
    ],
    "aka": [
-    "Joseph McLorey",
-    "Joe McClorey"
+    "Joe McClorey",
+    "Joseph McLorey"
    ],
+   "bestPace": "6:46",
+   "bestPaceSecs": 406,
    "hs5k": {
     "time": "17:44.0",
     "secs": 1064.0,
@@ -63239,6 +63664,18 @@
      "origin": "online"
     },
     {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 9,
+     "hplace": 1,
+     "grade": 8,
+     "time": "13:49.0",
+     "secs": 829.0,
+     "pace": "6:54",
+     "paceSecs": 414,
+     "teamPlace": 7,
+     "origin": "online"
+    },
+    {
      "meet": "hs-2013-howard-county-invitational-varsity-b",
      "place": 124,
      "hplace": 2,
@@ -63548,8 +63985,8 @@
     2015,
     2016
    ],
-   "bestPace": "7:01",
-   "bestPaceSecs": 421,
+   "bestPace": "6:54",
+   "bestPaceSecs": 414,
    "hs5k": {
     "time": "19:08.0",
     "secs": 1148.0,
@@ -64511,6 +64948,7 @@
    "seasons": [
     2015,
     2016,
+    2017,
     2018,
     2019,
     2020
@@ -64552,6 +64990,18 @@
      "pace": "7:44",
      "paceSecs": 464,
      "teamPlace": 10,
+     "origin": "online"
+    },
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 14,
+     "hplace": 3,
+     "grade": 8,
+     "time": "14:02.7",
+     "secs": 842.7,
+     "pace": "7:01",
+     "paceSecs": 421,
+     "teamPlace": 14,
      "origin": "online"
     },
     {
@@ -64734,7 +65184,8 @@
    ],
    "ms": [
     2015,
-    2016
+    2016,
+    2017
    ],
    "hs": [
     2018,
@@ -64817,6 +65268,18 @@
      "paceSecs": 442,
      "teamPlace": 27,
      "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 16,
+     "hplace": 5,
+     "grade": 8,
+     "time": "14:12.0",
+     "secs": 852.0,
+     "pace": "7:06",
+     "paceSecs": 426,
+     "teamPlace": 13,
+     "origin": "online"
     }
    ],
    "ms": [
@@ -64824,8 +65287,8 @@
     2012
    ],
    "hs": [],
-   "bestPace": "7:15",
-   "bestPaceSecs": 435
+   "bestPace": "7:06",
+   "bestPaceSecs": 426
   },
   {
    "name": "Edward Nelson",
@@ -66423,6 +66886,17 @@
      "pace": "8:48",
      "paceSecs": 528,
      "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 44,
+     "hplace": 16,
+     "grade": 8,
+     "time": "16:54.0",
+     "secs": 1014.0,
+     "pace": "8:27",
+     "paceSecs": 507,
+     "origin": "online"
     }
    ],
    "ms": [
@@ -66430,8 +66904,8 @@
     2012
    ],
    "hs": [],
-   "bestPace": "8:41",
-   "bestPaceSecs": 521
+   "bestPace": "8:27",
+   "bestPaceSecs": 507
   },
   {
    "name": "Nicholas Obrzut",
@@ -69417,6 +69891,17 @@
      "pace": "9:19",
      "paceSecs": 559,
      "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 49,
+     "hplace": 20,
+     "grade": 6,
+     "time": "17:49.0",
+     "secs": 1069.0,
+     "pace": "8:54",
+     "paceSecs": 534,
+     "origin": "online"
     }
    ],
    "ms": [
@@ -71488,14 +71973,25 @@
      "pace": "7:46",
      "paceSecs": 466,
      "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 27,
+     "hplace": 11,
+     "grade": 6,
+     "time": "15:08.0",
+     "secs": 908.0,
+     "pace": "7:34",
+     "paceSecs": 454,
+     "origin": "online"
     }
    ],
    "ms": [
     2012
    ],
    "hs": [],
-   "bestPace": "7:43",
-   "bestPaceSecs": 463
+   "bestPace": "7:34",
+   "bestPaceSecs": 454
   },
   {
    "name": "David Sadek",
@@ -72116,6 +72612,17 @@
      "pace": "7:21",
      "paceSecs": 441,
      "teamPlace": 26,
+     "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 22,
+     "hplace": 9,
+     "grade": 7,
+     "time": "14:53.0",
+     "secs": 893.0,
+     "pace": "7:26",
+     "paceSecs": 446,
      "origin": "online"
     },
     {
@@ -73829,6 +74336,18 @@
      "grade": 6,
      "time": "14:32.6",
      "secs": 872.6,
+     "pace": "6:55",
+     "paceSecs": 415,
+     "teamPlace": 8,
+     "origin": "online"
+    },
+    {
+     "meet": "2012-maryland-dc-middle-school-championships-2012-11-10",
+     "place": 10,
+     "hplace": 2,
+     "grade": 6,
+     "time": "13:50.0",
+     "secs": 830.0,
      "pace": "6:55",
      "paceSecs": 415,
      "teamPlace": 8,
@@ -75918,6 +76437,7 @@
    "seasons": [
     2015,
     2016,
+    2017,
     2018,
     2019,
     2020,
@@ -75984,6 +76504,18 @@
      "secs": 1046.0,
      "pace": "8:43",
      "paceSecs": 523,
+     "origin": "online",
+     "as": "Joe Sypal"
+    },
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 47,
+     "hplace": 10,
+     "grade": 8,
+     "time": "15:47.5",
+     "secs": 947.5,
+     "pace": "7:53",
+     "paceSecs": 473,
      "origin": "online",
      "as": "Joe Sypal"
     },
@@ -76238,7 +76770,8 @@
    ],
    "ms": [
     2015,
-    2016
+    2016,
+    2017
    ],
    "hs": [
     2018,
@@ -76249,8 +76782,8 @@
    "aka": [
     "Joe Sypal"
    ],
-   "bestPace": "7:54",
-   "bestPaceSecs": 474,
+   "bestPace": "7:53",
+   "bestPaceSecs": 473,
    "hs5k": {
     "time": "19:49.2",
     "secs": 1189.2,
@@ -78913,6 +79446,32 @@
    "bestPaceSecs": 447
   },
   {
+   "name": "Sebastian Villa",
+   "id": "sebastian-villa",
+   "seasons": [
+    2017
+   ],
+   "results": [
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 61,
+     "hplace": 11,
+     "grade": 8,
+     "time": "16:04.8",
+     "secs": 964.8,
+     "pace": "8:02",
+     "paceSecs": 482,
+     "origin": "online"
+    }
+   ],
+   "ms": [
+    2017
+   ],
+   "hs": [],
+   "bestPace": "8:02",
+   "bestPaceSecs": 482
+  },
+  {
    "name": "Rafael Virador",
    "id": "rafael-virador",
    "seasons": [
@@ -81212,7 +81771,8 @@
    "name": "Ryan Woolery",
    "id": "ryan-woolery",
    "seasons": [
-    2016
+    2016,
+    2017
    ],
    "results": [
     {
@@ -81249,10 +81809,23 @@
      "pace": "8:08",
      "paceSecs": 488,
      "origin": "online"
+    },
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 19,
+     "hplace": 4,
+     "grade": 8,
+     "time": "14:32.2",
+     "secs": 872.2,
+     "pace": "7:16",
+     "paceSecs": 436,
+     "teamPlace": 19,
+     "origin": "online"
     }
    ],
    "ms": [
-    2016
+    2016,
+    2017
    ],
    "hs": [],
    "bestPace": "7:07",
@@ -81726,6 +82299,7 @@
    "name": "Leo Zelaya",
    "id": "leo-zelaya",
    "seasons": [
+    2017,
     2018,
     2019,
     2020,
@@ -81733,6 +82307,17 @@
     2022
    ],
    "results": [
+    {
+     "meet": "2017-maryland-dc-middle-school-championships-2017-11-02",
+     "place": 67,
+     "hplace": 12,
+     "grade": 6,
+     "time": "16:13.5",
+     "secs": 973.5,
+     "pace": "8:06",
+     "paceSecs": 486,
+     "origin": "online"
+    },
     {
      "meet": "2018-landon-middle-school-invitational-2018-10-17",
      "place": 13,
@@ -81950,6 +82535,7 @@
     }
    ],
    "ms": [
+    2017,
     2018,
     2019
    ],
@@ -82542,6 +83128,7 @@
   "2017 Bullis Invitational \u2013 Varsity: 3 of 13 official team scores reproduced.",
   "2017 Georgetown Prep Cross-country Classic \u2013 Freshman: 9 of 11 official team scores reproduced.",
   "2017 Georgetown Prep Cross-country Classic \u2013 Unseeded Varsity: 0 of 11 official team scores reproduced.",
+  "2017 Maryland & DC Middle School Championships: 12 of 13 official team scores reproduced.",
   "2017 Maryland Private School Championships \u2013 Varsity Large: 6 of 10 official team scores reproduced.",
   "2017 Montgomery County Private School Championships \u2013 Junior Varsity: 4 of 6 official team scores reproduced.",
   "2018 Georgetown Prep Cross-country Classic \u2013 Freshman: 10 of 12 official team scores reproduced.",

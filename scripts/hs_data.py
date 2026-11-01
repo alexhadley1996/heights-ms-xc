@@ -151,6 +151,7 @@ EXTRA_MS_HS_MERGES = {
     "luca-tocci": "Lucca Tocci",
     "steven-mccreary": "Stephen McCreary",
     "david-krohn": "David Krohn",
+    "joe-mcclorey": "Joseph McClorey",  # 2017 MS States (gr 8) = HS 2018-21, class of 2021
 }
 
 # Runner pages to join into one person regardless of the listed grades (ids as the build would otherwise make them;

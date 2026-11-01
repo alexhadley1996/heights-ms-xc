@@ -91,6 +91,14 @@ Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); th
 
 Every race has a normalized `venue` (the course), built in `assign_venues` in `scripts/build_data.py`. Location strings are mapped through `VENUES`, so spelling variants of one course become one name. If no location is listed and the meet is named for its host school, `VENUE_FROM_NAME` supplies the venue and marks it `venueInferred`, shown with a *. Anything else is "Unknown". A location that isn't in `VENUES` is shown as listed and reported as a build quirk. All Results shows a Venue column (meet name underneath, linked to the race), has a Venue filter (`?venue=`), and includes both Venue and Meet in the CSV. Meet pages show the venue in their header.
 
+### MD/DC Private School MS Championships (2012, 2017)
+
+The boys' 2-mile races from athletic.net (meets 67289 and 134669) are in `data/supplemental/manifest.json`. Their official team scores are in `data/supplemental/official_team_scores.csv`. Neither race duplicated anything already on the site.
+- 2012: athletic.net lists one St Albans runner twice. With the duplicate removed, all 4 official team scores match.
+- 2017: 12 of 13 official team scores match. Rockbridge is 2 points off because of tied times.
+
+The missing-places check no longer counts a place skipped after a tie (8, 8, 10) as a missing finisher.
+
 ## Preview locally
 `python3 -m http.server` in this folder, then open http://localhost:8000
 
