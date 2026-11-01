@@ -1277,6 +1277,12 @@ def build_runners(meets):
     review.append(f"Grades inferred for {grade_log['filled']} Heights results; {grade_log['unresolved']} still unknown.")
     review += grade_log["conflicts"]
     ids = {r["id"] for r in runners}
+    # runner pages that disappeared because a name was merged into another (e.g. a confirmed same-runner pair)
+    import hs_data
+    for old_id, new_name in getattr(hs_data, "RETIRED_RUNNER_IDS", {}).items():
+        tgt = next((r["id"] for r in runners if r["name"] == new_name), None)
+        if tgt:
+            aliases.setdefault(old_id, tgt)
     build_runners.aliases = {k: v for k, v in aliases.items() if k not in ids}
     return runners, review
 

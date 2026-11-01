@@ -36,7 +36,7 @@ HS_NAME_ALIASES = {
     "Conor Breed": "Connor Breed",
     "James Calahan": "Jim Callahan",
     "Dom Currano": "Dominic Currano",
-    "A.J. Guarente": "AJ Guarente",
+    "A.J. Guarente": "Andrew Guarente",
     "Nathan Hale": "Nathanael Hale",
     "Will Krohn": "William Krohn",
     "Chris Lenczowski": "Christian Lenczowski",
@@ -50,7 +50,25 @@ HS_NAME_ALIASES = {
     "Krohn": "William Krohn",
     "Hadley": "Peter Hadley",
     "Yang": "Willy Yang",
+    # confirmed by the team (Nov 2026): AJ Guarente (2004-05) is Andrew Guarente (2006)
+    "AJ Guarente": "Andrew Guarente",
+    # 2000-2001 results (history batch 3): spellings/nicknames of the same Heights runner in consecutive seasons, grades consistent
+    "Dan Shusinsky": "Dan Sushinsky",
+    "Danny Mccarthy": "Dan McCarthy",
+    "Danny McCarthy": "Dan McCarthy",
+    "Dan MC Carthy": "Dan McCarthy",
+    "Dan Mc Carthy": "Dan McCarthy",
+    "Allejandro Lulli": "Alejandro Lulli",
+    "Dan Henebrey": "Dan Henebery",
+    "Charley Gallagher": "Charles Gallagher",
+    "Mike Galagher": "Mike Gallagher",
+    "James Acsvedo": "James Acevedo",
+    "Jim Streeter": "James Streeter",
+    "Matt Fuley": "Matt Foley",
 }
+# Old runner-page ids whose names were later merged into another runner: {old id: name of the runner it now belongs to}.
+RETIRED_RUNNER_IDS = {"aj-guarente": "Andrew Guarente"}
+
 # Listed in hs_name_variants.csv but kept separate: each is also a "needs confirmation" MS-HS pair.
 NOT_MERGED = []  # all earlier "possible same runner" pairs were confirmed by the team (Oct 2026) and merged
 
@@ -286,7 +304,7 @@ def race_short(s, level, label):
     return r or label
 
 
-def entry(row, grade_fix):
+def entry(row, grade_fix, name_fix=None):
     raw = re.sub(r"\s+", " ", (row.get("Name") or "").strip())
     leg = None
     m = re.search(r"\s*\(leg (\d)\)$", raw)
@@ -303,6 +321,8 @@ def entry(row, grade_fix):
     if e["heights"]:
         new = HS_NAME_ALIASES.get(name, name)
         new = re.sub(r"\bLuli$", "Lulli", new)
+        if name_fix and name in name_fix:
+            new = name_fix[name]
         if new != name:
             e["note"] = f"Listed as \u201c{raw}\u201d"
             e["name"] = new
@@ -366,7 +386,7 @@ def build_hs_meets(quirks):
     pending, url_users = [], collections.defaultdict(list)
     for s in rows:
         base = os.path.basename(s["CSV"])
-        field = [entry(r, gfix.get(base, {})) for r in csv.DictReader(open(os.path.join(HS, "races", base), encoding="utf-8"))]
+        field = [entry(r, gfix.get(base, {}), notes.get("name_fixes", {}).get(base)) for r in csv.DictReader(open(os.path.join(HS, "races", base), encoding="utf-8"))]
         for x in notes.get("extra_rows", {}).get(base, []):  # e.g. a DQ the source lists apart from the finishers
             e = entry(x, {})
             e["note"] = x.get("note") or e.get("note")

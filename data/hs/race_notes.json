@@ -102,7 +102,8 @@
    "Racecast title: 30th Annual Fall Classic 2003, \"Boys Small School\". The HY-TEK printout (milesplit.com via mocorunning, meet 3406) calls the same race \"Men's 5,000 Meter Division I Var Boys\" and gives the official team scores (Heights School 14th, 307). Racecast lists Mike Fagan, Jack Bauer, Steve Wyble, Vincent Barrett and Brendan Keats without grades."
   ],
   "2003_Baltimore_Washington_Private_Small_Varsity_moco5086.csv": [
-   "Only newspaper highlights were posted (mocorunning: \"compiled from Montgomery Journal and Washington Post highlights\"): the top 6 plus a few local runners, so most places are missing. \"William Krosh\" (13th, The Heights) is William Krohn (same team, same season; a misspelling). The printout gives Mike Fagan and Peter Hadley the same time, 17:45.07. The distance is not stated."
+   "Only newspaper highlights were posted (mocorunning: \"compiled from Montgomery Journal and Washington Post highlights\"): the top 6 plus a few local runners, so most places are missing. \"William Krosh\" (13th, The Heights) is William Krohn (same team, same season; a misspelling). The printout gives Mike Fagan and Peter Hadley the same time, 17:45.07.",
+   "Distance: 5K, as confirmed by the team (Nov 2026); the posted results don't state it."
   ],
   "2002_Baltimore_Washington_Private_Small_Varsity_moco4922.csv": [
    "The posted results list only the top 5 and a few other runners, so most places are missing. Date: mocorunning files the meet on Saturday, Nov 2, 2002; the printout header says November 11, 2002. The distance is not stated."
@@ -115,6 +116,34 @@
   ],
   "2003_Landon_Heights_St_Anselms_Lab_Team_Scores_moco9279.csv": [
    "Only the boys team scores were published (Washington Post, as posted on mocorunning); no individual results have been found. Published in the Washington Post on 10/22/2003. Mocorunning dates it Oct 21, 2003; the exact date and location are unknown. The level is not stated, so this is listed as an open race."
+  ],
+  "2001_Mercersburg_Invitational_Varsity_53014.csv": [
+   "Official team scores: the meet printout posted on DyeStat (The Heights 12th, 327), which lists teams by 8-letter codes; they are matched here to the school names racecast uses. DyeStat: \"Stern and Glah set course records on new course.\" DyeStat spells two Heights runners \"Dan Shusinsky\" and \"Dan Henebery\"; racecast has \"Dan Shusinsky\", \"Dan Henebrey\" and \"Danny Mccarthy\"."
+  ],
+  "2001_Georgetown_Prep_Classic_Div_I_Varsity_ms696.csv": [
+   "Results and official team scores: the HY-TEK printout posted on MileSplit (also partly on mocorunning, meet 3446).",
+   "The printout lists \"Mike Fagan\" in grade 9. He is shown on Michael Fagan's page: the 2001 Mercersburg results list him as Michael Fagan, and grade 9 in 2001 matches Michael Fagan's senior year in 2004."
+  ],
+  "2001_Georgetown_Prep_Classic_Div_I_JV_ms701.csv": [
+   "Results and official team scores: the HY-TEK printout posted on MileSplit (also partly on mocorunning, meet 3446)."
+  ],
+  "2001_Georgetown_Prep_Classic_Freshman_ms704.csv": [
+   "Results and official team scores: the HY-TEK printout posted on MileSplit (also partly on mocorunning, meet 3446). The freshman race was open to some 7th, 8th, 10th and 11th graders from other schools too; every Heights runner in it was a 9th grader."
+  ],
+  "2000_Georgetown_Prep_Classic_Div_I_Varsity_moco3492.csv": [
+   "Results and official team scores: the HY-TEK printout from DyeStat, as posted on mocorunning (meet 3492)."
+  ],
+  "2000_Georgetown_Prep_Classic_Div_I_JV_moco3492.csv": [
+   "Results and official team scores: the HY-TEK printout from DyeStat, as posted on mocorunning (meet 3492). The Heights had only 4 finishers, so it had no team score."
+  ],
+  "2000_Georgetown_Prep_Classic_Freshman_moco3492.csv": [
+   "Results and official team scores: the HY-TEK printout from DyeStat, as posted on mocorunning (meet 3492). The Heights had only 3 finishers, so it had no team score."
+  ],
+  "2000_Ballenger_Creek_Park_Meet_Team_Scores_moco9680.csv": [
+   "Only the boys team scores were published (Washington Post, as posted on mocorunning); no individual results have been found. Published in the Washington Post on 10/12/2000. Mocorunning dates it Wednesday, Oct 11, 2000 and lists the site as Ballenger Creek Park (mocorunning files it as the \"New Life Christian Meet\"). The Heights won with 26 points. Only the girls' winner is listed, so no Heights individual results are known."
+  ],
+  "2000_Washington_Independent_Schools_Championship_Team_Scores_moco7625.csv": [
+   "Only the boys team scores were published (Washington Post, as posted on mocorunning); no individual results have been found. Highlights from the Washington Post, as posted on mocorunning (filed under the Maryland private school championships history). Boys champion: Ben Stern, Georgetown Day. The Heights placed 4th of 13 with 124 points. No Heights individual results were published."
   ]
  },
  "grade_fixes": {
@@ -174,12 +203,20 @@
   "2010_Calverton_Homecoming_Race_Team_Scores.csv": "Team scores only: no individual results were published for this meet.",
   "2002_Private_School_Meet_Oct_2_Team_Scores_moco9297.csv": "Team scores only: no individual results were published for this meet.",
   "2003_Private_School_Meet_Sep_16_Team_Scores_moco9286.csv": "Team scores only: no individual results were published for this meet.",
-  "2003_Landon_Heights_St_Anselms_Lab_Team_Scores_moco9279.csv": "Team scores only: no individual results were published for this meet."
+  "2003_Landon_Heights_St_Anselms_Lab_Team_Scores_moco9279.csv": "Team scores only: no individual results were published for this meet.",
+  "2000_Ballenger_Creek_Park_Meet_Team_Scores_moco9680.csv": "Team scores only: no individual results were published for this meet.",
+  "2000_Washington_Independent_Schools_Championship_Team_Scores_moco7625.csv": "Team scores only: no individual results were published for this meet."
  },
  "partial_scores": {
   "2003_Sandy_Spring_Friends_Meet_Boys_moco6009.csv": "Only part of the field was posted, so team scores are not recalculated here; the official team scores are shown.",
   "2003_Baltimore_Washington_Private_Small_Varsity_moco5086.csv": "Only part of the field was posted, so team scores are not recalculated here; the official team scores are shown.",
   "2002_Baltimore_Washington_Private_Small_Varsity_moco4922.csv": "Only part of the field was posted, so team scores are not recalculated here; the official team scores are shown."
  },
- "_about_partial_scores": "partial_scores: races where only part of the field was posted; the official team scores are shown but not recalculated."
+ "_about_partial_scores": "partial_scores: races where only part of the field was posted; the official team scores are shown but not recalculated.",
+ "_about_name_fixes": "name_fixes: per-race listed name -> site runner, for a listing that must not be merged globally.",
+ "name_fixes": {
+  "2001_Georgetown_Prep_Classic_Div_I_Varsity_ms696.csv": {
+   "Mike Fagan": "Michael Fagan"
+  }
+ }
 }

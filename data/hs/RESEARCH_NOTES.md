@@ -26,3 +26,16 @@ Data quality:
 - Batch 1 (2005 HS, 2004): 11 races from racecast + mocorunning printouts.
 - Batch 2 (2003, 2002): 8 races: St. Johns Inv. 2003 and Georgetown Prep Classic 2003 (full fields), Sandy Spring 2003 and BW Private Championships 2002/2003 (partial fields; official team scores shown, not recalculated — race_notes.json "partial_scores"), and three Washington Post team-score-only meets.
 - "Mike Fagan" (2002 gr 12; 2003 no grade) is kept apart from "Michael Fagan" (2004 gr 12) until the team confirms.
+
+## History batch 3 (2001-2000), Nov 2026
+- 2001: Mercersburg Invitational varsity (racecast full field; official scores from the DyeStat printout, Heights 12th/327);
+  Georgetown Prep Classic Div I varsity, Div I JV and freshman (MileSplit raw HY-TEK printouts, official scores: 12th/329, 20th/582, 22nd/598).
+- 2000: Georgetown Prep Classic Div I varsity (16th/372), Div I JV and freshman (no Heights team score) from the DyeStat printout via mocorunning 3492;
+  team scores only: Ballenger Creek Park meet Oct 11 (Heights 1st, 26; WaPo via mocorunning 9680) and Washington Independent Schools Championship
+  Nov 4 at Glenelg (4th of 13, 124; mocorunning 7625).
+- Merges: AJ Guarente = Andrew Guarente (confirmed by the team). Spelling/nickname variants (same team, consecutive seasons, grades consistent):
+  Dan Shusinsky→Dan Sushinsky, Danny Mccarthy/Dan MC Carthy→Dan McCarthy, Allejandro→Alejandro Lulli, Dan Henebrey→Dan Henebery (spelling in 3 of 4 sources),
+  Charley→Charles Gallagher, Mike Galagher→Mike Gallagher, James Acsvedo→James Acevedo, Jim→James Streeter, Matt Fuley (2001 gr 9)→Matt Foley (2004 gr 12).
+- 2001 GP Classic "Mike Fagan" (gr 9) is put on Michael Fagan's page via race_notes name_fixes (2001 Mercersburg lists "Michael Fagan"; gr 9 in 2001 = senior in 2004).
+  The 2002-03 "Mike Fagan" (2002 listed gr 12) stays separate pending the team's answer.
+- 2003 Baltimore-Washington small-school race: distance set to 5K by the team.
