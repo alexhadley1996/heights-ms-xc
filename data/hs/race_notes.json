@@ -57,11 +57,48 @@
    "Conflicting source: Calverton's own schedule page for this date has the note “Chen (4) Heights (19) Gonzaga (25)”. That may be a separate or JV race (“CHEN” is likely a homeschool team), but it doesn't match the roundup and is unresolved. The scores shown are the roundup's. Calverton schedule (Wayback copy): https://web.archive.org/web/20101219040436/http://www.calvertonschool.org/page.cfm?p=303&teamID=25&event=2233&show=detail",
    "The distance isn't stated (Calverton's other home races were 5K), and the level isn't stated either, so this is listed as an open race.",
    "The somdnews page shows an Aug 22, 2011 date; that is when the site moved the article to a new system, not when the meet was held."
+  ],
+  "2005_Peter_Geraghty_Invitational_Varsity_moco3791.csv": [
+   "Official printout used (carrollcountyrunning.com via mocorunning; no grades listed). Racecast has the same race (https://racecast.co/race/xc/30858/133968) but leaves out one finisher (Ryan Smith, Perry Hall, 88th), so its places from 88th on are one lower and its team scores do not match the official ones."
+  ],
+  "2005_Mercersburg_Invitational_Varsity_50623.csv": [
+   "Racecast title: 10th Mercersburg Academy Invitational. Official team scores: HY-TEK printout (penntrackxc.com via mocorunning, meet 6919)."
+  ],
+  "2005_Mercersburg_Invitational_JV_moco6919.csv": [
+   "The printout says: \"NOTE There is a problem with these results. We had several runners without tags so they were counted with a time but not a place. Some of the times may be off.\" Racecast has only 12 runners for this race, so the printout is used. No grades in the printout."
+  ],
+  "2005_Gonzaga_St_Andrews_and_The_Heights_Landon_Varsity_50644.csv": [
+   "One race for everyone (printout: \"Landon Home Meet #3 - Boys 11/04/05\", 3 miles, md.milesplit.com via mocorunning meet 6908, which files it under Nov 3). Team scores count each team's first 7; runners marked * / ** in the printout did not count."
+  ],
+  "2005_Baltimore_Washington_Private_Small_Varsity_moco4095.csv": [
+   "Printout (mdrunners.com via mocorunning) used: 66 finishers incl. runners from non-scoring schools. Racecast has the same race with 60 (https://racecast.co/race/xc/10991/134465?alt=1, \"Baltimore/DC Private School Championships\", 5000 m)."
+  ],
+  "2005_Baltimore_Washington_Private_Small_JV_moco4095.csv": [
+   "Not on racecast. Distance: same course as the varsity races (racecast lists 5000 m for the meet).",
+   "Connor Breed is listed as grade 11 here; every other 2005 source lists him in grade 12 (and 2004 sources in grade 11), so grade 12 is used."
+  ],
+  "2004_Peter_Geraghty_Invitational_Varsity_139343.csv": [
+   "Date: the HY-TEK printout header (mocorunning meet 4098) and racecast both say 9/8/2004; mocorunning files it as \"Mount St. Mary's Invitational\", Sep 11, 2004."
+  ],
+  "2004_Mercersburg_Invitational_Varsity_81654.csv": [
+   "Racecast title: 9th Mercersburg Academy Invitational. Official team scores: printout (penntrackxc.com via mocorunning, meet 6954; team list without places, in order)."
+  ],
+  "2004_Mercersburg_Invitational_Junior_Varsity_81655.csv": [
+   "No team scores for the JV race in the printout (mocorunning meet 6954)."
+  ],
+  "2004_Baltimore_Washington_Private_Small_Varsity_moco4094.csv": [
+   "School names in the printout end in \" Boys\" (e.g. \"Heights Boys\"); dropped here. Not on racecast. Course (Oregon Ridge Park, Hunt Valley, MD) from the MileSplit meet page https://md.milesplit.com/meets/8905-baltimore-washington-independent-schools-championship-2004 (the printout does not name it). Distance not stated; 5K inferred from the printout paces."
+  ],
+  "2004_Baltimore_Washington_Private_Small_JV_moco4094.csv": [
+   "School names in the printout end in \" Boys\"; dropped here. Not on racecast. Course from the MileSplit meet page (see varsity race). Distance not stated; 5K inferred from the printout paces."
   ]
  },
  "grade_fixes": {
   "2020_Holy_Cross_Invitational_1_Open_Boys_overall__moco6880.csv": {
    "Joe McClorey": 11
+  },
+  "2005_Baltimore_Washington_Private_Small_JV_moco4095.csv": {
+   "Connor Breed": 12
   }
  },
  "extra_rows": {

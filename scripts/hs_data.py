@@ -31,6 +31,19 @@ HS_NAME_ALIASES = {
     "Nick O'Neill": "Nicholas O'Neil",
     "Nicholas Monaghan": "Nicholas Monahan",
     "Nick Morahan": "Nicholas Monahan",
+    # 2004-2005 results (history batch 1): same-team spelling/nickname variants within the same seasons, grades consistent
+    "Vince Barrett": "Vincent Barrett",
+    "Conor Breed": "Connor Breed",
+    "James Calahan": "Jim Callahan",
+    "Dom Currano": "Dominic Currano",
+    "A.J. Guarente": "AJ Guarente",
+    "Nathan Hale": "Nathanael Hale",
+    "Will Krohn": "William Krohn",
+    "Chris Lenczowski": "Christian Lenczowski",
+    "P.J. McGovern": "PJ McGovern",
+    "Ben Mccabe": "Ben McCabe",
+    "Joseph Mehan": "Joe Mehan",
+    "Mike Quine": "Michael Quine",
 }
 # Listed in hs_name_variants.csv but kept separate: each is also a "needs confirmation" MS-HS pair.
 NOT_MERGED = []  # all earlier "possible same runner" pairs were confirmed by the team (Oct 2026) and merged
@@ -55,6 +68,7 @@ HS_OFFICIAL_TEAM_ALIASES = [
     (r"^magruder\b", "Col. Zadok Magruder"),
     (r"^mcnamara\b", "Bishop McNamara"),
     (r"^glenelg boys small$", "Glenelg Country"),
+    (r"^gleneig$", "Glenelg Country"),  # 2004 Mercersburg printout typo
     (r"^episcopal (high school|hs va)$", "Episcopal"),
     (r"^philadelphia-montgomery\b", "Phil-Mont Christian Academy"),
     (r"^ss$", "St Stephens and St Agnes"),

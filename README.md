@@ -82,6 +82,12 @@ Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); th
   official scores, so the official scores were tallied on the single list.
 - Missing grades are inferred within each runner's whole career (MS 5–8, HS 9–12), shown in italics.
 
+### Pre-2006 high school results (history dig)
+
+- **2004–2005 HS** (batch 1 of the history dig, Nov 2026): 11 races from mocorunning.com archive printouts (meets 3791, 6919, 4095, 4094) and racecast.co (Peter Geraghty 2004, Mercersburg 2004 V/JV and 2005 V, Landon Nov 4 2005). Where racecast and the printout differ, the printout is used (2005 Peter Geraghty: racecast leaves out one finisher; 2005 Mercersburg JV and both Baltimore-Washington Private Schools Championships: not on racecast or incomplete there). Every race keeps its source URL and a note; the research files are in `xc-research/history/` (not part of the site).
+- 2004 Baltimore-Washington Private Schools Championships: the printout gives school names as "Heights Boys", "Potomac Boys", …; the " Boys" suffix is dropped. The course (Oregon Ridge Park, Hunt Valley, MD) comes from the MileSplit meet page.
+- 2005 Landon MS Tri-Meet (sheet race): official source and team scores from the mocorunning printout (meet 6929) added via `sheet_overrides.json`.
+
 ### Open community races and score-only meets
 
 - **Calverton Haunted Halloween 5K (2013-10-26, 2014-10-25)**: open community 5Ks (full fields from mdtiming.com; the 2013 file is also on the Wayback Machine). They're listed as Open-level races with no team scoring (`no_team_scores` in `race_notes.json`). The results give ages, not grades, so Heights grades are inferred from each runner's other races. Heights runners are split by division by grade: high schoolers are on the HS race; in 2014, 8th grader Reese Smith is on a separate MS entry for the same race (`data/supplemental/manifest.json`, with `not_heights_school` so the HS runners in that field aren't counted as MS results, and `no_team_scores`). That puts the 2014 race under both the MS and HS meet filters. Times count toward HS 5K PRs only for the HS runners.

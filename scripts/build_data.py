@@ -879,6 +879,7 @@ VENUES = [
     (r"^n(orth|\.)? bethesda, md$", "North Bethesda, MD (course not listed)"),
     (r"norwood school", "Norwood School, Bethesda, MD"),
     (r"oatlands", "Oatlands, Leesburg, VA"),
+    (r"oregon ridge", "Oregon Ridge Park, Hunt Valley, MD"),
     (r"pole green pa[lr]k", "Pole Green Park, Mechanicsville, VA"),
     (r"^richmond, va area", "Richmond, VA area (course not listed)"),
     (r"sandy spring friends", "Sandy Spring Friends School, Sandy Spring, MD"),
