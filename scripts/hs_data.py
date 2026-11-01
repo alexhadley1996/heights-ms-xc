@@ -65,6 +65,11 @@ HS_NAME_ALIASES = {
     "James Acsvedo": "James Acevedo",
     "Jim Streeter": "James Streeter",
     "Matt Fuley": "Matt Foley",
+    # 1998-1999 results (history batch 4): nickname/spelling variants of the same Heights runner, adjacent seasons, grades consistent
+    "Pat Jacxsens": "Patrick Jacxsens",
+    "Daniel McCarthy": "Dan McCarthy",
+    "Daniel Henebrey": "Dan Henebery",
+    "Shawn Baghai": "Shaun Baghai",
 }
 # Old runner-page ids whose names were later merged into another runner: {old id: name of the runner it now belongs to}.
 RETIRED_RUNNER_IDS = {"aj-guarente": "Andrew Guarente"}

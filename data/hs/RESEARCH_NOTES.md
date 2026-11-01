@@ -39,3 +39,11 @@ Data quality:
 - 2001 GP Classic "Mike Fagan" (gr 9) is put on Michael Fagan's page via race_notes name_fixes (2001 Mercersburg lists "Michael Fagan"; gr 9 in 2001 = senior in 2004).
   The 2002-03 "Mike Fagan" (2002 listed gr 12) stays separate pending the team's answer.
 - 2003 Baltimore-Washington small-school race: distance set to 5K by the team.
+
+## History batch 4 (1999-1998), Nov 2026
+- 1999: Georgetown Prep Classic (Oct 16) Div I varsity (Heights 11th/335) and Div I JV (23rd/688), full fields with grades, from the DyeStat
+  HY-TEK printout via mocorunning 4124; team scores only: Private School Meet Sep 21 (WaPo 9/22/1999, mocorunning 9740; Heights 3rd of 9, 84).
+- 1998: Washington Independent Schools Championship (Nov 7, Glenelg Country School): full varsity field, Heights 1st (35), Pat Jacxsens 1st (16:14);
+  DyeStat 8xc/md/wisc.html (= mocorunning 4308). Mocorunning counts it as the Heights' 1998 DC-MD Small School boys title. No grades in the printout.
+- Merges: Pat→Patrick Jacxsens, Daniel→Dan McCarthy, Daniel Henebrey→Dan Henebery, Shawn→Shaun Baghai (1999 gr 10; 2001 no grade).
+- "Daniel Sushinsky" (1998, no grade) is kept apart from "Dan Sushinsky" (2001 gr 11) until the team confirms.

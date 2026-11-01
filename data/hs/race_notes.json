@@ -144,6 +144,18 @@
   ],
   "2000_Washington_Independent_Schools_Championship_Team_Scores_moco7625.csv": [
    "Only the boys team scores were published (Washington Post, as posted on mocorunning); no individual results have been found. Highlights from the Washington Post, as posted on mocorunning (filed under the Maryland private school championships history). Boys champion: Ben Stern, Georgetown Day. The Heights placed 4th of 13 with 124 points. No Heights individual results were published."
+  ],
+  "1999_Georgetown_Prep_Classic_Div_I_Varsity_moco4124.csv": [
+   "Results and official team scores: the HY-TEK printout from DyeStat, as posted on mocorunning (meet 4124). The Heights placed 11th of 23 teams (335)."
+  ],
+  "1999_Georgetown_Prep_Classic_Div_I_JV_moco4124.csv": [
+   "Results and official team scores: the HY-TEK printout from DyeStat, as posted on mocorunning (meet 4124). The Heights placed 23rd of 25 teams (688)."
+  ],
+  "1999_Private_School_Meet_Sep21_Team_Scores_moco9740.csv": [
+   "Only the boys team scores were published (Washington Post, as posted on mocorunning); no individual results have been found. Published in the Washington Post on 9/22/1999; mocorunning dates it Tuesday, Sep 21, 1999 and says the exact date and location are unknown. The Heights placed 3rd of 9 with 84 points (Field also scored 84 and is listed 4th)."
+  ],
+  "1998_Washington_Independent_Schools_Championship_Varsity_dye4308.csv": [
+   "Results and official team scores: the Howard County Striders printout posted on DyeStat (same text on mocorunning, meet 4308). The Heights won the team title with 35 points (Potomac 48); Pat Jacxsens won the race. Mocorunning lists this as The Heights' 1998 DC-MD Small School boys championship. The printout gives no grades and does not state the distance; its pace column (16:14 = 5:13 per mile) implies 5 km. DyeStat's one-line summary gives Jacxsens 16:43, but the printout itself says 16:14."
   ]
  },
  "grade_fixes": {
@@ -205,7 +217,8 @@
   "2003_Private_School_Meet_Sep_16_Team_Scores_moco9286.csv": "Team scores only: no individual results were published for this meet.",
   "2003_Landon_Heights_St_Anselms_Lab_Team_Scores_moco9279.csv": "Team scores only: no individual results were published for this meet.",
   "2000_Ballenger_Creek_Park_Meet_Team_Scores_moco9680.csv": "Team scores only: no individual results were published for this meet.",
-  "2000_Washington_Independent_Schools_Championship_Team_Scores_moco7625.csv": "Team scores only: no individual results were published for this meet."
+  "2000_Washington_Independent_Schools_Championship_Team_Scores_moco7625.csv": "Team scores only: no individual results were published for this meet.",
+  "1999_Private_School_Meet_Sep21_Team_Scores_moco9740.csv": "Team scores only: no individual results were published for this meet."
  },
  "partial_scores": {
   "2003_Sandy_Spring_Friends_Meet_Boys_moco6009.csv": "Only part of the field was posted, so team scores are not recalculated here; the official team scores are shown.",
