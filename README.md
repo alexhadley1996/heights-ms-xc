@@ -87,6 +87,10 @@ Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); th
 - **Calverton Haunted Halloween 5K (2013-10-26, 2014-10-25)**: open community 5Ks (full fields from mdtiming.com; the 2013 file is also on the Wayback Machine). They're listed as Open-level races with no team scoring (`no_team_scores` in `race_notes.json`). The results give ages, not grades, so Heights grades are inferred from each runner's other races. Heights runners are split by division by grade: high schoolers are on the HS race; in 2014, 8th grader Reese Smith is on a separate MS entry for the same race (`data/supplemental/manifest.json`, with `not_heights_school` so the HS runners in that field aren't counted as MS results, and `no_team_scores`). That puts the 2014 race under both the MS and HS meet filters. Times count toward HS 5K PRs only for the HS runners.
 - **Calverton Homecoming tri-meet (2010-10-02)**: team scores only (somdnews.com roundup). It uses an empty results CSV plus rows in `official_team_scores.csv`, with `score_only` in `race_notes.json`. The meet page shows the official scores and notes, and hides the results table.
 
+### Venues
+
+Every race has a normalized `venue` (the course), built in `assign_venues` in `scripts/build_data.py`. Location strings are mapped through `VENUES`, so spelling variants of one course become one name. If no location is listed and the meet is named for its host school, `VENUE_FROM_NAME` supplies the venue and marks it `venueInferred`, shown with a *. Anything else is "Unknown". A location that isn't in `VENUES` is shown as listed and reported as a build quirk. All Results shows a Venue column (meet name underneath, linked to the race), has a Venue filter (`?venue=`), and includes both Venue and Meet in the CSV. Meet pages show the venue in their header.
+
 ## Preview locally
 `python3 -m http.server` in this folder, then open http://localhost:8000
 

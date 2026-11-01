@@ -792,6 +792,7 @@ def main(path):
         else:
             seen[m["id"]] = 1
 
+    assign_venues(meets, quirks)
     apply_row_splits(meets, quirks)
     runners, review = build_runners(meets)
     check_one_row_per_runner(meets, runners)
@@ -846,6 +847,74 @@ SEASON_NOTES = {2020: "2020 was the COVID-19 season: most invitationals and cham
                       "small dual or tri meets with few or no published results, so very few races are on record."}
 
 
+
+# Venue (course) for every race, normalized from the location fields. First matching pattern wins.
+VENUES = [
+    (r"agricultural (history )?farm park", "Agricultural History Farm Park, Derwood, MD"),
+    (r"belvoir scott", "Belvoir Scott's Plantation, Crownsville, MD"),
+    (r"bittersweet field", "Bittersweet Field"),
+    (r"brandywine creek", "Brandywine Creek State Park, Wilmington, DE"),
+    (r"bull run regional park", "Bull Run Regional Park, VA"),
+    (r"bullis", "Bullis School, Potomac, MD"),
+    (r"burke lake", "Burke Lake Park, Fairfax Station, VA"),
+    (r"centennial hs", "Centennial HS, Ellicott City, MD"),
+    (r"covenant life", "Covenant Life School, Gaithersburg, MD"),
+    (r"eastern state hospital", "Eastern State Hospital, Williamsburg, VA"),
+    (r"^williamsburg, va$", "Williamsburg, VA (course not listed)"),
+    (r"episcopal hs", "Episcopal High School, Alexandria, VA"),
+    (r"^flint hill", "Flint Hill School, Oakton, VA"),
+    (r"georgetown prep", "Georgetown Prep, North Bethesda, MD"),
+    (r"glenelg country", "Glenelg Country School, Ellicott City, MD"),
+    (r"governor thomas johnson", "Gov. Thomas Johnson HS, Frederick, MD"),
+    (r"kenilworth park", "Kenilworth Park, Washington, DC"),
+    (r"landon", "Landon School, Bethesda, MD"),
+    (r"maryland school for the deaf", "Maryland School for the Deaf"),
+    (r"mcdaniel college", "McDaniel College, Westminster, MD"),
+    (r"mercersburg", "Mercersburg Academy, Mercersburg, PA"),
+    (r"^montgomery county, md$", "Montgomery County, MD (course not listed)"),
+    (r"morven park", "Morven Park, Leesburg, VA"),
+    (r"mount saint mary", "Mount St. Mary's University, Emmitsburg, MD"),
+    (r"^n(orth|\.)? bethesda, md$", "North Bethesda, MD (course not listed)"),
+    (r"norwood school", "Norwood School, Bethesda, MD"),
+    (r"oatlands", "Oatlands, Leesburg, VA"),
+    (r"pole green pa[lr]k", "Pole Green Park, Mechanicsville, VA"),
+    (r"^richmond, va area", "Richmond, VA area (course not listed)"),
+    (r"sandy spring friends", "Sandy Spring Friends School, Sandy Spring, MD"),
+    (r"shawan downs", "Shawan Downs, Cockeysville, MD"),
+    (r"smokey glen", "Smokey Glen Farm, Gaithersburg, MD"),
+    (r"calverton", "The Calverton School, Huntingtown, MD"),
+    (r"potomac school", "The Potomac School, McLean, VA"),
+    (r"wakemed", "WakeMed Soccer Park, Cary, NC"),
+    (r"walter johnson", "Walter Johnson HS, Bethesda, MD"),
+    (r"watkins mill", "Watkins Mill HS, Gaithersburg, MD"),
+]
+# No location listed: the meet is named for its host school, so the venue is obvious.
+VENUE_FROM_NAME = [
+    (r"^(landon)\b", "Landon School, Bethesda, MD"),
+    (r"^bullis\b", "Bullis School, Potomac, MD"),
+    (r"^flint hill\b", "Flint Hill School, Oakton, VA"),
+    (r"^oakdale invitational\b", "Oakdale HS, Ijamsville, MD"),
+]
+UNKNOWN_LOC = re.compile(r"not listed in printout\)?$|course not listed\)$", re.I)
+
+
+def assign_venues(meets, quirks):
+    for m in meets:
+        loc = (m.get("location") or "").strip()
+        v = None
+        if loc and not (UNKNOWN_LOC.search(loc) and "area" not in loc.lower()) and not loc.lower().startswith("oakdale hs area"):
+            v = next((name for pat, name in VENUES if re.search(pat, loc, re.I)), None)
+            if not v:
+                v = loc
+                quirks.append(f"Venue: no normalized name for location {loc!r} ({m['id']}); shown as listed.")
+        if not v:
+            title = m.get("meetName") or m["name"]
+            v = next((name for pat, name in VENUE_FROM_NAME if re.search(pat, title, re.I)), None)
+            if v:
+                m["venueInferred"] = True
+        m["venue"] = v or "Unknown"
+
+
 def assign_groups(meets):
     """One meet page per meet: races of the same meet, date (or weekend) and division share a group.
     Returns the group list; each race gets m["group"] (a one-race meet keeps its race id as the group id)."""
@@ -876,6 +945,7 @@ def assign_groups(meets):
         g = {"id": gid, "season": season, "division": div, "name": name, "date": dates[0] if dates else None,
              "endDate": dates[-1] if len(dates) > 1 else None, "dateLabel": ms[0].get("dateLabel"),
              "location": next((m["location"] for m in ms if m.get("location")), None),
+             "venue": ms[0].get("venue"), "venueInferred": ms[0].get("venueInferred"),
              "order": min(m["order"] for m in ms), "races": [m["id"] for m in ms],
              "levels": list(dict.fromkeys(m.get("level") for m in ms))}
         for m in ms:

@@ -255,3 +255,6 @@ table.res-table td.wrapcell{white-space:normal;min-width:180px}
 table.res-table td,table.res-table th{padding-left:7px;padding-right:7px}
 main.wide .wrap{max-width:1360px}
 table.res-table.compact td.wrapcell{min-width:170px;max-width:300px}
+
+table.res-table .meet2{font-size:.78em;color:var(--muted,#6b6b6b);line-height:1.25;margin-top:1px}
+#f-venue{max-width:270px}
