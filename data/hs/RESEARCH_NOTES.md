@@ -21,3 +21,8 @@ Data quality:
 - Racecast's Heights grade data sometimes doesn't match the moco printout. Check mismatches if needed.
 - Missing places in source printouts: 2018 WCAC frosh, 2023 WCAC Varsity B and frosh, 2026 VA Showcase JV.
 - RVA "Extras" races were posted in sections (e.g., M–Z), so overall places have gaps.
+
+## Pre-2006 history (added Nov 2026)
+- Batch 1 (2005 HS, 2004): 11 races from racecast + mocorunning printouts.
+- Batch 2 (2003, 2002): 8 races: St. Johns Inv. 2003 and Georgetown Prep Classic 2003 (full fields), Sandy Spring 2003 and BW Private Championships 2002/2003 (partial fields; official team scores shown, not recalculated — race_notes.json "partial_scores"), and three Washington Post team-score-only meets.
+- "Mike Fagan" (2002 gr 12; 2003 no grade) is kept apart from "Michael Fagan" (2004 gr 12) until the team confirms.

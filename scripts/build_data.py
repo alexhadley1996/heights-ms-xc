@@ -558,6 +558,10 @@ def finalize(field, meta, quirks):
             e.pop("teamPlace", None)
     if meta.get("scoreOnly"):  # only the team scores were published
         caveats = [meta["scoreOnly"]]
+    if meta.get("partialScores"):  # only part of the field was posted: show the official scores, don't recalculate
+        standings, partial, caveats = [], [], [meta["partialScores"]]
+        for e in field:
+            e.pop("teamPlace", None)
     sb = {"standings": standings if len(standings) >= 2 else [], "partialTeams": partial, "caveats": caveats,
           "sheetNotes": meta.pop("_scoreNotes", [])}
     off = meta.pop("_official", None)
@@ -586,7 +590,13 @@ def finalize(field, meta, quirks):
                 sb["official"]["why"] = "The posted results are missing finishers, so the calculated scores can't match the official ones."
             elif ties and all(r["computedScore"] is not None and abs(r["computedScore"] - r["score"]) <= 2 for r in bad):
                 sb["official"]["why"] = "The 1\u20132 point differences come from runners with identical times, whose order differs in the official scoring."
-        if meta.get("scoreOnly"):
+        if meta.get("partialScores"):
+            sb["official"]["scoreOnly"] = True
+            sb["official"]["heightsMatch"] = None
+            for r in rows:
+                r["match"] = None
+            sb["official"]["why"] = "Only part of the field was posted, so the team scores can't be recalculated here."
+        elif meta.get("scoreOnly"):
             sb["official"]["scoreOnly"] = True
             sb["official"]["heightsMatch"] = None
             for r in rows:

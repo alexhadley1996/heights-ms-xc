@@ -44,6 +44,12 @@ HS_NAME_ALIASES = {
     "Ben Mccabe": "Ben McCabe",
     "Joseph Mehan": "Joe Mehan",
     "Mike Quine": "Michael Quine",
+    # 2002-2003 results (history batch 2): a misspelling and last-name-only listings, each the only Heights runner
+    # with that name in the same season (Mike Fagan is deliberately NOT merged with Michael Fagan: see RESEARCH_NOTES)
+    "William Krosh": "William Krohn",
+    "Krohn": "William Krohn",
+    "Hadley": "Peter Hadley",
+    "Yang": "Willy Yang",
 }
 # Listed in hs_name_variants.csv but kept separate: each is also a "needs confirmation" MS-HS pair.
 NOT_MERGED = []  # all earlier "possible same runner" pairs were confirmed by the team (Oct 2026) and merged
@@ -454,6 +460,7 @@ def build_hs_meets(quirks):
             "teamScoreStatus": status, "csv": base, "_tabOrder": 0, "doubled": meta_doubled,
             "aliasIds": [B.slug(f"hs-{season}-{meet}-{old_short}")] if lov else None,
             "noTeamScores": notes.get("no_team_scores", {}).get(base), "scoreOnly": notes.get("score_only", {}).get(base),
+            "partialScores": notes.get("partial_scores", {}).get(base),
         }
         if level == "Relay":
             pending.append((meta, field, None)); continue

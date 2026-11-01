@@ -91,6 +91,30 @@
   ],
   "2004_Baltimore_Washington_Private_Small_JV_moco4094.csv": [
    "School names in the printout end in \" Boys\"; dropped here. Not on racecast. Course from the MileSplit meet page (see varsity race). Distance not stated; 5K inferred from the printout paces."
+  ],
+  "2003_St_Johns_Invitational_Varsity_133056.csv": [
+   "Hosted by St. John's at Prospect Hall at Ballenger Creek Park (racecast). Official team scores: printout from mdrunners.com via mocorunning (meet 6054). The printout calls the event \"Boys 5280 Yard Run CC\" (3 miles), while racecast lists 5000 m; 5000 m is used for paces."
+  ],
+  "2003_Sandy_Spring_Friends_Meet_Boys_moco6009.csv": [
+   "Only the top 20 finishers were posted, mostly by last name only. The three Heights runners are listed as \"Krohn\", \"Hadley\" and \"Yang\"; each matches the only Heights runner with that last name in the 2003 results (William Krohn, Peter Hadley, Willy Yang). The distance and level are not stated."
+  ],
+  "2003_Georgetown_Prep_Classic_Small_School_251480.csv": [
+   "Racecast title: 30th Annual Fall Classic 2003, \"Boys Small School\". The HY-TEK printout (milesplit.com via mocorunning, meet 3406) calls the same race \"Men's 5,000 Meter Division I Var Boys\" and gives the official team scores (Heights School 14th, 307). Racecast lists Mike Fagan, Jack Bauer, Steve Wyble, Vincent Barrett and Brendan Keats without grades."
+  ],
+  "2003_Baltimore_Washington_Private_Small_Varsity_moco5086.csv": [
+   "Only newspaper highlights were posted (mocorunning: \"compiled from Montgomery Journal and Washington Post highlights\"): the top 6 plus a few local runners, so most places are missing. \"William Krosh\" (13th, The Heights) is William Krohn (same team, same season; a misspelling). The printout gives Mike Fagan and Peter Hadley the same time, 17:45.07. The distance is not stated."
+  ],
+  "2002_Baltimore_Washington_Private_Small_Varsity_moco4922.csv": [
+   "The posted results list only the top 5 and a few other runners, so most places are missing. Date: mocorunning files the meet on Saturday, Nov 2, 2002; the printout header says November 11, 2002. The distance is not stated."
+  ],
+  "2002_Private_School_Meet_Oct_2_Team_Scores_moco9297.csv": [
+   "Only the boys team scores were published (Washington Post, as posted on mocorunning); no individual results have been found. Published in the Washington Post on 10/3/2002. Mocorunning dates it Oct 2, 2002; the exact date and location are unknown. The level is not stated, so this is listed as an open race."
+  ],
+  "2003_Private_School_Meet_Sep_16_Team_Scores_moco9286.csv": [
+   "Only the boys team scores were published (Washington Post, as posted on mocorunning); no individual results have been found. Published in the Washington Post on 9/17/2003. Mocorunning dates it Sep 16, 2003; the exact date and location are unknown. The level is not stated, so this is listed as an open race."
+  ],
+  "2003_Landon_Heights_St_Anselms_Lab_Team_Scores_moco9279.csv": [
+   "Only the boys team scores were published (Washington Post, as posted on mocorunning); no individual results have been found. Published in the Washington Post on 10/22/2003. Mocorunning dates it Oct 21, 2003; the exact date and location are unknown. The level is not stated, so this is listed as an open race."
   ]
  },
  "grade_fixes": {
@@ -147,6 +171,15 @@
   "2014_Calverton_Haunted_Halloween_5K_Open.csv": "No team scores: open community race with no team scoring."
  },
  "score_only": {
-  "2010_Calverton_Homecoming_Race_Team_Scores.csv": "Team scores only: no individual results were published for this meet."
- }
+  "2010_Calverton_Homecoming_Race_Team_Scores.csv": "Team scores only: no individual results were published for this meet.",
+  "2002_Private_School_Meet_Oct_2_Team_Scores_moco9297.csv": "Team scores only: no individual results were published for this meet.",
+  "2003_Private_School_Meet_Sep_16_Team_Scores_moco9286.csv": "Team scores only: no individual results were published for this meet.",
+  "2003_Landon_Heights_St_Anselms_Lab_Team_Scores_moco9279.csv": "Team scores only: no individual results were published for this meet."
+ },
+ "partial_scores": {
+  "2003_Sandy_Spring_Friends_Meet_Boys_moco6009.csv": "Only part of the field was posted, so team scores are not recalculated here; the official team scores are shown.",
+  "2003_Baltimore_Washington_Private_Small_Varsity_moco5086.csv": "Only part of the field was posted, so team scores are not recalculated here; the official team scores are shown.",
+  "2002_Baltimore_Washington_Private_Small_Varsity_moco4922.csv": "Only part of the field was posted, so team scores are not recalculated here; the official team scores are shown."
+ },
+ "_about_partial_scores": "partial_scores: races where only part of the field was posted; the official team scores are shown but not recalculated."
 }
