@@ -895,6 +895,7 @@ VENUES = [
     (r"sandy spring friends", "Sandy Spring Friends School, Sandy Spring, MD"),
     (r"shawan downs", "Shawan Downs, Cockeysville, MD"),
     (r"smokey glen", "Smokey Glen Farm, Gaithersburg, MD"),
+    (r"supplee field", "Supplee Field, Laurel, MD"),
     (r"calverton", "The Calverton School, Huntingtown, MD"),
     (r"potomac school", "The Potomac School, McLean, VA"),
     (r"wakemed", "WakeMed Soccer Park, Cary, NC"),

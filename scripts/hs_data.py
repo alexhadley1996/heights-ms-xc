@@ -45,7 +45,7 @@ HS_NAME_ALIASES = {
     "Joseph Mehan": "Joe Mehan",
     "Mike Quine": "Michael Quine",
     # 2002-2003 results (history batch 2): a misspelling and last-name-only listings, each the only Heights runner
-    # with that name in the same season (Mike Fagan is deliberately NOT merged with Michael Fagan: see RESEARCH_NOTES)
+    # with that name in the same season
     "William Krosh": "William Krohn",
     "Krohn": "William Krohn",
     "Hadley": "Peter Hadley",
@@ -70,9 +70,14 @@ HS_NAME_ALIASES = {
     "Daniel McCarthy": "Dan McCarthy",
     "Daniel Henebrey": "Dan Henebery",
     "Shawn Baghai": "Shaun Baghai",
+    # confirmed by the team (Nov 1, 2026): every Mike/Michael Fagan result (2001-2004) is one runner; 1998 Daniel Sushinsky is Dan Sushinsky
+    "Mike Fagan": "Michael Fagan",
+    "Daniel Sushinsky": "Dan Sushinsky",
+    # 1997 results (history batch 5): spelling variant of the same Heights runner in the same season (Ricardella in the 1997 WIS and 1998 printouts)
+    "Chris Richardella": "Chris Ricardella",
 }
 # Old runner-page ids whose names were later merged into another runner: {old id: name of the runner it now belongs to}.
-RETIRED_RUNNER_IDS = {"aj-guarente": "Andrew Guarente"}
+RETIRED_RUNNER_IDS = {"aj-guarente": "Andrew Guarente", "mike-fagan": "Michael Fagan", "daniel-sushinsky": "Dan Sushinsky"}
 
 # Listed in hs_name_variants.csv but kept separate: each is also a "needs confirmation" MS-HS pair.
 NOT_MERGED = []  # all earlier "possible same runner" pairs were confirmed by the team (Oct 2026) and merged

@@ -25,7 +25,7 @@ Data quality:
 ## Pre-2006 history (added Nov 2026)
 - Batch 1 (2005 HS, 2004): 11 races from racecast + mocorunning printouts.
 - Batch 2 (2003, 2002): 8 races: St. Johns Inv. 2003 and Georgetown Prep Classic 2003 (full fields), Sandy Spring 2003 and BW Private Championships 2002/2003 (partial fields; official team scores shown, not recalculated — race_notes.json "partial_scores"), and three Washington Post team-score-only meets.
-- "Mike Fagan" (2002 gr 12; 2003 no grade) is kept apart from "Michael Fagan" (2004 gr 12) until the team confirms.
+- "Mike Fagan" (2002 gr 12; 2003 no grade) was kept apart from "Michael Fagan" (2004 gr 12) until the team confirmed (Nov 2026: same runner, now merged).
 
 ## History batch 3 (2001-2000), Nov 2026
 - 2001: Mercersburg Invitational varsity (racecast full field; official scores from the DyeStat printout, Heights 12th/327);
@@ -37,7 +37,7 @@ Data quality:
   Dan Shusinsky→Dan Sushinsky, Danny Mccarthy/Dan MC Carthy→Dan McCarthy, Allejandro→Alejandro Lulli, Dan Henebrey→Dan Henebery (spelling in 3 of 4 sources),
   Charley→Charles Gallagher, Mike Galagher→Mike Gallagher, James Acsvedo→James Acevedo, Jim→James Streeter, Matt Fuley (2001 gr 9)→Matt Foley (2004 gr 12).
 - 2001 GP Classic "Mike Fagan" (gr 9) is put on Michael Fagan's page via race_notes name_fixes (2001 Mercersburg lists "Michael Fagan"; gr 9 in 2001 = senior in 2004).
-  The 2002-03 "Mike Fagan" (2002 listed gr 12) stays separate pending the team's answer.
+  The 2002-03 "Mike Fagan" (2002 listed gr 12) was later confirmed as the same runner and merged (Nov 2026).
 - 2003 Baltimore-Washington small-school race: distance set to 5K by the team.
 
 ## History batch 4 (1999-1998), Nov 2026
@@ -46,4 +46,21 @@ Data quality:
 - 1998: Washington Independent Schools Championship (Nov 7, Glenelg Country School): full varsity field, Heights 1st (35), Pat Jacxsens 1st (16:14);
   DyeStat 8xc/md/wisc.html (= mocorunning 4308). Mocorunning counts it as the Heights' 1998 DC-MD Small School boys title. No grades in the printout.
 - Merges: Pat→Patrick Jacxsens, Daniel→Dan McCarthy, Daniel Henebrey→Dan Henebery, Shawn→Shaun Baghai (1999 gr 10; 2001 no grade).
-- "Daniel Sushinsky" (1998, no grade) is kept apart from "Dan Sushinsky" (2001 gr 11) until the team confirms.
+- "Daniel Sushinsky" (1998, no grade) was kept apart from "Dan Sushinsky" (2001 gr 11) until the team confirmed (Nov 2026: same runner, now merged).
+
+## Team answers applied (Nov 1, 2026)
+- All Mike/Michael Fagan results (2001, 2002, 2003, 2004) are one runner, Michael Fagan (the 2002 "grade 12" listing is left as printed; it is
+  presumably a typo, since he was a 9th grader in 2001 and a senior in 2004). The old page id mike-fagan redirects to Michael Fagan.
+- 1998 "Daniel Sushinsky" is Dan Sushinsky (old id daniel-sushinsky redirects). Dan and Steve Sushinsky are different runners.
+- Stephen and Andrew Syski are twins (kept separate). Charles and William Krohn are probably related (kept separate).
+  Dan McCarthy's grades are left as listed (unresolved). The batch 3 and batch 4 name merges are confirmed.
+
+## History batch 5 (1997-1996), Nov 2026
+- 1997: Washington Independent Schools Championship (Nov 1, Glenelg Country School): boys varsity (Heights 5th of 11, 126; Pat Jacxsens 4th)
+  and boys JV (Heights 3rd of 4 scoring teams, 65), full fields, no grades; Howard County Striders printouts on DyeStat 97/xc/results/m82-*
+  (= mocorunning 5075).
+- 1997: Pallotti Invitational (Sep 27, Supplee Field, Laurel MD, 5k): small-school boys varsity (Heights 9th, 270) and small-school boys JV
+  (13th of 15, 321), full fields, no grades; DyeStat 97/xc/results/m22-* (= mocorunning/interhightrack 5062).
+- Merge: Chris Richardella (Pallotti 1997) → Chris Ricardella (the WIS 1997 and 1998 spelling).
+- Kept separate (different first names): Paul Jacxsens (1997 JV, same meets as Patrick), Niall Fagan, Perry Yang.
+- 1996: nothing found (mocorunning 1996 pages are untyped; no DyeStat 1996 meet results with Heights).
