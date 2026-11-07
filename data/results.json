@@ -1,7 +1,113 @@
 {
- "generated": "2026-11-02",
+ "generated": "2026-11-07",
  "source": "Google Sheet \u201cHeights MS XC Results\u201d (middle school), races found on racecast.co / Athletic.net / mocorunning.com (middle school), and high school results from racecast.co and mocorunning.com (data/hs)",
  "meets": [
+  {
+   "id": "hs-2026-maryland-private-school-state-championships-open-2a",
+   "season": 2026,
+   "division": "HS",
+   "level": "Open",
+   "levelLabel": "Open (2A)",
+   "race": "Open 2A",
+   "meetName": "Maryland Private School State Championships",
+   "name": "Maryland Private School State Championships \u2013 Open 2A",
+   "date": "2026-11-05",
+   "origin": "hs",
+   "distance": 3.1068559611866697,
+   "distanceM": 5000.0,
+   "distKey": "5K",
+   "distanceSource": "official",
+   "officialName": "Maryland Private School State Championships \u2013 Open 2A",
+   "location": "Bittersweet Field",
+   "source": {
+    "name": "mocorunning.com",
+    "url": "https://mocorunning.com/meet.php?meet_id=11125",
+    "original": "https://www.athletic.net/CrossCountry/meet/272241/results"
+   },
+   "notes": [
+    "Timed by Windsor Running; results transcribed by mocorunning from Athletic.net. All posted finishers and DNF entries are retained. Distances are 5,000 m; paces are recalculated.",
+    "Varsity and Open were separate entry/scoring divisions of the same combined start, with the Open line behind the Varsity line (meet host schedule and DeMatha recap). The MoCo Boys Champion list is a virtual county subset of these same performances, not an additional race.",
+    "Open team scores were not officially kept, according to the DeMatha coach recap. Athletic.net calculated Calvert Hall 26 and The Heights 37 (2nd of 12); these are not official championship standings. The scores shown here are the site calculation, not official team scores. Recap: https://dmcrosscountry.puffett.com/meet-recaps/2026/maryland-private-school-championship",
+    "Source discrepancy: mocorunning and the DeMatha recap list 171 Open finishers, while racecast\u2019s meet summary lists 172. The extra racecast entry could not be verified, so no result has been invented or added. The full available mocorunning list is shown."
+   ],
+   "completeness": "full mocorunning posted field (171 finishers + 4 DNF); racecast lists 172 finishers",
+   "teamScoreStatus": "unofficial calculated scores only",
+   "fieldSize": 175,
+   "heightsCount": 29,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 418,
+   "venue": "Bittersweet Field",
+   "group": "hs-2026-maryland-private-school-state-championships",
+   "scoring": {
+    "teamCount": 12,
+    "calcCount": 12,
+    "heights": [
+     {
+      "team": "The Heights",
+      "place": 2,
+      "score": 37,
+      "official": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+   "season": 2026,
+   "division": "HS",
+   "level": "Varsity",
+   "levelLabel": "Varsity (2A)",
+   "race": "Varsity 2A",
+   "meetName": "Maryland Private School State Championships",
+   "name": "Maryland Private School State Championships \u2013 Varsity 2A",
+   "date": "2026-11-05",
+   "origin": "hs",
+   "distance": 3.1068559611866697,
+   "distanceM": 5000.0,
+   "distKey": "5K",
+   "distanceSource": "official",
+   "officialName": "Maryland Private School State Championships \u2013 Varsity 2A",
+   "location": "Bittersweet Field",
+   "source": {
+    "name": "mocorunning.com",
+    "url": "https://mocorunning.com/meet.php?meet_id=11125",
+    "original": "https://www.athletic.net/CrossCountry/meet/272241/results"
+   },
+   "notes": [
+    "Timed by Windsor Running; results transcribed by mocorunning from Athletic.net. All posted finishers and DNF entries are retained. Distances are 5,000 m; paces are recalculated.",
+    "Varsity and Open were separate entry/scoring divisions of the same combined start, with the Open line behind the Varsity line (meet host schedule and DeMatha recap). The MoCo Boys Champion list is a virtual county subset of these same performances, not an additional race."
+   ],
+   "completeness": "full posted field (129 finishers + 2 DNF)",
+   "teamScoreStatus": "official (as scored by meet)",
+   "fieldSize": 131,
+   "heightsCount": 10,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 417,
+   "venue": "Bittersweet Field",
+   "group": "hs-2026-maryland-private-school-state-championships",
+   "scoring": {
+    "teamCount": 14,
+    "calcCount": 14,
+    "official": {
+     "matched": 14,
+     "n": 14,
+     "heightsMatch": true
+    },
+    "heights": [
+     {
+      "team": "The Heights",
+      "place": 1,
+      "score": 63,
+      "official": true,
+      "calcPlace": 1,
+      "calcScore": 63,
+      "match": true
+     }
+    ]
+   }
+  },
   {
    "id": "2026-state-championship",
    "season": 2026,
@@ -21162,6 +21268,24 @@
  ],
  "groups": [
   {
+   "id": "hs-2026-maryland-private-school-state-championships",
+   "season": 2026,
+   "division": "HS",
+   "name": "Maryland Private School State Championships",
+   "date": "2026-11-05",
+   "location": "Bittersweet Field",
+   "venue": "Bittersweet Field",
+   "order": 417,
+   "races": [
+    "hs-2026-maryland-private-school-state-championships-varsity-2a",
+    "hs-2026-maryland-private-school-state-championships-open-2a"
+   ],
+   "levels": [
+    "Varsity",
+    "Open"
+   ]
+  },
+  {
    "id": "2026-state-championship",
    "season": 2026,
    "division": "MS",
@@ -26614,6 +26738,19 @@
      "paceSecs": 331,
      "teamPlace": 17,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 27,
+     "hplace": 6,
+     "grade": 12,
+     "time": "17:01.7",
+     "secs": 1021.7,
+     "pace": "5:28",
+     "paceSecs": 328,
+     "teamPlace": 26,
+     "origin": "hs",
+     "as": "David (Davie) Alvarado"
     }
    ],
    "ms": [
@@ -26624,6 +26761,9 @@
     2024,
     2025,
     2026
+   ],
+   "aka": [
+    "David (Davie) Alvarado"
    ],
    "bestPace": "6:02",
    "bestPaceSecs": 362,
@@ -27101,6 +27241,17 @@
      "secs": 1256.5,
      "pace": "6:44",
      "paceSecs": 404,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 43,
+     "hplace": 13,
+     "grade": 10,
+     "time": "20:08.6",
+     "secs": 1208.6,
+     "pace": "6:29",
+     "paceSecs": 389,
      "origin": "hs"
     }
    ],
@@ -28121,6 +28272,18 @@
      "pace": "5:27",
      "paceSecs": 327,
      "teamPlace": 15,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 19,
+     "hplace": 4,
+     "grade": 11,
+     "time": "16:41.8",
+     "secs": 1001.8,
+     "pace": "5:22",
+     "paceSecs": 322,
+     "teamPlace": 18,
      "origin": "hs"
     }
    ],
@@ -31997,6 +32160,17 @@
      "paceSecs": 351,
      "teamPlace": 2,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 65,
+     "hplace": 10,
+     "grade": 10,
+     "time": "18:20.9",
+     "secs": 1100.9,
+     "pace": "5:54",
+     "paceSecs": 354,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -32639,6 +32813,17 @@
      "secs": 1432.0,
      "pace": "7:40",
      "paceSecs": 460,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 114,
+     "hplace": 23,
+     "grade": 10,
+     "time": "23:18.4",
+     "secs": 1398.4,
+     "pace": "7:30",
+     "paceSecs": 450,
      "origin": "hs"
     }
    ],
@@ -36298,6 +36483,18 @@
      "paceSecs": 362,
      "teamPlace": 9,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 11,
+     "hplace": 4,
+     "grade": 11,
+     "time": "18:42.2",
+     "secs": 1122.2,
+     "pace": "6:01",
+     "paceSecs": 361,
+     "teamPlace": 9,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -39131,6 +39328,17 @@
      "pace": "6:31",
      "paceSecs": 391,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 41,
+     "hplace": 12,
+     "grade": 10,
+     "time": "20:06.1",
+     "secs": 1206.1,
+     "pace": "6:28",
+     "paceSecs": 388,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -39145,9 +39353,9 @@
    "bestPace": "6:09",
    "bestPaceSecs": 369,
    "hs5k": {
-    "time": "20:16.9",
-    "secs": 1216.9,
-    "meet": "hs-2026-wcac-cross-country-championships-varsity-b"
+    "time": "20:06.1",
+    "secs": 1206.1,
+    "meet": "hs-2026-maryland-private-school-state-championships-open-2a"
    },
    "hsBestPaceSecs": 375
   },
@@ -39759,6 +39967,17 @@
      "pace": "7:51",
      "paceSecs": 471,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 121,
+     "hplace": 25,
+     "grade": 10,
+     "time": "23:32.0",
+     "secs": 1412.0,
+     "pace": "7:34",
+     "paceSecs": 454,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -39773,9 +39992,9 @@
    "bestPace": "8:09",
    "bestPaceSecs": 489,
    "hs5k": {
-    "time": "23:46.6",
-    "secs": 1426.6,
-    "meet": "hs-2026-bittersweet-xc-invitational-open"
+    "time": "23:32.0",
+    "secs": 1412.0,
+    "meet": "hs-2026-maryland-private-school-state-championships-open-2a"
    },
    "hsBestPaceSecs": 442
   },
@@ -41334,6 +41553,17 @@
      "secs": 1336.9,
      "pace": "7:10",
      "paceSecs": 430,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 87,
+     "hplace": 21,
+     "grade": 9,
+     "time": "22:07.2",
+     "secs": 1327.2,
+     "pace": "7:07",
+     "paceSecs": 427,
      "origin": "hs"
     }
    ],
@@ -45244,6 +45474,17 @@
      "paceSecs": 354,
      "teamPlace": 3,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 59,
+     "hplace": 9,
+     "grade": 11,
+     "time": "18:07.7",
+     "secs": 1087.7,
+     "pace": "5:50",
+     "paceSecs": 350,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -45389,6 +45630,17 @@
      "pace": "6:09",
      "paceSecs": 369,
      "teamPlace": 12,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 22,
+     "hplace": 8,
+     "grade": 9,
+     "time": "19:28.9",
+     "secs": 1168.9,
+     "pace": "6:16",
+     "paceSecs": 376,
      "origin": "hs"
     }
    ],
@@ -47805,6 +48057,18 @@
      "paceSecs": 316,
      "teamPlace": 5,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 4,
+     "hplace": 1,
+     "grade": 12,
+     "time": "15:52.6",
+     "secs": 952.6,
+     "pace": "5:06",
+     "paceSecs": 306,
+     "teamPlace": 4,
+     "origin": "hs"
     }
    ],
    "ms": [],
@@ -47815,9 +48079,9 @@
     2026
    ],
    "hs5k": {
-    "time": "15:53.8",
-    "secs": 953.8,
-    "meet": "hs-2026-va-xc-showcase-varsity-showcase"
+    "time": "15:52.6",
+    "secs": 952.6,
+    "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a"
    },
    "hsBestPaceSecs": 306
   },
@@ -48466,6 +48730,18 @@
      "paceSecs": 361,
      "teamPlace": 5,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 9,
+     "hplace": 3,
+     "grade": 9,
+     "time": "18:40.1",
+     "secs": 1120.1,
+     "pace": "6:00",
+     "paceSecs": 360,
+     "teamPlace": 7,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -48858,6 +49134,17 @@
      "secs": 1227.2,
      "pace": "6:34",
      "paceSecs": 394,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 81,
+     "hplace": 19,
+     "grade": 10,
+     "time": "21:42.8",
+     "secs": 1302.8,
+     "pace": "6:59",
+     "paceSecs": 419,
      "origin": "hs"
     }
    ],
@@ -54364,6 +54651,13 @@
      "pace": "6:17",
      "paceSecs": 377,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": "DNF",
+     "grade": 11,
+     "time": "DNF",
+     "origin": "hs"
     }
    ],
    "ms": [],
@@ -57019,6 +57313,17 @@
      "paceSecs": 348,
      "teamPlace": 2,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 41,
+     "hplace": 8,
+     "grade": 9,
+     "time": "17:35.1",
+     "secs": 1055.1,
+     "pace": "5:39",
+     "paceSecs": 339,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -58920,6 +59225,18 @@
      "pace": "5:59",
      "paceSecs": 359,
      "teamPlace": 4,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 7,
+     "hplace": 2,
+     "grade": 9,
+     "time": "18:25.5",
+     "secs": 1105.5,
+     "pace": "5:55",
+     "paceSecs": 355,
+     "teamPlace": 6,
      "origin": "hs"
     }
    ],
@@ -61734,6 +62051,18 @@
      "paceSecs": 322,
      "teamPlace": 9,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 24,
+     "hplace": 5,
+     "grade": 11,
+     "time": "16:55.0",
+     "secs": 1015.0,
+     "pace": "5:26",
+     "paceSecs": 326,
+     "teamPlace": 23,
+     "origin": "hs"
     }
    ],
    "ms": [],
@@ -63746,6 +64075,18 @@
      "pace": "6:13",
      "paceSecs": 373,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 14,
+     "hplace": 5,
+     "grade": 11,
+     "time": "18:44.1",
+     "secs": 1124.1,
+     "pace": "6:01",
+     "paceSecs": 361,
+     "teamPlace": 12,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -63759,9 +64100,9 @@
    "bestPace": "7:39",
    "bestPaceSecs": 459,
    "hs5k": {
-    "time": "19:20.2",
-    "secs": 1160.2,
-    "meet": "hs-2025-the-va-xc-showcase-junior-varsity-morning"
+    "time": "18:44.1",
+    "secs": 1124.1,
+    "meet": "hs-2026-maryland-private-school-state-championships-open-2a"
    },
    "hsBestPaceSecs": 361
   },
@@ -64542,6 +64883,17 @@
      "pace": "6:57",
      "paceSecs": 417,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 136,
+     "hplace": 27,
+     "grade": 10,
+     "time": "24:21.5",
+     "secs": 1461.5,
+     "pace": "7:50",
+     "paceSecs": 470,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -65151,6 +65503,17 @@
      "secs": 1375.7,
      "pace": "7:22",
      "paceSecs": 442,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 102,
+     "hplace": 22,
+     "grade": 9,
+     "time": "22:47.5",
+     "secs": 1367.5,
+     "pace": "7:20",
+     "paceSecs": 440,
      "origin": "hs"
     }
    ],
@@ -67853,6 +68216,18 @@
      "paceSecs": 363,
      "teamPlace": 9,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 20,
+     "hplace": 6,
+     "grade": 9,
+     "time": "19:04.3",
+     "secs": 1144.3,
+     "pace": "6:08",
+     "paceSecs": 368,
+     "teamPlace": 18,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -68224,6 +68599,17 @@
      "pace": "7:58",
      "paceSecs": 478,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 140,
+     "hplace": 28,
+     "grade": 9,
+     "time": "24:37.4",
+     "secs": 1477.4,
+     "pace": "7:55",
+     "paceSecs": 475,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -68359,6 +68745,17 @@
      "pace": "6:50",
      "paceSecs": 410,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 49,
+     "hplace": 14,
+     "grade": 11,
+     "time": "20:24.6",
+     "secs": 1224.6,
+     "pace": "6:34",
+     "paceSecs": 394,
+     "origin": "hs"
     }
    ],
    "ms": [],
@@ -68368,11 +68765,11 @@
     2026
    ],
    "hs5k": {
-    "time": "20:33.1",
-    "secs": 1233.1,
-    "meet": "hs-2025-maryland-private-school-state-championships-junior-varsity"
+    "time": "20:24.6",
+    "secs": 1224.6,
+    "meet": "hs-2026-maryland-private-school-state-championships-open-2a"
    },
-   "hsBestPaceSecs": 396
+   "hsBestPaceSecs": 394
   },
   {
    "name": "Ramon SO Alvarez Menchaca",
@@ -68799,6 +69196,18 @@
      "paceSecs": 320,
      "teamPlace": 7,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 13,
+     "hplace": 3,
+     "grade": 11,
+     "time": "16:23.3",
+     "secs": 983.3,
+     "pace": "5:16",
+     "paceSecs": 316,
+     "teamPlace": 12,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -69192,6 +69601,18 @@
      "pace": "6:06",
      "paceSecs": 366,
      "teamPlace": 14,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 21,
+     "hplace": 7,
+     "grade": 11,
+     "time": "19:09.9",
+     "secs": 1149.9,
+     "pace": "6:10",
+     "paceSecs": 370,
+     "teamPlace": 19,
      "origin": "hs"
     }
    ],
@@ -71438,6 +71859,17 @@
      "pace": "7:05",
      "paceSecs": 425,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 70,
+     "hplace": 18,
+     "grade": 9,
+     "time": "21:18.5",
+     "secs": 1278.5,
+     "pace": "6:51",
+     "paceSecs": 411,
+     "origin": "hs"
     }
    ],
    "ms": [],
@@ -71445,9 +71877,9 @@
     2026
    ],
    "hs5k": {
-    "time": "22:02.8",
-    "secs": 1322.8,
-    "meet": "hs-2026-wcac-cross-country-championships-freshman"
+    "time": "21:18.5",
+    "secs": 1278.5,
+    "meet": "hs-2026-maryland-private-school-state-championships-open-2a"
    },
    "hsBestPaceSecs": 405
   },
@@ -75247,6 +75679,17 @@
      "paceSecs": 364,
      "teamPlace": 11,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 38,
+     "hplace": 11,
+     "grade": 10,
+     "time": "20:01.1",
+     "secs": 1201.1,
+     "pace": "6:26",
+     "paceSecs": 386,
+     "origin": "hs"
     }
    ],
    "ms": [],
@@ -76262,6 +76705,17 @@
      "paceSecs": 368,
      "teamPlace": 15,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 34,
+     "hplace": 10,
+     "grade": 10,
+     "time": "19:57.6",
+     "secs": 1197.6,
+     "pace": "6:25",
+     "paceSecs": 385,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -76601,6 +77055,17 @@
      "secs": 1270.6,
      "pace": "6:48",
      "paceSecs": 408,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 54,
+     "hplace": 15,
+     "grade": 11,
+     "time": "20:35.6",
+     "secs": 1235.6,
+     "pace": "6:37",
+     "paceSecs": 397,
      "origin": "hs"
     }
    ],
@@ -79562,6 +80027,17 @@
      "pace": "6:54",
      "paceSecs": 414,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 58,
+     "hplace": 16,
+     "grade": 10,
+     "time": "20:44.3",
+     "secs": 1244.3,
+     "pace": "6:40",
+     "paceSecs": 400,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -79574,11 +80050,11 @@
    "bestPace": "7:53",
    "bestPaceSecs": 473,
    "hs5k": {
-    "time": "21:09.4",
-    "secs": 1269.4,
-    "meet": "hs-2026-bittersweet-xc-invitational-open"
+    "time": "20:44.3",
+    "secs": 1244.3,
+    "meet": "hs-2026-maryland-private-school-state-championships-open-2a"
    },
-   "hsBestPaceSecs": 408
+   "hsBestPaceSecs": 400
   },
   {
    "name": "Gabriel Simpson",
@@ -79631,6 +80107,17 @@
      "pace": "6:52",
      "paceSecs": 412,
      "teamPlace": 25,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 67,
+     "hplace": 17,
+     "grade": 9,
+     "time": "21:17.4",
+     "secs": 1277.4,
+     "pace": "6:51",
+     "paceSecs": 411,
      "origin": "hs"
     }
    ],
@@ -79831,6 +80318,17 @@
      "secs": 1161.2,
      "pace": "6:13",
      "paceSecs": 373,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 29,
+     "hplace": 9,
+     "grade": 11,
+     "time": "19:49.6",
+     "secs": 1189.6,
+     "pace": "6:22",
+     "paceSecs": 382,
      "origin": "hs"
     }
    ],
@@ -81130,6 +81628,17 @@
      "secs": 1566.3,
      "pace": "8:24",
      "paceSecs": 504,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 119,
+     "hplace": 24,
+     "grade": 12,
+     "time": "23:30.7",
+     "secs": 1410.7,
+     "pace": "7:34",
+     "paceSecs": 454,
      "origin": "hs"
     }
    ],
@@ -84731,6 +85240,18 @@
      "paceSecs": 360,
      "teamPlace": 7,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 3,
+     "hplace": 1,
+     "grade": 12,
+     "time": "18:09.1",
+     "secs": 1089.1,
+     "pace": "5:50",
+     "paceSecs": 350,
+     "teamPlace": 3,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -85096,6 +85617,18 @@
      "pace": "5:14",
      "paceSecs": 314,
      "teamPlace": 3,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 6,
+     "hplace": 2,
+     "grade": 11,
+     "time": "15:58.0",
+     "secs": 958.0,
+     "pace": "5:08",
+     "paceSecs": 308,
+     "teamPlace": 6,
      "origin": "hs"
     }
    ],
@@ -85928,6 +86461,17 @@
      "secs": 1298.3,
      "pace": "6:57",
      "paceSecs": 417,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 84,
+     "hplace": 20,
+     "grade": 9,
+     "time": "21:55.9",
+     "secs": 1315.9,
+     "pace": "7:03",
+     "paceSecs": 423,
      "origin": "hs"
     }
    ],
@@ -88865,6 +89409,18 @@
      "paceSecs": 336,
      "teamPlace": 27,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
+     "place": 31,
+     "hplace": 7,
+     "grade": 11,
+     "time": "17:18.0",
+     "secs": 1038.0,
+     "pace": "5:34",
+     "paceSecs": 334,
+     "teamPlace": 30,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -89565,6 +90121,17 @@
      "secs": 1289.9,
      "pace": "6:55",
      "paceSecs": 415,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
+     "place": 122,
+     "hplace": 26,
+     "grade": 9,
+     "time": "23:32.7",
+     "secs": 1412.7,
+     "pace": "7:34",
+     "paceSecs": 454,
      "origin": "hs"
     }
    ],
