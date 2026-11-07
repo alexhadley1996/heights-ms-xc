@@ -117,3 +117,18 @@ Text marked “Placeholder” (home page About, History page, footer contact) st
 - Logo (provided by the team, Nov 2026): `assets/heights-logo-original.png` (red H over crossed sabers, white background). Made from it: `heights-logo.png` (transparent, red; footer), `heights-logo-white.png` (transparent, white; red header and home banner), favicons `favicon.ico` (16/32/48), `favicon-16/32/48.png`, `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` (`site.webmanifest`). The school crest is no longer used.
 - `assets/heights-men-fully-alive.svg` — https://heights.edu/app/themes/heights-school/resources/assets/images/mfa.svg (unaltered, not currently used)
 - Fonts on heights.edu: Adobe Garamond SC (self-hosted) and Typekit `tablet-gothic` / `adobe-garamond-pro` (licensed). This site uses free EB Garamond (Google Fonts) in small caps as a stand-in, plus system sans-serif.
+
+## Historical season summary
+
+The History page includes a sourced, static transcription of Heights championship
+places from the read-only **HS XC History** workbook (Drive file
+`1Usf_KmzdfCyE5u7WUSvKSkXzspyOSvYtFNgFoYTQ16g`): WCAC varsity/JV,
+small/large-school state standings, WCAC entry year, and recorded Heights coaches.
+It is content in the History template in `assets/app.js`, not inferred from race
+calculations. The existing build leaves that content intact. Update it only from
+verified source cells; the workbook ends at 2025, omits 2020, and does not define
+its NS/X codes. The 2007 state title is summary-only (no invented race or points).
+The 2006 small-school placing is distinct from the combined race standings; its
+context note is maintained in `data/hs/race_notes.json`. Unlabeled names/time
+blocks from the Heights tab are not used as rankings, rosters, or race results.
+The source sheet is never edited by the site refresh.
