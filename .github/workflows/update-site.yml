@@ -1,0 +1,80 @@
+# Rebuilds the website data whenever something changes, so nobody has to run anything by hand.
+#  - every change pushed or uploaded to main (new race files, name fixes, a new copy of the MS sheet)
+#  - every morning: checks the Google Sheet "Heights MS XC Results" for changes (only if it is shared as
+#    "Anyone with the link - Viewer"; otherwise this step is skipped)
+#  - on demand: Actions tab > "Update site" > "Run workflow"
+# If the build fails, nothing is committed and the live site keeps showing the last good version.
+# The summary on each run's page explains what happened in plain English. See HOW-TO-UPDATE.md.
+name: Update site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 10 * * *"   # every day, about 5-6 am Eastern
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit the rebuilt data
+  pages: write      # ask GitHub Pages to publish it
+
+concurrency:
+  group: update-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Get the files
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install tools
+        run: python -m pip install -r requirements.txt
+
+      - name: Check the sheet and rebuild the site data
+        id: build
+        run: python scripts/update_site.py
+
+      - name: Save the rebuilt data
+        id: save
+        if: steps.build.outputs.commit == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/results.js data/results.json data/races data/ms-sheet
+          if git diff --cached --quiet; then
+            echo "Nothing changed in the site data."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "Update site data (automatic)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && echo "pushed=true" >> "$GITHUB_OUTPUT" && exit 0
+            sleep 10
+          done
+          echo "::error::Could not save the rebuilt data (another change arrived at the same time). Run this workflow again from the Actions tab."
+          exit 1
+
+      - name: Publish the website
+        if: steps.save.outputs.pushed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent && echo "Asked GitHub Pages to publish the new data."
+
+      - name: Report a problem
+        if: steps.build.outputs.ok != 'true'
+        run: |
+          echo "::error::Something needs fixing. Open this run's Summary page for the explanation in plain English."
+          exit 1

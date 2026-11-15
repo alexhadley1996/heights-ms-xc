@@ -15,14 +15,30 @@ Every results table is sortable: click a column heading (again to reverse).
 Race distances are read from the divisor in each tab's pace formula (the script loads the workbook twice: values and formulas).
 Team scores are calculated by the script (standard XC scoring) and compared with official published team scores where those were found (Official column on each meet page).
 
-## Refreshing the data
-1. In Google Sheets, File → Download → Microsoft Excel (.xlsx) for “Heights MS XC Results”.
-2. `pip install openpyxl` then `python3 scripts/build_data.py path/to/file.xlsx`
-3. This rewrites `data/results.js` (used by every page: race list, runners and their results), `data/results.json`
-   (same content) and `data/races/<race id>.js` (full field + team scores for one race, loaded only by that race's page).
+## Updating the site (no programming needed)
+**See [HOW-TO-UPDATE.md](HOW-TO-UPDATE.md)** — step-by-step instructions using only the GitHub website: adding a new race,
+adding older results, fixing a runner's name, and what to do if something goes wrong.
 
-New meet tabs are picked up automatically; add a line to `MEET_INFO` in the script to set a nicer name/date/distance,
-and `NAME_ALIASES` to merge spelling variants of a runner's name.
+How it works: `.github/workflows/update-site.yml` runs `scripts/update_site.py` on every push to `main`, every morning,
+and on demand (Actions tab → *Update site* → *Run workflow*). It rebuilds `data/results.js`, `data/results.json` and
+`data/races/*.js` and commits them if they changed; GitHub Pages (deploy from `main`, root) then serves them. If the
+build fails nothing is committed, so the live site keeps the last good version; the run's Summary page explains the problem.
+
+Inputs (all in the repo):
+- `data/ms-sheet/Heights MS XC Results.xlsx` — the Google Sheet "Heights MS XC Results". The workflow re-downloads it
+  each morning if the sheet is shared as "Anyone with the link → Viewer" (only real content changes are committed;
+  a new copy that breaks the build is rejected and the old copy kept). Otherwise upload a fresh .xlsx here by hand.
+- `race-results/*.csv` — one file per race added by hand (template: `race-results/_TEMPLATE.csv`; parsed by
+  `scripts/new_races.py`). A file with mistakes is left out and listed on the run's Summary page.
+- `data/name-fixes.csv` — runner name spellings (replaces the old `NAME_ALIASES` / `HS_NAME_ALIASES` dicts).
+  An MS and an HS runner with exactly the same name and matching class year are joined automatically.
+- `data/hs/` and `data/supplemental/` — the researched historical results (see below).
+
+To run it yourself: `pip install -r requirements.txt` then `python3 scripts/build_data.py` (or pass a path to another .xlsx).
+Running it twice changes nothing (the "Data refreshed" date only moves when the data changes).
+
+New sheet tabs are picked up automatically (name them like "2027 - Bullis"); add a line to `MEET_INFO` in the script
+to set a nicer name/date/distance.
 
 ## Supplemental data and corrections (`data/supplemental/`)
 The sheet stays the primary source; the build also merges:
@@ -66,13 +82,13 @@ Built by the same script (`scripts/hs_data.py`, called from `build_data.py`); th
   Griffin Woofter); `ROW_SPLITS` in build_data.py marks a row that belongs to a different runner with the same name (brothers:
   Robert Spence at 2019 Landon, Noah Schneider at 2016 Norwood). The build stops with an error if any runner still appears
   twice in one race.
-- Runner merges confirmed by the team: `HS_NAME_ALIASES` (spellings), `EXTRA_MS_HS_MERGES` (MS→HS), `CONFIRMED_SAME_PERSON`
+- Runner merges confirmed by the team: `data/name-fixes.csv` (spellings), `EXTRA_MS_HS_MERGES` (MS→HS), `CONFIRMED_SAME_PERSON`
   (pages joined regardless of listed grades, e.g. all Will/William Cannon pages). Old runner ids redirect (`runnerAliases`).
 - Athlete search: the box in the header of every page (type part of a name, any spelling the runner is listed under;
   Enter opens the first match). The Runners page also has a name filter (`runners.html?q=…`).
 - `ms_hs_matches.csv` — MS↔HS runner matches. Only `confident` rows are merged. To merge a “needs confirmation” pair, add one line to
   `EXTRA_MS_HS_MERGES` in `scripts/hs_data.py` (`"ms-runner-id": "HS Name"`).
-- `hs_name_variants.csv` — HS spelling variants; the ones merged are listed in `HS_NAME_ALIASES` in `scripts/hs_data.py`.
+- `hs_name_variants.csv` — HS spelling variants; the ones merged are listed in `data/name-fixes.csv`.
 - Levels: Varsity, JV, Freshman, Open, Section (level not given — section name shown, e.g. Landon 2011 Brown/White), Relay.
   WCAC “Varsity B” is listed at JV level; Holy Cross 2020 (V/JV together) is Open; relays show team placings with legs and
   never count toward PRs or Top Times. Heights = school field exactly “The Heights”/“The Heights School”/“Heights School”

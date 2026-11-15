@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Build data/results.js (and results.json) from the "Heights MS XC Results" xlsx export.
 
-Usage:  python3 scripts/build_data.py path/to/Heights_MS_XC_Results.xlsx
+Usage:  python3 scripts/build_data.py            (uses the workbook in data/ms-sheet/)
+        python3 scripts/build_data.py path/to/Heights_MS_XC_Results.xlsx
 
 Also merges data/supplemental/ (races found online + per-race overrides for sheet races);
 see README "Supplemental data and corrections".
@@ -66,21 +67,63 @@ MEET_INFO = {
 # Otherwise tab order (reversed) is used.
 
 # Spelling variants of the same Heights runner -> canonical name.
-# Canonical = the spelling most used in official results (racecast / Athletic.net / mocorunning), user-confirmed merges.
-NAME_ALIASES = {
-    "Sean Carney (real)": "Sean Carney",
-    "Johnny Ortman": "John Ortman",      # official results: "John Ortman" in 8 meets, "Johnny" in 1
-    "Louie Liess": "Louie Leiss",        # official: "Leiss" (2 meets), never "Liess"
-    "P Allen": "Philip Allen",
-    "Phillip Allen": "Philip Allen",     # official: "Philip" 10 meets (mostly HS), "Phillip" 7
-    "Vince Kiernan": "Vince Keirnan",    # official: "Keirnan" 3 meets (2008), "Kiernan" 2 (2007)
-    "Santi Luli": "Santiago Lulli",      # nickname; full first name kept; family name is Lulli (user-confirmed)
-    "Andres Luli": "Andres Lulli",       # official: "Lulli" 8 meets (2009 + HS), "Luli" 3 (2008)
-    "Justin Liess": "Justin Leiss",      # user-confirmed (same family as Louie Leiss)
-    "Colin Oneil": "Cullun O'Neill",     # user-confirmed same boy; official results: "Cullun O'Neill" 2 meets (2006), "Colin Oneil" 1 (2008)
-    "Ed Nelson": "Edward Nelson",
-    "Henny Mangold": "Henry Mangold",    # 2005 Tri-Meet typo (user-confirmed)        # nickname; full first name kept
-}
+# These live in data/name-fixes.csv (one row per misspelling; easy to edit on the GitHub website).
+# Level "MS" rows are used here; "HS" rows by hs_data.HS_NAME_ALIASES; blank/"Both" rows by both.
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+NAME_FIXES_CSV = os.path.join(ROOT, "data", "name-fixes.csv")
+
+
+class DataError(Exception):
+    """A problem in one of the hand-edited input files, explained in plain English."""
+
+
+def load_name_fixes(level):
+    """{name as listed: correct name} for "MS" or "HS" from data/name-fixes.csv."""
+    out = {}
+    if not os.path.exists(NAME_FIXES_CSV):
+        return out
+    with open(NAME_FIXES_CSV, encoding="utf-8-sig", newline="") as f:
+        rows = list(csv.reader(f))
+    if not rows:
+        return out
+    head = [h.strip().lower() for h in rows[0]]
+    try:
+        i_old, i_new = head.index("name as listed"), head.index("correct name")
+    except ValueError:
+        raise DataError("data/name-fixes.csv: the first row must be the column names "
+                        "'Name as listed,Correct name,Level,Note'. Restore it from the file's History on GitHub.")
+    i_lvl = head.index("level") if "level" in head else None
+    problems = []
+    for n, r in enumerate(rows[1:], start=2):
+        cell = lambda i: (r[i].strip() if i is not None and i < len(r) else "")
+        old, new, lvl = re.sub(r"\s+", " ", cell(i_old)), re.sub(r"\s+", " ", cell(i_new)), cell(i_lvl).upper()
+        if not old and not new:
+            continue
+        if not old or not new:
+            problems.append(f"row {n}: both 'Name as listed' and 'Correct name' need a name.")
+            continue
+        if lvl in ("", "BOTH", "ALL", "MS/HS", "MS HS"):
+            lvls = ("MS", "HS")
+        elif lvl in ("MS", "HS"):
+            lvls = (lvl,)
+        else:
+            problems.append(f"row {n}: Level must be MS, HS or Both (or empty), not '{cell(i_lvl)}'.")
+            continue
+        if level in lvls:
+            if old in out and out[old] != new:
+                problems.append(f"row {n}: '{old}' is already fixed to '{out[old]}' on an earlier row.")
+            out[old] = new
+    if problems:
+        raise DataError("data/name-fixes.csv has a problem:\n  " + "\n  ".join(problems))
+    return out
+
+
+try:
+    NAME_ALIASES = load_name_fixes("MS")
+except DataError as _ex:
+    if __name__ == "__main__":
+        sys.exit(f"PROBLEM: {_ex}")
+    raise
 
 SILENT_FIXES = {"Henny Mangold"}  # plain typos: corrected without a "Listed as" note
 
@@ -298,7 +341,6 @@ def score_race(field, exclude_grades=(), max_per_team=7, incomplete_score=False,
 # ---------------------------------------------------------------------------
 # Supplemental data (races found online) and per-race overrides for sheet races
 # ---------------------------------------------------------------------------
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 SUPP = os.path.join(ROOT, "data", "supplemental")
 DIST_TOL = 0.01  # miles; official vs sheet distance closer than this counts as the same (e.g. 1.599 vs 1.6)
 
@@ -615,7 +657,32 @@ def finalize(field, meta, quirks):
     return meta
 
 
-def main(path):
+MS_SHEET_DIR = os.path.join(ROOT, "data", "ms-sheet")
+
+
+def find_ms_sheet():
+    """The MS results workbook in data/ms-sheet/. If several .xlsx files are there (e.g. an upload saved as
+    "... (1).xlsx"), the most recently committed one is used."""
+    files = [os.path.join(MS_SHEET_DIR, f) for f in os.listdir(MS_SHEET_DIR) if f.lower().endswith(".xlsx")] if os.path.isdir(MS_SHEET_DIR) else []
+    if not files:
+        raise DataError("No middle school results workbook (.xlsx) in data/ms-sheet/. Upload the Google Sheet "
+                        "'Heights MS XC Results' there (File > Download > Microsoft Excel).")
+    if len(files) > 1:
+        import subprocess
+        def when(f):
+            try:
+                t = subprocess.run(["git", "log", "-1", "--format=%ct", "--", f], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+                return (int(t) if t else 0, os.path.getmtime(f))
+            except OSError:
+                return (0, os.path.getmtime(f))
+        files.sort(key=when)
+        print(f"note: {len(files)} workbooks in data/ms-sheet/; using the newest, {os.path.basename(files[-1])}. Delete the others.")
+    return files[-1]
+
+
+def main(path=None):
+    path = path or find_ms_sheet()
+    print(f"Middle school sheet: {os.path.relpath(path, ROOT)}")
     wb = openpyxl.load_workbook(path, data_only=True)
     wb_f = openpyxl.load_workbook(path, data_only=False)
     overrides = load_json("sheet_overrides.json", {}).get("races", {})
@@ -782,6 +849,11 @@ def main(path):
     import hs_data
     meets += hs_data.build_hs_meets(quirks)
 
+    # Races added by hand as one CSV per race in race-results/ (see HOW-TO-UPDATE.md)
+    import new_races
+    uploaded, upload_problems = new_races.load_uploaded_races(quirks, {m["id"] for m in meets})
+    meets += uploaded
+
     # Chronological order: by date; sheet races without a date sit just after the previous dated race of the
     # same season in tab order.
     meets.sort(key=lambda m: (m["season"], m["_tabOrder"] if m["origin"] == "sheet" else 0))
@@ -809,6 +881,7 @@ def main(path):
     runners, review = build_runners(meets)
     check_one_row_per_runner(meets, runners)
     write_outputs(meets, runners, review, quirks)
+    print(f"Added from race-results/: {len(uploaded)} race(s)" + (f": {', '.join(m['csv'].split('/')[-1] for m in uploaded)}" if uploaded else ""))
     ms = [m for m in meets if m["division"] == "MS"]
     gs = collections.Counter(m["division"] for m in meets if m["group"] == m["id"] or True)
     ng = collections.Counter((m["division"], m["group"]) for m in meets)
@@ -828,6 +901,11 @@ def main(path):
         print("score:", m["division"], m["id"], m["date"], m["distance"], m["distanceSource"], f"official {o['matched']}/{len(o['teams'])} heights={o['heightsMatch']}" if o else "no official")
     for r in review:
         print("review:", r)
+    if upload_problems:
+        print("\nPROBLEMS (the rest of the site was updated; fix these files and upload them again):", file=sys.stderr)
+        for p in upload_problems:
+            print("  " + p, file=sys.stderr)
+        sys.exit(3)
 
 
 def slim_scoring(m):
@@ -938,7 +1016,8 @@ def assign_groups(meets):
             name = MEET_GROUP_ALIASES.get((m["season"], m["meetName"]), m["meetName"])
             key = ("HS", m["season"], name)
         else:
-            name = re.sub(r"\s*\((open|b) race\)\s*$", "", m["name"], flags=re.I).strip()
+            # races added through race-results/ group by their meet name; the others as before
+            name = m["meetName"] if m.get("uploaded") else re.sub(r"\s*\((open|b) race\)\s*$", "", m["name"], flags=re.I).strip()
             key = ("MS", m["season"], name, m.get("date") or m["id"])
         buckets[key].append(m)
     race_ids = {m["id"] for m in meets}
@@ -984,7 +1063,7 @@ def write_outputs(meets, runners, review, quirks):
             field["relay"] = m["relay"]
         with open(os.path.join(fdir, f"{m['id']}.js"), "w") as f:
             f.write(f"(window.XC_FIELD = window.XC_FIELD || {{}})[{json.dumps(m['id'])}] = " + json.dumps(field, separators=(",", ":")) + ";\n")
-        c = {k: v for k, v in m.items() if k not in ("results", "scoring", "relay", "csv", "aliasIds")
+        c = {k: v for k, v in m.items() if k not in ("results", "scoring", "relay", "csv", "aliasIds", "uploaded")
              and (v not in (None, False, [], "") or k in ("fieldSize", "heightsCount"))}
         if c.get("notes"):
             c.pop("note", None)  # HS races: the list of notes replaces the joined text
@@ -1002,6 +1081,13 @@ def write_outputs(meets, runners, review, quirks):
         "identityReview": review,
         "quirks": EXTRA_NOTES + sorted(set(quirks)),
     }
+    # keep the old "refreshed" date when nothing else changed, so re-running the build changes no files
+    try:
+        old = json.load(open(os.path.join(out, "results.json"), encoding="utf-8"))
+        if {k: v for k, v in old.items() if k != "generated"} == json.loads(json.dumps({k: v for k, v in data.items() if k != "generated"})):
+            data["generated"] = old.get("generated", data["generated"])
+    except (OSError, ValueError):
+        pass
     with open(os.path.join(out, "results.json"), "w") as f:
         json.dump(data, f, indent=1)
     with open(os.path.join(out, "results.js"), "w") as f:
@@ -1073,7 +1159,13 @@ def check_one_row_per_runner(meets, runners):
         c = collections.Counter(e.get("runnerId") for e in m["results"] if e.get("runnerId"))
         bad += [f"{rid} \u00d7{n} in {m['id']} (field)" for rid, n in c.items() if n > 1]
     if bad:
-        sys.exit("ERROR: a runner appears more than once in a race:\n  " + "\n  ".join(sorted(set(bad))))
+        names = {r["id"]: r["name"] for r in runners}
+        titles = {m["id"]: f"{m['season']} {m['name']}" + (f" ({m['csv']})" if m.get("csv") and m.get("uploaded") else "") for m in meets}
+        plain = sorted({f"{names.get(b.split(' ')[0], b.split(' ')[0])} is listed more than once in {titles.get(b.split(' in ')[1].replace(' (field)', ''), b)}"
+                        for b in bad})
+        sys.exit("ERROR: a runner appears more than once in a race. Usually the same runner was typed twice, or two "
+                 "different runners were merged by a line in data/name-fixes.csv:\n  " + "\n  ".join(plain)
+                 + "\n(details: " + "; ".join(sorted(set(bad))) + ")")
     print(f"Check passed: every runner appears at most once in each of {len(meets)} races.")
 
 
@@ -1177,6 +1269,21 @@ def build_runners(meets):
                 continue
             merged_hs.add(id(hp))
             msp.setdefault("hsParts", []).append(hp)
+    # Not in the match lists: an MS runner and an HS runner with exactly the same name whose class years agree
+    # (both known, at most 1 apart) are one person. This links each new class moving up to high school without
+    # any extra file; a different spelling can be fixed in data/name-fixes.csv (Level "Both").
+    linked_ms = {ms_id for ms_id, msp in ms_by_id.items() if msp.get("hsParts")}
+    confirmed_ids = {i for grp in hs_data.CONFIRMED_SAME_PERSON for i in grp}  # handled by CONFIRMED_SAME_PERSON below
+    for ms_id, msp in ms_by_id.items():
+        if ms_id in linked_ms or ms_id in confirmed_ids or msp.get("tagged") or not msp["cy"]:
+            continue
+        ms_cy = statistics.median(msp["cy"])
+        cands = [p for p in hs_people if p["name"] == msp["name"] and id(p) not in merged_hs and not p.get("tagged")
+                 and p["id"] not in confirmed_ids and p["cy"] and abs(statistics.median(p["cy"]) - ms_cy) <= 1 and p["seasons"][0] > msp["seasons"][-1]]
+        if len(cands) == 1:
+            merged_hs.add(id(cands[0]))
+            msp.setdefault("hsParts", []).append(cands[0])
+            review.append(f"MS\u2013HS: joined {msp['name']} (same name, class of {ms_cy:g}).")
     taken = set(ms_by_id)
     runners = []
     grade_log = {"filled": 0, "conflicts": [], "unresolved": 0}
@@ -1320,4 +1427,7 @@ def infer_grades(name, items, log):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "Heights_MS_XC_Results.xlsx")
+    try:
+        main(sys.argv[1] if len(sys.argv) > 1 else None)
+    except DataError as ex:
+        sys.exit(f"PROBLEM: {ex}")

@@ -13,69 +13,7 @@ HS_HEIGHTS_RE = re.compile(r"^(the\s+)?heights(\s+schoo+l)?(\s+boys\s+[a-c])?$",
 # HS-only spelling variants of the same Heights runner (official HS spellings win; the most-used one is kept).
 # One line per variant. Variants that are only *possibly* the same runner are deliberately left out
 # (see NOT_MERGED below) so they stay separate until confirmed.
-HS_NAME_ALIASES = {
-    "Timothy Vaughn": "Timothy Vaughan",
-    "Chrictopher Chmura": "Christopher Chmura",
-    "Peyton Petersen": "Peyton Peterson",
-    "Luke McLorey": "Luke McClorey",
-    "Joseph McLorey": "Joseph McClorey",
-    "Joe McClorey": "Joseph McClorey",
-    "Joesph Cremers": "Joseph Cremers",
-    "Johnny Ortman": "John Ortman",
-    "Phillip Allen": "Philip Allen",
-    "Nick Monahan": "Nicholas Monahan",
-    "Creegan Cahill": "Cregan Cahill",
-    "Gregan Cahill": "Cregan Cahill",
-    "Gregory Lipovsky": "Greg Lipovsky",
-    # confirmed by the team (Oct 2026)
-    "Nick O'Neill": "Nicholas O'Neil",
-    "Nicholas Monaghan": "Nicholas Monahan",
-    "Nick Morahan": "Nicholas Monahan",
-    # 2004-2005 results (history batch 1): same-team spelling/nickname variants within the same seasons, grades consistent
-    "Vince Barrett": "Vincent Barrett",
-    "Conor Breed": "Connor Breed",
-    "James Calahan": "Jim Callahan",
-    "Dom Currano": "Dominic Currano",
-    "A.J. Guarente": "Andrew Guarente",
-    "Nathan Hale": "Nathanael Hale",
-    "Will Krohn": "William Krohn",
-    "Chris Lenczowski": "Christian Lenczowski",
-    "P.J. McGovern": "PJ McGovern",
-    "Ben Mccabe": "Ben McCabe",
-    "Joseph Mehan": "Joe Mehan",
-    "Mike Quine": "Michael Quine",
-    # 2002-2003 results (history batch 2): a misspelling and last-name-only listings, each the only Heights runner
-    # with that name in the same season
-    "William Krosh": "William Krohn",
-    "Krohn": "William Krohn",
-    "Hadley": "Peter Hadley",
-    "Yang": "Willy Yang",
-    # confirmed by the team (Nov 2026): AJ Guarente (2004-05) is Andrew Guarente (2006)
-    "AJ Guarente": "Andrew Guarente",
-    # 2000-2001 results (history batch 3): spellings/nicknames of the same Heights runner in consecutive seasons, grades consistent
-    "Dan Shusinsky": "Dan Sushinsky",
-    "Danny Mccarthy": "Dan McCarthy",
-    "Danny McCarthy": "Dan McCarthy",
-    "Dan MC Carthy": "Dan McCarthy",
-    "Dan Mc Carthy": "Dan McCarthy",
-    "Allejandro Lulli": "Alejandro Lulli",
-    "Dan Henebrey": "Dan Henebery",
-    "Charley Gallagher": "Charles Gallagher",
-    "Mike Galagher": "Mike Gallagher",
-    "James Acsvedo": "James Acevedo",
-    "Jim Streeter": "James Streeter",
-    "Matt Fuley": "Matt Foley",
-    # 1998-1999 results (history batch 4): nickname/spelling variants of the same Heights runner, adjacent seasons, grades consistent
-    "Pat Jacxsens": "Patrick Jacxsens",
-    "Daniel McCarthy": "Dan McCarthy",
-    "Daniel Henebrey": "Dan Henebery",
-    "Shawn Baghai": "Shaun Baghai",
-    # confirmed by the team (Nov 1, 2026): every Mike/Michael Fagan result (2001-2004) is one runner; 1998 Daniel Sushinsky is Dan Sushinsky
-    "Mike Fagan": "Michael Fagan",
-    "Daniel Sushinsky": "Dan Sushinsky",
-    # 1997 results (history batch 5): spelling variant of the same Heights runner in the same season (Ricardella in the 1997 WIS and 1998 printouts)
-    "Chris Richardella": "Chris Ricardella",
-}
+HS_NAME_ALIASES = B.load_name_fixes("HS")  # data/name-fixes.csv (Level HS or Both)
 # Old runner-page ids whose names were later merged into another runner: {old id: name of the runner it now belongs to}.
 RETIRED_RUNNER_IDS = {"aj-guarente": "Andrew Guarente", "mike-fagan": "Michael Fagan", "daniel-sushinsky": "Dan Sushinsky"}
 
