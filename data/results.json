@@ -36,7 +36,7 @@
    "heightsCount": 29,
    "hasPace": true,
    "hasGrade": true,
-   "order": 419,
+   "order": 418,
    "venue": "Bittersweet Field",
    "group": "hs-2026-maryland-private-school-state-championships",
    "scoring": {
@@ -84,7 +84,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 418,
+   "order": 417,
    "venue": "Bittersweet Field",
    "group": "hs-2026-maryland-private-school-state-championships",
    "scoring": {
@@ -104,38 +104,6 @@
       "calcPlace": 1,
       "calcScore": 63,
       "match": true
-     }
-    ]
-   }
-  },
-  {
-   "id": "2026-fake-run",
-   "season": 2026,
-   "name": "Fake Run",
-   "division": "MS",
-   "level": "Open",
-   "levelLabel": "Middle school",
-   "tab": "2026 - Fake Run",
-   "origin": "sheet",
-   "distance": 1.86,
-   "distanceSource": "est",
-   "impliedDistance": 1.86,
-   "fieldSize": 125,
-   "heightsCount": 17,
-   "hasPace": true,
-   "hasGrade": true,
-   "order": 417,
-   "venue": "Unknown",
-   "group": "2026-fake-run",
-   "scoring": {
-    "teamCount": 13,
-    "calcCount": 13,
-    "heights": [
-     {
-      "team": "The Heights",
-      "place": 1,
-      "score": 51,
-      "official": false
      }
     ]
    }
@@ -21308,27 +21276,13 @@
    "date": "2026-11-05",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 418,
+   "order": 417,
    "races": [
     "hs-2026-maryland-private-school-state-championships-varsity-2a",
     "hs-2026-maryland-private-school-state-championships-open-2a"
    ],
    "levels": [
     "Varsity",
-    "Open"
-   ]
-  },
-  {
-   "id": "2026-fake-run",
-   "season": 2026,
-   "division": "MS",
-   "name": "Fake Run",
-   "venue": "Unknown",
-   "order": 417,
-   "races": [
-    "2026-fake-run"
-   ],
-   "levels": [
     "Open"
    ]
   },
@@ -45703,33 +45657,6 @@
    "hsBestPaceSecs": 338
   },
   {
-   "name": "Percy Eddington",
-   "id": "percy-eddington",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 1,
-     "hplace": 1,
-     "grade": 8,
-     "time": "9:54.7",
-     "secs": 594.7,
-     "pace": "5:19",
-     "paceSecs": 319,
-     "teamPlace": 1,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "5:19",
-   "bestPaceSecs": 319
-  },
-  {
    "name": "Stefan Eliopoulos",
    "id": "stefan-eliopoulos",
    "seasons": [
@@ -55936,59 +55863,6 @@
    "hsBestPaceSecs": 454
   },
   {
-   "name": "August Ibarra",
-   "id": "august-ibarra",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 97,
-     "hplace": 15,
-     "grade": 8,
-     "time": "13:25.5",
-     "secs": 805.5,
-     "pace": "7:12",
-     "paceSecs": 432,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:12",
-   "bestPaceSecs": 432
-  },
-  {
-   "name": "Emilio Ibarra",
-   "id": "emilio-ibarra",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 8,
-     "hplace": 2,
-     "grade": 6,
-     "time": "10:50.4",
-     "secs": 650.4,
-     "pace": "5:49",
-     "paceSecs": 349,
-     "teamPlace": 8,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "5:49",
-   "bestPaceSecs": 349
-  },
-  {
    "name": "Dmitri Ingraham",
    "id": "dmitri-ingraham",
    "seasons": [
@@ -61711,33 +61585,6 @@
    "bestPaceSecs": 402
   },
   {
-   "name": "Lachlan Li",
-   "id": "lachlan-li",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 15,
-     "hplace": 4,
-     "grade": 8,
-     "time": "11:14.7",
-     "secs": 674.7,
-     "pace": "6:02",
-     "paceSecs": 362,
-     "teamPlace": 14,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:02",
-   "bestPaceSecs": 362
-  },
-  {
    "name": "Brendan Lichter",
    "id": "brendan-lichter",
    "seasons": [
@@ -62350,32 +62197,6 @@
     "meet": "hs-2001-georgetown-prep-classic-freshman"
    },
    "hsBestPaceSecs": 476
-  },
-  {
-   "name": "Oscar Lopez",
-   "id": "oscar-lopez",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 92,
-     "hplace": 13,
-     "grade": 6,
-     "time": "13:15.5",
-     "secs": 795.5,
-     "pace": "7:07",
-     "paceSecs": 427,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:07",
-   "bestPaceSecs": 427
   },
   {
    "name": "Jacob Love",
@@ -64915,33 +64736,6 @@
    "hs": [],
    "bestPace": "6:43",
    "bestPaceSecs": 403
-  },
-  {
-   "name": "Hugo Matheson",
-   "id": "hugo-matheson",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 9,
-     "hplace": 3,
-     "grade": 8,
-     "time": "10:55.0",
-     "secs": 655.0,
-     "pace": "5:51",
-     "paceSecs": 351,
-     "teamPlace": 9,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "5:51",
-   "bestPaceSecs": 351
   },
   {
    "name": "John Henry Matich",
@@ -71195,32 +70989,6 @@
    "hsBestPaceSecs": 399
   },
   {
-   "name": "Matthias Murphy",
-   "id": "matthias-murphy",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 70,
-     "hplace": 11,
-     "grade": 7,
-     "time": "12:44.9",
-     "secs": 764.9,
-     "pace": "6:50",
-     "paceSecs": 410,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:50",
-   "bestPaceSecs": 410
-  },
-  {
    "name": "Luke Myers",
    "id": "luke-myers",
    "seasons": [
@@ -73358,33 +73126,6 @@
    "hsBestPaceSecs": 379
   },
   {
-   "name": "Graham Ocampo",
-   "id": "graham-ocampo",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 28,
-     "hplace": 7,
-     "grade": 8,
-     "time": "11:45.3",
-     "secs": 705.3,
-     "pace": "6:18",
-     "paceSecs": 378,
-     "teamPlace": 26,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:18",
-   "bestPaceSecs": 378
-  },
-  {
    "name": "Everett Oehler",
    "id": "everett-oehler",
    "seasons": [
@@ -74140,32 +73881,6 @@
    "hs": [],
    "bestPace": "6:26",
    "bestPaceSecs": 386
-  },
-  {
-   "name": "Milo Padilla",
-   "id": "milo-padilla",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 95,
-     "hplace": 14,
-     "grade": 7,
-     "time": "13:21.2",
-     "secs": 801.2,
-     "pace": "7:10",
-     "paceSecs": 430,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:10",
-   "bestPaceSecs": 430
   },
   {
    "name": "Luke Pannell",
@@ -76760,32 +76475,6 @@
    "hs": [],
    "bestPace": "8:29",
    "bestPaceSecs": 509
-  },
-  {
-   "name": "Griffin Rivera",
-   "id": "griffin-rivera",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 33,
-     "hplace": 8,
-     "grade": 7,
-     "time": "11:53.1",
-     "secs": 713.1,
-     "pace": "6:23",
-     "paceSecs": 383,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:23",
-   "bestPaceSecs": 383
   },
   {
    "name": "Alek Rizzo",
@@ -80251,33 +79940,6 @@
    "hs": [],
    "bestPace": "8:02",
    "bestPaceSecs": 482
-  },
-  {
-   "name": "Aziz Silva",
-   "id": "aziz-silva",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 20,
-     "hplace": 5,
-     "grade": 8,
-     "time": "11:27.4",
-     "secs": 687.4,
-     "pace": "6:09",
-     "paceSecs": 369,
-     "teamPlace": 19,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:09",
-   "bestPaceSecs": 369
   },
   {
    "name": "Jamison Simmons",
@@ -84653,32 +84315,6 @@
    "hsBestPaceSecs": 446
   },
   {
-   "name": "Bodhi Talbot",
-   "id": "bodhi-talbot",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 38,
-     "hplace": 9,
-     "grade": 8,
-     "time": "12:00.1",
-     "secs": 720.1,
-     "pace": "6:26",
-     "paceSecs": 386,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:26",
-   "bestPaceSecs": 386
-  },
-  {
    "name": "John Tanner",
    "id": "john-tanner",
    "seasons": [
@@ -86017,32 +85653,6 @@
    "hsBestPaceSecs": 305
   },
   {
-   "name": "Amos Thibault",
-   "id": "amos-thibault",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 116,
-     "hplace": 17,
-     "grade": 8,
-     "time": "14:00.1",
-     "secs": 840.1,
-     "pace": "7:31",
-     "paceSecs": 451,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:31",
-   "bestPaceSecs": 451
-  },
-  {
    "name": "Luca Tocci",
    "id": "luca-tocci",
    "seasons": [
@@ -86309,59 +85919,6 @@
     2009
    ],
    "hsBestPaceSecs": 414
-  },
-  {
-   "name": "Blaise Valdez",
-   "id": "blaise-valdez",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 26,
-     "hplace": 6,
-     "grade": 8,
-     "time": "11:40.6",
-     "secs": 700.6,
-     "pace": "6:16",
-     "paceSecs": 376,
-     "teamPlace": 25,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:16",
-   "bestPaceSecs": 376
-  },
-  {
-   "name": "Abner Valerio",
-   "id": "abner-valerio",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 109,
-     "hplace": 16,
-     "grade": 8,
-     "time": "13:47.0",
-     "secs": 827.0,
-     "pace": "7:24",
-     "paceSecs": 444,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:24",
-   "bestPaceSecs": 444
   },
   {
    "name": "JM Valle",
@@ -86831,32 +86388,6 @@
    "hsBestPaceSecs": 331
   },
   {
-   "name": "Finn Vega",
-   "id": "finn-vega",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 59,
-     "hplace": 10,
-     "grade": 7,
-     "time": "12:29.9",
-     "secs": 749.9,
-     "pace": "6:42",
-     "paceSecs": 402,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:42",
-   "bestPaceSecs": 402
-  },
-  {
    "name": "Alex Veprek",
    "id": "alex-veprek",
    "seasons": [
@@ -87082,32 +86613,6 @@
    "hs": [],
    "bestPace": "8:02",
    "bestPaceSecs": 482
-  },
-  {
-   "name": "Dante Villanueva",
-   "id": "dante-villanueva",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 74,
-     "hplace": 12,
-     "grade": 7,
-     "time": "12:49.9",
-     "secs": 769.9,
-     "pace": "6:53",
-     "paceSecs": 413,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:53",
-   "bestPaceSecs": 413
   },
   {
    "name": "Rafael Virador",
@@ -91135,7 +90640,6 @@
   "HS 2025 Oatlands Invitational \u2013 Varsity B: source lists finishers twice (404 rows); de-duplicated to 202 and renumbered.",
   "HS: one official team-score list covers 2 races (Landon Invitational \u2013 Brown, Landon Invitational \u2013 White); split by place restarts and matched to each race by its scores.",
   "Tab '2019 - Norwood Invitational': pace formula divides by 2.2 mi but the sheet states 2.1 mi; using the formula (2.2 mi).",
-  "Tab '2026 - Fake Run' has no MEET_INFO entry; name guessed.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2000-ballenger-creek-park-meet-washington-post-scores-team-scores); shown as listed.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2003-st-johns-invitational-varsity); shown as listed."
  ]
