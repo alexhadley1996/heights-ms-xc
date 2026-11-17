@@ -91136,6 +91136,8 @@
   "HS: one official team-score list covers 2 races (Landon Invitational \u2013 Brown, Landon Invitational \u2013 White); split by place restarts and matched to each race by its scores.",
   "Tab '2019 - Norwood Invitational': pace formula divides by 2.2 mi but the sheet states 2.1 mi; using the formula (2.2 mi).",
   "Tab '2026 - Fake Run' has no MEET_INFO entry; name guessed.",
+  "Tab 'Lake Needwood 11426 5k Varsity' has no MEET_INFO entry; name guessed.",
+  "Tab 'Lake Needwood 11426 5k Varsity': no Time column found, skipped.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2000-ballenger-creek-park-meet-washington-post-scores-team-scores); shown as listed.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2003-st-johns-invitational-varsity); shown as listed."
  ],
