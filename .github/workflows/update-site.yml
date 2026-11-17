@@ -52,7 +52,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/results.js data/results.json data/races data/ms-sheet
+          git add -A data/results.js data/results.json data/races data/ms-sheet assets/app.js index.html meet.html meets.html runner.html runners.html compare.html results.html top.html history.html
           if git diff --cached --quiet; then
             echo "Nothing changed in the site data."
             echo "pushed=false" >> "$GITHUB_OUTPUT"

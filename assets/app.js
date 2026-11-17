@@ -2,16 +2,12 @@
    scripts/build_data.py from the middle school results sheet, races found online, and the high school
    results in data/hs. The full field for each race is in data/races/<id>.js and is loaded by the race page. */
 (function () {
-  const D = window.XC_DATA;
-  const meetsById = Object.fromEntries(D.meets.map(m => [m.id, m]));
-  const runnersById = Object.fromEntries(D.runners.map(r => [r.id, r]));
-  const runnersByName = Object.fromEntries(D.runners.map(r => [r.name, r]));
+  // Reassigned when a stale cached results.js is reloaded (GitHub Pages caches it for 10 minutes).
+  let D, meetsById, runnersById, runnersByName, seasons, MS, HS, groups, groupsById, hByMeet;
   const chrono = (a, b) => a.season - b.season || a.order - b.order;
   const ckey = m => m.season * 1000 + m.order;               // chronological sort key
   const seasonsOf = ms => [...new Set(ms.map(m => m.season))].sort((a, b) => b - a);
-  const seasons = seasonsOf(D.meets);
   const DIVS = { MS: "Middle school", HS: "High school" };
-  const MS = D.meets.filter(m => m.division === "MS"), HS = D.meets.filter(m => m.division === "HS");
   const LEVELS = ["Varsity", "JV", "Freshman", "Open", "Section", "Relay"];
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -20,8 +16,6 @@
   const v = x => (x === null || x === undefined || x === "") ? dash : esc(x);
   const ord = n => { if (typeof n !== "number") return esc(n); const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
   // one meet page per meet (group of races); a race link points at its section on that page
-  const groups = D.groups || [];
-  const groupsById = Object.fromEntries(groups.map(g => [g.id, g]));
   const groupOf = m => groupsById[m.group] || { id: m.id, races: [m.id], name: m.name, season: m.season, division: m.division, date: m.date, levels: [m.level], order: m.order };
   const gRaces = g => g.races.map(id => meetsById[id]).filter(Boolean);
   const groupLink = g => `meet.html?id=${encodeURIComponent(g.id)}`;
@@ -51,12 +45,37 @@
   const distSort = m => m.distance || "";
   const gv = r => r.grade == null ? dash : (r.gradeInferred ? `<i class="inf" title="Inferred from other races">${esc(r.grade)}</i>` : esc(r.grade));
   // Heights rows for every race, built from the runner index (the full field is loaded on the race page only)
-  const hByMeet = {};
-  D.runners.forEach(r => r.results.forEach(x => {
-    x.m = meetsById[x.meet]; x.runnerId = r.id;
-    (hByMeet[x.meet] = hByMeet[x.meet] || []).push({ ...x, name: x.as || r.name, heights: true });
-  }));
-  Object.values(hByMeet).forEach(a => a.sort((p, q) => (typeof p.place === "number" ? p.place : 1e9) - (typeof q.place === "number" ? q.place : 1e9) || (p.relay?.leg || 0) - (q.relay?.leg || 0)));
+  function bindData(data) {
+    D = data;
+    meetsById = Object.fromEntries(D.meets.map(m => [m.id, m]));
+    runnersById = Object.fromEntries(D.runners.map(r => [r.id, r]));
+    runnersByName = Object.fromEntries(D.runners.map(r => [r.name, r]));
+    seasons = seasonsOf(D.meets);
+    MS = D.meets.filter(m => m.division === "MS");
+    HS = D.meets.filter(m => m.division === "HS");
+    groups = D.groups || [];
+    groupsById = Object.fromEntries(groups.map(g => [g.id, g]));
+    hByMeet = {};
+    D.runners.forEach(r => r.results.forEach(x => {
+      x.m = meetsById[x.meet]; x.runnerId = r.id;
+      (hByMeet[x.meet] = hByMeet[x.meet] || []).push({ ...x, name: x.as || r.name, heights: true });
+    }));
+    Object.values(hByMeet).forEach(a => a.sort((p, q) => (typeof p.place === "number" ? p.place : 1e9) - (typeof q.place === "number" ? q.place : 1e9) || (p.relay?.leg || 0) - (q.relay?.leg || 0)));
+  }
+  bindData(window.XC_DATA);
+  // One reload of results.js with a cache-busting query, then the page looks again.
+  let dataRetried = false;
+  function refreshResults() {
+    if (dataRetried) return Promise.resolve(false);
+    dataRetried = true;
+    return new Promise(resolve => {
+      const s = document.createElement("script");
+      s.src = "data/results.js?v=" + Date.now();
+      s.onload = () => { bindData(window.XC_DATA); resolve(true); };
+      s.onerror = () => resolve(false);
+      document.head.appendChild(s);
+    });
+  }
   const heightsOf = m => hByMeet[m.id] || [];
   const gRunners = g => new Set(gRaces(g).flatMap(m => heightsOf(m).map(e => e.runnerId))).size;
   const gMain = g => gRaces(g).find(m => heightsTeam(m)) || gRaces(g)[0];  // first race (varsity first) with a Heights team score
@@ -83,7 +102,8 @@
     if (window.XC_FIELD[m.id]) return Promise.resolve(window.XC_FIELD[m.id]);
     return new Promise((res, rej) => {
       const s = document.createElement("script");
-      s.src = `data/races/${encodeURIComponent(m.id)}.js`;
+      const ver = (D.raceVersions || {})[m.id];
+      s.src = `data/races/${encodeURIComponent(m.id)}.js` + (ver ? `?v=${ver}` : "");
       s.onload = () => window.XC_FIELD[m.id] ? res(window.XC_FIELD[m.id]) : rej(new Error("no data"));
       s.onerror = () => rej(new Error("could not load " + s.src));
       document.head.appendChild(s);
@@ -356,7 +376,11 @@
       if (!groupsById[id] && !meetsById[id] && ra && meetsById[ra]) { location.replace(meetLink(meetsById[ra])); return; }
       if (!groupsById[id] && meetsById[id] && groupOf(meetsById[id]).id !== id) { location.replace(meetLink(meetsById[id])); return; }
       const g = groupsById[id] || (meetsById[id] ? groupOf(meetsById[id]) : null);
-      if (!g) { $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Meet not found</h1><a href="meets.html">Back to meets</a></div></div>`; return; }
+      if (!g) {
+        if (!dataRetried) { refreshResults().then(() => pages.meet()); return; }
+        $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Meet not found</h1><a href="meets.html">Back to meets</a></div></div>`;
+        return;
+      }
       const rs = gRaces(g), multi = rs.length > 1;
       document.title = `${gTitle(g)} · Heights Cross Country`;
       const all = groups.filter(x => x.division === g.division).sort(gChrono), i = all.indexOf(g), prev = all[i - 1], next = all[i + 1];
@@ -461,7 +485,11 @@
       const r = runnersById[qs("id")];
       const alias = (D.runnerAliases || {})[qs("id")];
       if (!r && alias && runnersById[alias]) { location.replace(runnerHref(runnersById[alias]) + location.hash); return; }
-      if (!r) { $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Runner not found</h1><a href="runners.html">Back to runners</a></div></div>`; return; }
+      if (!r) {
+        if (!dataRetried) { refreshResults().then(() => pages.runner()); return; }
+        $("#app").innerHTML = `<div class="wrap"><div class="page-head"><h1>Runner not found</h1><a href="runners.html">Back to runners</a></div></div>`;
+        return;
+      }
       document.title = `${rName(r)} · Heights Cross Country`;
       const res = r.results.map(x => ({ ...x, m: meetsById[x.meet] })).sort((a, b) => chrono(a.m, b.m));
       const msr = res.filter(x => !isHS(x.m)), hsr = res.filter(x => isHS(x.m));
