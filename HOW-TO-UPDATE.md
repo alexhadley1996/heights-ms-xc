@@ -16,8 +16,8 @@ The sheet must be shared as **Anyone with the link → Viewer**. Open the sheet,
 1. Open the **Heights XC Results** sheet.
 2. Right-click a tab at the bottom and click **Duplicate**.
 3. Rename the new tab so the name includes the **date**, the **meet**, the **level**, and the **distance**. Example: **2027-09-18 Bullis Varsity 5K**.
-4. In the first row, put the headings **Place**, **Name**, **Grade**, **School**, **Time**. They can be in any order. Extra columns such as Pace are ignored.
-5. Paste the results under that row, one runner per line.
+4. Paste the results however the source shows them. The site figures out the columns. A normal table (Place, Name, Grade, School, Time, in any order) works, and so does text copied as one column from Athletic.net or a results file. Check the Actions summary for any skipped rows.
+5. You can still type the headings yourself: **Place**, **Name**, **Grade**, **School**, **Time**. Extra columns such as Pace or Bib are ignored.
    - **Best:** copy the whole race (every school), so the site can work out team scores.
    - **Short on time?** Type only our runners. Leave **School** empty for them; an empty School counts as **The Heights**.
    - **Time** like `17:42.3` or `17:42`. If Sheets turns 17:42 into a clock time, that is fine. Put **DNF** for a runner who didn't finish.
@@ -36,6 +36,7 @@ The tab name is how the site knows what the race is. A few examples:
 | `9.18.2027 - Bullis Invitational - MS - 2 mi` | Middle school, 2 miles |
 | `Oct 3, 2027 WCAC Varsity 5000m` | High school Varsity, 5K (5000 m) |
 | `2027-09-18 Bullis Varsity 2A 5K` | High school Varsity; "2A" stays on the race label |
+| `Lake Needwood 11426 5k Varsity` | High school Varsity, 5K, November 4, 2026. A compact date like `11426` means 11/4/26 (the fall reading, not January 14) |
 
 - **Varsity**, **Var**, or a lone **V** → high school Varsity.
 - **JV** → high school JV.
@@ -46,6 +47,8 @@ The tab name is how the site knows what the race is. A few examples:
 - If the name has a date but no level, the site treats it as middle school and says so on the update summary.
 - Races with the same meet name and the same day share one meet page (Varsity, JV, Freshman, and middle school together).
 - A high school tab whose meet and year match a meet already on the site is added to that meet's page. If that page already has the same level, the sheet replaces that race and the old official team scores are kept.
+- A compact date with no slashes is fine: `9426` is September 4, 2026, and `11426` is November 4, 2026. When the number could be two dates, the site picks the one in the cross country season (August–November) and says so on the summary.
+- Dashes, dots, and slashes all work (`2027-09-18`, `9.18.2027`, `9/18/27`).
 - The older middle school tabs, named like **2026 - Bullis**, keep working as they are. You do not have to rename them.
 
 ### Publish it now

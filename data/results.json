@@ -36,7 +36,7 @@
    "heightsCount": 29,
    "hasPace": true,
    "hasGrade": true,
-   "order": 419,
+   "order": 420,
    "venue": "Bittersweet Field",
    "group": "hs-2026-maryland-private-school-state-championships",
    "scoring": {
@@ -84,7 +84,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 418,
+   "order": 419,
    "venue": "Bittersweet Field",
    "group": "hs-2026-maryland-private-school-state-championships",
    "scoring": {
@@ -104,6 +104,44 @@
       "calcPlace": 1,
       "calcScore": 63,
       "match": true
+     }
+    ]
+   }
+  },
+  {
+   "season": 2026,
+   "division": "HS",
+   "date": "2026-11-04",
+   "tab": "Lake Needwood 11426 5k Varsity",
+   "origin": "hs",
+   "distance": 3.1068559611866697,
+   "distanceSource": "official",
+   "statedDistance": 3.1068559611866697,
+   "meetName": "Lake Needwood",
+   "sheetNew": true,
+   "level": "Varsity",
+   "levelLabel": "Varsity",
+   "race": "Varsity",
+   "name": "Lake Needwood \u2013 Varsity",
+   "distanceM": 5000.0,
+   "distKey": "5K",
+   "id": "hs-2026-lake-needwood-varsity",
+   "fieldSize": 77,
+   "heightsCount": 7,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 418,
+   "venue": "Unknown",
+   "group": "hs-2026-lake-needwood-varsity",
+   "scoring": {
+    "teamCount": 11,
+    "calcCount": 11,
+    "heights": [
+     {
+      "team": "The Heights",
+      "place": 1,
+      "score": 47,
+      "official": false
      }
     ]
    }
@@ -21308,7 +21346,7 @@
    "date": "2026-11-05",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 418,
+   "order": 419,
    "races": [
     "hs-2026-maryland-private-school-state-championships-varsity-2a",
     "hs-2026-maryland-private-school-state-championships-open-2a"
@@ -21316,6 +21354,21 @@
    "levels": [
     "Varsity",
     "Open"
+   ]
+  },
+  {
+   "id": "hs-2026-lake-needwood-varsity",
+   "season": 2026,
+   "division": "HS",
+   "name": "Lake Needwood",
+   "date": "2026-11-04",
+   "venue": "Unknown",
+   "order": 418,
+   "races": [
+    "hs-2026-lake-needwood-varsity"
+   ],
+   "levels": [
+    "Varsity"
    ]
   },
   {
@@ -37489,6 +37542,37 @@
    "hs": [],
    "bestPace": "8:02",
    "bestPaceSecs": 482
+  },
+  {
+   "name": "Caleb Charmatz",
+   "id": "caleb-charmatz",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-lake-needwood-varsity",
+     "place": 16,
+     "hplace": 5,
+     "grade": 12,
+     "time": "17:42.3",
+     "secs": 1062.3,
+     "pace": "5:41",
+     "paceSecs": 341,
+     "teamPlace": 16,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "17:42.3",
+    "secs": 1062.3,
+    "meet": "hs-2026-lake-needwood-varsity"
+   },
+   "hsBestPaceSecs": 341
   },
   {
    "name": "Dylan Chen",
@@ -71788,6 +71872,37 @@
    "hsBestPaceSecs": 471
   },
   {
+   "name": "Yonathan Nigussie",
+   "id": "yonathan-nigussie",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-lake-needwood-varsity",
+     "place": 21,
+     "hplace": 6,
+     "grade": 11,
+     "time": "17:57.5",
+     "secs": 1077.5,
+     "pace": "5:46",
+     "paceSecs": 346,
+     "teamPlace": 21,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "17:57.5",
+    "secs": 1077.5,
+    "meet": "hs-2026-lake-needwood-varsity"
+   },
+   "hsBestPaceSecs": 346
+  },
+  {
    "name": "Edmund Nolan",
    "id": "edmund-nolan",
    "seasons": [
@@ -75837,6 +75952,37 @@
    "bestPaceSecs": 380
   },
   {
+   "name": "Portland Range",
+   "id": "portland-range",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-lake-needwood-varsity",
+     "place": 15,
+     "hplace": 4,
+     "grade": 11,
+     "time": "17:35.5",
+     "secs": 1055.5,
+     "pace": "5:39",
+     "paceSecs": 339,
+     "teamPlace": 15,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "17:35.5",
+    "secs": 1055.5,
+    "meet": "hs-2026-lake-needwood-varsity"
+   },
+   "hsBestPaceSecs": 339
+  },
+  {
    "name": "Joseph Rayel",
    "id": "joseph-rayel",
    "seasons": [
@@ -76526,6 +76672,37 @@
     "meet": "hs-2008-fall-classic-varsity"
    },
    "hsBestPaceSecs": 353
+  },
+  {
+   "name": "Dimitrios Rementelas",
+   "id": "dimitrios-rementelas",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-lake-needwood-varsity",
+     "place": 1,
+     "hplace": 1,
+     "grade": 11,
+     "time": "15:51.9",
+     "secs": 951.9,
+     "pace": "5:06",
+     "paceSecs": 306,
+     "teamPlace": 1,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "15:51.9",
+    "secs": 951.9,
+    "meet": "hs-2026-lake-needwood-varsity"
+   },
+   "hsBestPaceSecs": 306
   },
   {
    "name": "Matthew Ribeiro",
@@ -80683,6 +80860,37 @@
     "meet": "hs-2026-bittersweet-xc-invitational-open"
    },
    "hsBestPaceSecs": 341
+  },
+  {
+   "name": "Avery Smith",
+   "id": "avery-smith",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-lake-needwood-varsity",
+     "place": 5,
+     "hplace": 2,
+     "grade": 11,
+     "time": "16:36.4",
+     "secs": 996.4,
+     "pace": "5:20",
+     "paceSecs": 320,
+     "teamPlace": 5,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "16:36.4",
+    "secs": 996.4,
+    "meet": "hs-2026-lake-needwood-varsity"
+   },
+   "hsBestPaceSecs": 320
   },
   {
    "name": "Cubby Smith",
@@ -86285,6 +86493,37 @@
    "hsBestPaceSecs": 467
   },
   {
+   "name": "Cyril Traven",
+   "id": "cyril-traven",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-lake-needwood-varsity",
+     "place": 55,
+     "hplace": 7,
+     "grade": 12,
+     "time": "19:37.4",
+     "secs": 1177.4,
+     "pace": "6:18",
+     "paceSecs": 378,
+     "teamPlace": 55,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "19:37.4",
+    "secs": 1177.4,
+    "meet": "hs-2026-lake-needwood-varsity"
+   },
+   "hsBestPaceSecs": 378
+  },
+  {
    "name": "Walter Twetten",
    "id": "walter-twetten",
    "seasons": [
@@ -90648,6 +90887,37 @@
    "hsBestPaceSecs": 412
   },
   {
+   "name": "Alexander Zirkelbach",
+   "id": "alexander-zirkelbach",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-lake-needwood-varsity",
+     "place": 10,
+     "hplace": 3,
+     "grade": 11,
+     "time": "17:21.0",
+     "secs": 1041.0,
+     "pace": "5:35",
+     "paceSecs": 335,
+     "teamPlace": 10,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "17:21.0",
+    "secs": 1041.0,
+    "meet": "hs-2026-lake-needwood-varsity"
+   },
+   "hsBestPaceSecs": 335
+  },
+  {
    "name": "Joseph Zischkau",
    "id": "joseph-zischkau",
    "seasons": [
@@ -91136,14 +91406,13 @@
   "HS: one official team-score list covers 2 races (Landon Invitational \u2013 Brown, Landon Invitational \u2013 White); split by place restarts and matched to each race by its scores.",
   "Tab '2019 - Norwood Invitational': pace formula divides by 2.2 mi but the sheet states 2.1 mi; using the formula (2.2 mi).",
   "Tab '2026 - Fake Run' has no MEET_INFO entry; name guessed.",
-  "Tab 'Lake Needwood 11426 5k Varsity' has no MEET_INFO entry; name guessed.",
-  "Tab 'Lake Needwood 11426 5k Varsity': no Time column found, skipped.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2000-ballenger-creek-park-meet-washington-post-scores-team-scores); shown as listed.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2003-st-johns-invitational-varsity); shown as listed."
  ],
  "raceVersions": {
   "hs-2026-maryland-private-school-state-championships-open-2a": "568ef1dbd21c",
   "hs-2026-maryland-private-school-state-championships-varsity-2a": "2a511b0e8130",
+  "hs-2026-lake-needwood-varsity": "e5a1d920b98c",
   "2026-fake-run": "a60ba49d3dc9",
   "2026-state-championship": "6164fd73bcb7",
   "hs-2026-wcac-cross-country-championships-varsity-b": "df989a09a8b7",

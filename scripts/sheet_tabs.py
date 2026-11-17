@@ -3,7 +3,7 @@
 Old tabs ("2026 - Bullis", anything listed in MEET_INFO) are not handled here. A title only counts as new-style
 when it contains a full date (year, month and day). Everything else stays on the original middle-school path.
 """
-import datetime, difflib, re
+import datetime, difflib, os, re
 
 import build_data as B
 import hs_data as H
@@ -40,11 +40,42 @@ def _date(y, m, d):
         return None
 
 
+# Cross country meets are in the fall. A compact date that can be read two ways prefers these months.
+_XC_MONTHS = {8, 9, 10, 11}
+
+
+def _compact_dates(digits):
+    """Every valid M/D/YY or MM/DD/YY reading of a 4–6 digit run with no separators.
+
+    The last two digits are the year. 11426 is 11/4/26 and 1/14/26. 9426 is 9/4/26.
+    """
+    if not digits.isdigit() or not (4 <= len(digits) <= 6):
+        return []
+    body, yy = digits[:-2], digits[-2:]
+    found = []
+    for mlen in (1, 2):
+        if len(body) <= mlen:
+            continue
+        month, day = int(body[:mlen]), int(body[mlen:])
+        if not (1 <= month <= 12 and 1 <= day <= 31):
+            continue
+        d = _date(yy, month, day)
+        if d and d not in found:
+            found.append(d)
+    return found
+
+
+def _pick_compact(cands):
+    """Prefer a month in Aug–Nov. Otherwise the first valid reading (1-digit month first)."""
+    season = [d for d in cands if d.month in _XC_MONTHS]
+    return (season or cands)[0]
+
+
 def find_date(title):
-    """-> (date, start, end) of the first full date in the title, or None."""
+    """-> (date, start, end, note) or None. note is set when a compact number was read as a date."""
     patterns = [
         (re.compile(r"\b((?:19|20)\d{2})-(\d{1,2})-(\d{1,2})\b"), lambda m: _date(m.group(1), m.group(2), m.group(3))),
-        (re.compile(r"\b(\d{1,2})[./](\d{1,2})[./](\d{2,4})\b"), lambda m: _date(m.group(3), m.group(1), m.group(2))),
+        (re.compile(r"\b(\d{1,2})[./-](\d{1,2})[./-](\d{2,4})\b"), lambda m: _date(m.group(3), m.group(1), m.group(2))),
         (re.compile(r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2}),?\s+((?:19|20)\d{2})\b", re.I),
          lambda m: _date(m.group(3), _MONTHS[m.group(1).lower()[:4] if m.group(1).lower().startswith("sept") else m.group(1).lower()[:3]], m.group(2))),
         (re.compile(r"\b(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?,?\s+((?:19|20)\d{2})\b", re.I),
@@ -57,13 +88,20 @@ def find_date(title):
             continue
         d = conv(m)
         if d and 1990 <= d.year <= datetime.date.today().year + 2:
-            found.append((m.start(), d, m.end()))
+            found.append((m.start(), -(m.end() - m.start()), d, m.end(), None))
+    for m in re.finditer(r"\b(\d{4,6})\b", title):
+        cands = _compact_dates(m.group(1))
+        if not cands:
+            continue
+        chosen = _pick_compact(cands)
+        alts = [d.isoformat() for d in cands if d != chosen]
+        note = f"date {m.group(1)} read as {chosen.isoformat()}" + (f" (also possible: {', '.join(alts)})" if alts else "")
+        found.append((m.start(), -(m.end() - m.start()), chosen, m.end(), note))
     if not found:
         return None
-    found.sort(key=lambda x: (x[0], -(x[2] - x[0])))
-    _, d, end = found[0]
-    start = found[0][0]
-    return d, start, end
+    found.sort()
+    _, _, d, end, note = found[0]
+    return d, found[0][0], end, note
 
 
 def find_distance(text):
@@ -123,7 +161,7 @@ def parse_title(title):
     found = find_date(title)
     if not found:
         return None
-    date, a, b = found
+    date, a, b, date_note = found
     rest = _cleanup(title[:a] + " " + title[b:])
     dist = find_distance(rest)
     if dist:
@@ -140,7 +178,7 @@ def parse_title(title):
         division, lvl, label, defaulted = "MS", "Open", "Middle school", True
     meet = _cleanup(rest)
     return {"date": date, "distance": parsed, "division": division, "level": lvl, "levelLabel": label,
-            "race": label if division == "HS" else "", "meet": meet, "defaultedMS": defaulted}
+            "race": label if division == "HS" else "", "meet": meet, "defaultedMS": defaulted, "dateNote": date_note}
 
 
 def _cell(v):
@@ -158,154 +196,313 @@ def _cell(v):
     return str(v).strip()
 
 
+# Header words a results website might use. Extra columns (pace, bib, points) are ignored.
+_HEADER = {
+    "place": "place", "pl": "place", "pos": "place", "position": "place", "overall": "place", "overall place": "place",
+    "name": "name", "runner": "name", "athlete": "name",
+    "first": "first", "first name": "first", "last": "last", "last name": "last",
+    "grade": "grade", "gr": "grade", "yr": "grade", "year": "grade", "class": "grade",
+    "school": "school", "team": "school", "affiliation": "school",
+    "time": "time", "finish": "time", "finish time": "time", "chip": "time", "chip time": "time",
+    "net": "time", "net time": "time", "gun": "time", "gun time": "time", "mark": "time",
+    "pace": None, "bib": None, "bib #": None, "#": None, "points": None, "pts": None, "score": None,
+    "team score": None, "photo": None, "avg": None, "gap": None, "behind": None, "heights place": None,
+    "place (heights)": "hplace", "meet": None,
+}
+_TIME_TOKEN = re.compile(r"\b(\d{1,2}:\d{2}(?:\.\d+)?)\b")
+_JUNK_LINE = re.compile(
+    r"^(results|scoring|team\s+scores?|page\s+\d+(\s+of\s+\d+)?|boys|girls|men|women|varsity|jv|freshman|open)\s*$",
+    re.I)
+_GRADE_WORD = {"sr": 12, "jr": 11, "so": 10, "fr": 9, "senior": 12, "junior": 11, "sophomore": 10, "freshman": 9,
+               "frosh": 9}
+_schools = None
+
+
+def _known_schools():
+    """School names already on the site, longest first, so a pasted line can be split into name and school."""
+    global _schools
+    if _schools is not None:
+        return _schools
+    found = {"the heights", "heights"}
+    import csv, glob
+    for path in glob.glob(os.path.join(B.ROOT, "data", "hs", "races", "*.csv")) + glob.glob(os.path.join(B.ROOT, "data", "supplemental", "races", "*.csv")):
+        try:
+            rows = list(csv.reader(open(path, encoding="utf-8", errors="replace")))
+        except OSError:
+            continue
+        if not rows:
+            continue
+        head = [c.strip().lower() for c in rows[0]]
+        idx = next((i for i, c in enumerate(head) if c in ("school", "team", "affiliation")), None)
+        if idx is None:
+            continue
+        for r in rows[1:]:
+            if idx < len(r) and r[idx].strip():
+                found.add(re.sub(r"\s+", " ", r[idx].strip().lower()))
+    _schools = sorted(found, key=len, reverse=True)
+    return _schools
+
+
 def _header_map(cells):
-    """-> list of column keys (or None) using the same names as a race-results CSV, or None if this isn't a header."""
+    """-> (keys, unknown) or None if this row is not a results header."""
     lows = [_cell(c).lower().rstrip(":") for c in cells]
     if not any(lows):
         return None
-    known = set(N.COLUMN_NAMES)
-    if not ({"place", "pl", "overall place"} & set(lows) and {"name", "athlete", "runner", "first name"} & set(lows)):
-        return None
-    header = []
-    unknown = []
+    keys_present = set()
+    header, unknown = [], []
     for c in lows:
         if not c:
             header.append(None)
             continue
-        if c not in known and c not in ("first name", "last name"):
+        if c not in _HEADER:
             unknown.append(c)
             header.append(None)
-        elif c in ("first name", "last name"):
-            header.append(c)
+            continue
+        header.append(_HEADER[c])
+        if _HEADER[c]:
+            keys_present.add(_HEADER[c])
+    if "place" in keys_present and ("name" in keys_present or "first" in keys_present) and "time" in keys_present:
+        return header, unknown
+    return None
+
+
+def _nonempty(row):
+    return [_cell(c) for c in row if _cell(c)]
+
+
+def _looks_header_text(text):
+    low = text.lower()
+    has_place = bool(re.search(r"\b(place|pl|pos)\b", low))
+    has_name = bool(re.search(r"\b(name|runner|athlete)\b", low))
+    has_time = bool(re.search(r"\btime\b|\bfinish\b", low))
+    return has_place and has_name and has_time and not _TIME_TOKEN.search(text)
+
+
+def _split_aligned(header_line, line):
+    """Split one pasted line into the header's columns, using the header's character positions."""
+    parts = [p for p in re.split(r" {2,}", header_line.strip()) if p]
+    starts, pos = [], 0
+    for p in parts:
+        i = header_line.find(p, pos)
+        starts.append(i if i >= 0 else pos)
+        pos = (i if i >= 0 else pos) + len(p)
+    cols = [c.strip() for c in re.split(r" {2,}", line.strip()) if c.strip()]
+    if len(cols) == len(parts):
+        return cols
+    sliced = []
+    for i, s in enumerate(starts):
+        end = starts[i + 1] if i + 1 < len(starts) else len(line)
+        sliced.append(line[s:end].strip() if s < len(line) else "")
+    return sliced
+
+
+def _expand_rows(rows):
+    """Turn one-column pastes (tabs, or spaces lined up under a header) into cells."""
+    out = []
+    for row in rows:
+        cells = _nonempty(row)
+        if len(cells) == 1 and "\t" in cells[0]:
+            out.append(tuple(c.strip() for c in cells[0].split("\t")))
         else:
-            header.append(N.COLUMN_NAMES[c])
-    return header, unknown
-
-
-def read_tab(ws):
-    """-> (field entries or None, problems). One bad row is a problem; the caller drops the whole tab."""
-    rows = list(ws.iter_rows(values_only=True))
-    header = None
-    start = None
-    unknown = []
-    for i, r in enumerate(rows):
-        hit = _header_map(r)
-        if hit:
-            header, unknown = hit
-            start = i + 1
+            out.append(tuple(row))
+    header_at, header_line = None, None
+    for i, row in enumerate(out):
+        cells = _nonempty(row)
+        if len(cells) == 1 and _looks_header_text(cells[0]) and "  " in cells[0]:
+            header_at, header_line = i, cells[0]
             break
-    problems = []
-    if header is None:
-        return None, ["no results header row. The first row should be Place, Name, Grade, School, Time "
-                      "(or the usual sheet headings: Place, Grade, Name, Pace, Time, School)."]
-    for u in unknown:
-        if u not in ("meet",):  # a Meet column pasted from another sheet is ignored
-            problems.append(f"unknown column name '{u}'. Use Place, Name, Grade, School, Time.")
-    # old sheet layout (First Name / Last Name, or Place (Heights)) goes through the existing reader
-    lows = [_cell(c).lower() for c in rows[start - 1]]
-    return header, start, rows, problems, ("first name" in lows or "last name" in lows or any(x.startswith("place (heights") for x in lows))
+    if header_at is None:
+        return out
+    expanded = []
+    for i, row in enumerate(out):
+        cells = _nonempty(row)
+        if i >= header_at and len(cells) == 1:
+            expanded.append(tuple(_split_aligned(header_line, cells[0])))
+        else:
+            expanded.append(row)
+    return expanded
+
+
+def _flip_last_first(name):
+    if "," in name and len(name.split(",")) == 2:
+        last, first = [x.strip() for x in name.split(",", 1)]
+        if last and first:
+            return f"{first} {last}"
+    return name
+
+
+def _school_from_rest(text):
+    """Pull a known school off the end of the leftover text. 'Heights' counts as The Heights."""
+    low = re.sub(r"\s+", " ", text).strip()
+    if re.search(r"\bheights\b", low, re.I):
+        name = re.sub(r"\b(the\s+)?heights(\s+school)?\b", "", text, flags=re.I)
+        return re.sub(r"\s+", " ", name).strip(" ,-"), "The Heights"
+    for school in _known_schools():
+        if low == school or low.endswith(" " + school):
+            cut = len(text) - len(school)
+            return re.sub(r"\s+", " ", text[:cut]).strip(" ,-"), text[cut:].strip()
+    return re.sub(r"\s+", " ", text).strip(), ""
+
+
+def _parse_free_line(text, division):
+    """One pasted line with no columns. -> ('ok', entry) | ('skip', reason) | ('junk', None)."""
+    raw = text.strip()
+    if not raw or _JUNK_LINE.match(raw) or _looks_header_text(raw):
+        return "junk", None
+    tm = _TIME_TOKEN.search(raw)
+    if not tm:
+        # "1 The Heights 45" is a team score. "1 Alex Runner The Heights" with no time is a row we could not read.
+        if re.match(r"^\d+\.?\s+.+?\s+\d{1,3}$", raw):
+            return "junk", None
+        if re.match(r"^\d+\.?\s+\S+", raw):
+            return "skip", "no finish time"
+        return "junk", None
+    time = N.clean_time(tm.group(1))
+    if time is None:
+        return "skip", f"can't read the time '{tm.group(1)}'"
+    rest = (raw[:tm.start()] + " " + raw[tm.end():])
+    rest = re.sub(r"\s+", " ", rest).strip()
+    place = ""
+    pm = re.match(r"^(\d+)\.?\s+", rest)
+    if pm:
+        place, rest = pm.group(1), rest[pm.end():].strip()
+    grade = None
+    tokens = rest.split()
+    kept = []
+    for tok in tokens:
+        word = tok.strip(".").lower()
+        if grade is None and word in _GRADE_WORD:
+            grade = _GRADE_WORD[word]
+            continue
+        if grade is None and re.fullmatch(r"\d{1,2}", tok) and 6 <= int(tok) <= 12 and tok != place:
+            grade = int(tok)
+            continue
+        if re.fullmatch(r"\d{3,6}", tok):
+            continue  # bib
+        kept.append(tok)
+    name, school = _school_from_rest(" ".join(kept))
+    name = _flip_last_first(name)
+    if not name:
+        return "skip", "no runner name left after the time"
+    lo, hi = (4, 8) if division == "MS" else (9, 12)
+    if grade is not None and not (lo <= grade <= hi):
+        return "skip", f"grade {grade} isn't a {'middle' if division == 'MS' else 'high'} school grade ({lo}–{hi})"
+    if place and time in ("DNF", "DNS", "DQ"):
+        place = ""
+    school = school or "The Heights"
+    return "ok", {"place": place, "grade": str(grade) if grade else "", "name": name, "school": school, "time": time}
+
+
+def _row_to_entry(row, division, lineno):
+    """Column dict -> ('ok', entry) | ('skip', reason) | ('junk', None)."""
+    lo, hi = (4, 8) if division == "MS" else (9, 12)
+    first, last = row.get("first", ""), row.get("last", "")
+    name = re.sub(r"\s+", " ", str(row.get("name") or f"{first} {last}")).strip()
+    name = _flip_last_first(name)
+    if not name and not str(row.get("time") or "").strip() and not str(row.get("place") or "").strip():
+        return "junk", None
+    if not name:
+        return "skip", "the Name is empty"
+    raw_time = row.get("time", "")
+    if not str(raw_time).strip():
+        return "skip", f"({name}): the Time is empty"
+    t = N.clean_time(_cell(raw_time))
+    if t is None:
+        return "skip", f"({name}): can't read the time '{raw_time}'"
+    place = str(row.get("place", "")).strip().rstrip(".")
+    if place.upper() in ("DNF", "DNS", "DQ", "-", "--") or t in ("DNF", "DNS", "DQ"):
+        place = ""
+    elif place and not re.fullmatch(r"\d+", place):
+        return "skip", f"({name}): the Place '{place}' should be a whole number"
+    g = str(row.get("grade", "")).strip().rstrip(".")
+    gnum = _GRADE_WORD.get(g.lower()) if g else None
+    if g and gnum is None:
+        gnum = N.CLASS_YEARS.get(g.lower())
+    if g and gnum is None:
+        if not re.fullmatch(r"\d{1,2}", g):
+            return "skip", f"({name}): the Grade '{g}' should be a number or SR/JR/SO/FR"
+        gnum = int(g)
+    if gnum is not None and not (lo <= gnum <= hi):
+        return "skip", f"({name}): grade {gnum} isn't a {'middle' if division == 'MS' else 'high'} school grade ({lo}–{hi})"
+    school = re.sub(r"\s+", " ", str(row.get("school") or "")).strip() or "The Heights"
+    packed = {"Place": place, "Grade": str(gnum) if gnum else "", "Name": name, "School": school, "Time": t}
+    if division == "HS":
+        e = H.entry(packed, {})
+        e["heights"] = bool(H.HS_HEIGHTS_RE.match(str(e["school"]).strip()))
+    else:
+        e = B.make_entry(place or None, gnum, name, school, t, row.get("pace"))
+    return "ok", e
 
 
 def field_from_tab(ws, division):
-    """-> (list of result entries, problems)."""
-    parsed = read_tab(ws)
-    if parsed[0] is None:
-        return None, parsed[1]
-    header, start, rows, problems, old_layout = parsed
-    title_row = start  # 1-based header row number is start
-    field, seen = [], {}
-    lo, hi = (4, 8) if division == "MS" else (9, 12)
-    if old_layout:
-        cols = B.find_cols(rows[start - 1])
-        if cols["time"] is None:
-            return None, problems + ["no Time column found."]
-        def get(r, k):
-            i = cols[k]
-            return r[i] if i is not None and i < len(r) else None
-        for n, r in enumerate(rows[start:], start=start + 1):
-            if not any(c not in (None, "", " ") for c in r[:12]):
-                continue
-            if cols["name"] is not None:
-                name = get(r, "name")
-            else:
-                name = f"{_cell(get(r, 'first'))} {_cell(get(r, 'last'))}".strip()
-            name = re.sub(r"\s+", " ", _cell(name) if not isinstance(name, str) else name).strip()
-            if not name:
-                problems.append(f"row {n}: the Name is empty.")
-                continue
-            t = get(r, "time")
-            if t in (None, ""):
-                problems.append(f"row {n} ({name}): the Time is empty. Use minutes:seconds like 17:42.3, or DNF.")
-                continue
-            school = B.clean_school(get(r, "school")) or "The Heights"
-            e = B.make_entry(get(r, "place"), get(r, "grade"), H.proper_case(name) if division == "HS" else name,
-                             school, t, get(r, "pace"))
-            if division == "HS":
-                e["heights"] = bool(H.HS_HEIGHTS_RE.match(str(e["school"]).strip()))
-            if e["heights"]:
-                k = B.norm_name(e["name"])
-                if k in seen:
-                    problems.append(f"row {n}: {e['name']} is listed twice (also row {seen[k]}).")
-                    continue
-                seen[k] = n
-            field.append(e)
-        return field, problems
+    """-> (entries, fatal problems, skipped-row notes).
 
-    for n, r in enumerate(rows[start:], start=start + 1):
-        cells = [_cell(c) for c in r]
-        if not any(cells):
-            continue
-        row = {}
-        for key, c in zip(header, cells):
-            if key and key not in ("first name", "last name"):
-                row[key] = c
-        name = re.sub(r"\s+", " ", row.get("name", "")).strip()
-        if "," in name and len(name.split(",")) == 2:
-            last, first = [x.strip() for x in name.split(",")]
-            name = f"{first} {last}"
-        if not name and not row.get("time") and not row.get("place"):
-            continue
-        if not name:
-            problems.append(f"row {n}: the Name is empty.")
-            continue
-        if not row.get("time"):
-            problems.append(f"row {n} ({name}): the Time is empty. Use minutes:seconds like 17:42.3, or DNF.")
-            continue
-        t = N.clean_time(row["time"])
-        if t is None:
-            problems.append(f"row {n} ({name}): can't read the time '{row['time']}'. Use minutes:seconds like 17:42.3, or DNF.")
-            continue
-        place = row.get("place", "").strip().rstrip(".")
-        if place.upper() in ("DNF", "DNS", "DQ", "-", "--") or t in ("DNF", "DNS", "DQ"):
-            place = ""
-        elif place and not re.fullmatch(r"\d+", place):
-            problems.append(f"row {n} ({name}): the Place '{place}' should be a whole number.")
-            continue
-        g = row.get("grade", "").strip().rstrip(".")
-        gnum = N.CLASS_YEARS.get(g.lower()) if g else None
-        if g and gnum is None:
-            if not re.fullmatch(r"\d{1,2}", g):
-                problems.append(f"row {n} ({name}): the Grade '{g}' should be a number like {lo}–{hi} (or empty).")
-                continue
-            gnum = int(g)
-        if gnum is not None and not (lo <= gnum <= hi):
-            problems.append(f"row {n} ({name}): grade {gnum} isn't a {'middle' if division == 'MS' else 'high'} school grade ({lo}–{hi}).")
-            continue
-        school = re.sub(r"\s+", " ", row.get("school", "")).strip() or "The Heights"
-        packed = {"Place": place, "Grade": str(gnum) if gnum else "", "Name": name, "School": school, "Time": t}
-        e = H.entry(packed, {}) if division == "HS" else B.make_entry(place or None, gnum, name, school, t, None)
+    A row that can't be read is skipped and named in the summary. The tab is dropped only when
+    more than half of the result-like rows fail, or when no Heights runner can be read.
+    """
+    rows = _expand_rows(list(ws.iter_rows(values_only=True)))
+    header, start = None, 0
+    for i, r in enumerate(rows):
+        hit = _header_map(r)
+        if hit:
+            header, _unknown = hit
+            start = i + 1
+            break
+    field, seen, skipped, attempted = [], {}, [], 0
+
+    def take(kind, payload, label):
+        nonlocal attempted
+        if kind == "junk":
+            return
+        attempted += 1
+        if kind == "skip":
+            skipped.append(f"row {label}: {payload}")
+            return
+        e = payload
         if e["heights"]:
             k = B.norm_name(e["name"])
             if k in seen:
-                problems.append(f"row {n}: {e['name']} is listed twice (also row {seen[k]}).")
-                continue
-            seen[k] = n
+                skipped.append(f"row {label}: {e['name']} is listed twice (also row {seen[k]})")
+                return
+            seen[k] = label
         field.append(e)
-    if not field and not problems:
-        problems.append("there are no runners under the header row.")
-    if field and not any(e["heights"] for e in field):
-        problems.append("no runner is from The Heights. Write 'The Heights' in the School column, or leave School empty.")
-    return field, problems
+
+    if header is not None:
+        for n, r in enumerate(rows[start:], start=start + 1):
+            cells = [_cell(c) for c in r]
+            if not any(cells):
+                continue
+            joined = " ".join(c for c in cells if c)
+            if _JUNK_LINE.match(joined) or _looks_header_text(joined):
+                continue
+            row = {}
+            for key, c in zip(header, cells):
+                if key:
+                    row[key] = c
+            # no finish time anywhere: a team-score line or page furniture, not a runner we failed to read
+            if not _TIME_TOKEN.search(joined) and not str(row.get("time") or "").strip():
+                continue
+            kind, payload = _row_to_entry(row, division, n)
+            take(kind, payload, n)
+    else:
+        for n, r in enumerate(rows, start=1):
+            text = " ".join(c for c in (_cell(x) for x in r) if c)
+            if not text:
+                continue
+            kind, payload = _parse_free_line(text, division)
+            if kind == "ok":
+                kind, payload = _row_to_entry(payload, division, n)
+            take(kind, payload, n)
+    fatal = []
+    if attempted and len(skipped) > attempted / 2:
+        fatal.append(f"more than half the rows could not be read ({len(skipped)} of {attempted}).")
+        fatal.extend(skipped[:12])
+        skipped = []
+    elif not field:
+        fatal.append("no runners could be read. Paste the results with a place, a name, and a time.")
+    elif not any(e["heights"] for e in field):
+        fatal.append("no runner is from The Heights. The school should say 'The Heights', or be left empty.")
+    return field, fatal, skipped
 
 
 def norm_meet(name):
@@ -397,16 +594,20 @@ def apply_titled_tabs(tabs, meets, quirks):
     problems = []
     for order, ws, parsed in tabs:
         parsed = dict(parsed, title=ws.title)
+        if parsed.get("dateNote"):
+            print(f"note: tab {ws.title!r}: {parsed['dateNote']}.")
         if parsed["defaultedMS"]:
             print(f"note: tab {ws.title!r} has a date but no level (Varsity, JV, Freshman, Open, or MS); treated as middle school.")
         if not parsed["meet"]:
             problems.append(f"tab {ws.title!r} was NOT added:\n    - the tab name has a date, but no meet name left after the date, distance and level.")
             continue
         try:
-            field, probs = field_from_tab(ws, parsed["division"])
+            field, probs, skipped = field_from_tab(ws, parsed["division"])
         except Exception as ex:
             problems.append(f"tab {ws.title!r} was NOT added:\n    - couldn't read the tab ({type(ex).__name__}: {ex}).")
             continue
+        for s in skipped:
+            print(f"note: tab {ws.title!r} skipped {s}.")
         if probs or not field:
             if not probs:
                 probs = ["no runners could be read."]
