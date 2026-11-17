@@ -1,7 +1,41 @@
 {
- "generated": "2026-11-07",
+ "generated": "2026-11-17",
  "source": "Google Sheet \u201cHeights MS XC Results\u201d (middle school), races found on racecast.co / Athletic.net / mocorunning.com (middle school), and high school results from racecast.co and mocorunning.com (data/hs)",
  "meets": [
+  {
+   "season": 2026,
+   "division": "HS",
+   "date": "2026-11-17",
+   "distance": 3.1068559611866697,
+   "distanceSource": "official",
+   "location": "Bullis School",
+   "source": {
+    "name": "athletic.net",
+    "url": "https://www.athletic.net/CrossCountry/meet/000000/results",
+    "original": null
+   },
+   "id": "hs-2026-automation-test-delete-varsity",
+   "level": "Varsity",
+   "levelLabel": "Varsity",
+   "race": "Varsity",
+   "meetName": "AUTOMATION TEST - DELETE",
+   "name": "AUTOMATION TEST - DELETE \u2013 Varsity",
+   "origin": "hs",
+   "distanceM": 5000.0,
+   "distKey": "5K",
+   "fieldSize": 6,
+   "heightsCount": 4,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 420,
+   "venue": "Bullis School, Potomac, MD",
+   "group": "hs-2026-automation-test-delete-varsity",
+   "scoring": {
+    "teamCount": 0,
+    "calcCount": 0,
+    "heights": []
+   }
+  },
   {
    "id": "hs-2026-maryland-private-school-state-championships-open-2a",
    "season": 2026,
@@ -36,7 +70,7 @@
    "heightsCount": 29,
    "hasPace": true,
    "hasGrade": true,
-   "order": 418,
+   "order": 419,
    "venue": "Bittersweet Field",
    "group": "hs-2026-maryland-private-school-state-championships",
    "scoring": {
@@ -84,7 +118,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 417,
+   "order": 418,
    "venue": "Bittersweet Field",
    "group": "hs-2026-maryland-private-school-state-championships",
    "scoring": {
@@ -136,7 +170,7 @@
    "heightsCount": 35,
    "hasPace": true,
    "hasGrade": true,
-   "order": 416,
+   "order": 417,
    "venue": "Bittersweet Field",
    "group": "2026-state-championship",
    "scoring": {
@@ -191,7 +225,7 @@
    "heightsCount": 20,
    "hasPace": true,
    "hasGrade": true,
-   "order": 415,
+   "order": 416,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -243,7 +277,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 414,
+   "order": 415,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -295,7 +329,7 @@
    "heightsCount": 13,
    "hasPace": true,
    "hasGrade": true,
-   "order": 413,
+   "order": 414,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -347,7 +381,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 412,
+   "order": 413,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2026-va-xc-showcase",
    "scoring": {
@@ -394,7 +428,7 @@
    "heightsCount": 11,
    "hasPace": true,
    "hasGrade": true,
-   "order": 411,
+   "order": 412,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2026-va-xc-showcase",
    "scoring": {
@@ -405,6 +439,38 @@
       "team": "The Heights School",
       "place": 7,
       "score": 215,
+      "official": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "2026-states-no-8th-graders",
+   "season": 2026,
+   "name": "States - No 8th graders",
+   "division": "MS",
+   "level": "Open",
+   "levelLabel": "Middle school",
+   "tab": "2026 States - No 8th graders",
+   "origin": "sheet",
+   "distance": 1.864,
+   "distanceSource": "formula",
+   "impliedDistance": 1.86,
+   "fieldSize": 203,
+   "heightsCount": 25,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 411,
+   "venue": "Unknown",
+   "group": "2026-states-no-8th-graders",
+   "scoring": {
+    "teamCount": 18,
+    "calcCount": 18,
+    "heights": [
+     {
+      "team": "The Heights",
+      "place": 1,
+      "score": 66,
       "official": false
      }
     ]
@@ -21269,6 +21335,22 @@
  ],
  "groups": [
   {
+   "id": "hs-2026-automation-test-delete-varsity",
+   "season": 2026,
+   "division": "HS",
+   "name": "AUTOMATION TEST - DELETE",
+   "date": "2026-11-17",
+   "location": "Bullis School",
+   "venue": "Bullis School, Potomac, MD",
+   "order": 420,
+   "races": [
+    "hs-2026-automation-test-delete-varsity"
+   ],
+   "levels": [
+    "Varsity"
+   ]
+  },
+  {
    "id": "hs-2026-maryland-private-school-state-championships",
    "season": 2026,
    "division": "HS",
@@ -21276,7 +21358,7 @@
    "date": "2026-11-05",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 417,
+   "order": 418,
    "races": [
     "hs-2026-maryland-private-school-state-championships-varsity-2a",
     "hs-2026-maryland-private-school-state-championships-open-2a"
@@ -21294,7 +21376,7 @@
    "date": "2026-10-29",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 416,
+   "order": 417,
    "races": [
     "2026-state-championship"
    ],
@@ -21310,7 +21392,7 @@
    "date": "2026-10-24",
    "location": "Kenilworth Park",
    "venue": "Kenilworth Park, Washington, DC",
-   "order": 413,
+   "order": 414,
    "races": [
     "hs-2026-wcac-cross-country-championships-varsity-a",
     "hs-2026-wcac-cross-country-championships-varsity-b",
@@ -21330,7 +21412,7 @@
    "date": "2026-10-17",
    "location": "Pole Green Park (Upper Course), Mechanicsville, VA",
    "venue": "Pole Green Park, Mechanicsville, VA",
-   "order": 411,
+   "order": 412,
    "races": [
     "hs-2026-va-xc-showcase-varsity-showcase",
     "hs-2026-va-xc-showcase-morning-jv"
@@ -21338,6 +21420,20 @@
    "levels": [
     "Varsity",
     "JV"
+   ]
+  },
+  {
+   "id": "2026-states-no-8th-graders",
+   "season": 2026,
+   "division": "MS",
+   "name": "States - No 8th graders",
+   "venue": "Unknown",
+   "order": 411,
+   "races": [
+    "2026-states-no-8th-graders"
+   ],
+   "levels": [
+    "Open"
    ]
   },
   {
@@ -28516,6 +28612,17 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 71,
+     "hplace": 10,
+     "grade": 7,
+     "time": "13:10.7",
+     "secs": 790.7,
+     "pace": "7:04",
+     "paceSecs": 424,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 119,
      "hplace": 18,
@@ -30748,6 +30855,17 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 127,
+     "hplace": 21,
+     "grade": 7,
+     "time": "14:30.2",
+     "secs": 870.2,
+     "pace": "7:47",
+     "paceSecs": 467,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 189,
      "hplace": 31,
@@ -32210,6 +32328,17 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 64,
+     "hplace": 8,
+     "grade": 7,
+     "time": "13:00.2",
+     "secs": 780.2,
+     "pace": "6:59",
+     "paceSecs": 419,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 112,
      "hplace": 16,
@@ -32351,6 +32480,17 @@
      "secs": 1023.8,
      "pace": "9:10",
      "paceSecs": 550,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 144,
+     "hplace": 23,
+     "grade": 7,
+     "time": "14:56.8",
+     "secs": 896.8,
+     "pace": "8:01",
+     "paceSecs": 481,
      "origin": "sheet"
     },
     {
@@ -32544,6 +32684,17 @@
      "secs": 1118.9,
      "pace": "10:02",
      "paceSecs": 602,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 179,
+     "hplace": 25,
+     "grade": 7,
+     "time": "17:21.1",
+     "secs": 1041.1,
+     "pace": "9:19",
+     "paceSecs": 559,
      "origin": "sheet"
     },
     {
@@ -33998,6 +34149,17 @@
      "secs": 1097.0,
      "pace": "9:50",
      "paceSecs": 590,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 126,
+     "hplace": 20,
+     "grade": 6,
+     "time": "14:27.6",
+     "secs": 867.6,
+     "pace": "7:45",
+     "paceSecs": 465,
      "origin": "sheet"
     },
     {
@@ -36162,6 +36324,18 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 7,
+     "hplace": 1,
+     "grade": 6,
+     "time": "11:20.6",
+     "secs": 680.6,
+     "pace": "6:05",
+     "paceSecs": 365,
+     "teamPlace": 2,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 23,
      "hplace": 4,
@@ -38063,6 +38237,17 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 93,
+     "hplace": 14,
+     "grade": 7,
+     "time": "13:32.4",
+     "secs": 812.4,
+     "pace": "7:16",
+     "paceSecs": 436,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 147,
      "hplace": 23,
@@ -39421,6 +39606,17 @@
      "secs": 865.2,
      "pace": "7:45",
      "paceSecs": 465,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 69,
+     "hplace": 9,
+     "grade": 7,
+     "time": "13:07.0",
+     "secs": 787.0,
+     "pace": "7:02",
+     "paceSecs": 422,
      "origin": "sheet"
     },
     {
@@ -42392,6 +42588,36 @@
    "hs": [],
    "bestPace": "7:59",
    "bestPaceSecs": 479
+  },
+  {
+   "name": "Peter Demo",
+   "id": "peter-demo",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-automation-test-delete-varsity",
+     "place": 4,
+     "hplace": 2,
+     "grade": 12,
+     "time": "16:44.5",
+     "secs": 1004.5,
+     "pace": "5:23",
+     "paceSecs": 323,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "16:44.5",
+    "secs": 1004.5,
+    "meet": "hs-2026-automation-test-delete-varsity"
+   },
+   "hsBestPaceSecs": 323
   },
   {
    "name": "Gordon Denis",
@@ -45862,6 +46088,56 @@
    "hs": [],
    "bestPace": "10:28",
    "bestPaceSecs": 628
+  },
+  {
+   "name": "Dnf Example",
+   "id": "dnf-example",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-automation-test-delete-varsity",
+     "place": null,
+     "grade": 10,
+     "time": "DNF",
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ]
+  },
+  {
+   "name": "John Example",
+   "id": "john-example",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-automation-test-delete-varsity",
+     "place": 2,
+     "hplace": 1,
+     "grade": 11,
+     "time": "16:21.8",
+     "secs": 981.8,
+     "pace": "5:16",
+     "paceSecs": 316,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "16:21.8",
+    "secs": 981.8,
+    "meet": "hs-2026-automation-test-delete-varsity"
+   },
+   "hsBestPaceSecs": 316
   },
   {
    "name": "Michael Fagan",
@@ -49654,6 +49930,17 @@
     2026
    ],
    "results": [
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 159,
+     "hplace": 24,
+     "grade": 7,
+     "time": "15:41.1",
+     "secs": 941.1,
+     "pace": "8:25",
+     "paceSecs": 505,
+     "origin": "sheet"
+    },
     {
      "meet": "2026-state-championship",
      "place": 224,
@@ -53522,6 +53809,17 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 90,
+     "hplace": 13,
+     "grade": 6,
+     "time": "13:30.2",
+     "secs": 810.2,
+     "pace": "7:15",
+     "paceSecs": 435,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 144,
      "hplace": 22,
@@ -55516,6 +55814,18 @@
      "secs": 862.7,
      "pace": "7:44",
      "paceSecs": 464,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 47,
+     "hplace": 6,
+     "grade": 7,
+     "time": "12:44.7",
+     "secs": 764.7,
+     "pace": "6:50",
+     "paceSecs": 410,
+     "teamPlace": 35,
      "origin": "sheet"
     },
     {
@@ -59973,6 +60283,17 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 120,
+     "hplace": 17,
+     "grade": 7,
+     "time": "14:13.0",
+     "secs": 853.0,
+     "pace": "7:38",
+     "paceSecs": 458,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 178,
      "hplace": 27,
@@ -61084,6 +61405,18 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 26,
+     "hplace": 4,
+     "grade": 7,
+     "time": "12:21.5",
+     "secs": 741.5,
+     "pace": "6:38",
+     "paceSecs": 398,
+     "teamPlace": 17,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 59,
      "hplace": 10,
@@ -61656,6 +61989,17 @@
      "secs": 939.8,
      "pace": "8:25",
      "paceSecs": 505,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 86,
+     "hplace": 12,
+     "grade": 7,
+     "time": "13:23.7",
+     "secs": 803.7,
+     "pace": "7:11",
+     "paceSecs": 431,
      "origin": "sheet"
     },
     {
@@ -64767,6 +65111,18 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 40,
+     "hplace": 5,
+     "grade": 6,
+     "time": "12:38.5",
+     "secs": 758.5,
+     "pace": "6:47",
+     "paceSecs": 407,
+     "teamPlace": 29,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 89,
      "hplace": 13,
@@ -67384,6 +67740,17 @@
      "secs": 977.6,
      "pace": "8:46",
      "paceSecs": 526,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 129,
+     "hplace": 22,
+     "grade": 6,
+     "time": "14:32.2",
+     "secs": 872.2,
+     "pace": "7:48",
+     "paceSecs": 468,
      "origin": "sheet"
     },
     {
@@ -72463,6 +72830,17 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 122,
+     "hplace": 19,
+     "grade": 6,
+     "time": "14:17.6",
+     "secs": 857.6,
+     "pace": "7:40",
+     "paceSecs": 460,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 181,
      "hplace": 29,
@@ -73911,6 +74289,18 @@
      "pace": "7:13",
      "paceSecs": 433,
      "teamPlace": 9,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 22,
+     "hplace": 3,
+     "grade": 7,
+     "time": "12:18.9",
+     "secs": 738.9,
+     "pace": "6:36",
+     "paceSecs": 396,
+     "teamPlace": 14,
      "origin": "sheet"
     },
     {
@@ -77115,6 +77505,17 @@
      "secs": 949.2,
      "pace": "8:30",
      "paceSecs": 510,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 104,
+     "hplace": 15,
+     "grade": 6,
+     "time": "13:44.4",
+     "secs": 824.4,
+     "pace": "7:22",
+     "paceSecs": 442,
      "origin": "sheet"
     },
     {
@@ -82823,6 +83224,18 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 9,
+     "hplace": 2,
+     "grade": 7,
+     "time": "11:33.5",
+     "secs": 693.5,
+     "pace": "6:12",
+     "paceSecs": 372,
+     "teamPlace": 4,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 31,
      "hplace": 5,
@@ -84234,6 +84647,17 @@
      "secs": 1023.0,
      "pace": "9:10",
      "paceSecs": 550,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 121,
+     "hplace": 18,
+     "grade": 6,
+     "time": "14:16.8",
+     "secs": 856.8,
+     "pace": "7:40",
+     "paceSecs": 460,
      "origin": "sheet"
     },
     {
@@ -85653,6 +86077,36 @@
    "hsBestPaceSecs": 305
   },
   {
+   "name": "Mark Testcase",
+   "id": "mark-testcase",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-automation-test-delete-varsity",
+     "place": 5,
+     "hplace": 3,
+     "grade": 9,
+     "time": "17:02.1",
+     "secs": 1022.1,
+     "pace": "5:28",
+     "paceSecs": 328,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "17:02.1",
+    "secs": 1022.1,
+    "meet": "hs-2026-automation-test-delete-varsity"
+   },
+   "hsBestPaceSecs": 328
+  },
+  {
    "name": "Luca Tocci",
    "id": "luca-tocci",
    "seasons": [
@@ -85992,6 +86446,17 @@
      "secs": 892.5,
      "pace": "8:00",
      "paceSecs": 480,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 83,
+     "hplace": 11,
+     "grade": 7,
+     "time": "13:22.4",
+     "secs": 802.4,
+     "pace": "7:10",
+     "paceSecs": 430,
      "origin": "sheet"
     },
     {
@@ -87304,6 +87769,18 @@
      "secs": 824.1,
      "pace": "7:23",
      "paceSecs": 443,
+     "origin": "sheet"
+    },
+    {
+     "meet": "2026-states-no-8th-graders",
+     "place": 63,
+     "hplace": 7,
+     "grade": 7,
+     "time": "12:59.0",
+     "secs": 779.0,
+     "pace": "6:58",
+     "paceSecs": 418,
+     "teamPlace": 46,
      "origin": "sheet"
     },
     {
@@ -89985,6 +90462,17 @@
      "origin": "sheet"
     },
     {
+     "meet": "2026-states-no-8th-graders",
+     "place": 118,
+     "hplace": 16,
+     "grade": 6,
+     "time": "14:09.8",
+     "secs": 849.8,
+     "pace": "7:36",
+     "paceSecs": 456,
+     "origin": "sheet"
+    },
+    {
      "meet": "2026-state-championship",
      "place": 175,
      "hplace": 26,
@@ -90640,6 +91128,13 @@
   "HS 2025 Oatlands Invitational \u2013 Varsity B: source lists finishers twice (404 rows); de-duplicated to 202 and renumbered.",
   "HS: one official team-score list covers 2 races (Landon Invitational \u2013 Brown, Landon Invitational \u2013 White); split by place restarts and matched to each race by its scores.",
   "Tab '2019 - Norwood Invitational': pace formula divides by 2.2 mi but the sheet states 2.1 mi; using the formula (2.2 mi).",
+  "Tab '2026 States - No 8th graders' has no MEET_INFO entry; name guessed.",
+  "Tab '26 States - Team Score' has no MEET_INFO entry; name guessed.",
+  "Tab '26 States - Team Score': no Time column found, skipped.",
+  "Tab '26 States - Team Scores no 8th ' has no MEET_INFO entry; name guessed.",
+  "Tab '26 States - Team Scores no 8th ': no Time column found, skipped.",
+  "Tab 'Sheet38' has no MEET_INFO entry; name guessed.",
+  "Tab 'Sheet38': no Time column found, skipped.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2000-ballenger-creek-park-meet-washington-post-scores-team-scores); shown as listed.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2003-st-johns-invitational-varsity); shown as listed."
  ]
