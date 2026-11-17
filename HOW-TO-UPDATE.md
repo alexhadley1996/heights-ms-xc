@@ -62,6 +62,10 @@ The middle school races come from the team's Google Sheet **Heights MS XC Result
 - **Automatic (recommended):** share that sheet so the website can read it. Open the sheet, click **Share**, and under **General access** change **Restricted** to **Anyone with the link**, with role **Viewer**. Click **Done**. After that, the site checks the sheet **every morning** and picks up new tabs and fixes by itself. Name new tabs like the old ones, e.g. **2027 - Bullis**. (The sheet then works like the website: anyone with the link can view it, but only people you invite can edit it.)
 - **By hand:** in the sheet, click **File → Download → Microsoft Excel (.xlsx)**. On GitHub, open **`data`** → **`ms-sheet`**, click **Add file → Upload files**, drop the file in, and click **Commit changes**. It replaces the old copy, as long as the file is still named `Heights MS XC Results.xlsx`.
 
+### Tabs the site should ignore
+
+Some tabs are scratch work (a team-score table, or a copy of a race with some grades left out), not a race of their own. Open **data** → **ms-sheet** → **skip-tabs.csv**, click the pencil, add a line with the exact tab name, and commit. Tabs named **Sheet** plus a number, or containing **no 8th** or **team score**, are skipped automatically.
+
 Put each middle school race in **either** the team sheet **or** a `race-results` file, not both, or it will show up twice.
 
 ---

@@ -16,6 +16,8 @@ import sys, re, json, datetime, os, statistics, csv, difflib, collections, itert
 import openpyxl
 
 # Tabs that are analysis/comparison sheets, not meet results.
+# More names (and a short note) can be added in data/ms-sheet/skip-tabs.csv without editing this file.
+# Tabs whose names contain "no 8th" or "team score", or are "Sheet" plus a number, are skipped too.
 SKIP_TABS = {"2026 Comparison", "Comparison 2025 - 6th Grade"}
 
 # Per-tab metadata.  Only facts that appear in the sheet (tab name / header notes) are used.
@@ -658,6 +660,51 @@ def finalize(field, meta, quirks):
 
 
 MS_SHEET_DIR = os.path.join(ROOT, "data", "ms-sheet")
+SKIP_TABS_CSV = os.path.join(MS_SHEET_DIR, "skip-tabs.csv")
+
+
+def norm_tab(name):
+    """Collapse spaces so a trailing space in a sheet tab still matches the name a person types."""
+    return re.sub(r"\s+", " ", str(name or "")).strip()
+
+
+def load_skip_tabs():
+    """Tab names from data/ms-sheet/skip-tabs.csv, keyed by their normalized name.
+
+    The file is the list a person edits on GitHub. Columns: Tab name, Note.
+    """
+    if not os.path.exists(SKIP_TABS_CSV):
+        return {}
+    with open(SKIP_TABS_CSV, encoding="utf-8-sig", newline="") as f:
+        rows = list(csv.reader(f))
+    if not rows:
+        return {}
+    head = [h.strip().lower() for h in rows[0]]
+    try:
+        i_name = head.index("tab name")
+    except ValueError:
+        raise DataError("data/ms-sheet/skip-tabs.csv: the first row must be the column names 'Tab name,Note'. "
+                        "Restore it from the file's History on GitHub.")
+    out, problems = {}, []
+    for n, r in enumerate(rows[1:], start=2):
+        name = norm_tab(r[i_name] if i_name < len(r) else "")
+        if not name:
+            continue
+        if name in out:
+            problems.append(f"row {n}: '{name}' is already listed.")
+            continue
+        out[name] = name
+    if problems:
+        raise DataError("data/ms-sheet/skip-tabs.csv has a problem:\n  " + "\n  ".join(problems))
+    return out
+
+
+def auto_skip_tab(name):
+    """True for analysis tabs the sheet keeps next to a real race: team-score tallies, 'no 8th' subsets, blank SheetN."""
+    low = name.lower()
+    if "no 8th" in low or "team score" in low:
+        return True
+    return re.fullmatch(r"Sheet\d+", name, re.IGNORECASE) is not None
 
 
 def find_ms_sheet():
@@ -689,11 +736,26 @@ def main(path=None):
     manifest = load_json("manifest.json", {}).get("races", [])
     offscores = load_official_scores()
     meets, quirks, distance_log = [], [], []
+    csv_skips = load_skip_tabs()
+    announced = set()
+
+    def is_skipped(title):
+        """Analysis tabs are not races. Hard-coded comparison tabs stay quiet; the csv and the name rules are announced."""
+        if title in SKIP_TABS:
+            return True
+        key = norm_tab(title)
+        if key in csv_skips or auto_skip_tab(key):
+            if key not in announced:
+                announced.add(key)
+                print(f"skipped tab {key}")
+            return True
+        return False
+
     def is_team_tab(ws):
         h = [str(c or "").strip().lower() for c in next(ws.iter_rows(max_row=1, values_only=True), ())][:4]
         return h[:4] == ["race", "rank", "team", "score"]
-    team_tabs = [ws.title for ws in wb if ws.title not in SKIP_TABS and is_team_tab(ws)]
-    tabs = [ws for ws in wb if ws.title not in SKIP_TABS and ws.title not in team_tabs]
+    team_tabs = [ws.title for ws in wb if not is_skipped(ws.title) and is_team_tab(ws)]
+    tabs = [ws for ws in wb if not is_skipped(ws.title) and ws.title not in team_tabs]
     used_overrides = set()
     for order, ws in enumerate(reversed(tabs)):
         title = ws.title
