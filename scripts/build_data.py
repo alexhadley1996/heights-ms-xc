@@ -757,8 +757,14 @@ def main(path=None):
     team_tabs = [ws.title for ws in wb if not is_skipped(ws.title) and is_team_tab(ws)]
     tabs = [ws for ws in wb if not is_skipped(ws.title) and ws.title not in team_tabs]
     used_overrides = set()
+    titled = []  # new-style tabs (a full date in the title); old tabs stay on the path below
+    import sheet_tabs
     for order, ws in enumerate(reversed(tabs)):
         title = ws.title
+        parsed = None if title in MEET_INFO else sheet_tabs.parse_title(title)
+        if parsed:
+            titled.append((order, ws, parsed))
+            continue
         info = dict(MEET_INFO.get(title, {}))
         if "season" not in info:
             m = re.search(r"(19|20)\d{2}", title)
@@ -911,6 +917,9 @@ def main(path=None):
     import hs_data
     meets += hs_data.build_hs_meets(quirks)
 
+    # New-style sheet tabs (date in the title) for every level. A broken tab is left out; the rest still publish.
+    sheet_problems = sheet_tabs.apply_titled_tabs(titled, meets, quirks)
+
     # Races added by hand as one CSV per race in race-results/ (see HOW-TO-UPDATE.md)
     import new_races
     uploaded, upload_problems = new_races.load_uploaded_races(quirks, {m["id"] for m in meets})
@@ -963,9 +972,9 @@ def main(path=None):
         print("score:", m["division"], m["id"], m["date"], m["distance"], m["distanceSource"], f"official {o['matched']}/{len(o['teams'])} heights={o['heightsMatch']}" if o else "no official")
     for r in review:
         print("review:", r)
-    if upload_problems:
-        print("\nPROBLEMS (the rest of the site was updated; fix these files and upload them again):", file=sys.stderr)
-        for p in upload_problems:
+    if upload_problems or sheet_problems:
+        print("\nPROBLEMS (the rest of the site was updated; fix these and upload them again):", file=sys.stderr)
+        for p in upload_problems + sheet_problems:
             print("  " + p, file=sys.stderr)
         sys.exit(3)
 
@@ -1074,7 +1083,11 @@ def assign_groups(meets):
     Returns the group list; each race gets m["group"] (a one-race meet keeps its race id as the group id)."""
     buckets = collections.defaultdict(list)
     for m in meets:
-        if m["division"] == "HS":
+        if m.get("sheetNew") and not m.get("joinedExisting"):
+            # a new sheet race groups with the other new tabs of the same meet and day, HS and MS together
+            name = m.get("meetName") or m["name"]
+            key = ("SHEET", m["season"], re.sub(r"\s+", " ", name.lower()).strip(), m.get("date") or "")
+        elif m["division"] == "HS":
             name = MEET_GROUP_ALIASES.get((m["season"], m["meetName"]), m["meetName"])
             key = ("HS", m["season"], name)
         else:
@@ -1086,13 +1099,21 @@ def assign_groups(meets):
     groups, used = [], set()
     for key, ms in buckets.items():
         div, season, name = key[0], key[1], key[2]
-        ms.sort(key=lambda m: (LEVEL_ORDER.get(m.get("level"), 9) if div == "HS" else (m["name"] != name), m["order"]))
+        if key[0] == "SHEET":
+            div = "HS" if any(m["division"] == "HS" for m in ms) else "MS"
+            name = ms[0].get("meetName") or name
+            ms.sort(key=lambda m: (0 if m["division"] == "HS" else 1, LEVEL_ORDER.get(m.get("level"), 9), m["order"]))
+        else:
+            ms.sort(key=lambda m: (LEVEL_ORDER.get(m.get("level"), 9) if div == "HS" else (m["name"] != name), m["order"]))
         if len(ms) == 1:
             gid = ms[0]["id"]
-        elif div == "MS":
+        elif div == "MS" and key[0] != "SHEET":
             gid = ms[0]["id"]  # the main race's id: its old links already land on this page
+        elif key[0] == "SHEET":
+            gid = slug(f"{season}-{name}-{ms[0].get('date') or ''}")
         else:
             gid = slug(f"hs-{season}-{name}")
+        if key[0] in ("SHEET", "HS") and len(ms) > 1:
             while gid in race_ids or gid in used:
                 gid += "-meet"
         used.add(gid)

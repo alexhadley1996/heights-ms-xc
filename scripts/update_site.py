@@ -104,7 +104,7 @@ def build():
 
 
 def headline(stdout):
-    keep = [l for l in stdout.splitlines() if l.startswith(("Meet pages:", "MS:", "HS:", "Added from race-results/", "note:", "skipped tab "))]
+    keep = [l for l in stdout.splitlines() if l.startswith(("Meet pages:", "MS:", "HS:", "Added from race-results/", "note:", "skipped tab ", "tab "))]
     return ["- " + l for l in keep]
 
 
