@@ -3,6 +3,84 @@
  "source": "Google Sheet \u201cHeights MS XC Results\u201d (middle school), races found on racecast.co / Athletic.net / mocorunning.com (middle school), and high school results from racecast.co and mocorunning.com (data/hs)",
  "meets": [
   {
+   "season": 2026,
+   "division": "HS",
+   "date": "2026-11-22",
+   "tab": "Nov 22 2026 - 5k - Varsity",
+   "origin": "hs",
+   "distance": 3.1068559611866697,
+   "distanceSource": "official",
+   "statedDistance": 3.1068559611866697,
+   "location": "WakeMed Soccer Park, Cary, NC",
+   "meetName": "NXR Southeast Regionals",
+   "sheetNew": true,
+   "level": "Varsity",
+   "levelLabel": "Championship",
+   "race": "Championship",
+   "name": "NXR Southeast Regionals \u2013 Championship",
+   "distanceM": 5000.0,
+   "distKey": "5K",
+   "id": "hs-2026-nxr-southeast-regionals-championship",
+   "fieldSize": 259,
+   "heightsCount": 7,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 420,
+   "venue": "WakeMed Soccer Park, Cary, NC",
+   "group": "2026-nxr-southeast-regionals-2026-11-22",
+   "scoring": {
+    "teamCount": 26,
+    "calcCount": 26,
+    "heights": [
+     {
+      "team": "The Heights",
+      "place": 25,
+      "score": 548,
+      "official": false
+     }
+    ]
+   }
+  },
+  {
+   "season": 2026,
+   "division": "HS",
+   "date": "2026-11-22",
+   "tab": "Nov 22 2026 - 5k - JV",
+   "origin": "hs",
+   "distance": 3.1068559611866697,
+   "distanceSource": "official",
+   "statedDistance": 3.1068559611866697,
+   "location": "WakeMed Soccer Park, Cary, NC",
+   "meetName": "NXR Southeast Regionals",
+   "sheetNew": true,
+   "level": "JV",
+   "levelLabel": "Rising Stars",
+   "race": "Rising Stars",
+   "name": "NXR Southeast Regionals \u2013 Rising Stars",
+   "distanceM": 5000.0,
+   "distKey": "5K",
+   "id": "hs-2026-nxr-southeast-regionals-rising-stars",
+   "fieldSize": 269,
+   "heightsCount": 5,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 419,
+   "venue": "WakeMed Soccer Park, Cary, NC",
+   "group": "2026-nxr-southeast-regionals-2026-11-22",
+   "scoring": {
+    "teamCount": 16,
+    "calcCount": 16,
+    "heights": [
+     {
+      "team": "The Heights",
+      "place": 13,
+      "score": 290,
+      "official": false
+     }
+    ]
+   }
+  },
+  {
    "id": "hs-2026-maryland-private-school-state-championships-open-2a",
    "season": 2026,
    "division": "HS",
@@ -21269,6 +21347,24 @@
  ],
  "groups": [
   {
+   "id": "2026-nxr-southeast-regionals-2026-11-22",
+   "season": 2026,
+   "division": "HS",
+   "name": "NXR Southeast Regionals",
+   "date": "2026-11-22",
+   "location": "WakeMed Soccer Park, Cary, NC",
+   "venue": "WakeMed Soccer Park, Cary, NC",
+   "order": 419,
+   "races": [
+    "hs-2026-nxr-southeast-regionals-championship",
+    "hs-2026-nxr-southeast-regionals-rising-stars"
+   ],
+   "levels": [
+    "Varsity",
+    "JV"
+   ]
+  },
+  {
    "id": "hs-2026-maryland-private-school-state-championships",
    "season": 2026,
    "division": "HS",
@@ -26373,6 +26469,37 @@
    "hsBestPaceSecs": 341
   },
   {
+   "name": "David (Davie) Alvarado",
+   "id": "david-davie-alvarado",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-championship",
+     "place": 215,
+     "hplace": 4,
+     "grade": 12,
+     "time": "17:05.4",
+     "secs": 1025.4,
+     "pace": "5:30",
+     "paceSecs": 330,
+     "teamPlace": 130,
+     "origin": "hs"
+    }
+   ],
+   "ms": [],
+   "hs": [
+    2026
+   ],
+   "hs5k": {
+    "time": "17:05.4",
+    "secs": 1025.4,
+    "meet": "hs-2026-nxr-southeast-regionals-championship"
+   },
+   "hsBestPaceSecs": 330
+  },
+  {
    "name": "Davie Alvarado",
    "id": "davie-alvarado",
    "seasons": [
@@ -28285,6 +28412,18 @@
      "pace": "5:22",
      "paceSecs": 322,
      "teamPlace": 18,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-championship",
+     "place": 180,
+     "hplace": 2,
+     "grade": 11,
+     "time": "16:45.8",
+     "secs": 1005.8,
+     "pace": "5:23",
+     "paceSecs": 323,
+     "teamPlace": 100,
      "origin": "hs"
     }
    ],
@@ -32171,6 +32310,18 @@
      "secs": 1100.9,
      "pace": "5:54",
      "paceSecs": 354,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-rising-stars",
+     "place": 94,
+     "hplace": 1,
+     "grade": 10,
+     "time": "17:48.8",
+     "secs": 1068.8,
+     "pace": "5:44",
+     "paceSecs": 344,
+     "teamPlace": 38,
      "origin": "hs"
     }
    ],
@@ -45643,6 +45794,18 @@
      "pace": "6:16",
      "paceSecs": 376,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-rising-stars",
+     "place": 189,
+     "hplace": 5,
+     "grade": 9,
+     "time": "19:14.3",
+     "secs": 1154.3,
+     "pace": "6:11",
+     "paceSecs": 371,
+     "teamPlace": 85,
+     "origin": "hs"
     }
    ],
    "ms": [],
@@ -48070,6 +48233,18 @@
      "paceSecs": 306,
      "teamPlace": 4,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-championship",
+     "place": 94,
+     "hplace": 1,
+     "grade": 12,
+     "time": "16:11.8",
+     "secs": 971.8,
+     "pace": "5:12",
+     "paceSecs": 312,
+     "teamPlace": 52,
+     "origin": "hs"
     }
    ],
    "ms": [],
@@ -48743,6 +48918,18 @@
      "paceSecs": 360,
      "teamPlace": 7,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-rising-stars",
+     "place": 103,
+     "hplace": 3,
+     "grade": 9,
+     "time": "17:55.5",
+     "secs": 1075.5,
+     "pace": "5:46",
+     "paceSecs": 346,
+     "teamPlace": 43,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -48754,9 +48941,9 @@
    "bestPace": "7:08",
    "bestPaceSecs": 428,
    "hs5k": {
-    "time": "17:56.0",
-    "secs": 1076.0,
-    "meet": "hs-2026-bittersweet-xc-invitational-open"
+    "time": "17:55.5",
+    "secs": 1075.5,
+    "meet": "hs-2026-nxr-southeast-regionals-rising-stars"
    },
    "hsBestPaceSecs": 346
   },
@@ -57325,6 +57512,18 @@
      "pace": "5:39",
      "paceSecs": 339,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-rising-stars",
+     "place": 97,
+     "hplace": 2,
+     "grade": 9,
+     "time": "17:53.5",
+     "secs": 1073.5,
+     "pace": "5:45",
+     "paceSecs": 345,
+     "teamPlace": 40,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -62063,6 +62262,18 @@
      "pace": "5:26",
      "paceSecs": 326,
      "teamPlace": 23,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-championship",
+     "place": 242,
+     "hplace": 5,
+     "grade": 11,
+     "time": "17:34.4",
+     "secs": 1054.4,
+     "pace": "5:39",
+     "paceSecs": 339,
+     "teamPlace": 154,
      "origin": "hs"
     }
    ],
@@ -68229,6 +68440,18 @@
      "paceSecs": 368,
      "teamPlace": 18,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-rising-stars",
+     "place": 188,
+     "hplace": 4,
+     "grade": 9,
+     "time": "19:14.0",
+     "secs": 1154.0,
+     "pace": "6:11",
+     "paceSecs": 371,
+     "teamPlace": 84,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -69208,6 +69431,18 @@
      "pace": "5:16",
      "paceSecs": 316,
      "teamPlace": 12,
+     "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-championship",
+     "place": 244,
+     "hplace": 6,
+     "grade": 11,
+     "time": "17:37.9",
+     "secs": 1057.9,
+     "pace": "5:40",
+     "paceSecs": 340,
+     "teamPlace": 156,
      "origin": "hs"
     }
    ],
@@ -85631,6 +85866,18 @@
      "paceSecs": 308,
      "teamPlace": 6,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-championship",
+     "place": 197,
+     "hplace": 3,
+     "grade": 11,
+     "time": "16:54.6",
+     "secs": 1014.6,
+     "pace": "5:26",
+     "paceSecs": 326,
+     "teamPlace": 112,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -89422,6 +89669,18 @@
      "paceSecs": 334,
      "teamPlace": 30,
      "origin": "hs"
+    },
+    {
+     "meet": "hs-2026-nxr-southeast-regionals-championship",
+     "place": 247,
+     "hplace": 7,
+     "grade": 11,
+     "time": "17:41.4",
+     "secs": 1061.4,
+     "pace": "5:41",
+     "paceSecs": 341,
+     "teamPlace": 159,
+     "origin": "hs"
     }
    ],
    "ms": [
@@ -90443,6 +90702,7 @@
   "Split \u201cWill Cannon\u201d (HS) into 2 runners: 2022\u20132025 (class of 2025); 2024\u20132025 (class of 2027)",
   "Kept \u201cRigby Anderson\u201d (HS) as one runner although the listed grades disagree (class of 2023, 2026); never ran on the same day, so likely a grade typo.",
   "MS\u2013HS match: no HS runner named Jude Mcniff (for Jude McNiff); not merged.",
+  "Possible same runner, not merged: \u201cDavid (Davie) Alvarado\u201d (2026) and \u201cDavie Alvarado\u201d (2022, 2023, 2024, 2025, 2026).",
   "Merged capitalization/punctuation variants (HS): Matthew McDonald, Matthew Mcdonald \u2192 Matthew McDonald.",
   "Merged capitalization/punctuation variants (HS): John McDonald, John Mcdonald \u2192 John McDonald.",
   "Merged capitalization/punctuation variants (MS): Nick O'Neil, Nick O'neil \u2192 Nick O'Neil.",
@@ -90644,6 +90904,8 @@
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2003-st-johns-invitational-varsity); shown as listed."
  ],
  "raceVersions": {
+  "hs-2026-nxr-southeast-regionals-championship": "006ca860b357",
+  "hs-2026-nxr-southeast-regionals-rising-stars": "4ccda50bcead",
   "hs-2026-maryland-private-school-state-championships-open-2a": "568ef1dbd21c",
   "hs-2026-maryland-private-school-state-championships-varsity-2a": "2a511b0e8130",
   "2026-state-championship": "6164fd73bcb7",
