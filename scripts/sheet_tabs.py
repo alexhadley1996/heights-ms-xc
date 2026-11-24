@@ -643,7 +643,7 @@ def _meta(parsed, field, order):
         "season": season, "division": parsed["division"], "date": d.isoformat() if d else None, "dateLabel": None,
         "tab": parsed["title"], "origin": "sheet", "distance": miles,
         "distanceSource": "official" if miles else None, "statedDistance": miles, "impliedDistance": None,
-        "officialDistance": None, "location": None, "source": None, "correction": None,
+        "officialDistance": None, "location": parsed.get("venue"), "source": None, "correction": None,
         "meetName": parsed["meet"], "sheetNew": True, "_tabOrder": order, "_scoreNotes": [],
         "noTeamScores": "Only Heights runners are listed for this race, so team scores aren't shown." if only_heights else None,
     }
@@ -671,9 +671,108 @@ def official_rows(meet):
     return [{"Place": t["place"], "Score": t["score"], "Team": t["team"], "SourceURL": off.get("source")} for t in off["teams"]]
 
 
+# Labels written in a cell, with the value in the next cell to the right (or the cell below):
+# "Venue:" | "WakeMed Soccer Park, Cary, NC". A trailing colon is needed for Meet and Distance, because a
+# results table can have a column headed "Meet" or "Distance".
+_DETAIL_KEYS = {"venue": "venue", "location": "venue", "course": "venue", "site": "venue",
+                "meet": "meet", "meet name": "meet", "distance": "distance"}
+_ALWAYS_LABEL = {"venue", "location", "course"}
+
+
+def sheet_details(ws, max_rows=40):
+    """-> {'venue': ..., 'meet': ..., 'distance': ...} from 'Label:' cells near the top of a tab."""
+    rows = [[_cell(c) for c in r] for r in ws.iter_rows(max_row=max_rows, values_only=True)]
+    found = {}
+    for i, r in enumerate(rows):
+        for j, c in enumerate(r):
+            low = c.lower().strip()
+            key = low.rstrip(":").strip()
+            if key not in _DETAIL_KEYS or not (low.endswith(":") or key in _ALWAYS_LABEL):
+                continue
+            field = _DETAIL_KEYS[key]
+            if field in found:
+                continue
+            value = next((v for v in r[j + 1:] if v), "")
+            if not value and i + 1 < len(rows) and j < len(rows[i + 1]):
+                value = rows[i + 1][j]
+            if value and value.lower().rstrip(":") not in _DETAIL_KEYS:
+                found[field] = re.sub(r"\s+", " ", value).strip()
+    return found
+
+
+def _words(text):
+    return [w for w in re.split(r"\s+", text.strip()) if w]
+
+
+def with_sheet_details(tabs):
+    """Fill in venue, distance and meet name from the tab's own cells.
+
+    When the tab name has no meet name ('Nov 22 2026 - 5k - Varsity'), the meet name comes from a
+    'Meet:' cell or the Meet column. Tabs of the same day whose names share a beginning share one
+    meet page: 'NXR Southeast Regionals Championship' and 'NXR Southeast Regionals Rising Stars'
+    become the meet 'NXR Southeast Regionals' with the races 'Championship' and 'Rising Stars'.
+    """
+    out, from_sheet = [], []
+    for order, ws, parsed in tabs:
+        parsed = dict(parsed)
+        try:
+            details = sheet_details(ws)
+        except Exception:
+            details = {}
+        if details.get("venue"):
+            parsed["venue"] = details["venue"]
+        if not parsed.get("distance") and details.get("distance"):
+            got = find_distance(details["distance"])
+            if got:
+                parsed["distance"] = got[0]
+        if not parsed.get("meet"):
+            full = details.get("meet") or meet_column(ws)
+            full = _cleanup(re.sub(r"\b(?:19|20)\d{2}\b", " ", full))
+            if full:
+                parsed["meet"] = full
+                parsed["meetFromSheet"] = True
+                from_sheet.append(parsed)
+        out.append((order, ws, parsed))
+    # same day, same division: split the shared beginning (the meet) from the rest (the race)
+    by_day = {}
+    for p in from_sheet:
+        by_day.setdefault((p.get("date"), p.get("season"), p["division"]), []).append(p)
+    for group in by_day.values():
+        names = {p["meet"] for p in group}
+        if len(group) < 2 or len(names) < 2:
+            for p in group:
+                _strip_level_word(p)
+            continue
+        split = [_words(n) for n in names]
+        common = []
+        for ws_ in zip(*split):
+            if len({w.lower() for w in ws_}) != 1:
+                break
+            common.append(ws_[0])
+        if not common or any(len(w) == len(common) for w in split):
+            for p in group:
+                _strip_level_word(p)
+            continue
+        meet = " ".join(common).strip(" -–,")
+        for p in group:
+            race = " ".join(_words(p["meet"])[len(common):]).strip(" -–,")
+            p["meet"] = meet
+            if race and p["division"] == "HS":
+                p["levelLabel"] = p["race"] = race
+    return out
+
+
+def _strip_level_word(p):
+    """A lone tab: '2026 Bullis Invitational Varsity' in the Meet column -> meet 'Bullis Invitational'."""
+    found = find_level(p["meet"])
+    if found and found[0] == p["division"] and _cleanup(found[3]):
+        p["meet"] = _cleanup(found[3])
+
+
 def apply_titled_tabs(tabs, meets, quirks):
     """tabs: list of (order, worksheet, parsed title). Mutates meets. -> list of problem strings."""
     problems = []
+    tabs = with_sheet_details(tabs)
     for order, ws, parsed in tabs:
         parsed = dict(parsed, title=ws.title)
         if parsed.get("dateNote"):
@@ -711,7 +810,7 @@ def apply_titled_tabs(tabs, meets, quirks):
             meta["meetName"] = replace.get("meetName") or parsed["meet"]
             meta["sheetNew"] = False
             meta["joinedExisting"] = True
-            meta["location"] = replace.get("location")
+            meta["location"] = parsed.get("venue") or replace.get("location")
             meta["source"] = replace.get("source")
             meta["notes"] = replace.get("notes") or []
             meta["note"] = replace.get("note")
