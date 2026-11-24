@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17",
+ "generated": "2026-11-24",
  "source": "Google Sheet \u201cHeights MS XC Results\u201d (middle school), races found on racecast.co / Athletic.net / mocorunning.com (middle school), and high school results from racecast.co and mocorunning.com (data/hs)",
  "meets": [
   {
@@ -36,7 +36,7 @@
    "heightsCount": 29,
    "hasPace": true,
    "hasGrade": true,
-   "order": 420,
+   "order": 421,
    "venue": "Bittersweet Field",
    "group": "hs-2026-maryland-private-school-state-championships",
    "scoring": {
@@ -84,7 +84,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 419,
+   "order": 420,
    "venue": "Bittersweet Field",
    "group": "hs-2026-maryland-private-school-state-championships",
    "scoring": {
@@ -109,70 +109,64 @@
    }
   },
   {
+   "id": "2026-nxr-southeast-regionals",
    "season": 2026,
-   "division": "HS",
-   "date": "2026-11-04",
-   "tab": "Lake Needwood 11426 5k Varsity",
-   "origin": "hs",
-   "distance": 3.1068559611866697,
-   "distanceSource": "official",
-   "statedDistance": 3.1068559611866697,
-   "meetName": "Lake Needwood",
-   "sheetNew": true,
-   "level": "Varsity",
-   "levelLabel": "Varsity",
-   "race": "Varsity",
-   "name": "Lake Needwood \u2013 Varsity",
-   "distanceM": 5000.0,
-   "distKey": "5K",
-   "id": "hs-2026-lake-needwood-varsity",
-   "fieldSize": 77,
+   "name": "NXR Southeast Regionals",
+   "division": "MS",
+   "level": "Open",
+   "levelLabel": "Middle school",
+   "tab": "2026 - NXR Southeast Regionals ",
+   "origin": "sheet",
+   "distance": 3.107,
+   "distanceSource": "formula",
+   "impliedDistance": 3.11,
+   "fieldSize": 259,
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 418,
+   "order": 419,
    "venue": "Unknown",
-   "group": "hs-2026-lake-needwood-varsity",
+   "group": "2026-nxr-southeast-regionals",
    "scoring": {
-    "teamCount": 11,
-    "calcCount": 11,
+    "teamCount": 26,
+    "calcCount": 26,
     "heights": [
      {
       "team": "The Heights",
-      "place": 1,
-      "score": 47,
+      "place": 25,
+      "score": 548,
       "official": false
      }
     ]
    }
   },
   {
-   "id": "2026-fake-run",
+   "id": "2026-5k-nxr-regionals-risin",
    "season": 2026,
-   "name": "Fake Run",
+   "name": "5k NXR Regionals - Risin",
    "division": "MS",
    "level": "Open",
    "levelLabel": "Middle school",
-   "tab": "2026 - Fake Run",
+   "tab": "2026 - 5k NXR Regionals - Risin",
    "origin": "sheet",
-   "distance": 1.86,
-   "distanceSource": "est",
-   "impliedDistance": 1.86,
-   "fieldSize": 125,
-   "heightsCount": 17,
+   "distance": 3.107,
+   "distanceSource": "formula",
+   "impliedDistance": 3.11,
+   "fieldSize": 269,
+   "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 417,
+   "order": 418,
    "venue": "Unknown",
-   "group": "2026-fake-run",
+   "group": "2026-5k-nxr-regionals-risin",
    "scoring": {
-    "teamCount": 13,
-    "calcCount": 13,
+    "teamCount": 16,
+    "calcCount": 16,
     "heights": [
      {
       "team": "The Heights",
-      "place": 1,
-      "score": 51,
+      "place": 13,
+      "score": 290,
       "official": false
      }
     ]
@@ -206,7 +200,7 @@
    "heightsCount": 35,
    "hasPace": true,
    "hasGrade": true,
-   "order": 416,
+   "order": 417,
    "venue": "Bittersweet Field",
    "group": "2026-state-championship",
    "scoring": {
@@ -261,7 +255,7 @@
    "heightsCount": 20,
    "hasPace": true,
    "hasGrade": true,
-   "order": 415,
+   "order": 416,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -313,7 +307,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 414,
+   "order": 415,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -365,7 +359,7 @@
    "heightsCount": 13,
    "hasPace": true,
    "hasGrade": true,
-   "order": 413,
+   "order": 414,
    "venue": "Kenilworth Park, Washington, DC",
    "group": "hs-2026-wcac-cross-country-championships",
    "scoring": {
@@ -417,7 +411,7 @@
    "heightsCount": 7,
    "hasPace": true,
    "hasGrade": true,
-   "order": 412,
+   "order": 413,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2026-va-xc-showcase",
    "scoring": {
@@ -464,7 +458,7 @@
    "heightsCount": 11,
    "hasPace": true,
    "hasGrade": true,
-   "order": 411,
+   "order": 412,
    "venue": "Pole Green Park, Mechanicsville, VA",
    "group": "hs-2026-va-xc-showcase",
    "scoring": {
@@ -508,7 +502,7 @@
    "heightsCount": 38,
    "hasPace": true,
    "hasGrade": true,
-   "order": 410,
+   "order": 411,
    "venue": "Bullis School, Potomac, MD",
    "group": "2026-bullis",
    "scoring": {
@@ -560,7 +554,7 @@
    "heightsCount": 8,
    "hasPace": true,
    "hasGrade": true,
-   "order": 409,
+   "order": 410,
    "venue": "Bittersweet Field",
    "group": "hs-2026-bittersweet-xc-invitational",
    "scoring": {
@@ -612,7 +606,7 @@
    "heightsCount": 32,
    "hasPace": true,
    "hasGrade": true,
-   "order": 408,
+   "order": 409,
    "venue": "Bittersweet Field",
    "group": "hs-2026-bittersweet-xc-invitational",
    "scoring": {
@@ -665,7 +659,7 @@
    "heightsCount": 36,
    "hasPace": true,
    "hasGrade": true,
-   "order": 407,
+   "order": 408,
    "venue": "Flint Hill School, Oakton, VA",
    "group": "2026-flint-hill",
    "scoring": {
@@ -720,7 +714,7 @@
    "heightsCount": 5,
    "hasPace": true,
    "hasGrade": true,
-   "order": 406,
+   "order": 407,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2026-rva-relays",
    "scoring": {
@@ -760,7 +754,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 405,
+   "order": 406,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2026-rva-relays",
    "scoring": {
@@ -800,7 +794,7 @@
    "heightsCount": 16,
    "hasPace": true,
    "hasGrade": true,
-   "order": 404,
+   "order": 405,
    "venue": "Richmond, VA area (course not listed)",
    "group": "hs-2026-rva-relays",
    "scoring": {
@@ -837,7 +831,7 @@
    "heightsCount": 9,
    "hasPace": true,
    "hasGrade": true,
-   "order": 403,
+   "order": 404,
    "venue": "Morven Park, Leesburg, VA",
    "group": "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance",
    "scoring": {
@@ -889,7 +883,7 @@
    "heightsCount": 32,
    "hasPace": true,
    "hasGrade": true,
-   "order": 402,
+   "order": 403,
    "venue": "Morven Park, Leesburg, VA",
    "group": "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance",
    "scoring": {
@@ -945,7 +939,7 @@
    "heightsCount": 10,
    "hasPace": true,
    "hasGrade": true,
-   "order": 401,
+   "order": 402,
    "venue": "Bittersweet Field",
    "group": "hs-2025-maryland-private-school-state-championships",
    "scoring": {
@@ -1001,7 +995,7 @@
    "heightsCount": 29,
    "hasPace": true,
    "hasGrade": true,
-   "order": 400,
+   "order": 401,
    "venue": "Bittersweet Field",
    "group": "hs-2025-maryland-private-school-state-championships",
    "scoring": {
@@ -1023,6 +1017,31 @@
       "match": true
      }
     ]
+   }
+  },
+  {
+   "id": "2025-nxr-southeast-regionals",
+   "season": 2025,
+   "name": "NXR Southeast Regionals",
+   "division": "MS",
+   "level": "Open",
+   "levelLabel": "Middle school",
+   "tab": "2025 - NXR Southeast Regionals ",
+   "origin": "sheet",
+   "distance": 3.107,
+   "distanceSource": "formula",
+   "impliedDistance": 3.11,
+   "fieldSize": 286,
+   "heightsCount": 0,
+   "hasPace": true,
+   "hasGrade": true,
+   "order": 400,
+   "venue": "Unknown",
+   "group": "2025-nxr-southeast-regionals",
+   "scoring": {
+    "teamCount": 22,
+    "calcCount": 22,
+    "heights": []
    }
   },
   {
@@ -21346,7 +21365,7 @@
    "date": "2026-11-05",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 419,
+   "order": 420,
    "races": [
     "hs-2026-maryland-private-school-state-championships-varsity-2a",
     "hs-2026-maryland-private-school-state-championships-open-2a"
@@ -21357,29 +21376,28 @@
    ]
   },
   {
-   "id": "hs-2026-lake-needwood-varsity",
+   "id": "2026-nxr-southeast-regionals",
    "season": 2026,
-   "division": "HS",
-   "name": "Lake Needwood",
-   "date": "2026-11-04",
+   "division": "MS",
+   "name": "NXR Southeast Regionals",
    "venue": "Unknown",
-   "order": 418,
+   "order": 419,
    "races": [
-    "hs-2026-lake-needwood-varsity"
+    "2026-nxr-southeast-regionals"
    ],
    "levels": [
-    "Varsity"
+    "Open"
    ]
   },
   {
-   "id": "2026-fake-run",
+   "id": "2026-5k-nxr-regionals-risin",
    "season": 2026,
    "division": "MS",
-   "name": "Fake Run",
+   "name": "5k NXR Regionals - Risin",
    "venue": "Unknown",
-   "order": 417,
+   "order": 418,
    "races": [
-    "2026-fake-run"
+    "2026-5k-nxr-regionals-risin"
    ],
    "levels": [
     "Open"
@@ -21393,7 +21411,7 @@
    "date": "2026-10-29",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 416,
+   "order": 417,
    "races": [
     "2026-state-championship"
    ],
@@ -21409,7 +21427,7 @@
    "date": "2026-10-24",
    "location": "Kenilworth Park",
    "venue": "Kenilworth Park, Washington, DC",
-   "order": 413,
+   "order": 414,
    "races": [
     "hs-2026-wcac-cross-country-championships-varsity-a",
     "hs-2026-wcac-cross-country-championships-varsity-b",
@@ -21429,7 +21447,7 @@
    "date": "2026-10-17",
    "location": "Pole Green Park (Upper Course), Mechanicsville, VA",
    "venue": "Pole Green Park, Mechanicsville, VA",
-   "order": 411,
+   "order": 412,
    "races": [
     "hs-2026-va-xc-showcase-varsity-showcase",
     "hs-2026-va-xc-showcase-morning-jv"
@@ -21447,7 +21465,7 @@
    "date": "2026-10-05",
    "location": "The Bullis School Campus",
    "venue": "Bullis School, Potomac, MD",
-   "order": 410,
+   "order": 411,
    "races": [
     "2026-bullis"
    ],
@@ -21463,7 +21481,7 @@
    "date": "2026-10-03",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 408,
+   "order": 409,
    "races": [
     "hs-2026-bittersweet-xc-invitational-varsity",
     "hs-2026-bittersweet-xc-invitational-open"
@@ -21481,7 +21499,7 @@
    "date": "2026-09-24",
    "location": "Flint Hill",
    "venue": "Flint Hill School, Oakton, VA",
-   "order": 407,
+   "order": 408,
    "races": [
     "2026-flint-hill"
    ],
@@ -21497,7 +21515,7 @@
    "date": "2026-09-19",
    "location": "Richmond, VA area (course not listed in printout)",
    "venue": "Richmond, VA area (course not listed)",
-   "order": 404,
+   "order": 405,
    "races": [
     "hs-2026-rva-relays-extra-2",
     "hs-2026-rva-relays-bc-relay",
@@ -21516,7 +21534,7 @@
    "date": "2026-09-04",
    "location": "Morven Park Grounds",
    "venue": "Morven Park, Leesburg, VA",
-   "order": 402,
+   "order": 403,
    "races": [
     "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-varsity",
     "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-junior-varsity"
@@ -21534,7 +21552,7 @@
    "date": "2025-11-06",
    "location": "Bittersweet Field",
    "venue": "Bittersweet Field",
-   "order": 400,
+   "order": 401,
    "races": [
     "hs-2025-maryland-private-school-state-championships-varsity-2a-large",
     "hs-2025-maryland-private-school-state-championships-junior-varsity"
@@ -21542,6 +21560,20 @@
    "levels": [
     "Varsity",
     "JV"
+   ]
+  },
+  {
+   "id": "2025-nxr-southeast-regionals",
+   "season": 2025,
+   "division": "MS",
+   "name": "NXR Southeast Regionals",
+   "venue": "Unknown",
+   "order": 400,
+   "races": [
+    "2025-nxr-southeast-regionals"
+   ],
+   "levels": [
+    "Open"
    ]
   },
   {
@@ -25645,7 +25677,6 @@
   "henry-syski-hs": "henry-syski",
   "robbie-wright-hs": "robbie-wright",
   "andrew-magee-hs": "andrew-magee",
-  "josh-miller": "joshua-miller",
   "josh-miller-hs": "joshua-miller",
   "joshua-miller-hs": "joshua-miller",
   "cubby-smith-hs": "cubby-smith",
@@ -26470,6 +26501,33 @@
     "meet": "hs-2011-nxn-southeast-regional-2011-open"
    },
    "hsBestPaceSecs": 341
+  },
+  {
+   "name": "David (Davie) Alvarado",
+   "id": "david-davie-alvarado",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "2026-nxr-southeast-regionals",
+     "place": 215,
+     "hplace": 4,
+     "grade": 12,
+     "time": "17:05.4",
+     "secs": 1025.4,
+     "pace": "5:30",
+     "paceSecs": 330,
+     "teamPlace": 130,
+     "origin": "sheet"
+    }
+   ],
+   "ms": [
+    2026
+   ],
+   "hs": [],
+   "bestPace": "5:30",
+   "bestPaceSecs": 330
   },
   {
    "name": "Davie Alvarado",
@@ -28375,6 +28433,18 @@
      "origin": "hs"
     },
     {
+     "meet": "2026-nxr-southeast-regionals",
+     "place": 180,
+     "hplace": 2,
+     "grade": 11,
+     "time": "16:45.8",
+     "secs": 1005.8,
+     "pace": "5:24",
+     "paceSecs": 324,
+     "teamPlace": 100,
+     "origin": "sheet"
+    },
+    {
      "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
      "place": 19,
      "hplace": 4,
@@ -28390,15 +28460,16 @@
    "ms": [
     2021,
     2022,
-    2023
+    2023,
+    2026
    ],
    "hs": [
     2024,
     2025,
     2026
    ],
-   "bestPace": "5:43",
-   "bestPaceSecs": 343,
+   "bestPace": "5:24",
+   "bestPaceSecs": 324,
    "hs5k": {
     "time": "16:28.9",
     "secs": 988.9,
@@ -32262,6 +32333,18 @@
      "origin": "hs"
     },
     {
+     "meet": "2026-5k-nxr-regionals-risin",
+     "place": 94,
+     "hplace": 1,
+     "grade": 10,
+     "time": "17:48.8",
+     "secs": 1068.8,
+     "pace": "5:44",
+     "paceSecs": 344,
+     "teamPlace": 38,
+     "origin": "sheet"
+    },
+    {
      "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
      "place": 65,
      "hplace": 10,
@@ -32275,14 +32358,15 @@
    ],
    "ms": [
     2022,
-    2023
+    2023,
+    2026
    ],
    "hs": [
     2025,
     2026
    ],
-   "bestPace": "7:23",
-   "bestPaceSecs": 443,
+   "bestPace": "5:44",
+   "bestPaceSecs": 344,
    "hs5k": {
     "time": "17:38.7",
     "secs": 1058.7,
@@ -37542,37 +37626,6 @@
    "hs": [],
    "bestPace": "8:02",
    "bestPaceSecs": 482
-  },
-  {
-   "name": "Caleb Charmatz",
-   "id": "caleb-charmatz",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "hs-2026-lake-needwood-varsity",
-     "place": 16,
-     "hplace": 5,
-     "grade": 12,
-     "time": "17:42.3",
-     "secs": 1062.3,
-     "pace": "5:41",
-     "paceSecs": 341,
-     "teamPlace": 16,
-     "origin": "hs"
-    }
-   ],
-   "ms": [],
-   "hs": [
-    2026
-   ],
-   "hs5k": {
-    "time": "17:42.3",
-    "secs": 1062.3,
-    "meet": "hs-2026-lake-needwood-varsity"
-   },
-   "hsBestPaceSecs": 341
   },
   {
    "name": "Dylan Chen",
@@ -45707,6 +45760,33 @@
    ],
    "results": [
     {
+     "meet": "2026-5k-nxr-regionals-risin",
+     "place": 189,
+     "hplace": 5,
+     "grade": 9,
+     "time": "19:14.3",
+     "secs": 1154.3,
+     "pace": "6:12",
+     "paceSecs": 372,
+     "teamPlace": 85,
+     "origin": "sheet"
+    }
+   ],
+   "ms": [
+    2026
+   ],
+   "hs": [],
+   "bestPace": "6:12",
+   "bestPaceSecs": 372
+  },
+  {
+   "name": "Andrew Eckel",
+   "id": "andrew-eckel-hs",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
      "meet": "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-junior-varsity",
      "place": 88,
      "hplace": 11,
@@ -45785,33 +45865,6 @@
     "meet": "hs-2026-bittersweet-xc-invitational-open"
    },
    "hsBestPaceSecs": 338
-  },
-  {
-   "name": "Percy Eddington",
-   "id": "percy-eddington",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 1,
-     "hplace": 1,
-     "grade": 8,
-     "time": "9:54.7",
-     "secs": 594.7,
-     "pace": "5:19",
-     "paceSecs": 319,
-     "teamPlace": 1,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "5:19",
-   "bestPaceSecs": 319
   },
   {
    "name": "Stefan Eliopoulos",
@@ -47922,7 +47975,7 @@
   },
   {
    "name": "Tommy Flynn",
-   "id": "tommy-flynn",
+   "id": "tommy-flynn-hs",
    "seasons": [
     2023,
     2024,
@@ -48242,6 +48295,33 @@
     "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a"
    },
    "hsBestPaceSecs": 306
+  },
+  {
+   "name": "Tommy Flynn",
+   "id": "tommy-flynn",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "2026-nxr-southeast-regionals",
+     "place": 94,
+     "hplace": 1,
+     "grade": 12,
+     "time": "16:11.8",
+     "secs": 971.8,
+     "pace": "5:13",
+     "paceSecs": 313,
+     "teamPlace": 52,
+     "origin": "sheet"
+    }
+   ],
+   "ms": [
+    2026
+   ],
+   "hs": [],
+   "bestPace": "5:13",
+   "bestPaceSecs": 313
   },
   {
    "name": "Matt Foley",
@@ -48890,6 +48970,18 @@
      "origin": "hs"
     },
     {
+     "meet": "2026-5k-nxr-regionals-risin",
+     "place": 103,
+     "hplace": 3,
+     "grade": 9,
+     "time": "17:55.5",
+     "secs": 1075.5,
+     "pace": "5:46",
+     "paceSecs": 346,
+     "teamPlace": 43,
+     "origin": "sheet"
+    },
+    {
      "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
      "place": 9,
      "hplace": 3,
@@ -48903,13 +48995,14 @@
     }
    ],
    "ms": [
-    2024
+    2024,
+    2026
    ],
    "hs": [
     2026
    ],
-   "bestPace": "7:08",
-   "bestPaceSecs": 428,
+   "bestPace": "5:46",
+   "bestPaceSecs": 346,
    "hs5k": {
     "time": "17:56.0",
     "secs": 1076.0,
@@ -56020,59 +56113,6 @@
    "hsBestPaceSecs": 454
   },
   {
-   "name": "August Ibarra",
-   "id": "august-ibarra",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 97,
-     "hplace": 15,
-     "grade": 8,
-     "time": "13:25.5",
-     "secs": 805.5,
-     "pace": "7:12",
-     "paceSecs": 432,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:12",
-   "bestPaceSecs": 432
-  },
-  {
-   "name": "Emilio Ibarra",
-   "id": "emilio-ibarra",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 8,
-     "hplace": 2,
-     "grade": 6,
-     "time": "10:50.4",
-     "secs": 650.4,
-     "pace": "5:49",
-     "paceSecs": 349,
-     "teamPlace": 8,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "5:49",
-   "bestPaceSecs": 349
-  },
-  {
    "name": "Dmitri Ingraham",
    "id": "dmitri-ingraham",
    "seasons": [
@@ -57526,6 +57566,18 @@
      "origin": "hs"
     },
     {
+     "meet": "2026-5k-nxr-regionals-risin",
+     "place": 97,
+     "hplace": 2,
+     "grade": 9,
+     "time": "17:53.5",
+     "secs": 1073.5,
+     "pace": "5:46",
+     "paceSecs": 346,
+     "teamPlace": 40,
+     "origin": "sheet"
+    },
+    {
      "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
      "place": 41,
      "hplace": 8,
@@ -57539,13 +57591,14 @@
    ],
    "ms": [
     2024,
-    2025
+    2025,
+    2026
    ],
    "hs": [
     2026
    ],
-   "bestPace": "6:05",
-   "bestPaceSecs": 365,
+   "bestPace": "5:46",
+   "bestPaceSecs": 346,
    "hs5k": {
     "time": "17:20.4",
     "secs": 1040.4,
@@ -61795,33 +61848,6 @@
    "bestPaceSecs": 402
   },
   {
-   "name": "Lachlan Li",
-   "id": "lachlan-li",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 15,
-     "hplace": 4,
-     "grade": 8,
-     "time": "11:14.7",
-     "secs": 674.7,
-     "pace": "6:02",
-     "paceSecs": 362,
-     "teamPlace": 14,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:02",
-   "bestPaceSecs": 362
-  },
-  {
    "name": "Brendan Lichter",
    "id": "brendan-lichter",
    "seasons": [
@@ -62137,7 +62163,7 @@
   },
   {
    "name": "Dash Lively",
-   "id": "dash-lively",
+   "id": "dash-lively-hs",
    "seasons": [
     2025,
     2026
@@ -62316,6 +62342,33 @@
    "hsBestPaceSecs": 320
   },
   {
+   "name": "Dash Lively",
+   "id": "dash-lively",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "2026-nxr-southeast-regionals",
+     "place": 242,
+     "hplace": 5,
+     "grade": 11,
+     "time": "17:34.4",
+     "secs": 1054.4,
+     "pace": "5:39",
+     "paceSecs": 339,
+     "teamPlace": 154,
+     "origin": "sheet"
+    }
+   ],
+   "ms": [
+    2026
+   ],
+   "hs": [],
+   "bestPace": "5:39",
+   "bestPaceSecs": 339
+  },
+  {
    "name": "Peter Lloyd",
    "id": "peter-lloyd",
    "seasons": [
@@ -62434,32 +62487,6 @@
     "meet": "hs-2001-georgetown-prep-classic-freshman"
    },
    "hsBestPaceSecs": 476
-  },
-  {
-   "name": "Oscar Lopez",
-   "id": "oscar-lopez",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 92,
-     "hplace": 13,
-     "grade": 6,
-     "time": "13:15.5",
-     "secs": 795.5,
-     "pace": "7:07",
-     "paceSecs": 427,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:07",
-   "bestPaceSecs": 427
   },
   {
    "name": "Jacob Love",
@@ -64999,33 +65026,6 @@
    "hs": [],
    "bestPace": "6:43",
    "bestPaceSecs": 403
-  },
-  {
-   "name": "Hugo Matheson",
-   "id": "hugo-matheson",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 9,
-     "hplace": 3,
-     "grade": 8,
-     "time": "10:55.0",
-     "secs": 655.0,
-     "pace": "5:51",
-     "paceSecs": 351,
-     "teamPlace": 9,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "5:51",
-   "bestPaceSecs": 351
   },
   {
    "name": "John Henry Matich",
@@ -68509,6 +68509,18 @@
      "origin": "hs"
     },
     {
+     "meet": "2026-5k-nxr-regionals-risin",
+     "place": 188,
+     "hplace": 4,
+     "grade": 9,
+     "time": "19:14.0",
+     "secs": 1154.0,
+     "pace": "6:11",
+     "paceSecs": 371,
+     "teamPlace": 84,
+     "origin": "sheet"
+    },
+    {
      "meet": "hs-2026-maryland-private-school-state-championships-open-2a",
      "place": 20,
      "hplace": 6,
@@ -68524,7 +68536,8 @@
    "ms": [
     2023,
     2024,
-    2025
+    2025,
+    2026
    ],
    "hs": [
     2026
@@ -69522,6 +69535,33 @@
     "meet": "hs-2026-va-xc-showcase-varsity-showcase"
    },
    "hsBestPaceSecs": 311
+  },
+  {
+   "name": "Josh Miller",
+   "id": "josh-miller",
+   "seasons": [
+    2026
+   ],
+   "results": [
+    {
+     "meet": "2026-nxr-southeast-regionals",
+     "place": 244,
+     "hplace": 6,
+     "grade": 11,
+     "time": "17:37.9",
+     "secs": 1057.9,
+     "pace": "5:40",
+     "paceSecs": 340,
+     "teamPlace": 156,
+     "origin": "sheet"
+    }
+   ],
+   "ms": [
+    2026
+   ],
+   "hs": [],
+   "bestPace": "5:40",
+   "bestPaceSecs": 340
   },
   {
    "name": "Paul Miller",
@@ -71279,32 +71319,6 @@
    "hsBestPaceSecs": 399
   },
   {
-   "name": "Matthias Murphy",
-   "id": "matthias-murphy",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 70,
-     "hplace": 11,
-     "grade": 7,
-     "time": "12:44.9",
-     "secs": 764.9,
-     "pace": "6:50",
-     "paceSecs": 410,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:50",
-   "bestPaceSecs": 410
-  },
-  {
    "name": "Luke Myers",
    "id": "luke-myers",
    "seasons": [
@@ -71870,37 +71884,6 @@
     "meet": "hs-2015-william-mary-invitational-junior-varsity"
    },
    "hsBestPaceSecs": 471
-  },
-  {
-   "name": "Yonathan Nigussie",
-   "id": "yonathan-nigussie",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "hs-2026-lake-needwood-varsity",
-     "place": 21,
-     "hplace": 6,
-     "grade": 11,
-     "time": "17:57.5",
-     "secs": 1077.5,
-     "pace": "5:46",
-     "paceSecs": 346,
-     "teamPlace": 21,
-     "origin": "hs"
-    }
-   ],
-   "ms": [],
-   "hs": [
-    2026
-   ],
-   "hs5k": {
-    "time": "17:57.5",
-    "secs": 1077.5,
-    "meet": "hs-2026-lake-needwood-varsity"
-   },
-   "hsBestPaceSecs": 346
   },
   {
    "name": "Edmund Nolan",
@@ -73473,33 +73456,6 @@
    "hsBestPaceSecs": 379
   },
   {
-   "name": "Graham Ocampo",
-   "id": "graham-ocampo",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 28,
-     "hplace": 7,
-     "grade": 8,
-     "time": "11:45.3",
-     "secs": 705.3,
-     "pace": "6:18",
-     "paceSecs": 378,
-     "teamPlace": 26,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:18",
-   "bestPaceSecs": 378
-  },
-  {
    "name": "Everett Oehler",
    "id": "everett-oehler",
    "seasons": [
@@ -74255,32 +74211,6 @@
    "hs": [],
    "bestPace": "6:26",
    "bestPaceSecs": 386
-  },
-  {
-   "name": "Milo Padilla",
-   "id": "milo-padilla",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 95,
-     "hplace": 14,
-     "grade": 7,
-     "time": "13:21.2",
-     "secs": 801.2,
-     "pace": "7:10",
-     "paceSecs": 430,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:10",
-   "bestPaceSecs": 430
   },
   {
    "name": "Luke Pannell",
@@ -75952,37 +75882,6 @@
    "bestPaceSecs": 380
   },
   {
-   "name": "Portland Range",
-   "id": "portland-range",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "hs-2026-lake-needwood-varsity",
-     "place": 15,
-     "hplace": 4,
-     "grade": 11,
-     "time": "17:35.5",
-     "secs": 1055.5,
-     "pace": "5:39",
-     "paceSecs": 339,
-     "teamPlace": 15,
-     "origin": "hs"
-    }
-   ],
-   "ms": [],
-   "hs": [
-    2026
-   ],
-   "hs5k": {
-    "time": "17:35.5",
-    "secs": 1055.5,
-    "meet": "hs-2026-lake-needwood-varsity"
-   },
-   "hsBestPaceSecs": 339
-  },
-  {
    "name": "Joseph Rayel",
    "id": "joseph-rayel",
    "seasons": [
@@ -76674,37 +76573,6 @@
    "hsBestPaceSecs": 353
   },
   {
-   "name": "Dimitrios Rementelas",
-   "id": "dimitrios-rementelas",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "hs-2026-lake-needwood-varsity",
-     "place": 1,
-     "hplace": 1,
-     "grade": 11,
-     "time": "15:51.9",
-     "secs": 951.9,
-     "pace": "5:06",
-     "paceSecs": 306,
-     "teamPlace": 1,
-     "origin": "hs"
-    }
-   ],
-   "ms": [],
-   "hs": [
-    2026
-   ],
-   "hs5k": {
-    "time": "15:51.9",
-    "secs": 951.9,
-    "meet": "hs-2026-lake-needwood-varsity"
-   },
-   "hsBestPaceSecs": 306
-  },
-  {
    "name": "Matthew Ribeiro",
    "id": "matthew-ribeiro",
    "seasons": [
@@ -76937,32 +76805,6 @@
    "hs": [],
    "bestPace": "8:29",
    "bestPaceSecs": 509
-  },
-  {
-   "name": "Griffin Rivera",
-   "id": "griffin-rivera",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 33,
-     "hplace": 8,
-     "grade": 7,
-     "time": "11:53.1",
-     "secs": 713.1,
-     "pace": "6:23",
-     "paceSecs": 383,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:23",
-   "bestPaceSecs": 383
   },
   {
    "name": "Alek Rizzo",
@@ -80430,33 +80272,6 @@
    "bestPaceSecs": 482
   },
   {
-   "name": "Aziz Silva",
-   "id": "aziz-silva",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 20,
-     "hplace": 5,
-     "grade": 8,
-     "time": "11:27.4",
-     "secs": 687.4,
-     "pace": "6:09",
-     "paceSecs": 369,
-     "teamPlace": 19,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:09",
-   "bestPaceSecs": 369
-  },
-  {
    "name": "Jamison Simmons",
    "id": "jamison-simmons",
    "seasons": [
@@ -80860,37 +80675,6 @@
     "meet": "hs-2026-bittersweet-xc-invitational-open"
    },
    "hsBestPaceSecs": 341
-  },
-  {
-   "name": "Avery Smith",
-   "id": "avery-smith",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "hs-2026-lake-needwood-varsity",
-     "place": 5,
-     "hplace": 2,
-     "grade": 11,
-     "time": "16:36.4",
-     "secs": 996.4,
-     "pace": "5:20",
-     "paceSecs": 320,
-     "teamPlace": 5,
-     "origin": "hs"
-    }
-   ],
-   "ms": [],
-   "hs": [
-    2026
-   ],
-   "hs5k": {
-    "time": "16:36.4",
-    "secs": 996.4,
-    "meet": "hs-2026-lake-needwood-varsity"
-   },
-   "hsBestPaceSecs": 320
   },
   {
    "name": "Cubby Smith",
@@ -84861,32 +84645,6 @@
    "hsBestPaceSecs": 446
   },
   {
-   "name": "Bodhi Talbot",
-   "id": "bodhi-talbot",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 38,
-     "hplace": 9,
-     "grade": 8,
-     "time": "12:00.1",
-     "secs": 720.1,
-     "pace": "6:26",
-     "paceSecs": 386,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:26",
-   "bestPaceSecs": 386
-  },
-  {
    "name": "John Tanner",
    "id": "john-tanner",
    "seasons": [
@@ -86193,6 +85951,18 @@
      "origin": "hs"
     },
     {
+     "meet": "2026-nxr-southeast-regionals",
+     "place": 197,
+     "hplace": 3,
+     "grade": 11,
+     "time": "16:54.6",
+     "secs": 1014.6,
+     "pace": "5:27",
+     "paceSecs": 327,
+     "teamPlace": 112,
+     "origin": "sheet"
+    },
+    {
      "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
      "place": 6,
      "hplace": 2,
@@ -86208,47 +85978,22 @@
    "ms": [
     2021,
     2022,
-    2023
+    2023,
+    2026
    ],
    "hs": [
     2024,
     2025,
     2026
    ],
-   "bestPace": "5:49",
-   "bestPaceSecs": 349,
+   "bestPace": "5:27",
+   "bestPaceSecs": 327,
    "hs5k": {
     "time": "15:49.3",
     "secs": 949.3,
     "meet": "hs-2026-bittersweet-xc-invitational-varsity"
    },
    "hsBestPaceSecs": 305
-  },
-  {
-   "name": "Amos Thibault",
-   "id": "amos-thibault",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 116,
-     "hplace": 17,
-     "grade": 8,
-     "time": "14:00.1",
-     "secs": 840.1,
-     "pace": "7:31",
-     "paceSecs": 451,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:31",
-   "bestPaceSecs": 451
   },
   {
    "name": "Luca Tocci",
@@ -86493,37 +86238,6 @@
    "hsBestPaceSecs": 467
   },
   {
-   "name": "Cyril Traven",
-   "id": "cyril-traven",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "hs-2026-lake-needwood-varsity",
-     "place": 55,
-     "hplace": 7,
-     "grade": 12,
-     "time": "19:37.4",
-     "secs": 1177.4,
-     "pace": "6:18",
-     "paceSecs": 378,
-     "teamPlace": 55,
-     "origin": "hs"
-    }
-   ],
-   "ms": [],
-   "hs": [
-    2026
-   ],
-   "hs5k": {
-    "time": "19:37.4",
-    "secs": 1177.4,
-    "meet": "hs-2026-lake-needwood-varsity"
-   },
-   "hsBestPaceSecs": 378
-  },
-  {
    "name": "Walter Twetten",
    "id": "walter-twetten",
    "seasons": [
@@ -86548,59 +86262,6 @@
     2009
    ],
    "hsBestPaceSecs": 414
-  },
-  {
-   "name": "Blaise Valdez",
-   "id": "blaise-valdez",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 26,
-     "hplace": 6,
-     "grade": 8,
-     "time": "11:40.6",
-     "secs": 700.6,
-     "pace": "6:16",
-     "paceSecs": 376,
-     "teamPlace": 25,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:16",
-   "bestPaceSecs": 376
-  },
-  {
-   "name": "Abner Valerio",
-   "id": "abner-valerio",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 109,
-     "hplace": 16,
-     "grade": 8,
-     "time": "13:47.0",
-     "secs": 827.0,
-     "pace": "7:24",
-     "paceSecs": 444,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "7:24",
-   "bestPaceSecs": 444
   },
   {
    "name": "JM Valle",
@@ -87070,32 +86731,6 @@
    "hsBestPaceSecs": 331
   },
   {
-   "name": "Finn Vega",
-   "id": "finn-vega",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 59,
-     "hplace": 10,
-     "grade": 7,
-     "time": "12:29.9",
-     "secs": 749.9,
-     "pace": "6:42",
-     "paceSecs": 402,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:42",
-   "bestPaceSecs": 402
-  },
-  {
    "name": "Alex Veprek",
    "id": "alex-veprek",
    "seasons": [
@@ -87321,32 +86956,6 @@
    "hs": [],
    "bestPace": "8:02",
    "bestPaceSecs": 482
-  },
-  {
-   "name": "Dante Villanueva",
-   "id": "dante-villanueva",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "2026-fake-run",
-     "place": 74,
-     "hplace": 12,
-     "grade": 7,
-     "time": "12:49.9",
-     "secs": 769.9,
-     "pace": "6:53",
-     "paceSecs": 413,
-     "origin": "sheet"
-    }
-   ],
-   "ms": [
-    2026
-   ],
-   "hs": [],
-   "bestPace": "6:53",
-   "bestPaceSecs": 413
   },
   {
    "name": "Rafael Virador",
@@ -90146,6 +89755,18 @@
      "origin": "hs"
     },
     {
+     "meet": "2026-nxr-southeast-regionals",
+     "place": 247,
+     "hplace": 7,
+     "grade": 11,
+     "time": "17:41.4",
+     "secs": 1061.4,
+     "pace": "5:42",
+     "paceSecs": 342,
+     "teamPlace": 159,
+     "origin": "sheet"
+    },
+    {
      "meet": "hs-2026-maryland-private-school-state-championships-varsity-2a",
      "place": 31,
      "hplace": 7,
@@ -90161,15 +89782,16 @@
    "ms": [
     2021,
     2022,
-    2023
+    2023,
+    2026
    ],
    "hs": [
     2024,
     2025,
     2026
    ],
-   "bestPace": "6:36",
-   "bestPaceSecs": 396,
+   "bestPace": "5:42",
+   "bestPaceSecs": 342,
    "hs5k": {
     "time": "17:12.6",
     "secs": 1032.6,
@@ -90887,37 +90509,6 @@
    "hsBestPaceSecs": 412
   },
   {
-   "name": "Alexander Zirkelbach",
-   "id": "alexander-zirkelbach",
-   "seasons": [
-    2026
-   ],
-   "results": [
-    {
-     "meet": "hs-2026-lake-needwood-varsity",
-     "place": 10,
-     "hplace": 3,
-     "grade": 11,
-     "time": "17:21.0",
-     "secs": 1041.0,
-     "pace": "5:35",
-     "paceSecs": 335,
-     "teamPlace": 10,
-     "origin": "hs"
-    }
-   ],
-   "ms": [],
-   "hs": [
-    2026
-   ],
-   "hs5k": {
-    "time": "17:21.0",
-    "secs": 1041.0,
-    "meet": "hs-2026-lake-needwood-varsity"
-   },
-   "hsBestPaceSecs": 335
-  },
-  {
    "name": "Joseph Zischkau",
    "id": "joseph-zischkau",
    "seasons": [
@@ -91208,6 +90799,7 @@
   "Split \u201cWill Cannon\u201d (HS) into 2 runners: 2022\u20132025 (class of 2025); 2024\u20132025 (class of 2027)",
   "Kept \u201cRigby Anderson\u201d (HS) as one runner although the listed grades disagree (class of 2023, 2026); never ran on the same day, so likely a grade typo.",
   "MS\u2013HS match: no HS runner named Jude Mcniff (for Jude McNiff); not merged.",
+  "Possible same runner, not merged: \u201cDavid (Davie) Alvarado\u201d (2026) and \u201cDavie Alvarado\u201d (2022, 2023, 2024, 2025, 2026).",
   "Merged capitalization/punctuation variants (HS): Matthew McDonald, Matthew Mcdonald \u2192 Matthew McDonald.",
   "Merged capitalization/punctuation variants (HS): John McDonald, John Mcdonald \u2192 John McDonald.",
   "Merged capitalization/punctuation variants (MS): Nick O'Neil, Nick O'neil \u2192 Nick O'Neil.",
@@ -91405,105 +90997,108 @@
   "HS 2025 Oatlands Invitational \u2013 Varsity B: source lists finishers twice (404 rows); de-duplicated to 202 and renumbered.",
   "HS: one official team-score list covers 2 races (Landon Invitational \u2013 Brown, Landon Invitational \u2013 White); split by place restarts and matched to each race by its scores.",
   "Tab '2019 - Norwood Invitational': pace formula divides by 2.2 mi but the sheet states 2.1 mi; using the formula (2.2 mi).",
-  "Tab '2026 - Fake Run' has no MEET_INFO entry; name guessed.",
+  "Tab '2025 - NXR Southeast Regionals ' has no MEET_INFO entry; name guessed.",
+  "Tab '2026 - 5k NXR Regionals - Risin' has no MEET_INFO entry; name guessed.",
+  "Tab '2026 - NXR Southeast Regionals ' has no MEET_INFO entry; name guessed.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2000-ballenger-creek-park-meet-washington-post-scores-team-scores); shown as listed.",
   "Venue: no normalized name for location 'Ballenger Creek Park, Frederick, MD' (hs-2003-st-johns-invitational-varsity); shown as listed."
  ],
  "raceVersions": {
-  "hs-2026-maryland-private-school-state-championships-open-2a": "568ef1dbd21c",
-  "hs-2026-maryland-private-school-state-championships-varsity-2a": "2a511b0e8130",
-  "hs-2026-lake-needwood-varsity": "e5a1d920b98c",
-  "2026-fake-run": "a60ba49d3dc9",
+  "hs-2026-maryland-private-school-state-championships-open-2a": "efcb5c5002c6",
+  "hs-2026-maryland-private-school-state-championships-varsity-2a": "555c09330d4c",
+  "2026-nxr-southeast-regionals": "5210ebf65111",
+  "2026-5k-nxr-regionals-risin": "a1a02dbf084c",
   "2026-state-championship": "6164fd73bcb7",
   "hs-2026-wcac-cross-country-championships-varsity-b": "df989a09a8b7",
-  "hs-2026-wcac-cross-country-championships-varsity-a": "17efeef5ea9d",
-  "hs-2026-wcac-cross-country-championships-freshman": "02e933b0051f",
-  "hs-2026-va-xc-showcase-varsity-showcase": "318871eab2c7",
-  "hs-2026-va-xc-showcase-morning-jv": "b215f33d78be",
+  "hs-2026-wcac-cross-country-championships-varsity-a": "11c1bc5f0420",
+  "hs-2026-wcac-cross-country-championships-freshman": "f15e663fc33e",
+  "hs-2026-va-xc-showcase-varsity-showcase": "a58c228124c9",
+  "hs-2026-va-xc-showcase-morning-jv": "340bd08aa58c",
   "2026-bullis": "173504d94328",
-  "hs-2026-bittersweet-xc-invitational-varsity": "2939b1ccad01",
-  "hs-2026-bittersweet-xc-invitational-open": "5dcb78911b14",
+  "hs-2026-bittersweet-xc-invitational-varsity": "2998b7c4cbc0",
+  "hs-2026-bittersweet-xc-invitational-open": "4189a52c6113",
   "2026-flint-hill": "828c9591890b",
-  "hs-2026-rva-relays-a-relay": "becff3b65987",
-  "hs-2026-rva-relays-bc-relay": "e0c4106fc7aa",
-  "hs-2026-rva-relays-extra-2": "83d9e335622c",
-  "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-varsity": "6d1cc637bd84",
-  "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-junior-varsity": "08e9ddde7df5",
-  "hs-2025-maryland-private-school-state-championships-varsity-2a-large": "c88e8adc0bce",
+  "hs-2026-rva-relays-a-relay": "6c65b23a5a20",
+  "hs-2026-rva-relays-bc-relay": "2b30f151ba0e",
+  "hs-2026-rva-relays-extra-2": "7dcc5f89a4da",
+  "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-varsity": "8621340af34d",
+  "hs-2026-trials-of-miles-opening-night-xc-presented-by-new-balance-junior-varsity": "7297af3e8c5e",
+  "hs-2025-maryland-private-school-state-championships-varsity-2a-large": "a28fc5ab732a",
   "hs-2025-maryland-private-school-state-championships-junior-varsity": "d13e58b65091",
+  "2025-nxr-southeast-regionals": "df6ef770d96f",
   "2025-state-championship": "24b8a0ca56d7",
   "2025-flint-hill": "645a067a8ef6",
-  "hs-2025-wcac-championships-varsity-a": "8e1c4e13709c",
-  "hs-2025-wcac-championships-varsity-b": "2267d08f8830",
+  "hs-2025-wcac-championships-varsity-a": "67f1ba35af0d",
+  "hs-2025-wcac-championships-varsity-b": "2071c3dd45c0",
   "hs-2025-wcac-championships-freshmen": "b4ba45787cb5",
-  "hs-2025-the-va-xc-showcase-elite": "68efcb8c4a40",
-  "hs-2025-the-va-xc-showcase-junior-varsity-morning": "24c31aa11c3c",
+  "hs-2025-the-va-xc-showcase-elite": "75af2cfc651e",
+  "hs-2025-the-va-xc-showcase-junior-varsity-morning": "895f050b1d26",
   "2025-bittersweet-2": "a2b2dfe65680",
-  "hs-2025-maryland-xc-invitational-presented-by-brooks-mdxc-black-gold-varsity": "164bd69e2656",
-  "hs-2025-maryland-xc-invitational-presented-by-brooks-mdxc-black-gold-junior-varsity-am": "bea891f4405c",
+  "hs-2025-maryland-xc-invitational-presented-by-brooks-mdxc-black-gold-varsity": "64296e36c271",
+  "hs-2025-maryland-xc-invitational-presented-by-brooks-mdxc-black-gold-junior-varsity-am": "223472fef619",
   "2025-bittersweet-1": "832871fb44a5",
-  "hs-2025-oatlands-invitational-varsity-b": "1dc1f5ec184e",
+  "hs-2025-oatlands-invitational-varsity-b": "eb15e0d59645",
   "hs-2025-oatlands-invitational-varsity-a": "facd8dafd51e",
   "hs-2025-oatlands-invitational-junior-varsity-upperclassmen": "405875c7df27",
   "hs-2025-oatlands-invitational-junior-varsity-underclassmen": "51824fd45b58",
-  "hs-2025-skip-grant-invitational-varsity": "a56e3a44979d",
+  "hs-2025-skip-grant-invitational-varsity": "15f358d4b9f0",
   "hs-2025-skip-grant-invitational-jv": "0e1483d00bc2",
-  "hs-2025-bittersweet-xc-invitational-varsity": "4a98a23b8b19",
-  "hs-2025-bittersweet-xc-invitational-junior-varsity": "ca7dfc9f75f9",
+  "hs-2025-bittersweet-xc-invitational-varsity": "f40abb371f40",
+  "hs-2025-bittersweet-xc-invitational-junior-varsity": "0d3c3ec6cee3",
   "hs-2024-nxr-southeast-regional-championships-rising-stars": "0b7b2956a4fd",
   "2024-state-championship": "b4d2078066cd",
-  "hs-2024-maryland-private-school-state-championships-varsity-large": "ca4a705dd80b",
+  "hs-2024-maryland-private-school-state-championships-varsity-large": "590f25390eca",
   "hs-2024-maryland-private-school-state-championships-junior-varsity": "3261b3c502a3",
   "2024-flint-hill": "78515f9d3ed0",
   "hs-2024-wcac-varsity-b": "c1f2598ff901",
-  "hs-2024-wcac-varsity-a": "5ff2a04ca594",
+  "hs-2024-wcac-varsity-a": "fa7f5dec0a0a",
   "2024-landon": "9db8896f3e0d",
   "hs-2024-va-xc-showcase-varsity": "9d9d47a1ad96",
-  "hs-2024-va-xc-showcase-elite": "31fd79a2c820",
+  "hs-2024-va-xc-showcase-elite": "35ccd65d5c6a",
   "2024-georgetown-prep": "b04e04cc4518",
   "hs-2024-pvac-xc-3-moco-private-school-championship-sandy-spring-moco-champs": "6a2dd559ecbf",
   "hs-2024-pvac-xc-3-moco-private-school-championship-sandy-spring-moco-co-ed-junior-varsity": "dde028a1926d",
-  "hs-2024-maryland-xc-invitational-mdxc-black-gold": "5b01d8c6b6a3",
+  "hs-2024-maryland-xc-invitational-mdxc-black-gold": "bc11f08a02ab",
   "hs-2024-maryland-xc-invitational-mdxc-open": "54d16723675e",
   "hs-2024-maryland-xc-invitational-mdxc-junior-varsity": "79df2e6bc320",
   "hs-2024-skip-grant-invitational-varsity": "2b25f4aff757",
   "hs-2024-skip-grant-invitational-jv": "49d61c4e74ae",
   "hs-2024-oatlands-invitational-varsity-b": "e70161240aff",
-  "hs-2024-oatlands-invitational-varsity-a": "667c2139ce5c",
+  "hs-2024-oatlands-invitational-varsity-a": "6646a446be0c",
   "hs-2024-oatlands-invitational-jv-upper-class": "f7ce1126b8b5",
   "hs-2024-oatlands-invitational-jv-under-class": "829a9e41557b",
-  "hs-2024-rva-relays-relay": "41eacadc0efb",
+  "hs-2024-rva-relays-relay": "0f97f313e8f4",
   "hs-2024-rva-relays-bc-relay": "3fadc7b6e40a",
   "hs-2024-rva-relays-extras-m-z": "10f40e2cea0e",
   "hs-2024-woodward-cross-country-relays-junior-varsity": "eda998650c53",
   "2024-bullis": "35e6a21d375a",
-  "hs-2024-trials-of-miles-opening-night-xc-varsity": "254f2121cffa",
+  "hs-2024-trials-of-miles-opening-night-xc-varsity": "fd58973bcc75",
   "hs-2024-trials-of-miles-opening-night-xc-junior-varsity": "dcdc321566f9",
   "hs-2024-trials-of-miles-opening-night-xc-freshman": "a1ac5fffb669",
-  "hs-2023-md-state-private-schools-cross-country-championships-varsity-large-school": "d40a939dca99",
+  "hs-2023-md-state-private-schools-cross-country-championships-varsity-large-school": "046b6898e5fb",
   "hs-2023-md-state-private-schools-cross-country-championships-junior-varsity": "9a2150cbd567",
   "2023-state-championship": "78743280aae6",
-  "hs-2023-moco-private-school-championships-varsity": "672b58704cd5",
+  "hs-2023-moco-private-school-championships-varsity": "77b5ec25175c",
   "hs-2023-moco-private-school-championships-junior-varsity": "a710bdbcf720",
   "hs-2023-wcac-championship-varsity-a": "d132766dfa91",
   "hs-2023-wcac-championship-varsity-b": "b3c95da7b047",
-  "hs-2023-wcac-championship-freshmen": "6200e7a0ff1f",
+  "hs-2023-wcac-championship-freshmen": "e01454cf5c01",
   "hs-2023-skip-grant-invitational-varsity": "fcb97e759820",
-  "hs-2023-skip-grant-invitational-junior-varsity": "b3ab9cf58c26",
+  "hs-2023-skip-grant-invitational-junior-varsity": "879ca7da87aa",
   "hs-2023-milestat-com-xc-invitational-2023-elite": "700e4a4de8c2",
   "hs-2023-maryland-xc-invitational-presented-by-saucony-mdxc-black-gold": "0a8141e58290",
-  "hs-2023-maryland-xc-invitational-presented-by-saucony-mdxc-junior-varsity": "9fbed5833617",
+  "hs-2023-maryland-xc-invitational-presented-by-saucony-mdxc-junior-varsity": "2e2b4e8b64fb",
   "2023-bullis": "3edc21fc70b4",
   "2023-flint-hill": "806c49d67a96",
   "2023-covenant-life": "02c2856b0a2d",
   "hs-2023-oatlands-invitational-varsity": "6adad35965b8",
   "hs-2023-oatlands-invitational-junior-varsity": "fb9216b8628f",
   "hs-2023-rva-relays-race-relay": "daef733e6b13",
-  "hs-2023-rva-relays-bc-relay": "7d59393a853f",
+  "hs-2023-rva-relays-bc-relay": "e7a72ba156e4",
   "hs-2023-rva-relays-individual-2": "f3ee488a855d",
   "hs-2023-eagle-invitational-varsity": "3d2661103f23",
   "hs-2023-eagle-invitational-open": "ca65bbb721b1",
-  "hs-2023-eagle-invitational-frosh-soph": "7a2e6ee35222",
+  "hs-2023-eagle-invitational-frosh-soph": "476e65b76bc1",
   "hs-2022-md-state-private-schools-championships-varsity-large-school": "b2208c2b15d5",
   "hs-2022-md-state-private-schools-championships-junior-varsity": "1a82b63e6ff0",
   "2022-state-championship": "8237ac5d4802",
