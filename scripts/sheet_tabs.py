@@ -15,9 +15,10 @@ _MONTHS = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6, "jul": 7,
 _LEVELS = [
     (re.compile(r"\bmiddle\s+school\b", re.I), "MS", "Open", "Middle school"),
     (re.compile(r"\bms\b", re.I), "MS", "Open", "Middle school"),
-    (re.compile(r"\bfreshman\b|\bfrosh\b|\bfr\b", re.I), "HS", "Freshman", "Freshman"),
+    (re.compile(r"\bfresh(?:man|men)\b|\bfrosh\b|\bfr\b", re.I), "HS", "Freshman", "Freshman"),
     (re.compile(r"\bjunior\s+varsity\b|\bjv\b", re.I), "HS", "JV", "JV"),
     (re.compile(r"\bvarsity\b|\bvar\b", re.I), "HS", "Varsity", "Varsity"),
+    (re.compile(r"\brising\s+stars?\b", re.I), "HS", "Open", "Rising Stars"),
     (re.compile(r"\bopen\b", re.I), "HS", "Open", "Open"),
     (re.compile(r"(?<![A-Za-z0-9])V(?![A-Za-z0-9])"), "HS", "Varsity", "Varsity"),
 ]
@@ -181,6 +182,82 @@ def parse_title(title):
             "race": label if division == "HS" else "", "meet": meet, "defaultedMS": defaulted, "dateNote": date_note}
 
 
+def meet_column(ws):
+    """The most common value in the tab's Meet column ('2026 NXR Southeast Varsity'), or ''."""
+    import collections
+    rows = ws.iter_rows(values_only=True)
+    head = [_cell(c).lower() for c in next(rows, ())]
+    if "meet" not in head:
+        return ""
+    i = head.index("meet")
+    seen = collections.Counter(_cell(r[i]) for r in rows if i < len(r) and _cell(r[i]))
+    return seen.most_common(1)[0][0] if seen else ""
+
+
+def hs_level_from_meet_column(ws):
+    """-> (level, label, meet name) when the Meet column names a high school race (Varsity, JV, Freshmen,
+    Rising Stars, Open), else None.
+
+    Google's Excel download cuts tab names to 31 characters, so '2026 - NXR Southeast Regionals Varsity'
+    arrives as '2026 - NXR Southeast Regionals '. The Meet column inside the tab still says 'Varsity'.
+    """
+    text = meet_column(ws)
+    if not text:
+        return None
+    found = find_level(_cleanup(text))
+    if not found or found[0] != "HS":
+        return None
+    _, lvl, label, rest = found
+    meet = _cleanup(re.sub(r"\b(?:19|20)\d{2}\b", " ", rest))
+    return lvl, label, meet
+
+
+def _distance_from_miles(miles):
+    if not miles:
+        return None
+    if abs(miles * 1609.344 - 5000) < 20:  # a pace formula that divides by 3.107 or 3.1 is a 5K
+        return N.parse_distance("5k")
+    return N.parse_distance(f"{miles:g} mi")
+
+
+def parse_undated_hs(title, ws, formula_miles=None):
+    """A tab with no full date in its name that is still a high school race.
+
+    The level comes from the tab name ('2026 - Bullis Varsity') or, when the name doesn't say, from the
+    Meet column. A name that says MS or middle school always stays middle school. -> parsed dict or None.
+    """
+    ym = re.search(r"\b((?:19|20)\d{2})\b", title)
+    if not ym:
+        return None
+    season = int(ym.group(1))
+    rest = _cleanup(title[:ym.start()] + " " + title[ym.end():])
+    dist = find_distance(rest)
+    if dist:
+        parsed_dist, a, b = dist
+        rest = _cleanup(rest[:a] + " " + rest[b:])
+    else:
+        parsed_dist = _distance_from_miles(formula_miles)
+    level = find_level(rest)
+    if level and level[0] != "HS":
+        return None
+    if level:
+        _, lvl, label, meet = level
+        meet = _cleanup(meet)
+        source = "tab name"
+    else:
+        hit = hs_level_from_meet_column(ws)
+        if not hit:
+            return None
+        lvl, label, meet = hit
+        meet = meet or rest
+        source = "Meet column"
+    if not meet:
+        return None
+    return {"date": None, "season": season, "distance": parsed_dist, "division": "HS", "level": lvl,
+            "levelLabel": label, "race": label, "meet": meet, "defaultedMS": False, "dateNote": None,
+            "levelNote": f"read as high school {label} from the {source}"}
+
+
 def _cell(v):
     if v is None:
         return ""
@@ -211,7 +288,7 @@ _HEADER = {
 }
 _TIME_TOKEN = re.compile(r"\b(\d{1,2}:\d{2}(?:\.\d+)?)\b")
 _JUNK_LINE = re.compile(
-    r"^(results|scoring|team\s+scores?|page\s+\d+(\s+of\s+\d+)?|boys|girls|men|women|varsity|jv|freshman|open)\s*$",
+    r"^(results|scoring|team\s+scores?|page\s+\d+(\s+of\s+\d+)?|boys|girls|men|women|varsity|jv|freshman|freshmen|open)\s*$",
     re.I)
 _GRADE_WORD = {"sr": 12, "jr": 11, "so": 10, "fr": 9, "senior": 12, "junior": 11, "sophomore": 10, "freshman": 9,
                "frosh": 9}
@@ -385,7 +462,9 @@ def _parse_free_line(text, division):
     if not name:
         return "skip", "no runner name left after the time"
     lo, hi = (4, 8) if division == "MS" else (9, 12)
-    if grade is not None and not (lo <= grade <= hi):
+    # an open high school race (e.g. NXR Rising Stars) can include other schools' middle schoolers
+    other_school = division == "HS" and school and not H.HS_HEIGHTS_RE.match(school.strip())
+    if grade is not None and not (lo <= grade <= hi) and not other_school:
         return "skip", f"grade {grade} isn't a {'middle' if division == 'MS' else 'high'} school grade ({lo}–{hi})"
     if place and time in ("DNF", "DNS", "DQ"):
         place = ""
@@ -422,9 +501,11 @@ def _row_to_entry(row, division, lineno):
         if not re.fullmatch(r"\d{1,2}", g):
             return "skip", f"({name}): the Grade '{g}' should be a number or SR/JR/SO/FR"
         gnum = int(g)
-    if gnum is not None and not (lo <= gnum <= hi):
-        return "skip", f"({name}): grade {gnum} isn't a {'middle' if division == 'MS' else 'high'} school grade ({lo}–{hi})"
     school = re.sub(r"\s+", " ", str(row.get("school") or "")).strip() or "The Heights"
+    # an open high school race (e.g. NXR Rising Stars) can include other schools' middle schoolers
+    other_school = division == "HS" and not H.HS_HEIGHTS_RE.match(school)
+    if gnum is not None and not (lo <= gnum <= hi) and not other_school:
+        return "skip", f"({name}): grade {gnum} isn't a {'middle' if division == 'MS' else 'high'} school grade ({lo}–{hi})"
     packed = {"Place": place, "Grade": str(gnum) if gnum else "", "Name": name, "School": school, "Time": t}
     if division == "HS":
         e = H.entry(packed, {})
@@ -524,7 +605,7 @@ def _similar(a, b):
 
 def _existing_hs(meets, parsed):
     """The HS meet this tab belongs with, and the one race it replaces (or None)."""
-    year = parsed["date"].year
+    year = parsed.get("season") or parsed["date"].year
     by_name = {}
     for m in meets:
         # only races that were already on the site, not other new tabs from this same sheet
@@ -554,11 +635,12 @@ def _existing_hs(meets, parsed):
 
 def _meta(parsed, field, order):
     d = parsed["date"]
+    season = parsed.get("season") or d.year
     dist = parsed["distance"]
     metres, miles, dkey = dist if dist else (None, None, None)
     only_heights = bool(field) and all(e["heights"] for e in field)
     common = {
-        "season": d.year, "division": parsed["division"], "date": d.isoformat(), "dateLabel": None,
+        "season": season, "division": parsed["division"], "date": d.isoformat() if d else None, "dateLabel": None,
         "tab": parsed["title"], "origin": "sheet", "distance": miles,
         "distanceSource": "official" if miles else None, "statedDistance": miles, "impliedDistance": None,
         "officialDistance": None, "location": None, "source": None, "correction": None,
@@ -572,12 +654,12 @@ def _meta(parsed, field, order):
             "name": f"{parsed['meet']} \u2013 {label}", "distanceM": metres, "distKey": dkey,
             "officialName": None, "note": None, "notes": [], "completeness": None, "teamScoreStatus": None,
             "doubled": False, "aliasIds": None, "scoreOnly": None, "partialScores": None,
-            "id": B.slug(f"hs-{d.year}-{parsed['meet']}-{label}"),
+            "id": B.slug(f"hs-{season}-{parsed['meet']}-{label}"),
         })
     else:
         common.update({
             "level": "Open", "levelLabel": "Middle school",
-            "name": parsed["meet"], "id": B.slug(f"{d.year}-{parsed['meet']}-{d.isoformat()}"),
+            "name": parsed["meet"], "id": B.slug(f"{season}-{parsed['meet']}-{d.isoformat() if d else ''}"),
         })
     return common
 
@@ -596,6 +678,14 @@ def apply_titled_tabs(tabs, meets, quirks):
         parsed = dict(parsed, title=ws.title)
         if parsed.get("dateNote"):
             print(f"note: tab {ws.title!r}: {parsed['dateNote']}.")
+        if parsed["defaultedMS"]:
+            hit = hs_level_from_meet_column(ws)
+            if hit:
+                lvl, label, _ = hit
+                parsed.update(division="HS", level=lvl, levelLabel=label, race=label, defaultedMS=False,
+                              levelNote=f"read as high school {label} from the Meet column")
+        if parsed.get("levelNote"):
+            print(f"note: tab {ws.title!r} {parsed['levelNote']}.")
         if parsed["defaultedMS"]:
             print(f"note: tab {ws.title!r} has a date but no level (Varsity, JV, Freshman, Open, or MS); treated as middle school.")
         if not parsed["meet"]:
@@ -637,6 +727,6 @@ def apply_titled_tabs(tabs, meets, quirks):
             meta["joinedExisting"] = True
             if parsed["division"] == "HS":
                 meta["name"] = f"{canon} \u2013 {parsed['levelLabel']}"
-                meta["id"] = B.slug(f"hs-{parsed['date'].year}-{canon}-{parsed['levelLabel']}")
+                meta["id"] = B.slug(f"hs-{meta['season']}-{canon}-{parsed['levelLabel']}")
         meets.append(B.finalize(field, meta, quirks))
     return problems

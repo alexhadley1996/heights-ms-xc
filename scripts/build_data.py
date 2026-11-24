@@ -762,6 +762,10 @@ def main(path=None):
     for order, ws in enumerate(reversed(tabs)):
         title = ws.title
         parsed = None if title in MEET_INFO else sheet_tabs.parse_title(title)
+        if not parsed and title not in MEET_INFO:
+            # no date in the name, but Varsity/JV/Freshmen in the name or the Meet column: a high school race
+            fd = formula_distance(wb_f[title])
+            parsed = sheet_tabs.parse_undated_hs(title, ws, fd.most_common(1)[0][0] if fd else None)
         if parsed:
             titled.append((order, ws, parsed))
             continue
@@ -934,7 +938,7 @@ def main(path=None):
             last[m["season"]] = m["date"]
         m["_sortDate"] = m["date"] or (last.get(m["season"], f"{m['season']}-09-01") + "~")
     for m in meets:
-        m.setdefault("_sortDate", m["date"])
+        m.setdefault("_sortDate", m["date"] or f"{m['season']}-12-31")  # an undated high school tab: end of season
     meets.sort(key=lambda m: (m["season"], m["_sortDate"], m["_tabOrder"]))
     for i, m in enumerate(meets):
         m["order"] = i
